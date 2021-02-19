@@ -1,31 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>Trainer - Peak Physique</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="./images/favicon/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Bootstrap for Mobile-first, and JQuery -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+
+    <!-- Custom style sheet sign up trainer -->
+    <link href="./styles/sign-up-trainer.css" rel="stylesheet" />
+
 </head>
+
 <body>
-    <header>
-        <image src="./images/logo.svg" alt="peak physique logo"></image>
-        <h1>Peak Physique</h1>
+    <header class="row" id="heaeder">
+        <image class="col-4" id="logo" src="./images/logo.svg" alt="peak physique logo"></image>
+        <h1 class="col-8">Peak Physique</h1>
     </header>
 
-    <div class="">
-        <h1 class="display-4">Become a trainer</h1>
-    </div>
-    <div>
-        <button class="signup" type="submit">Gmail</button>
-        <button class="signup" type="submit">Facebook</button>
-        <p>or</p>
-        <button class="signup" type="submit">Creeate with Email</button>
+    <div class="container">
+
+        <div class="row top-buffer">
+            <h1 class="display-4 d-flex justify-content-center">Become a Trainer</h1>
+        </div>
+
+        <div class="buttons row d-flex justify my-row top-buffer">
+            <button class="" type="submit">Gmail</button>
+            <button class="gy-4" type="submit">Facebook</button>
+            <p class="d-flex justify-content-center gy-4">or</p>
+            <button class="gy-4" id="create-button" type="submit">Create with Email</button>
+        </div>
+
+
+
+        <div class="row d-flex justify-content-center top-buffer" id="bottom-buttons">
+            <a class="col-10 d-flex justify-content-start buttons top-buffer" href="#">Have an account?</a>
+            <a class="col-2 d-flex justify-content-end buttons top-buffer" href="#">login</a>
+        </div>
     </div>
 
-    <div>
-        <a href="">Have an account?</a>
-        <a href="">login</a>
-    </div>
 
 </body>
+
 </html>
