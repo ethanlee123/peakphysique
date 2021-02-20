@@ -1,0 +1,27 @@
+{
+  "name": "peakphysique",
+  "version": "1.0.0",
+  "description": "fitness app for connecting fitness professionals and their clients",
+  "main": "index.js",
+  "scripts": {
+    "sass": "node-sass scss/custom.scss styles/style.css -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethanlee123/peakphysique.git"
+  },
+  "keywords": [
+    "fitness",
+    "health"
+  ],
+  "author": "team 37",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ethanlee123/peakphysique/issues"
+  },
+  "homepage": "https://github.com/ethanlee123/peakphysique#readme",
+  "dependencies": {
+    "bootstrap": "^5.0.0-beta2",
+    "node-sass": "^5.0.0"
+  }
+}
