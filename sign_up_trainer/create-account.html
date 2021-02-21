@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Trainer - Peak Physique</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="/images/favicon/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Bootstrap for Mobile-first, and JQuery -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+
+    <!-- Custom style sheet sign up trainer -->
+    <link href="../styles/sign-up-trainer.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <!-- Header Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">PeakPhysique</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../find-a-trainer.html">Find a Trainer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./create-account.html">Trainer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+
+        <div class="row top-buffer">
+            <h1 class="display-4 d-flex justify-content-center">Become a Trainer</h1>
+        </div>
+
+        <div class="buttons row d-flex justify my-row top-buffer">
+            <button class="btn btn-dark btn-outline-light btn-lg" type="submit">Gmail</button>
+            <button class="gy-4 btn btn-dark btn-outline-light btn-lg" type="submit">Facebook</button>
+            <p class="d-flex justify-content-center gy-4">or</p>
+            <a class="gy-4 btn btn-light btn-outline-dark btn-sm" href="./empty-form.html">
+                <button class="btn" id="create-button" type="submit">
+                    Create with Email
+                </button>
+            </a>
+        </div>
+
+
+
+        <div class="row d-flex justify-content-center top-buffer" id="bottom-buttons">
+            <a class="col-xs-10 d-flex justify-content-start top-buffer" href="#">Have an account?</a>
+            <a class="col-xs-2 d-flex justify-content-end top-buffer" href="#">login</a>
+        </div>
+    </div>
+
+    <footer class="d-grid">
+        <a class="btn btn-outline-none" href="#body">
+          <i class="fas fa-arrow-circle-up"></i> Scroll to Top
+        </a>
+  
+        <nav class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#servicesLinks"
+                aria-expanded="false"
+                aria-controls="servicesLinks"
+              >
+                <i class="fas fa-dumbbell"></i> Services
+              </button>
+            </h2>
+            <ul class="collapse nav flex-column" id="servicesLinks">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">Find a Trainer</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Join a Group Class</a>
+              </li>
+            </ul>
+          </div><!--.accordion-item-->
+          
+          <div class="accordion-item about-us">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#aboutLinks"
+                aria-expanded="false"
+                aria-controls="aboutLinks"
+              >
+                <i class="fas fa-users"></i> About
+              </button>
+            </h2>
+            <ul class="collapse nav flex-column" id="aboutLinks">
+              <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">FAQ</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Policies</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Careers</a>
+              </li>
+            </ul>
+          </div><!--.about-us-->
+  
+          <div class="accordion-item contact-us no-children">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+              >
+              <i class="fas fa-envelope"></i> Contact Us
+              </button>
+            </h2>
+          </div><!--.contact-us-->
+          
+          <div class="accordion-item no-children">
+            <div class="accordion-button collapsed">
+              <div class="col copyright">
+                <i class="icon-logo"></i> &#169 2021
+              </div>
+              <div class="col social-media">
+                <a href="#0">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#0">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#0">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://github.com/ethanlee123/peakphysique">
+                  <i class="fab fa-github"></i>
+                </a>          
+              </div>
+            </div>
+          </div><!--.accordion-item-->
+  
+        </nav>
+  
+  
+      </footer>
+      <!----------------------------------------------->
+      <!-- JS: Boostrap, Firebase, API related    -->
+      <!----------------------------------------------->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+      </script>
+  
+      <!--------------------------------------------------------------------->
+      <!-- JS files: Your own JavaScript functions included here    -->
+      <!--------------------------------------------------------------------->
+  
+
+</body>
+
+</html>
