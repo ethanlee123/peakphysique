@@ -1,9 +1,23 @@
 // variables.scss
 
 // Theme colours
+$primary:       #83C3A3;
+$secondary:     #D4DDD6;
+$success:       #83C3A3;
+$info:          #0444AC;
+$warning:       #AB5A50;
+$danger:        #F7D38D;
+$light:         #D4DDD6;
+$dark:          #1E242E;
 
-// Type variables
-$text-colour-dark: #000;
-$text-colour-light: #fff;
-$text-color-link: #000;
+// Body
+//
+// Settings for the `<body>` element.
 
+$body-bg:                   $dark;
+$body-color:                $light;
+$body-text-align:           null !default;
+
+// Cards
+$card-cap-bg:                       rgba($dark, .1);
+$card-bg:                           rgba($light, 0.1);
