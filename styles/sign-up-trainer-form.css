@@ -1,13 +1,12 @@
-/* style sheet for sign up trainer */
-
-.container {
-    margin-top: 5%;
+/* style sheet for sign up trainer empty-form and filled-form */
+.text {
+    width: 60%;
+}
+.name {
+    width: 50%;
 }
 .top-buffer {
     margin-top: 50px;
-}
-body {
-    margin: 0 auto;
 }
 
 /* for "have an account and login buttons" */
@@ -22,6 +21,10 @@ a {
     color: #BABABA;
 }
 
-.my-row {
-    margin: 50px auto 0 auto;
+[type=text] {
+    margin-top: 10px;
+}
+
+#next-btn {
+    margin-top: 10px;
 }
