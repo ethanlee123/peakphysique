@@ -22,7 +22,7 @@
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
 
     <!-- Custom style sheet sign up trainer -->
-    <link href="/styles/sign-up-trainer-form.css" rel="stylesheet" />
+    <link href="/styles/initial-trainer-profile.css" rel="stylesheet" />
 
 </head>
 
@@ -58,30 +58,55 @@
     </nav>
 
     <!-- Main Content of this page -->
-    <div class="container d-grid justify-content-center gx-5">
+    <div class="container d-grid justify-content-center top-buffer">
         <div class="row">
-            <h1 class="display-4 d-flex justify-content-center">Become a Trainer</h1>
+            <h1 class="display-6 d-flex justify-content-center" id="title">To find prospects - please complete your
+                profile</h1>
         </div>
 
+        <div class="row top-buffer">
+            <ul class="list-group d-flex justify-content-end" id="list-items">
 
-        <input type="text" class="row top-buffer" placeholder="Email">
-        <div class="row d-flex justify-content-center">
-            <input type="text" class="col-xs-6 name" placeholder="First Name">
-            <input type="text" class="col-xs-6 name" placeholder="Last Name">
+                <a>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <figcaption>
+                            <img src="/images/profile-placeholder.svg" alt="" class="src">
+                            Hello, <span id="name">John!</span>
+                        </figcaption>
+                        <span class="badge badge-primary badge-pill bg-danger">14</span>
+                    </li>
+                </a>
+
+                <a>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <figcaption>
+                            <img src="/images/target-icon.svg" alt="" class="src">
+                            My Expertise
+                        </figcaption>
+                        <span class="badge badge-primary badge-pill bg-danger">2</span>
+                    </li>
+                </a>
+
+                <a>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <figcaption>
+                            <img src="/images/logo.svg" alt="peak physique logo" class="src img-thumbnail" />
+                            Platform Specific
+                        </figcaption>
+                        <span class="badge badge-primary badge-pill bg-danger">1</span>
+                    </li>
+                </a>
+                
+                <a>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <figcaption>
+                            <img src="/images/settings-icon.svg" alt="" class="src">
+                            Settings
+                        </figcaption>
+                </a>
+                </li>
+            </ul>
         </div>
-        <input type="text" class="row" placeholder="Phone Number">
-        <input type="text" class="row" placeholder="City">
-        <a class="row btn btn-primary btn-sm" id="next-btn" href="./initial-trainer-profile.html">
-            <button type="submit" class="btn">
-                Next
-            </button>
-        </a>
-
-        <div class="row d-flex justify-content-center top-buffer" id="bottom-buttons">
-            <a class="col-xs-10 d-flex justify-content-start buttons top-buffer" href="#">Have an account?</a>
-            <a class="col-xs-2 d-flex justify-content-end buttons top-buffer" href="#">login</a>
-        </div>
-
     </div>
 
     <footer class="d-grid top-buffer">

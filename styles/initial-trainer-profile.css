@@ -1,0 +1,23 @@
+/* style sheet for initial-trainer-profile */
+.top-buffer {
+    margin-top: 50px;
+}
+
+#title {
+    padding-top: 5px;
+    margin-bottom: 0;
+}
+
+#list-items {
+    padding: 0;
+}
+
+/* icons in list */
+.src {
+    width: 50px;
+}
+
+[alt="peak physique logo"] {
+    padding: 0;
+    border: none;
+}
