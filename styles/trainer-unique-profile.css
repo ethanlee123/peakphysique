@@ -1,0 +1,24 @@
+/* style sheet for trainer unique profile */
+.top-buffer {
+    margin-top: 50px;
+}
+.no-padding {
+    padding: 0;
+}
+textarea {
+    word-break: normal!important;
+}
+h1 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0;
+}
+ul {
+    list-style: none;
+}
+path {
+    fill: #83C3A3;
+}
+svg {
+    width: 6em;
+}
