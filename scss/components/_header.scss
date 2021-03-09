@@ -290,6 +290,10 @@ header {
                 display: none;
             }
 
+            body.logged-out.active-nav & {
+                display: none;
+            }
+
             body.active-nav & {
                 display: block;
             }

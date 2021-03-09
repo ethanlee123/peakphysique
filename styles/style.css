@@ -230,6 +230,8 @@ header {
           display: block; } }
       body.logged-out header .account .logout {
         display: none; }
+      body.logged-out.active-nav header .account .logout {
+        display: none; }
       body.active-nav header .account .logout {
         display: block; }
     header .account i {
