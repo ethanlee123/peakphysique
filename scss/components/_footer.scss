@@ -1,24 +1,87 @@
 footer {
-    width: 100%;
-
     a {
         color: $light;
         text-decoration: none;
     }
 
     i {
-        margin-right: 1em;
+        color: $primary;
+    }
 
-        &.icon-logo::before {
-            margin: 0;
-            padding: 0;
+    li {
+        list-style-type: none;
+    }
+
+    .scroll-to-top {
+        color: $info;
+        box-shadow: none;
+
+        i {
+            color: $info;
         }
     }
 
-    .no-children {
-        .accordion-button::after {
+    .mobile {
+        @include box-shadow($left: -1px);
+        
+        @include desktop {
             display: none;
-        }        
+        }
+
+        .social-media {
+            justify-content: flex-end;
+
+            a { 
+                &:last-of-type {
+                    i {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .desktop {
+        display: none;
+        background: $darkest;
+        @include box-shadow($left: -1px);
+        
+        @include desktop {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            padding: 1vh 1vw;
+        }
+
+        .heading {
+            padding-bottom: 0.25em;
+            border-bottom: 1px solid $dark;
+        }
+
+        ul {
+            margin: 0;
+            margin-top: 0.75em;
+            padding: 0;
+        }
+
+        .category {
+            &.copyright {
+                grid-column: 1;
+
+                .heading {
+                    border: none;
+                }
+            }
+
+            &.social {
+                grid-column: 3;
+                grid-row: 1 / span 2;
+                align-self: center;
+
+                .social-media {
+                    justify-content: flex-start;
+                }
+            }
+        }
     }
 
     .social-media {
@@ -28,12 +91,6 @@ footer {
         a {
             i {
                 font-size: 1.5em;
-            }
-            
-            &:last-of-type {
-                i {
-                    margin-right: 0;
-                }
             }
         }
 

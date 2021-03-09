@@ -1,9 +1,27 @@
 body {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     min-height: 100vh;
-    
+
     b {
         color: $primary;
+    }
+
+    i {
+        margin-right: 1em;
+
+        &.icon-logo::before {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .btn {
+        @include box-shadow($blur: 20px);
+
+        &.btn-outline-light {
+            box-shadow: none;
+        }
     }
 }

@@ -17,7 +17,7 @@
   }
 }
 
-@mixin box-shadow($top: 0, $left: 1px, $blur: 15px, $size: 1px, $color: #000) {
+@mixin box-shadow($top: 0, $left: 4px, $blur: 8px, $size: 1px, $color: rgba(0, 0, 0, 0.8)) {
   -webkit-box-shadow: $top $left $blur $size $color;
   -moz-box-shadow: $top $left $blur $size $color;
   box-shadow: $top $left $blur $size $color;

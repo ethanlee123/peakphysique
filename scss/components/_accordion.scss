@@ -1,0 +1,17 @@
+.accordion {
+    background: $darkest;
+
+    .no-children {
+        .accordion-button::after {
+            display: none;
+        }        
+    }
+
+    .copyright {
+        color: $dark;
+
+        i {
+            color: $dark;
+        }
+    }
+}
