@@ -1,9 +1,30 @@
+.accordion {
+  background: #0a0c0f; }
+  .accordion .no-children .accordion-button::after {
+    display: none; }
+  .accordion .copyright {
+    color: #1E242E; }
+    .accordion .copyright i {
+      color: #1E242E; }
+
 body {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   min-height: 100vh; }
   body b {
     color: #83C3A3; }
+  body i {
+    margin-right: 1em; }
+    body i.icon-logo::before {
+      margin: 0;
+      padding: 0; }
+  body .btn {
+    -webkit-box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.8);
+    -moz-box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.8); }
+    body .btn.btn-outline-light {
+      box-shadow: none; }
 
 header {
   display: flex;
@@ -11,9 +32,9 @@ header {
   margin-bottom: 1em;
   padding: 1em 1rem;
   background: #0a0c0f;
-  -webkit-box-shadow: 0 1px 15px 1px #000;
-  -moz-box-shadow: 0 1px 15px 1px #000;
-  box-shadow: 0 1px 15px 1px #000; }
+  -webkit-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8); }
   @media (min-width: 1200px) {
     header {
       display: grid;
@@ -107,8 +128,8 @@ header {
         header nav li:nth-child(2) {
           order: 99;
           margin-right: 0; } }
-      header nav li i::before {
-        margin-right: 1rem; }
+      header nav li i {
+        margin-right: 0.5em; }
         @media (min-width: 1200px) {
           header nav li i::before {
             display: none; } }
@@ -232,7 +253,6 @@ header {
     body.logged-out header .user-profile {
       display: none; }
     header .user-profile i::before {
-      margin-right: 0.5em;
       font-size: 1.5em; }
       @media (min-width: 1200px) {
         header .user-profile i::before {
@@ -256,25 +276,68 @@ header {
     header .messages .text {
       display: none; } }
 
-footer {
-  width: 100%; }
-  footer a {
-    color: #D4DDD6;
-    text-decoration: none; }
-  footer i {
-    margin-right: 1em; }
-    footer i.icon-logo::before {
-      margin: 0;
-      padding: 0; }
-  footer .no-children .accordion-button::after {
-    display: none; }
-  footer .social-media {
-    display: flex;
+footer a {
+  color: #D4DDD6;
+  text-decoration: none; }
+
+footer i {
+  color: #83C3A3; }
+
+footer li {
+  list-style-type: none; }
+
+footer .scroll-to-top {
+  color: #0444AC;
+  box-shadow: none; }
+  footer .scroll-to-top i {
+    color: #0444AC; }
+
+footer .mobile {
+  -webkit-box-shadow: 0 -1px 8px 1px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 0 -1px 8px 1px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 -1px 8px 1px rgba(0, 0, 0, 0.8); }
+  @media (min-width: 1200px) {
+    footer .mobile {
+      display: none; } }
+  footer .mobile .social-media {
     justify-content: flex-end; }
-    footer .social-media a i {
-      font-size: 1.5em; }
-    footer .social-media a:last-of-type i {
+    footer .mobile .social-media a:last-of-type i {
       margin-right: 0; }
+
+footer .desktop {
+  display: none;
+  background: #0a0c0f;
+  -webkit-box-shadow: 0 -1px 8px 1px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 0 -1px 8px 1px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 -1px 8px 1px rgba(0, 0, 0, 0.8); }
+  @media (min-width: 1200px) {
+    footer .desktop {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding: 1vh 1vw; } }
+  footer .desktop .heading {
+    padding-bottom: 0.25em;
+    border-bottom: 1px solid #1E242E; }
+  footer .desktop ul {
+    margin: 0;
+    margin-top: 0.75em;
+    padding: 0; }
+  footer .desktop .category.copyright {
+    grid-column: 1; }
+    footer .desktop .category.copyright .heading {
+      border: none; }
+  footer .desktop .category.social {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    align-self: center; }
+    footer .desktop .category.social .social-media {
+      justify-content: flex-start; }
+
+footer .social-media {
+  display: flex;
+  justify-content: flex-end; }
+  footer .social-media a i {
+    font-size: 1.5em; }
 
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)
