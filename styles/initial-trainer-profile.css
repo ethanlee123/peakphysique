@@ -3,13 +3,10 @@
     margin-top: 50px;
 }
 
-#title {
+h1 {
     padding-top: 5px;
-    margin-bottom: 0;
-}
-
-#list-items {
-    padding: 0;
+    padding-bottom: 5px;
+    margin: 0;
 }
 
 .profile-pic {
@@ -25,11 +22,21 @@
 }
 
 /* icons in list */
-.src {
+svg {
     width: 50px;
+    margin-right: 5px;
+    fill: #83C3A3;
 }
 
 [alt="peak physique logo"] {
     padding: 0;
     border: none;
+}
+
+
+circle {
+    stroke: #83C3A3;
+}
+path {
+    stroke: #83C3A3;
 }
