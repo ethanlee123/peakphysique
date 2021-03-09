@@ -28,3 +28,13 @@
 .login-buttons {
     margin-bottom: 2%;
 }
+
+.form-format {
+    margin: 0 auto;
+    width: 400px;
+    max-width: 100%;
+}
+
+.title-margin {
+    margin-top: 2%;
+}

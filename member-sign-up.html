@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Book An Appointment - Peak Physique</title>
+    <title>Member Sign Up - Peak Physique</title>
     <meta name="comp1800 boilerplate code" content="my bcit project">
     <meta name="author" content="BCIT">
 
@@ -62,21 +62,83 @@
         </div>
     </nav>
 
-    <div class="container">
-        <h1 class="display-4"><span class="title-font">Book an <span class="title-font-color">appointment</span></span></h1>
-        <hr>
-        <h3 class="display-7">A message from Trainy</h3>
-        <p>If this is your first session with me, please make sure....</p>
+    <div class="container form-format">
+        <h3 class="display-7 title-margin">Tell us a bit about yourself!</h3>
         <hr>
         <div class="mb-3">
-            <label for="set-date" class="form-label">Set the date</label>
-            <input type="number" class="form-control" id="set-date" placeholder="MM / DD / YYYY">
+            <label for="form-gender" class="form-label">Gender</label>
+            <input type="text" class="form-control" id="form-gender">
         </div>
         <div class="mb-3">
-            <label for="comments" class="form-label">Comments</label>
-            <textarea class="form-control" id="comments" rows="3"></textarea>
+            <label for="form-age" class="form-label">Age</label>
+            <input type="text" class="form-control" id="form-age">
         </div>
-        <input class="btn btn-primary" type="submit" value="BOOK">
+        <div class="mb-3">
+            <label for="form-city" class="form-label">City</label>
+            <input type="text" class="form-control" id="form-city">
+        </div>
+        <div class="mb-3">
+            <label for="form-city" class="form-label">What are you looking for?</label>
+            <div class="col-sm-10">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                <label class="form-check-label" for="gridCheck1">
+                  Bodybuilding
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="gridCheck1">
+                  <label class="form-check-label" for="gridCheck1">
+                    Strength Training
+                  </label>
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="gridCheck1">
+                  <label class="form-check-label" for="gridCheck1">
+                    Endurance Training
+                  </label>
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="gridCheck1">
+                  <label class="form-check-label" for="gridCheck1">
+                    Custom Workout Regimen
+                  </label>
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="gridCheck1">
+                  <label class="form-check-label" for="gridCheck1">
+                    Dietary Consultation
+                  </label>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="form-fitness-level" class="form-label">What is your fitness level?</label>
+            <input type="text" class="form-control" id="form-fitness-level">
+        </div>
+        <div class="mb-3">
+            <label for="form-prefer-workout-time" class="form-label">When do you prefer to workout?</label>
+            <input type="text" class="form-control" id="form-prefer-workout-time">
+        </div>
+        <div class="mb-3">
+            <label for="form-equipment" class="form-label">What equipment do you like to use?</label>
+            <input type="text" class="form-control" id="form-equipment">
+        </div>
+        <div class="mb-3">
+            <label for="form-fav-exercises" class="form-label">What are your favorite exercises?</label>
+            <input type="text" class="form-control" id="form-fav-exercises">
+        </div>
+        <div>
+            <a class="btn btn-dark" role="button" href="">NEXT</a>
+        </div>
     </div>
 
     <footer class="d-grid">
