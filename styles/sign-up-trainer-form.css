@@ -28,3 +28,7 @@ a {
 #next-btn {
     margin-top: 10px;
 }
+
+div.row > *{
+    padding: 0px;
+}

@@ -1,7 +1,13 @@
 .accordion {
   background: #0a0c0f; }
-  .accordion .no-children .accordion-button::after {
-    display: none; }
+  .accordion .accordion-button {
+    background: #0a0c0f; }
+    .accordion .accordion-button:not(.collapsed) {
+      background: #0e1115; }
+    .accordion .accordion-button.no-children .accordion-button::after {
+      display: none; }
+  .accordion .accordion-item .nav-item {
+    background: #1E242E; }
   .accordion .copyright {
     color: #1E242E; }
     .accordion .copyright i {
@@ -190,6 +196,9 @@ header {
     body.logged-out header .account {
       justify-self: end;
       gap: 1em; }
+      @media (min-width: 1200px) {
+        body.logged-out header .account {
+          grid-template-columns: repeat(2, 1fr); } }
     body.active-nav header .account {
       position: fixed;
       left: 0;
@@ -219,6 +228,8 @@ header {
       @media (min-width: 1200px) {
         header .account .logout {
           display: block; } }
+      body.logged-out header .account .logout {
+        display: none; }
       body.active-nav header .account .logout {
         display: block; }
     header .account i {
@@ -282,6 +293,8 @@ footer a {
 
 footer i {
   color: #83C3A3; }
+  footer i:hover, footer i:active, footer i:focus {
+    color: #1E242E; }
 
 footer li {
   list-style-type: none; }
@@ -338,6 +351,9 @@ footer .social-media {
   justify-content: flex-end; }
   footer .social-media a i {
     font-size: 1.5em; }
+
+footer .btn.btn-outline-light.contact-us i {
+  color: #D4DDD6; }
 
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)

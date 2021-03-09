@@ -1,10 +1,25 @@
 .accordion {
     background: $darkest;
 
-    .no-children {
-        .accordion-button::after {
-            display: none;
-        }        
+    .accordion-button {
+        background: $darkest;
+        
+
+        &:not(.collapsed) {
+            background: $darker;
+        }
+
+        &.no-children {
+            .accordion-button::after {
+                display: none;
+            }        
+        }
+    }
+
+    .accordion-item {
+        .nav-item {
+            background: $dark;
+        }
     }
 
     .copyright {
