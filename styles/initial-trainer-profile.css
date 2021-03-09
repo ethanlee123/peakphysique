@@ -48,3 +48,35 @@ circle {
 path {
     stroke: #83C3A3;
 }
+
+@font-face {
+    font-family: apex;
+    src: url('../fonts/apexmk2-boldextended-webfont.woff2') format('woff2'),
+         url('../fonts/apexmk2-boldextended-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.landing {
+    background-image: url('../images/gym-banner.jpg');
+    height: 32%;
+    text-align: center;
+    width: 100%;
+    font-weight: bolder;
+    font-family: apex;
+}
+
+.title-font {
+    font-weight: bolder;
+    font-family: apex;
+}
+
+.title-font-color {
+    color: #83C3A3;
+}
+
+.login-buttons {
+    margin-bottom: 2%;
+}
+
