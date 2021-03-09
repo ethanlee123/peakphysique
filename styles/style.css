@@ -1,7 +1,13 @@
 .accordion {
   background: #0a0c0f; }
-  .accordion .no-children .accordion-button::after {
-    display: none; }
+  .accordion .accordion-button {
+    background: #0a0c0f; }
+    .accordion .accordion-button:not(.collapsed) {
+      background: #0e1115; }
+    .accordion .accordion-button.no-children .accordion-button::after {
+      display: none; }
+  .accordion .accordion-item .nav-item {
+    background: #1E242E; }
   .accordion .copyright {
     color: #1E242E; }
     .accordion .copyright i {
@@ -282,6 +288,8 @@ footer a {
 
 footer i {
   color: #83C3A3; }
+  footer i:hover, footer i:active, footer i:focus {
+    color: #1E242E; }
 
 footer li {
   list-style-type: none; }

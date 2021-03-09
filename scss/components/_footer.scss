@@ -6,6 +6,10 @@ footer {
 
     i {
         color: $primary;
+
+        @include hover-state {
+            color: $dark;
+        }
     }
 
     li {
@@ -23,7 +27,7 @@ footer {
 
     .mobile {
         @include box-shadow($left: -1px);
-        
+
         @include desktop {
             display: none;
         }
