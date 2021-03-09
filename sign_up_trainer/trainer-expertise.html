@@ -22,7 +22,11 @@
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
 
     <!-- Custom style sheet sign up trainer -->
-    <link href="/styles/initial-trainer-profile.css" rel="stylesheet" />
+    <link href="/styles/style.css" rel="stylesheet" />
+    <link href="/styles/fontello.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet"
+        type='text/css'>
+    <link href="/styles/trainer-expertise.css" rel="stylesheet" />
 
 </head>
 
@@ -59,54 +63,64 @@
 
     <!-- Main Content of this page -->
     <div class="container d-grid justify-content-center top-buffer">
-        <div class="row">
-            <h1 class="display-6 d-flex justify-content-center" id="title">To find prospects - please complete your
-                profile</h1>
+        <div class="row progress h-100" id="progress">
+            <h1 class="d-flex justify-content-center progress-bar fs-7" id="title" role="progressbar">
+                Upload your qualifications!
+            </h1>
         </div>
 
-        <div class="row top-buffer">
-            <ul class="list-group d-flex justify-content-end" id="list-items">
+        <div class="row top-buffer d-flex justify-content-center">
+            <div>
+                <p class="">Upload a pdf of your qualifications</p>
+            </div>
+            <div>
+                <p class="">Years of Experiences</p>
+            </div>
+            <div>
+                <a class="btn btn-primary shadow-none" data-bs-toggle="collapse" href="#collapseFitness" role="button"
+                    aria-expanded="false" aria-controls="collapseFitness">
+                    Fitness Specialization
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <div class="collapse" id="collapseFitness">
+                    <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck1">Body Building</label>
 
-                <a>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <figcaption>
-                            <img src="/images/profile-placeholder.svg" alt="" class="src">
-                            Hello, <span id="name">John!</span>
-                        </figcaption>
-                        <span class="badge badge-primary badge-pill bg-danger">14</span>
-                    </li>
-                </a>
+                    <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck2">Power Lifting</label>
 
-                <a>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <figcaption>
-                            <img src="/images/target-icon.svg" alt="" class="src">
-                            My Expertise
-                        </figcaption>
-                        <span class="badge badge-primary badge-pill bg-danger">2</span>
-                    </li>
-                </a>
+                    <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck3">Cross Fit</label>
+                </div>
+            </div>
 
-                <a>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <figcaption>
-                            <img src="/images/logo.svg" alt="peak physique logo" class="src img-thumbnail" />
-                            Platform Specific
-                        </figcaption>
-                        <span class="badge badge-primary badge-pill bg-danger">1</span>
-                    </li>
+
+            <div>
+                <a class="btn btn-primary shadow-none" data-bs-toggle="collapse" href="#collapseWellness" role="button"
+                    aria-expanded="false" aria-controls="collapseWellness">
+                    Wellness Services
+                    <i class="fas fa-chevron-down"></i>
                 </a>
-                
-                <a>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <figcaption>
-                            <img src="/images/settings-icon.svg" alt="" class="src">
-                            Settings
-                        </figcaption>
-                </a>
-                </li>
-            </ul>
+                <div class="collapse" id="collapseWellness">
+                    <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck4">Macro Coaching</label>
+
+                    <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck5">Spritual Guidance</label>
+
+                    <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck6">Diet Consultation</label>
+                </div>
+            </div>
+
+
         </div>
+        <a class="row btn btn-primary btn-sm d-flex justify-content-center top-buffer" id="next-btn"
+            href="./initial-trainer-profile.html">
+            <button type="submit" class="btn">
+                Done
+            </button>
+        </a>
     </div>
 
     <footer class="d-grid top-buffer">

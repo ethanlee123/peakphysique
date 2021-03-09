@@ -1,0 +1,10 @@
+/* style sheet for trainer "my expertise" */
+h1 {
+    margin: 0;
+}
+ul.list-group {
+    padding: 0;
+}
+.top-buffer {
+    margin-top: 50px;
+}
