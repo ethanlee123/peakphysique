@@ -21,6 +21,14 @@ h1 {
     margin: 0 5%;
 }
 
+#accordionUpdate {
+    margin: 0 5%;
+}
+
+.navbar {
+    background-color: blueviolet;
+}
+
 /* icons in list */
 svg {
     width: 50px;
@@ -40,3 +48,4 @@ circle {
 path {
     stroke: #83C3A3;
 }
+
