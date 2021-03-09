@@ -12,6 +12,18 @@
     padding: 0;
 }
 
+.profile-pic {
+    border-radius: 50%;
+}
+
+.card {
+    margin: 0 5%;
+}
+
+.list-group {
+    margin: 0 5%;
+}
+
 /* icons in list */
 .src {
     width: 50px;
