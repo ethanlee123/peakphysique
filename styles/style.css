@@ -352,6 +352,9 @@ footer .social-media {
   footer .social-media a i {
     font-size: 1.5em; }
 
+footer .btn.btn-outline-light.contact-us i {
+  color: #D4DDD6; }
+
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
