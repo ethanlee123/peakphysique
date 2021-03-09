@@ -196,6 +196,9 @@ header {
     body.logged-out header .account {
       justify-self: end;
       gap: 1em; }
+      @media (min-width: 1200px) {
+        body.logged-out header .account {
+          grid-template-columns: repeat(2, 1fr); } }
     body.active-nav header .account {
       position: fixed;
       left: 0;
@@ -225,6 +228,8 @@ header {
       @media (min-width: 1200px) {
         header .account .logout {
           display: block; } }
+      body.logged-out header .account .logout {
+        display: none; }
       body.active-nav header .account .logout {
         display: block; }
     header .account i {

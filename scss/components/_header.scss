@@ -238,6 +238,10 @@ header {
         body.logged-out & {
             justify-self: end;
             gap: 1em;
+
+            @include desktop {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         body.active-nav & {
@@ -280,6 +284,10 @@ header {
 
             @include desktop {
                 display: block;
+            }
+
+            body.logged-out & {
+                display: none;
             }
 
             body.active-nav & {
