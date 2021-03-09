@@ -1,0 +1,42 @@
+/* style sheet for initial-trainer-profile */
+.top-buffer {
+    margin-top: 50px;
+}
+
+h1 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0;
+}
+
+.profile-pic {
+    border-radius: 50%;
+}
+
+.card {
+    margin: 0 5%;
+}
+
+.list-group {
+    margin: 0 5%;
+}
+
+/* icons in list */
+svg {
+    width: 50px;
+    margin-right: 5px;
+    fill: #83C3A3;
+}
+
+[alt="peak physique logo"] {
+    padding: 0;
+    border: none;
+}
+
+
+circle {
+    stroke: #83C3A3;
+}
+path {
+    stroke: #83C3A3;
+}

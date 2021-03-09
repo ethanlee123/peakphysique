@@ -22,7 +22,11 @@
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
 
     <!-- Custom style sheet sign up trainer -->
-    <link href="../styles/sign-up-trainer.css" rel="stylesheet" />
+    <link href="/styles/style.css" rel="stylesheet" />
+    <link href="/styles/create-account.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="./styles/fontello.css">
+    <script src="https://kit.fontawesome.com/beb9e55d0a.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -56,7 +60,9 @@
             </div>
         </div>
     </nav>
-    <div class="container">
+
+    <!-- Main Content of this page -->
+    <div class="container d-grid justify-content-center gx-5">
 
         <div class="row top-buffer">
             <h1 class="display-4 d-flex justify-content-center">Become a Trainer</h1>
@@ -66,7 +72,7 @@
             <button class="btn btn-dark btn-outline-light btn-lg" type="submit">Gmail</button>
             <button class="gy-4 btn btn-dark btn-outline-light btn-lg" type="submit">Facebook</button>
             <p class="d-flex justify-content-center gy-4">or</p>
-            <a class="gy-4 btn btn-light btn-outline-dark btn-sm" href="./empty-form.html">
+            <a class="gy-4 btn btn-outline-dark btn-sm" href="./empty-form.html">
                 <button class="btn" id="create-button" type="submit">
                     Create with Email
                 </button>
@@ -75,13 +81,13 @@
 
 
 
-        <div class="row d-flex justify-content-center top-buffer" id="bottom-buttons">
+        <div class="row d-flex justify-content-between top-buffer" id="bottom-buttons">
             <a class="col-xs-10 d-flex justify-content-start top-buffer" href="#">Have an account?</a>
             <a class="col-xs-2 d-flex justify-content-end top-buffer" href="#">login</a>
         </div>
     </div>
 
-    <footer class="d-grid">
+    <footer class="d-grid top-buffer">
         <a class="btn btn-outline-none" href="#body">
           <i class="fas fa-arrow-circle-up"></i> Scroll to Top
         </a>
