@@ -4,6 +4,26 @@
     }
 }
 
+// mq breakpoints
+@mixin tablet {
+    @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop - 1px}) {
+      @content;
+    }
+  }
+  
+@mixin desktop {
+  @media (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+@mixin box-shadow($top: 0, $left: 1px, $blur: 15px, $size: 1px, $color: #000) {
+  -webkit-box-shadow: $top $left $blur $size $color;
+  -moz-box-shadow: $top $left $blur $size $color;
+  box-shadow: $top $left $blur $size $color;
+}
+
+
 // not yet used
 @mixin have-an-account {
     width: 200px;

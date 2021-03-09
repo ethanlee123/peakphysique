@@ -1,20 +1,29 @@
 // variables.scss
 
+// Breakpoints
+$breakpoint-desktop: 1200px;
+$breakpoint-tablet: 800px;
+
 // Theme colours
-$primary:       #83C3A3;
-$secondary:     #D4DDD6;
-$success:       #83C3A3;
-$info:          #0444AC;
-$warning:       #AB5A50;
-$danger:        #F7D38D;
-$light:         #D4DDD6;
-$dark:          #1E242E;
+$primary:         #83C3A3;
+$primary-darker:  darken($primary, 10%);
+$primary-lighter: lighten($primary, 10%);
+$secondary:       #D4DDD6;
+$success:         #83C3A3;
+$info:            #0444AC;
+$warning:         #C84146;
+$danger:          #F7D38D;
+$light:           #D4DDD6;
+$dark:            #1E242E;
+
+$darker:          darken($dark, 8%);
+$darkest:         darken($dark, 10%);  
 
 // Body
 //
 // Settings for the `<body>` element.
 
-$body-bg:                   $dark;
+$body-bg:                   $darker;
 $body-color:                $light;
 $body-text-align:           null !default;
 
