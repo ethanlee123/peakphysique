@@ -363,6 +363,11 @@ footer .social-media {
 footer .btn.btn-outline-light.contact-us i {
   color: #D4DDD6; }
 
+#firebaseui-auth-container .firebaseui-container {
+  background: #1E242E; }
+  #firebaseui-auth-container .firebaseui-container .firebaseui-title {
+    color: #D4DDD6; }
+
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
