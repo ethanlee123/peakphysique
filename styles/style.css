@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'apex';
+  src: url("../fonts/apexmk2-boldextended-webfont.woff2") format("woff2"), url("../fonts/apexmk2-boldextended-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
+  font-family: "apex"; }
+
 .accordion {
   background: #0a0c0f; }
   .accordion .accordion-button {
@@ -147,9 +156,6 @@ header {
     cursor: pointer;
     z-index: 9999; }
     body.active-nav header .burger-menu {
-      position: fixed;
-      left: 375px;
-      transform: translateX(-200%);
       width: 1.5em; }
     @media (min-width: 1200px) {
       header .burger-menu {
