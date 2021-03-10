@@ -22,8 +22,10 @@
 
 
     <!-- Optional styles and scripts of your own -->
-    <link rel="stylesheet" href="./styles/style.css">
+    <link href="/styles/style.css" rel="stylesheet" />
+    <link href="/styles/fontello.css" rel="stylesheet" />
     <link rel="stylesheet" href="./styles/book-appointment.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet" />
 
 </head>
 
@@ -79,101 +81,90 @@
         <input class="btn btn-primary" type="submit" value="BOOK">
     </div>
 
-    <footer class="d-grid">
+    <footer class="d-grid top-buffer">
       <a class="btn btn-outline-none" href="#body">
-        <i class="fas fa-arrow-circle-up"></i> Scroll to Top
+          <i class="fas fa-arrow-circle-up"></i> Scroll to Top
       </a>
 
       <nav class="accordion" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#servicesLinks"
-              aria-expanded="false"
-              aria-controls="servicesLinks"
-            >
-              <i class="fas fa-dumbbell"></i> Services
-            </button>
-          </h2>
-          <ul class="collapse nav flex-column" id="servicesLinks">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Find a Trainer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Join a Group Class</a>
-            </li>
-          </ul>
-        </div><!--.accordion-item-->
-        
-        <div class="accordion-item about-us">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#aboutLinks"
-              aria-expanded="false"
-              aria-controls="aboutLinks"
-            >
-              <i class="fas fa-users"></i> About
-            </button>
-          </h2>
-          <ul class="collapse nav flex-column" id="aboutLinks">
-            <li class="nav-item">
-              <a class="nav-link" href="#">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">FAQ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Policies</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Careers</a>
-            </li>
-          </ul>
-        </div><!--.about-us-->
-
-        <div class="accordion-item contact-us no-children">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-            >
-            <i class="fas fa-envelope"></i> Contact Us
-            </button>
-          </h2>
-        </div><!--.contact-us-->
-        
-        <div class="accordion-item no-children">
-          <div class="accordion-button collapsed">
-            <div class="col copyright">
-              <i class="icon-logo"></i> &#169 2021
-            </div>
-            <div class="col social-media">
-              <a href="#0">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="#0">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="#0">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="https://github.com/ethanlee123/peakphysique">
-                <i class="fab fa-github"></i>
-              </a>          
-            </div>
+          <div class="accordion-item">
+              <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#servicesLinks" aria-expanded="false" aria-controls="servicesLinks">
+                      <i class="fas fa-dumbbell"></i> Services
+                  </button>
+              </h2>
+              <ul class="collapse nav flex-column" id="servicesLinks">
+                  <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="#">Find a Trainer</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Join a Group Class</a>
+                  </li>
+              </ul>
           </div>
-        </div><!--.accordion-item-->
+          <!--.accordion-item-->
+
+          <div class="accordion-item about-us">
+              <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#aboutLinks" aria-expanded="false" aria-controls="aboutLinks">
+                      <i class="fas fa-users"></i> About
+                  </button>
+              </h2>
+              <ul class="collapse nav flex-column" id="aboutLinks">
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">About Us</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">FAQ</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Policies</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Careers</a>
+                  </li>
+              </ul>
+          </div>
+          <!--.about-us-->
+
+          <div class="accordion-item contact-us no-children">
+              <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button">
+                      <i class="fas fa-envelope"></i> Contact Us
+                  </button>
+              </h2>
+          </div>
+          <!--.contact-us-->
+
+          <div class="accordion-item no-children">
+              <div class="accordion-button collapsed">
+                  <div class="col copyright">
+                      <i class="icon-logo"></i> &#169 2021
+                  </div>
+                  <div class="col social-media">
+                      <a href="#0">
+                          <i class="fab fa-facebook-f"></i>
+                      </a>
+                      <a href="#0">
+                          <i class="fab fa-instagram"></i>
+                      </a>
+                      <a href="#0">
+                          <i class="fab fa-twitter"></i>
+                      </a>
+                      <a href="https://github.com/ethanlee123/peakphysique">
+                          <i class="fab fa-github"></i>
+                      </a>
+                  </div>
+              </div>
+          </div>
+          <!--.accordion-item-->
 
       </nav>
 
 
-    </footer>
+  </footer>
     <!----------------------------------------------->
     <!-- JS: Boostrap, Firebase, API related    -->
     <!----------------------------------------------->
