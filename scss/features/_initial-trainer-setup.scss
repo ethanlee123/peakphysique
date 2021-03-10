@@ -1,0 +1,72 @@
+.initial-trainer-profile {
+
+    .top-buffer {
+        margin-top: 50px;
+    }
+
+    h1 {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin: 0;
+        min-width: 80%;
+    }
+
+    .profile-pic {
+        border-radius: 50%;
+    }
+
+    .card {
+        margin: 0 5%;
+    }
+
+    .list-group {
+        margin: 0 5%;
+    }
+
+    #accordionUpdate {
+        margin: 0 5%;
+    }
+
+    // .navbar {
+    //     background-color: blueviolet;
+    // }
+
+    li {
+        @include hover-state {
+            i {
+                color: $darkest;
+            }
+        }
+    }
+
+    i {
+        @include hover-state {
+            color: $darkest;
+        }
+
+        &.menu {
+            font-size: 47px;
+            margin-right: 0;
+            margin-right: 10px;
+            color: $primary;
+        }
+
+        &.icon-logo {
+            font-size: 2.5em;
+            color: $primary;
+            margin-right: 15px;
+        }
+
+
+    }
+    
+    figure {
+        margin: 0;
+        margin-right: 0.5em;
+        padding: 0;
+        
+    }
+}
+
+
+

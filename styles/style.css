@@ -368,6 +368,49 @@ footer .btn.btn-outline-light.contact-us i {
   #firebaseui-auth-container .firebaseui-container .firebaseui-title {
     color: #D4DDD6; }
 
+.initial-trainer-profile .top-buffer {
+  margin-top: 50px; }
+
+.initial-trainer-profile h1, .initial-trainer-profile .h1 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 0;
+  min-width: 80%; }
+
+.initial-trainer-profile .profile-pic {
+  border-radius: 50%; }
+
+.initial-trainer-profile .card {
+  margin: 0 5%; }
+
+.initial-trainer-profile .list-group {
+  margin: 0 5%; }
+
+.initial-trainer-profile #accordionUpdate {
+  margin: 0 5%; }
+
+.initial-trainer-profile li:hover i, .initial-trainer-profile li:active i, .initial-trainer-profile li:focus i {
+  color: #0a0c0f; }
+
+.initial-trainer-profile i:hover, .initial-trainer-profile i:active, .initial-trainer-profile i:focus {
+  color: #0a0c0f; }
+
+.initial-trainer-profile i.menu {
+  font-size: 47px;
+  margin-right: 0;
+  margin-right: 10px;
+  color: #83C3A3; }
+
+.initial-trainer-profile i.icon-logo {
+  font-size: 2.5em;
+  color: #83C3A3;
+  margin-right: 15px; }
+
+.initial-trainer-profile figure {
+  margin: 0;
+  margin-right: 0.5em;
+  padding: 0; }
+
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
