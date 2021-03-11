@@ -368,48 +368,115 @@ footer .btn.btn-outline-light.contact-us i {
   #firebaseui-auth-container .firebaseui-container .firebaseui-title {
     color: #D4DDD6; }
 
-.initial-trainer-profile .top-buffer {
+.initial-trainer-setup .top-buffer {
   margin-top: 50px; }
 
-.initial-trainer-profile h1, .initial-trainer-profile .h1 {
+.initial-trainer-setup h1, .initial-trainer-setup .h1 {
   padding-top: 5px;
   padding-bottom: 5px;
   margin: 0;
   min-width: 80%; }
 
-.initial-trainer-profile .profile-pic {
+.initial-trainer-setup .profile-pic {
   border-radius: 50%; }
 
-.initial-trainer-profile .card {
+.initial-trainer-setup .card {
   margin: 0 5%; }
 
-.initial-trainer-profile .list-group {
+.initial-trainer-setup .list-group {
   margin: 0 5%; }
 
-.initial-trainer-profile #accordionUpdate {
+.initial-trainer-setup #accordionUpdate {
   margin: 0 5%; }
 
-.initial-trainer-profile li:hover i, .initial-trainer-profile li:active i, .initial-trainer-profile li:focus i {
+.initial-trainer-setup li:hover i, .initial-trainer-setup li:active i, .initial-trainer-setup li:focus i {
   color: #0a0c0f; }
 
-.initial-trainer-profile i:hover, .initial-trainer-profile i:active, .initial-trainer-profile i:focus {
+.initial-trainer-setup i:hover, .initial-trainer-setup i:active, .initial-trainer-setup i:focus {
   color: #0a0c0f; }
 
-.initial-trainer-profile i.menu {
+.initial-trainer-setup i.menu {
   font-size: 47px;
   margin-right: 0;
   margin-right: 10px;
   color: #83C3A3; }
 
-.initial-trainer-profile i.icon-logo {
+.initial-trainer-setup i.icon-logo {
   font-size: 2.5em;
   color: #83C3A3;
   margin-right: 15px; }
 
-.initial-trainer-profile figure {
+.initial-trainer-setup figure {
   margin: 0;
   margin-right: 0.5em;
   padding: 0; }
+
+/* style sheet for sign up trainer */
+.trainer-create-account {
+  /* for "have an account and login buttons" */ }
+  .trainer-create-account .container {
+    margin-top: 5%; }
+  .trainer-create-account .top-buffer {
+    margin-top: 50px; }
+  .trainer-create-account body {
+    margin: 0 auto; }
+  .trainer-create-account #bottom-buttons a {
+    width: 50%;
+    border-color: #FFF; }
+  .trainer-create-account #bottom-buttons {
+    border-top: solid 5px #000; }
+  .trainer-create-account a {
+    color: #BABABA; }
+  .trainer-create-account .my-row {
+    margin: 50px auto 0 auto; }
+
+/* style sheet for sign up trainer empty-form and filled-form */
+.trainer-signup-form {
+  /* for "have an account and login buttons" */ }
+  .trainer-signup-form .text {
+    width: 60%; }
+  .trainer-signup-form .name {
+    width: 50%; }
+  .trainer-signup-form .top-buffer {
+    margin-top: 50px; }
+  .trainer-signup-form #bottom-buttons a {
+    width: 50%;
+    border-color: #FFF; }
+  .trainer-signup-form #bottom-buttons {
+    border-top: solid 5px #000; }
+  .trainer-signup-form a {
+    color: #BABABA; }
+  .trainer-signup-form [type=text] {
+    margin-top: 10px; }
+  .trainer-signup-form #next-btn {
+    margin-top: 10px; }
+  .trainer-signup-form div.row > * {
+    padding: 0px; }
+
+/* style sheet for initial setup of trainer unique profile */
+.initial-trainer-info .top-buffer {
+  margin-top: 50px; }
+
+.initial-trainer-info .no-padding {
+  padding: 0; }
+
+.initial-trainer-info textarea {
+  word-break: normal !important; }
+
+.initial-trainer-info h1, .initial-trainer-info .h1 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 0;
+  background-color: #0444AC !important; }
+
+.initial-trainer-info ul {
+  list-style: none; }
+
+.initial-trainer-info path {
+  fill: #83C3A3; }
+
+.initial-trainer-info svg {
+  width: 6em; }
 
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)

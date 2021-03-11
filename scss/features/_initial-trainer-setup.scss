@@ -1,7 +1,7 @@
-.initial-trainer-profile {
+.initial-trainer-setup {
 
     .top-buffer {
-        margin-top: 50px;
+        @include top-buffer-trainer;
     }
 
     h1 {

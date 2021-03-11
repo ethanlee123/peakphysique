@@ -1,0 +1,36 @@
+/* style sheet for sign up trainer empty-form and filled-form */
+.trainer-signup-form {
+    .text {
+        width: 60%;
+    }
+    .name {
+        width: 50%;
+    }
+    .top-buffer {
+        margin-top: 50px;
+    }
+    
+    /* for "have an account and login buttons" */
+    #bottom-buttons a {
+        width: 50%;
+        border-color: #FFF;
+    }
+    #bottom-buttons {
+        border-top: solid 5px #000;
+    }
+    a {
+        color: #BABABA;
+    }
+    
+    [type=text] {
+        margin-top: 10px;
+    }
+    
+    #next-btn {
+        margin-top: 10px;
+    }
+
+    div.row > *{
+        padding: 0px;
+    }
+}

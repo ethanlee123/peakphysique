@@ -14,5 +14,10 @@
 
 @import "./features/find-a-trainer";
 @import "./features/initial-trainer-setup";
+@import "./features/trainer-create-account";
+@import "./features/trainer-signup-form.scss";
+@import "./features/initial-trainer-info";
+@import "./features/initial-trainer-expertise";
+
 
 @import "../node_modules/bootstrap/scss/bootstrap";
