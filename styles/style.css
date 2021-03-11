@@ -478,6 +478,28 @@ footer .btn.btn-outline-light.contact-us i {
 .initial-trainer-info svg {
   width: 6em; }
 
+/* style sheet for trainer "my expertise" */
+.initial-trainer-expertise h1, .initial-trainer-expertise .h1 {
+  margin: 0; }
+
+.initial-trainer-expertise ul.list-group {
+  padding: 0; }
+
+.initial-trainer-expertise .top-buffer {
+  margin-top: 50px; }
+
+.initial-trainer-expertise .container {
+  width: 90%; }
+
+.initial-trainer-expertise i {
+  font-size: 20pt; }
+
+.initial-trainer-expertise .btn {
+  padding: 0; }
+
+.initial-trainer-expertise .progress-bar {
+  background-color: #1E242E; }
+
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

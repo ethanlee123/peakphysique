@@ -27,6 +27,9 @@
 @mixin top-buffer-trainer {
     margin-top: 50px;
 }
+@mixin content-width {
+  width: 90%;
+}
 // not yet used
 @mixin have-an-account {
     width: 200px;

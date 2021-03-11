@@ -10,6 +10,18 @@
     }
 
     .top-buffer {
-        margin-top: 50px;
+        @include top-buffer-trainer;
+    }
+    .container {
+        @include content-width;
+    }
+    i {
+        font-size: 20pt;
+    }
+    .btn {
+        padding: 0;
+    }
+    .progress-bar {
+        background-color: $dark;
     }
 }
