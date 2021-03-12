@@ -20,63 +20,121 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./styles/fontello.css">
+    <script src="https://kit.fontawesome.com/beb9e55d0a.js" crossorigin="anonymous"></script>
 
-    <!-- Optional styles and scripts of your own -->
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/book-appointment.css">
 
 </head>
 
-<body>
+<body id="#body" class="logged-out">
 
-    <!-------------------------------------->
-    <!-- The following is HTML for layout -->
-    <!-------------------------------------->
-    <!-- Header Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">PeakPhysique</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="find-a-trainer.html">Find a Trainer</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Schedule</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="sign_up_trainer/create-account.html">Trainer</a>
-                    </li>
-                </ul>
+  <!-------------------------------------->
+  <!-- The following is HTML for layout -->
+  <!-------------------------------------->
+  <!-- Header Navigation Bar -->
+  <header>
+    <div class="burger-menu" id="#burgerMenu">
+      <span class="top-bun"></span>
+      <span class="patty"></span>
+      <span class="btm-bun"></span>
+    </div>
+    <!--.burger-->
+
+    <a href="./index.html" class="logo">
+      <i class="icon icon-logo"></i>
+      <span class="text">Peak <b>Physique</b></span>
+    </a>
+
+    <nav>
+      <a href="./index.html" class="logo">
+        <i class="icon icon-logo"></i>
+        <span class="text">Peak <b>Physique</b></span>
+      </a>
+      <ul>
+        <li><a class="user-profile" href="#0">
+            <i class="fas fa-user-circle"></i>
+            <div class="text">
+              <span class="greeting">Hello, John!</span>
+              <span class="edit-profile">Edit my <b>Profile</b></span>
             </div>
-        </div>
+            <!--.text-->
+          </a></li>
+        <li class="messages"><a href="#0">
+            <span id="notifications" class="notifications"></span>
+            <i class="fas fa-inbox"></i>
+            <span class="text">Check my <b>messages</b></span>
+          </a></li>
+        <li><a href="./index.html">
+            <i class="fas fa-home"></i>
+            Home
+          </a></li>
+        <li><a href="#0">
+            <i class="fas fa-clock"></i>
+            My fitness <b>schedule</b>
+          </a></li>
+        <li><a href="./find-a-trainer.html">
+            <i class="fas fa-user"></i>
+            Find a <b>trainer</b>
+          </a></li>
+        <li><a href="#0">
+            <i class="fas fa-users"></i>
+            Join a <b>group class</b>
+          </a></li>
+      </ul>
     </nav>
 
+    <div class="account">
+      <i class="fas fa-user-plus"></i>
+      <button id="signupBtn" class="btn btn-outline-light login">Log In</button>
+      <button id="signupBtn" class="btn btn-primary signup">Sign Up</button>
+      <div class="user">
+        <a class="user-profile" href="#0">
+          <i class="fas fa-user-circle"></i>
+          <div class="text">
+            <span class="greeting">Hello, John!</span>
+            <span class="edit-profile">Edit my <b>Profile</b></span>
+          </div>
+          <!--.text-->
+        </a>
+        <!--.user-profile-->
+        <a class="messages" href="#0">
+          <div class="icon">
+            <span id="notifications" class="notifications"></span>
+            <i class="fas fa-inbox"></span></i>
+          </div>
+          <!--.icon-->
+        </a>
+        <!--.message-->
+      </div>
+      <!--.user-->
+
+      <button id="signupBtn" class="btn btn-outline-light logout">Log Out</button>
+    </div>
+    <!--.account-->
+
+  </header>
+
     <div class="container">
-        <h1 class="display-4"><span class="title-font">Book an <span class="title-font-color">appointment</span></span></h1>
-        <hr>
-        <h3 class="display-7">A message from Trainy</h3>
-        <p>If this is your first session with me, please make sure....</p>
-        <hr>
-        <div class="mb-3">
-            <label for="set-date" class="form-label">Set the date</label>
-            <input type="number" class="form-control" id="set-date" placeholder="MM / DD / YYYY">
-        </div>
-        <div class="mb-3">
-            <label for="comments" class="form-label">Comments</label>
-            <textarea class="form-control" id="comments" rows="3"></textarea>
-        </div>
-        <input class="btn btn-primary" type="submit" value="BOOK">
+      <h1 class="display-4"><span class="title-font">Book an <span class="title-font-color">appointment</span></span>
+      </h1>
+      <hr>
+      <h3 class="display-7">A message from Trainy</h3>
+      <p>If this is your first session with me, please make sure....</p>
+      <hr>
+      <div class="mb-3">
+        <label for="set-date" class="form-label">Set the date</label>
+        <input type="number" class="form-control" id="set-date" placeholder="MM / DD / YYYY">
+      </div>
+      <div class="mb-3">
+        <label for="comments" class="form-label">Comments</label>
+        <textarea class="form-control" id="comments" rows="3"></textarea>
+      </div>
+      <input class="btn btn-primary" type="submit" value="BOOK">
     </div>
 
     <footer class="d-grid">
@@ -87,14 +145,8 @@
       <nav class="accordion" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#servicesLinks"
-              aria-expanded="false"
-              aria-controls="servicesLinks"
-            >
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#servicesLinks" aria-expanded="false" aria-controls="servicesLinks">
               <i class="fas fa-dumbbell"></i> Services
             </button>
           </h2>
@@ -106,18 +158,13 @@
               <a class="nav-link" href="#">Join a Group Class</a>
             </li>
           </ul>
-        </div><!--.accordion-item-->
-        
+        </div>
+        <!--.accordion-item-->
+
         <div class="accordion-item about-us">
           <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#aboutLinks"
-              aria-expanded="false"
-              aria-controls="aboutLinks"
-            >
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#aboutLinks" aria-expanded="false" aria-controls="aboutLinks">
               <i class="fas fa-users"></i> About
             </button>
           </h2>
@@ -135,19 +182,18 @@
               <a class="nav-link" href="#">Careers</a>
             </li>
           </ul>
-        </div><!--.about-us-->
+        </div>
+        <!--.about-us-->
 
         <div class="accordion-item contact-us no-children">
           <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-            >
-            <i class="fas fa-envelope"></i> Contact Us
+            <button class="accordion-button collapsed" type="button">
+              <i class="fas fa-envelope"></i> Contact Us
             </button>
           </h2>
-        </div><!--.contact-us-->
-        
+        </div>
+        <!--.contact-us-->
+
         <div class="accordion-item no-children">
           <div class="accordion-button collapsed">
             <div class="col copyright">
@@ -165,12 +211,11 @@
               </a>
               <a href="https://github.com/ethanlee123/peakphysique">
                 <i class="fab fa-github"></i>
-              </a>          
+              </a>
             </div>
           </div>
-        </div><!--.accordion-item-->
-
-      </nav>
+        </div>
+        <!--.accordion-item-->
 
 
     </footer>
@@ -184,6 +229,7 @@
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
+    <script src="./scripts/components/header.js"></script>
 
 </body>
 
