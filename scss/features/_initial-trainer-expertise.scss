@@ -13,7 +13,7 @@
         @include top-buffer-trainer;
     }
     .container {
-        @include content-width;
+        @include content-center;
     }
     i {
         font-size: 20pt;
