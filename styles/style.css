@@ -454,29 +454,29 @@ footer .btn.btn-outline-light.contact-us i {
     padding: 0px; }
 
 /* style sheet for initial setup of trainer unique profile */
-.initial-trainer-info .top-buffer {
-  margin-top: 50px; }
-
-.initial-trainer-info .no-padding {
-  padding: 0; }
-
-.initial-trainer-info textarea {
-  word-break: normal !important; }
-
-.initial-trainer-info h1, .initial-trainer-info .h1 {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin: 0;
-  background-color: #0444AC !important; }
-
-.initial-trainer-info ul {
-  list-style: none; }
-
-.initial-trainer-info path {
-  fill: #83C3A3; }
-
-.initial-trainer-info svg {
-  width: 6em; }
+.initial-trainer-info {
+  background-color: #1E242E; }
+  .initial-trainer-info .top-buffer {
+    margin-top: 50px; }
+  .initial-trainer-info .container {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 50px; }
+  .initial-trainer-info .no-padding {
+    padding: 0; }
+  .initial-trainer-info textarea {
+    word-break: normal !important; }
+  .initial-trainer-info h1, .initial-trainer-info .h1 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0; }
+  .initial-trainer-info ul {
+    list-style: none; }
+  .initial-trainer-info path {
+    fill: #83C3A3; }
+  .initial-trainer-info .fa-user-circle {
+    font-size: 84pt;
+    margin: 0; }
 
 /* style sheet for trainer "my expertise" */
 .initial-trainer-expertise h1, .initial-trainer-expertise .h1 {
@@ -490,7 +490,8 @@ footer .btn.btn-outline-light.contact-us i {
 
 .initial-trainer-expertise .container {
   width: 90%;
-  margin: 0 auto; }
+  margin: 0 auto;
+  margin-top: 50px; }
 
 .initial-trainer-expertise i {
   font-size: 20pt; }
@@ -505,7 +506,8 @@ footer .btn.btn-outline-light.contact-us i {
   background-color: #1E242E; }
   .initial-platform-specific .main-content {
     width: 90%;
-    margin: 0 auto; }
+    margin: 0 auto;
+    margin-top: 50px; }
   .initial-platform-specific .top-buffer {
     margin-top: 50px; }
   .initial-platform-specific h1, .initial-platform-specific .h1 {
@@ -514,7 +516,8 @@ footer .btn.btn-outline-light.contact-us i {
     padding: 0; }
   .initial-platform-specific .container {
     width: 90%;
-    margin: 0 auto; }
+    margin: 0 auto;
+    margin-top: 50px; }
   .initial-platform-specific i {
     font-size: 20pt; }
   .initial-platform-specific .progress-bar {

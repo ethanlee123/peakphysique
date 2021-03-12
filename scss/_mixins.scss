@@ -30,6 +30,7 @@
 @mixin content-center {
   width: 90%;
   margin: 0 auto;
+  margin-top: 50px;
 }
 // not yet used
 @mixin have-an-account {

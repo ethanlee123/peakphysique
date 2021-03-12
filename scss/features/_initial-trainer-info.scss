@@ -1,8 +1,12 @@
 
     /* style sheet for initial setup of trainer unique profile */
 .initial-trainer-info {
+    background-color: $dark;
     .top-buffer {
         margin-top: 50px;
+    }
+    .container {
+        @include content-center;
     }
 
     .no-padding {
@@ -17,7 +21,6 @@
         padding-top: 5px;
         padding-bottom: 5px;
         margin: 0;
-        background-color: #0444AC !important;
     }
 
     ul {
@@ -28,8 +31,9 @@
         fill: #83C3A3;
     }
 
-    svg {
-        width: 6em;
+    .fa-user-circle {
+        font-size: 84pt;
+        margin: 0;
     }
 
 }
