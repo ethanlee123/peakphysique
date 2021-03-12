@@ -1,5 +1,5 @@
 .initial-trainer-setup {
-
+    background-color: $dark;
     .top-buffer {
         @include top-buffer-trainer;
     }
@@ -16,10 +16,6 @@
     }
 
     .card {
-        margin: 0 5%;
-    }
-
-    .list-group {
         margin: 0 5%;
     }
 
