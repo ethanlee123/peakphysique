@@ -1,0 +1,39 @@
+.initial-platform-specific {
+    background-color: $dark;
+    .main-content{
+        @include content-center;
+    }
+    .top-buffer {
+        @include top-buffer-trainer;
+    }
+    h1 {
+        margin: 0;
+    }
+    ul.list-group {
+        padding: 0;
+    }
+
+    .container {
+        @include content-center;
+    }
+    i {
+        font-size: 20pt;
+    }
+    .progress-bar {
+        background-color: $dark;
+    }
+    .days {
+        .btn {
+            span {
+                min-width: 20px;
+                color: $light;
+            }
+        }
+    }
+    .collaspe .btn {
+        padding: 6px 8px;
+    }
+    .fitness, .wellness {
+        padding: 0;
+    }
+}

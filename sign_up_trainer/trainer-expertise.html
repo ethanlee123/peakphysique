@@ -26,11 +26,10 @@
     <link href="/styles/fontello.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet"
         type='text/css'>
-    <link href="/styles/trainer-expertise.css" rel="stylesheet" />
 
 </head>
 
-<body>
+<body class="initial-trainer-expertise bg-dark">
     <!-- Header Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
         <div class="container-fluid">
@@ -62,26 +61,30 @@
     </nav>
 
     <!-- Main Content of this page -->
-    <div class="container d-grid justify-content-center top-buffer">
+    <div class="container d-grid justify-content-center top-buffer main-content">
         <div class="row progress h-100" id="progress">
-            <h1 class="d-flex justify-content-center progress-bar fs-7" id="title" role="progressbar">
+            <h1 class="d-flex justify-content-center progress-bar fs-4" id="title" role="progressbar">
                 Upload your qualifications!
             </h1>
         </div>
 
-        <div class="row top-buffer d-flex justify-content-center">
-            <div>
+        <div class="row top-buffer d-flex justify-content-center mb-3">
+            <div class="d-flex flex-row justify-content-between">
                 <p class="">Upload a pdf of your qualifications</p>
+                <i class="fas fa-upload"></i>
             </div>
-            <div>
-                <p class="">Years of Experiences</p>
+            <div class="d-flex flex-row justify-content-between mb-3">
+                <label class="" for="years">Years of Experiences</label>
+                <input type="number" id="years" name="quantity" min="0" max="30" value="0">
             </div>
-            <div>
-                <a class="btn btn-primary shadow-none" data-bs-toggle="collapse" href="#collapseFitness" role="button"
-                    aria-expanded="false" aria-controls="collapseFitness">
-                    Fitness Specialization
-                    <i class="fas fa-chevron-down"></i>
-                </a>
+            <div class="mb-3">
+
+                    <a class="btn btn-primary btn-outline-dark shadow-none bg-transparent text-light container-fluid d-flex justify-content-between" data-bs-toggle="collapse" href="#collapseFitness" role="button"
+                        aria-expanded="false" aria-controls="collapseFitness">
+                        Fitness Specialization
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+
                 <div class="collapse" id="collapseFitness">
                     <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
                     <label class="btn btn-outline-primary" for="btncheck1">Body Building</label>
@@ -95,8 +98,8 @@
             </div>
 
 
-            <div>
-                <a class="btn btn-primary shadow-none" data-bs-toggle="collapse" href="#collapseWellness" role="button"
+            <div class="container-fluid">
+                <a class="btn btn-primary btn-outline-dark shadow-none bg-transparent text-light container-fluid d-flex justify-content-between" data-bs-toggle="collapse" href="#collapseWellness" role="button"
                     aria-expanded="false" aria-controls="collapseWellness">
                     Wellness Services
                     <i class="fas fa-chevron-down"></i>
@@ -116,9 +119,9 @@
 
         </div>
         <a class="row btn btn-primary btn-sm d-flex justify-content-center top-buffer" id="next-btn"
-            href="./initial-trainer-profile.html">
+            href="./initial-trainer-setup.html">
             <button type="submit" class="btn">
-                Done
+                Save & Return
             </button>
         </a>
     </div>

@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-        <title>Trainer - Peak Physique</title>
-    
-        <!-- Favicon -->
-        <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png" />
-        <link rel="manifest" href="/images/favicon/site.webmanifest" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
-    
-        <!-- Bootstrap for Mobile-first, and JQuery -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
-    
-        <!-- Custom style sheet sign up trainer -->
-        <link href="/styles/style.css" rel="stylesheet" />
-        <link href="/styles/fontello.css" rel="stylesheet" />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet" />
-    
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<body>
+    <title>Trainer - Peak Physique</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="/images/favicon/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Bootstrap for Mobile-first, and JQuery -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+
+    <!-- Custom style sheet sign up trainer -->
+    <link href="/styles/style.css" rel="stylesheet" />
+    <link href="/styles/fontello.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet" />
+
+</head>
+
+<body class="initial-trainer-setup">
     <!-- Header Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
         <div class="container-fluid">
@@ -61,52 +61,59 @@
 
     <!-- Main Content of this page -->
     <div class="container d-grid justify-content-center top-buffer">
-        <div class="row">
-            <h1 class="display-6 d-flex justify-content-center" id="title">To find prospects - please complete your
-                profile</h1>
+        <div class="row progress h-100" id="progress">
+            <h1 class="d-flex justify-content-center progress-bar fs-6" id="title" role="progressbar">
+                Thank you for registering! See below
+            </h1>
         </div>
 
         <div class="row top-buffer">
             <ul class="list-group d-flex justify-content-end" id="list-items">
 
-                <a>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <figcaption>
-                            <img src="/images/profile-placeholder.svg" alt="" class="src">
-                            Hello, <span id="name">John!</span>
-                        </figcaption>
-                        <span class="badge badge-primary badge-pill bg-danger">14</span>
+                <a href="./trainer-unique-profile.html" class="btn">
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-dark">
+                        <figure class="d-flex align-items-center">
+                            <i class="far fa-user-circle menu"></i>
+                            <figcaption>
+                                Hello, <span id="name">John!</span>
+                            </figcaption>
+                        </figure>
+                        <span class="badge badge-primary badge-pill bg-info">5</span>
                     </li>
                 </a>
 
-                <a>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <figcaption>
-                            <img src="/images/target-icon.svg" alt="" class="src">
-                            My Expertise
-                        </figcaption>
-                        <span class="badge badge-primary badge-pill bg-danger">2</span>
+                <a href="./trainer-expertise.html" class="btn">
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-dark">
+                        <figure class="d-flex align-items-center">
+                            <i class="fas fa-expand menu"></i>
+                            <figcaption>
+                                My Expertise
+                            </figcaption>
+                        </figure>
+                        <span class="badge badge-primary badge-pill bg-info">2</span>
                     </li>
                 </a>
 
-                <a>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <figcaption>
-                            <img src="/images/logo.svg" alt="peak physique logo" class="src img-thumbnail" />
-                            Platform Specific
-                        </figcaption>
-                        <span class="badge badge-primary badge-pill bg-danger">1</span>
+                <a href="./platform-specific.html" class="btn">
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-dark">
+                        <div class="d-flex align-items-center">
+                            <i class="icon icon-logo"></i>
+                            <figcaption>Platform Specific</figcaption>
+                        </div>
+                        <span class="badge badge-primary badge-pill bg-info">1</span>
                     </li>
                 </a>
-                
-                <a>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <figcaption>
-                            <img src="/images/settings-icon.svg" alt="" class="src">
-                            Settings
-                        </figcaption>
+
+                <a href="./trainer-settings.html" class="btn">
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-dark">
+                        <figure class="d-flex align-items-center">                            
+                            <i class="fas fa-tools menu"></i>
+                            <figcaption>
+                                Settings
+                            </figcaption>
+                        </figure>
+                    </li>
                 </a>
-                </li>
             </ul>
         </div>
     </div>

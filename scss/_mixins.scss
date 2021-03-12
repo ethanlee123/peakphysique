@@ -24,12 +24,17 @@
 }
 
 
+@mixin top-buffer-trainer {
+    margin-top: 50px;
+}
+@mixin content-center {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
 // not yet used
 @mixin have-an-account {
     width: 200px;
     border-color: #FFF;
     border-top: solid 5px #000;
-}
-@mixin top-buffer-trainer {
-    margin-top: 50px;
 }

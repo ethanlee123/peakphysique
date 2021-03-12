@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Home - Peak Physique</title>
+    <title>Schedule - Peak Physique</title>
     <meta name="comp1800 boilerplate code" content="my bcit project">
     <meta name="author" content="BCIT">
 
@@ -27,10 +27,10 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="./styles/style.css">
-    <link rel="stylesheet" href="./styles/book-appointment.css">
+    <link rel="stylesheet" href="./styles/trainer-profile.css">
 </head>
 
-<body id="#body" class="logged-out">
+<body id="#body">
 
     <!-------------------------------------->
     <!-- The following is HTML for layout -->
@@ -70,7 +70,7 @@
             <i class="fas fa-home"></i>
             Home
           </a></li>
-          <li><a href="./schedule.html">
+          <li><a href="#0">
             <i class="fas fa-clock"></i>
             My fitness <b>schedule</b>
           </a></li>
@@ -110,13 +110,85 @@
 
   </header>
 
-    <div class="container landing">
-        <h1 class="display-4">GET IN <span class="title-font-color">TOP</span> SHAPE WITH THE <span class="title-font-color">TOP</span> TRAINERS.</h1>
-        <div class="login-buttons">
-          <a class="btn btn-light" role="button" href="./login.html">LOGIN</a>
-          <a class="btn btn-dark" role="button" href="./login.html">SIGN UP</a>
-        </div>
+    <div class="container-schedule-title">
+        <h1 class="display-4">schedule</h1>
     </div>
+
+    <div class="container-schedule">
+    <div class="card mb-3" style="max-width: 640px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <a href="./trainer-profile.html"> 
+                <img class="schedule-profile-pic" src="/images/trainer-profile-pic.jpg" alt="trainer profile pic">
+            </a>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+                <a href="./trainer-profile.html">
+                <h5 class="card-title">Trainer Mike</h5>
+            </a>
+              <h5 class="card-title">Thursday Mar 11, 2021</h5>
+              <h6 class>8pm to 9pm</h6>
+              <p class="card-text">Yoga with Mike at Stanley Park</p>
+              <a href="#" class="btn btn-primary">Add to Calendar</a>
+              <a class="card-text"><small class="text-muted">Cancel</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3" style="max-width: 640px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img class="schedule-profile-pic" src="/images/trainer-profile-pic.jpg" alt="trainer profile pic">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Thursday Mar 11, 2021</h5>
+              <h6 class>8pm to 9pm</h6>
+              <p class="card-text">Yoga with Mike at Stanley Park</p>
+              <a href="#" class="btn btn-primary">Add to Calendar</a>
+              <a class="card-text"><small class="text-muted">Cancel</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3" style="max-width: 640px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img class="schedule-profile-pic" src="/images/trainer-profile-pic.jpg" alt="trainer profile pic">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Thursday Mar 11, 2021</h5>
+              <h6 class>8pm to 9pm</h6>
+              <p class="card-text">Yoga with Mike at Stanley Park</p>
+              <a href="#" class="btn btn-primary">Add to Calendar</a>
+              <a class="card-text"><small class="text-muted">Cancel</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img class="schedule-profile-pic" src="/images/trainer-profile-pic.jpg" alt="trainer profile pic">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Saturday Mar 13, 2021</h5>
+              <h6 class>3pm to 4pm</h6>
+              <p class="card-text">Individual Yoga Session with Mike</p>
+              <a href="#" class="btn btn-primary">Add to Calendar</a>
+              <a class="card-text"><small class="text-muted">Cancel</small></p>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
 
     <footer class="d-grid">
       <a class="btn btn-outline-none scroll-to-top" href="#body">

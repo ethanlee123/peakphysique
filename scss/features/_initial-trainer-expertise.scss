@@ -1,0 +1,27 @@
+/* style sheet for trainer "my expertise" */
+.initial-trainer-expertise {
+
+    h1 {
+        margin: 0;
+    }
+
+    ul.list-group {
+        padding: 0;
+    }
+
+    .top-buffer {
+        @include top-buffer-trainer;
+    }
+    .container {
+        @include content-center;
+    }
+    i {
+        font-size: 20pt;
+    }
+    .btn {
+        padding: 0;
+    }
+    .progress-bar {
+        background-color: $dark;
+    }
+}
