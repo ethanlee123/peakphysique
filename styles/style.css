@@ -368,38 +368,45 @@ footer .btn.btn-outline-light.contact-us i {
   #firebaseui-auth-container .firebaseui-container .firebaseui-title {
     color: #D4DDD6; }
 
-.initial-trainer-setup {
-  background-color: #1E242E; }
-  .initial-trainer-setup .top-buffer {
-    margin-top: 50px; }
-  .initial-trainer-setup h1, .initial-trainer-setup .h1 {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin: 0;
-    min-width: 80%; }
-  .initial-trainer-setup .profile-pic {
-    border-radius: 50%; }
-  .initial-trainer-setup .card {
-    margin: 0 5%; }
-  .initial-trainer-setup #accordionUpdate {
-    margin: 0 5%; }
-  .initial-trainer-setup li:hover i, .initial-trainer-setup li:active i, .initial-trainer-setup li:focus i {
-    color: #0a0c0f; }
-  .initial-trainer-setup i:hover, .initial-trainer-setup i:active, .initial-trainer-setup i:focus {
-    color: #0a0c0f; }
-  .initial-trainer-setup i.menu {
-    font-size: 47px;
-    margin-right: 0;
-    margin-right: 10px;
-    color: #83C3A3; }
-  .initial-trainer-setup i.icon-logo {
-    font-size: 2.5em;
-    color: #83C3A3;
-    margin-right: 15px; }
-  .initial-trainer-setup figure {
-    margin: 0;
-    margin-right: 0.5em;
-    padding: 0; }
+.initial-trainer-setup .top-buffer {
+  margin-top: 50px; }
+
+.initial-trainer-setup h1, .initial-trainer-setup .h1 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 0;
+  min-width: 80%; }
+
+.initial-trainer-setup .profile-pic {
+  border-radius: 50%; }
+
+.initial-trainer-setup .card {
+  margin: 0 5%; }
+
+.initial-trainer-setup #accordionUpdate {
+  margin: 0 5%; }
+
+.initial-trainer-setup li:hover i, .initial-trainer-setup li:active i, .initial-trainer-setup li:focus i {
+  color: #0a0c0f; }
+
+.initial-trainer-setup i:hover, .initial-trainer-setup i:active, .initial-trainer-setup i:focus {
+  color: #0a0c0f; }
+
+.initial-trainer-setup i.menu {
+  font-size: 47px;
+  margin-right: 0;
+  margin-right: 10px;
+  color: #83C3A3; }
+
+.initial-trainer-setup i.icon-logo {
+  font-size: 2.5em;
+  color: #83C3A3;
+  margin-right: 15px; }
+
+.initial-trainer-setup figure {
+  margin: 0;
+  margin-right: 0.5em;
+  padding: 0; }
 
 /* style sheet for sign up trainer */
 .trainer-create-account {
