@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Trainer - Peak Physique</title>
+    <title>My Expertise - Peak Physique</title>
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
@@ -24,11 +24,12 @@
     <!-- Custom style sheet sign up trainer -->
     <link href="/styles/style.css" rel="stylesheet" />
     <link href="/styles/fontello.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet"
+        type='text/css'>
 
 </head>
 
-<body class="initial-trainer-setup">
+<body class="initial-trainer-expertise bg-dark">
     <!-- Header Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
         <div class="container-fluid">
@@ -60,62 +61,69 @@
     </nav>
 
     <!-- Main Content of this page -->
-    <div class="container d-grid justify-content-center top-buffer">
+    <div class="container d-grid justify-content-center top-buffer main-content">
         <div class="row progress h-100" id="progress">
-            <h1 class="d-flex justify-content-center progress-bar fs-6" id="title" role="progressbar">
-                Thank you for registering! See below
+            <h1 class="d-flex justify-content-center progress-bar fs-4" id="title" role="progressbar">
+                Upload your qualifications!
             </h1>
         </div>
 
-        <div class="row top-buffer">
-            <ul class="list-group d-flex justify-content-end" id="list-items">
+        <div class="row top-buffer d-flex justify-content-center mb-3">
+            <div class="d-flex flex-row justify-content-between">
+                <p class="">Upload a pdf of your qualifications</p>
+                <i class="fas fa-upload"></i>
+            </div>
+            <div class="d-flex flex-row justify-content-between mb-3">
+                <label class="" for="years">Years of Experiences</label>
+                <input type="number" id="years" name="quantity" min="0" max="30" value="0">
+            </div>
+            <div class="mb-3">
 
-                <a href="./trainer-unique-profile.html" class="btn">
-                    <li class="list-group-item d-flex justify-content-between align-items-center bg-dark">
-                        <figure class="d-flex align-items-center">
-                            <i class="far fa-user-circle menu"></i>
-                            <figcaption>
-                                Hello, <span id="name">John!</span>
-                            </figcaption>
-                        </figure>
-                        <span class="badge badge-primary badge-pill bg-info">5</span>
-                    </li>
-                </a>
+                    <a class="btn btn-primary btn-outline-dark shadow-none bg-transparent text-light container-fluid d-flex justify-content-between" data-bs-toggle="collapse" href="#collapseFitness" role="button"
+                        aria-expanded="false" aria-controls="collapseFitness">
+                        Fitness Specialization
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
 
-                <a href="./trainer-expertise.html" class="btn">
-                    <li class="list-group-item d-flex justify-content-between align-items-center bg-dark">
-                        <figure class="d-flex align-items-center">
-                            <i class="fas fa-expand menu"></i>
-                            <figcaption>
-                                My Expertise
-                            </figcaption>
-                        </figure>
-                        <span class="badge badge-primary badge-pill bg-info">2</span>
-                    </li>
-                </a>
+                <div class="collapse" id="collapseFitness">
+                    <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck1">Body Building</label>
 
-                <a href="./platform-specific.html" class="btn">
-                    <li class="list-group-item d-flex justify-content-between align-items-center bg-dark">
-                        <div class="d-flex align-items-center">
-                            <i class="icon icon-logo"></i>
-                            <figcaption>Platform Specific</figcaption>
-                        </div>
-                        <span class="badge badge-primary badge-pill bg-info">1</span>
-                    </li>
-                </a>
+                    <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck2">Power Lifting</label>
 
-                <a href="./trainer-settings.html" class="btn">
-                    <li class="list-group-item d-flex justify-content-between align-items-center bg-dark">
-                        <figure class="d-flex align-items-center">                            
-                            <i class="fas fa-tools menu"></i>
-                            <figcaption>
-                                Settings
-                            </figcaption>
-                        </figure>
-                    </li>
+                    <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck3">Cross Fit</label>
+                </div>
+            </div>
+
+
+            <div class="container-fluid">
+                <a class="btn btn-primary btn-outline-dark shadow-none bg-transparent text-light container-fluid d-flex justify-content-between" data-bs-toggle="collapse" href="#collapseWellness" role="button"
+                    aria-expanded="false" aria-controls="collapseWellness">
+                    Wellness Services
+                    <i class="fas fa-chevron-down"></i>
                 </a>
-            </ul>
+                <div class="collapse" id="collapseWellness">
+                    <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck4">Macro Coaching</label>
+
+                    <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck5">Spritual Guidance</label>
+
+                    <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck6">Diet Consultation</label>
+                </div>
+            </div>
+
+
         </div>
+        <a class="row btn btn-primary btn-sm d-flex justify-content-center top-buffer" id="next-btn"
+            href="./initial-trainer-setup.html">
+            <button type="submit" class="btn">
+                Save & Return
+            </button>
+        </a>
     </div>
 
     <footer class="d-grid top-buffer">
