@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Trainer - Peak Physique</title>
+    <title>Profile - Peak Physique</title>
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
@@ -29,7 +29,7 @@
 
 </head>
 
-<body class="initial-trainer-expertise bg-dark">
+<body class="initial-trainer-info">
     <!-- Header Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
         <div class="container-fluid">
@@ -61,69 +61,97 @@
     </nav>
 
     <!-- Main Content of this page -->
-    <div class="container d-grid justify-content-center top-buffer main-content">
+    <div class="container d-flex flex-column justify-content-center top-buffer">
         <div class="row progress h-100" id="progress">
-            <h1 class="d-flex justify-content-center progress-bar fs-4" id="title" role="progressbar">
-                Upload your qualifications!
+            <h1 class="d-flex justify-content-start progress-bar fs-6  bg-dark" id="title" role="progressbar">
+                Tell us a bit about yourself?
             </h1>
         </div>
 
-        <div class="row top-buffer d-flex justify-content-center mb-3">
-            <div class="d-flex flex-row justify-content-between">
-                <p class="">Upload a pdf of your qualifications</p>
-                <i class="fas fa-upload"></i>
-            </div>
-            <div class="d-flex flex-row justify-content-between mb-3">
-                <label class="" for="years">Years of Experiences</label>
-                <input type="number" id="years" name="quantity" min="0" max="30" value="0">
-            </div>
-            <div class="mb-3">
-
-                    <a class="btn btn-primary btn-outline-dark shadow-none bg-transparent text-light container-fluid d-flex justify-content-between" data-bs-toggle="collapse" href="#collapseFitness" role="button"
-                        aria-expanded="false" aria-controls="collapseFitness">
-                        Fitness Specialization
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-
-                <div class="collapse" id="collapseFitness">
-                    <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btncheck1">Body Building</label>
-
-                    <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btncheck2">Power Lifting</label>
-
-                    <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btncheck3">Cross Fit</label>
-                </div>
-            </div>
-
-
-            <div class="container-fluid">
-                <a class="btn btn-primary btn-outline-dark shadow-none bg-transparent text-light container-fluid d-flex justify-content-between" data-bs-toggle="collapse" href="#collapseWellness" role="button"
-                    aria-expanded="false" aria-controls="collapseWellness">
-                    Wellness Services
-                    <i class="fas fa-chevron-down"></i>
-                </a>
-                <div class="collapse" id="collapseWellness">
-                    <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btncheck4">Macro Coaching</label>
-
-                    <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btncheck5">Spritual Guidance</label>
-
-                    <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btncheck6">Diet Consultation</label>
-                </div>
-            </div>
-
-
+        <div class="d-flex justify-content-center align-items-center flex-column bg transparent top-buffer">
+            <i class="fas fa-user-circle"></i>
+            <p><span id="name">James John</span></p>
+            <label for="customRange1" class="form-label">Radius of Travel <span id="radius">50</span> km</label>
+            <input type="range" class="form-range" step="5" id="customRange1">
         </div>
-        <a class="row btn btn-primary btn-sm d-flex justify-content-center top-buffer" id="next-btn"
-            href="./initial-trainer-setup.html">
-            <button type="submit" class="btn">
-                Save & Return
-            </button>
-        </a>
+
+        <div class="row top-buffer d-flex justify-content-center">
+            <ul class="list-group no-padding" id="list-items">
+
+
+                <li class="form-floating">
+                    <textarea class="form-control bg-transparent" placeholder="Tell us a bit about yourself"
+                        maxlength="80"></textarea>
+                    <label for="floatingTextarea2">Tell us a bit about yourself</label>
+                </li>
+
+                <li class="form-floating">
+                    <input class="form-control bg-transparent" placeholder="Leave a comment here"
+                        maxlength="30"></input>
+                    <label for="floatingTextarea">Favourite Workout</label>
+                </li>
+
+                <li class="form-floating">
+                    <input class="form-control bg-transparent" placeholder="Leave a comment here"
+                        maxlength="30"></input>
+                    <label for="floatingTextarea">Favourite Cheat Meal</label>
+                </li>
+
+                <li class="form-floating">
+                    <input class="form-control bg-transparent" placeholder="Leave a comment here"
+                        maxlength="30"></input>
+                    <label for="floatingTextarea">Random fact about you</label>
+                </li>
+            </ul>
+            <div class="mb-3">
+                <label for="form-city" class="form-label">What are you looking for?</label>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                        <label class="form-check-label" for="gridCheck1">
+                            Bodybuilding
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                        <label class="form-check-label" for="gridCheck1">
+                            Strength Training
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                        <label class="form-check-label" for="gridCheck1">
+                            Endurance Training
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                        <label class="form-check-label" for="gridCheck1">
+                            Custom Workout Regimen
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                        <label class="form-check-label" for="gridCheck1">
+                            Dietary Consultation
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <a class="row btn btn-primary btn-sm top-buffer" id="next-btn" href="sign-up-profile-setup.html">
+                <button type="submit" class="btn">
+                    Save & Return
+                </button>
+            </a>
+        </div>
     </div>
 
     <footer class="d-grid top-buffer">
@@ -207,7 +235,6 @@
             <!--.accordion-item-->
 
         </nav>
-
 
     </footer>
     <!----------------------------------------------->
