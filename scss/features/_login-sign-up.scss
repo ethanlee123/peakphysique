@@ -1,0 +1,38 @@
+.login-sign-up {
+    .container {
+        margin-top: 5%;
+    }
+    .top-buffer {
+        @include top-buffer-trainer;
+    }
+    body {
+        margin: 0 auto;
+    }
+    h1 {
+        text-align: center;
+    }
+    
+    /* for "have an account and login buttons" */
+    #bottom-buttons a {
+        width: 50%;
+        border-color: #FFF;
+    }
+    #bottom-buttons {
+        border-top: solid 5px #000;
+    }
+    a {
+        color: #BABABA;
+    }
+    
+    .my-row {
+        margin: 50px auto 0 auto;
+    }
+
+    // Email placeholder text in firebase UI
+    .firebaseui-label, .firebaseui-input {
+        color: $light;
+    }
+    .text-mint {
+        color: $primary;
+    }
+}

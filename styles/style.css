@@ -527,6 +527,30 @@ footer .btn.btn-outline-light.contact-us i {
   .initial-platform-specific .fitness, .initial-platform-specific .wellness {
     padding: 0; }
 
+.login-sign-up {
+  /* for "have an account and login buttons" */ }
+  .login-sign-up .container {
+    margin-top: 5%; }
+  .login-sign-up .top-buffer {
+    margin-top: 50px; }
+  .login-sign-up body {
+    margin: 0 auto; }
+  .login-sign-up h1, .login-sign-up .h1 {
+    text-align: center; }
+  .login-sign-up #bottom-buttons a {
+    width: 50%;
+    border-color: #FFF; }
+  .login-sign-up #bottom-buttons {
+    border-top: solid 5px #000; }
+  .login-sign-up a {
+    color: #BABABA; }
+  .login-sign-up .my-row {
+    margin: 50px auto 0 auto; }
+  .login-sign-up .firebaseui-label, .login-sign-up .firebaseui-input {
+    color: #D4DDD6; }
+  .login-sign-up .text-mint {
+    color: #83C3A3; }
+
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
