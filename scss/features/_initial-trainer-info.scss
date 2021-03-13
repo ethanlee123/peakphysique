@@ -1,14 +1,15 @@
 
     /* style sheet for initial setup of trainer unique profile */
-.initial-trainer-info {
-    background-color: $dark;
+.sign-up-user-info {
     .top-buffer {
         margin-top: 50px;
     }
     .container {
         @include content-center;
     }
-
+    #progress {
+        @include progress-text;
+    }
     .no-padding {
         padding: 0;
     }

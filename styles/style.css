@@ -377,6 +377,10 @@ footer .btn.btn-outline-light.contact-us i {
   margin: 0;
   min-width: 80%; }
 
+.initial-trainer-setup #progress {
+  background-color: black;
+  border-radius: 0px; }
+
 .initial-trainer-setup .profile-pic {
   border-radius: 50%; }
 
@@ -451,29 +455,38 @@ footer .btn.btn-outline-light.contact-us i {
     padding: 0px; }
 
 /* style sheet for initial setup of trainer unique profile */
-.initial-trainer-info {
-  background-color: #1E242E; }
-  .initial-trainer-info .top-buffer {
-    margin-top: 50px; }
-  .initial-trainer-info .container {
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 50px; }
-  .initial-trainer-info .no-padding {
-    padding: 0; }
-  .initial-trainer-info textarea {
-    word-break: normal !important; }
-  .initial-trainer-info h1, .initial-trainer-info .h1 {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin: 0; }
-  .initial-trainer-info ul {
-    list-style: none; }
-  .initial-trainer-info path {
-    fill: #83C3A3; }
-  .initial-trainer-info .fa-user-circle {
-    font-size: 84pt;
-    margin: 0; }
+.sign-up-user-info .top-buffer {
+  margin-top: 50px; }
+
+.sign-up-user-info .container {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 50px; }
+
+.sign-up-user-info #progress {
+  background-color: black;
+  border-radius: 0px; }
+
+.sign-up-user-info .no-padding {
+  padding: 0; }
+
+.sign-up-user-info textarea {
+  word-break: normal !important; }
+
+.sign-up-user-info h1, .sign-up-user-info .h1 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 0; }
+
+.sign-up-user-info ul {
+  list-style: none; }
+
+.sign-up-user-info path {
+  fill: #83C3A3; }
+
+.sign-up-user-info .fa-user-circle {
+  font-size: 84pt;
+  margin: 0; }
 
 /* style sheet for trainer "my expertise" */
 .initial-trainer-expertise h1, .initial-trainer-expertise .h1 {
