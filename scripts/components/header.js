@@ -1,3 +1,4 @@
+// Animation for hamburger menu at smaller resolutions
 var isLoggedIn = false;
 
 const burgerMenu = document.getElementById("#burgerMenu");
