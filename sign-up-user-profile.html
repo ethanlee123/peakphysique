@@ -29,7 +29,7 @@
 
 </head>
 
-<body class="initial-trainer-info">
+<body class="sign-up-user-info">
     <!-- Header Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
         <div class="container-fluid">
@@ -62,7 +62,7 @@
 
     <!-- Main Content of this page -->
     <div class="container d-flex flex-column justify-content-center top-buffer">
-        <div class="row progress h-100" id="progress">
+        <div class="row progress h-100 top-buffer" id="progress">
             <h1 class="d-flex justify-content-start progress-bar fs-6  bg-dark" id="title" role="progressbar">
                 Tell us a bit about yourself?
             </h1>
@@ -76,8 +76,18 @@
         </div>
 
         <div class="row top-buffer d-flex justify-content-center">
-            <ul class="list-group no-padding" id="list-items">
+            <ul class="list-group no-padding mb-5" id="list-items">
+                <li class="form-floating">
+                    <textarea class="form-control bg-transparent" placeholder="Tell us a bit about yourself"
+                        maxlength="80"></textarea>
+                    <label for="floatingTextarea2">Phone Number</label>
+                </li>
 
+                <li class="form-floating mb-5">
+                    <input class="form-control bg-transparent" placeholder="Leave a comment here"
+                        maxlength="30"></input>
+                    <label for="floatingTextarea">City</label>
+                </li>
 
                 <li class="form-floating">
                     <textarea class="form-control bg-transparent" placeholder="Tell us a bit about yourself"

@@ -9,6 +9,9 @@
         margin: 0;
         min-width: 80%;
     }
+    #progress {
+        @include progress-text;
+    }
 
     .profile-pic {
         border-radius: 50%;
@@ -21,11 +24,6 @@
     #accordionUpdate {
         margin: 0 5%;
     }
-
-    // .navbar {
-    //     background-color: blueviolet;
-    // }
-
     li {
         @include hover-state {
             i {
@@ -53,8 +51,7 @@
         }
 
 
-    }
-    
+    } 
     figure {
         margin: 0;
         margin-right: 0.5em;
