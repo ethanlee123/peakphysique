@@ -32,3 +32,7 @@
   margin: 0 auto;
   margin-top: 50px;
 }
+@mixin progress-text {
+  background-color: black;
+  border-radius: 0px;
+}
