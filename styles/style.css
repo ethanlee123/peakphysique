@@ -564,6 +564,20 @@ footer .btn.btn-outline-light.contact-us i {
   .login-sign-up .text-mint {
     color: #83C3A3; }
 
+.messages-notifications .top-buffer {
+  margin-top: 50px; }
+
+.messages-notifications button {
+  color: #D4DDD6; }
+
+.messages-notifications .main-content {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 50px; }
+
+.messages-notifications button .active {
+  background-color: #83C3A3 !important; }
+
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

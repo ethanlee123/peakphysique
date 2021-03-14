@@ -1,0 +1,13 @@
+.messages-notifications {
+
+    .top-buffer {
+        @include top-buffer-trainer;
+    }
+    button {
+        color: $secondary;
+    }
+    .main-content {
+        @include content-center;
+    };
+        
+}
