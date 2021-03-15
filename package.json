@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "fitness app for connecting fitness professionals and their clients",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "sass": "node-sass scss/custom.scss styles/style.css -w"
   },

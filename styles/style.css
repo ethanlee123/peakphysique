@@ -25,7 +25,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
 body {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   min-height: 100vh; }
   body b {
     color: #83C3A3; }
@@ -294,6 +293,9 @@ header {
   @media (min-width: 1200px) {
     header .messages .text {
       display: none; } }
+
+main, .main-content {
+  flex: 1; }
 
 footer a {
   color: #D4DDD6;
@@ -574,9 +576,6 @@ footer .btn.btn-outline-light.contact-us i {
   width: 90%;
   margin: 0 auto;
   margin-top: 50px; }
-
-.messages-notifications button .active {
-  background-color: #83C3A3 !important; }
 
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)
