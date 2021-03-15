@@ -35,79 +35,7 @@
     <!-- The following is HTML for layout -->
     <!-------------------------------------->
     <!-- Header Navigation Bar -->
-    <header>
-        <div class="burger-menu" id="#burgerMenu">
-          <span class="top-bun"></span>
-          <span class="patty"></span>
-          <span class="btm-bun"></span>
-        </div><!--.burger-->
-
-        <a href="./index.html" class="logo">
-          <i class="icon icon-logo"></i>
-          <span class="text">Peak <b>Physique</b></span>
-        </a>
-        
-        <nav>
-          <a href="./index.html" class="logo">
-            <i class="icon icon-logo"></i>
-            <span class="text">Peak <b>Physique</b></span>
-          </a>
-          <ul>
-            <li><a class="user-profile" href="#0">
-              <i class="fas fa-user-circle"></i>
-              <div class="text">
-                <span class="greeting">Hello, John!</span>
-                <span class="edit-profile">Edit my <b>Profile</b></span>
-              </div><!--.text-->
-            </a></li>
-            <li class="messages"><a href="#0">
-              <span id="notifications" class="notifications"></span>
-              <i class="fas fa-inbox"></i>        
-              <span class="text">Check my <b>messages</b></span>
-            </a></li>
-            <li><a href="./index.html">
-              <i class="fas fa-home"></i>
-              Home
-            </a></li>
-            <li><a href="#0">
-              <i class="fas fa-clock"></i>
-              My fitness <b>schedule</b>
-            </a></li>
-            <li><a href="./find-a-trainer.html">
-              <i class="fas fa-user"></i>
-              Find a <b>trainer</b>
-            </a></li>
-            <li><a href="#0">
-              <i class="fas fa-users"></i>
-              Join a <b>group class</b>
-            </a></li>
-          </ul>
-        </nav>
-
-        <div class="account">
-          <i class="fas fa-user-plus"></i>
-          <button id="signupBtn" class="btn btn-outline-light login">Log In</button>
-          <button id="signupBtn" class="btn btn-primary signup">Sign Up</button>
-          <div class="user">
-            <a class="user-profile" href="#0">
-              <i class="fas fa-user-circle"></i>
-              <div class="text">
-                <span class="greeting">Hello, John!</span>
-                <span class="edit-profile">Edit my <b>Profile</b></span>
-              </div><!--.text-->
-            </a><!--.user-profile-->
-            <a class="messages" href="#0">
-              <div class="icon">
-                <span id="notifications" class="notifications"></span>
-                <i class="fas fa-inbox"></span></i>                
-              </div><!--.icon-->
-            </a><!--.message-->
-          </div><!--.user-->
-
-          <button id="signupBtn" class="btn btn-outline-light logout">Log Out</button>          
-        </div><!--.account-->
-
-    </header>
+    <header-component></header-component>
 
     <div class="container d-grid gap-3 main-content">
       <div class="row section-title">
@@ -195,154 +123,7 @@
       </div><!--.row-->
     </div><!--.container-->
 
-    <footer class="d-grid">
-      <a class="btn btn-outline-none scroll-to-top" href="#body">
-        <i class="fas fa-arrow-circle-up"></i> Scroll to Top
-      </a>
-
-
-      <nav class="desktop" id="footerNavDesktop">
-        
-        <div class="category services">
-          <span class="heading">
-            <i class="fas fa-dumbbell"></i> Services
-          </span>
-          <ul>
-            <li><a href="./find-a-trainer.html">Find a Trainer</a></li>
-            <li><a href="#0">Join a Group Class</a></li>
-          </ul>
-        </div><!--.category.services-->
-
-        <div class="category about">
-          <span class="heading">
-            <i class="fas fa-users"></i> About
-          </span>
-          <ul>
-            <li><a href="#0">About Us</a></li>
-            <li><a href="#0">FAQ</a></li>
-            <li><a href="#0">Policies</a></li>
-            <li><a href="#0">Careers</a></li>
-          </ul>
-        </div><!--.category.about-->
-
-        <div class="category copyright">
-          <span class="heading">
-            <i class="icon-logo"></i> &#169 2021
-          </span>
-        </div><!--.category.copyright-->
-
-        <div class="category social">
-          <button class="btn btn-outline-light contact-us">
-            <i class="fas fa-envelope"></i> Contact Us
-          </button>
-
-          <ul class="social-media">
-            <li><a href="#0">
-              <i class="fab fa-facebook-f"></i>
-            </a></li>
-            <li><a href="#0">
-              <i class="fab fa-instagram"></i>
-            </a></li>
-            <li><a href="#0">
-              <i class="fab fa-twitter"></i>
-            </a></li>
-            <li><a href="https://github.com/ethanlee123/peakphysique">
-              <i class="fab fa-github"></i>
-            </a></li>            
-          </ul>
-        </div><!--.category.social-->
-      </nav>      
-
-      <nav class="accordion mobile" id="footerNavMobile">
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#servicesLinks"
-              aria-expanded="false"
-              aria-controls="servicesLinks"
-            >
-              <i class="fas fa-dumbbell"></i> Services
-            </button>
-          </h2>
-          <ul class="collapse nav flex-column" id="servicesLinks">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Find a Trainer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Join a Group Class</a>
-            </li>
-          </ul>
-        </div><!--.accordion-item-->
-        
-        <div class="accordion-item about-us">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#aboutLinks"
-              aria-expanded="false"
-              aria-controls="aboutLinks"
-            >
-              <i class="fas fa-users"></i> About
-            </button>
-          </h2>
-          <ul class="collapse nav flex-column" id="aboutLinks">
-            <li class="nav-item">
-              <a class="nav-link" href="#">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">FAQ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Policies</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Careers</a>
-            </li>
-          </ul>
-        </div><!--.about-us-->
-
-        <div class="accordion-item no-children">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-            >
-            <i class="fas fa-envelope"></i> Contact Us
-            </button>
-          </h2>
-        </div><!--.contact-us-->
-        
-        <div class="accordion-item no-children">
-          <div class="accordion-button collapsed">
-            <div class="col copyright">
-              <i class="icon-logo"></i> &#169 2021
-            </div>
-            <div class="col social-media">
-              <a href="#0">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="#0">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="#0">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="https://github.com/ethanlee123/peakphysique">
-                <i class="fab fa-github"></i>
-              </a>          
-            </div>
-          </div>
-        </div><!--.accordion-item-->
-
-      </nav>
-
-
-    </footer>
+    <footer-component></footer-component>
     <!----------------------------------------------->
     <!-- JS: Boostrap, Firebase, API related    -->
     <!----------------------------------------------->
@@ -353,7 +134,8 @@
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
-    <script src="./scripts/components/header.js"></script>
+    <script type="module" src="./scripts/components/header.js"></script>
+    <script type="module" src="./scripts/components/footer.js"></script>
 </body>
 
 </html>
