@@ -492,8 +492,14 @@ footer .btn.btn-outline-light.contact-us i {
 .initial-trainer-expertise i {
   font-size: 20pt; }
 
-.initial-trainer-expertise .btn {
+.initial-trainer-expertise a {
   padding: 0; }
+
+.initial-trainer-expertise .btn:hover {
+  background-color: #D4DDD6; }
+
+.initial-trainer-expertise .btn-outline-dark {
+  border-color: #0e1115; }
 
 .initial-trainer-expertise .progress-bar {
   background-color: #1E242E; }

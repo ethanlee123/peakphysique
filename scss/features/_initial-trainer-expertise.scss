@@ -18,8 +18,14 @@
     i {
         font-size: 20pt;
     }
-    .btn {
+    a {
         padding: 0;
+    }
+    .btn:hover {
+        background-color: $secondary;
+    }
+    .btn-outline-dark {
+        border-color: $darker;
     }
     .progress-bar {
         background-color: $dark;
