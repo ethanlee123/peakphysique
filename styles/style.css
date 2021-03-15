@@ -191,6 +191,11 @@ header {
       header > .logo {
         grid-column: 1;
         grid-row: 1; } }
+    header > .logo .text {
+      display: none; }
+      @media (min-width: 1200px) {
+        header > .logo .text {
+          display: inline-block; } }
   header .account {
     display: grid;
     grid-template-columns: 1fr;
@@ -270,14 +275,22 @@ header {
     display: flex; }
     body.logged-out header .user-profile {
       display: none; }
-    header .user-profile i::before {
-      font-size: 1.5em; }
-      @media (min-width: 1200px) {
-        header .user-profile i::before {
-          display: block; } }
+    header .user-profile i {
+      margin: 0; }
+      @media (min-width: 800px) and (max-width: 1199px) {
+        header .user-profile i {
+          margin-right: 1em; } }
+      header .user-profile i::before {
+        font-size: 1.5em; }
+        @media (min-width: 1200px) {
+          header .user-profile i::before {
+            display: block; } }
     header .user-profile .text {
-      display: flex;
-      flex-direction: column; }
+      display: none; }
+      @media (min-width: 800px) and (max-width: 1199px) {
+        header .user-profile .text {
+          display: flex;
+          flex-direction: column; } }
     header .user-profile .greeting,
     header .user-profile .edit-profile {
       line-height: 1;

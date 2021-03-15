@@ -226,6 +226,14 @@ header {
             grid-column: 1;
             grid-row: 1;
         }
+
+        .text {
+            display: none;
+
+            @include desktop {
+                display: inline-block;
+            }
+        }
     }
 
     .account {
@@ -353,8 +361,13 @@ header {
         body.logged-out & {
             display: none;
         }
-
         i {
+            margin: 0;
+
+            @include tablet {
+                margin-right: 1em;
+            }
+
             &::before {
                 font-size: 1.5em;
                 
@@ -365,8 +378,12 @@ header {
         }
 
         .text {
-            display: flex;
-            flex-direction: column;
+            display: none;
+
+            @include tablet {
+                display: flex;
+                flex-direction: column;                
+            }
         }
 
         .greeting,
