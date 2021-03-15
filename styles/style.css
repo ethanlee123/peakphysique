@@ -432,6 +432,9 @@ footer .btn.btn-outline-light.contact-us i {
   margin-right: 0.5em;
   padding: 0; }
 
+.initial-trainer-setup #footer {
+  margin-top: auto; }
+
 /* style sheet for sign up trainer */
 .trainer-create-account {
   /* for "have an account and login buttons" */ }
