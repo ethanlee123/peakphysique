@@ -361,8 +361,13 @@ header {
         body.logged-out & {
             display: none;
         }
+
         i {
             margin: 0;
+
+            body.active-nav & {
+                margin-right: 0.5em;
+            }
 
             @include tablet {
                 margin-right: 1em;
@@ -379,6 +384,11 @@ header {
 
         .text {
             display: none;
+            
+            body.active-nav & {
+                display: flex;
+                flex-direction: column;
+            }
 
             @include tablet {
                 display: flex;
