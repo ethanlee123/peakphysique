@@ -1,3 +1,23 @@
+// import { getTemplate } from "./getTemplate.js";
+
+// const path = "../../common/header.html";
+
+// class Header extends HTMLElement {
+//     constructor() {
+//         super();
+//     }
+
+//     connectedCallback() {
+//         getTemplate(path)
+//             .then((response) => {
+//                 const node = document.importNode(response.content, true);
+//                 document.body.prepend(response.content);
+//             });
+//     }
+// }
+
+// customElements.define("header-component", Header);
+
 // Common logged in header component, add <header-component> to html and this script to bottom
 class Header extends HTMLElement {
     constructor() {
@@ -96,7 +116,7 @@ customElements.define("header-component", Header);
 // Animation for hamburger menu at smaller resolutions
 var isLoggedIn = false;
 
-const burgerMenu = document.getElementById("#burgerMenu");
+const burgerMenu = document.getElementById("burgerMenu");
 burgerMenu.addEventListener("click", () => {
     document.body.classList.contains("active-nav") ? document.body.classList.remove("active-nav") : document.body.classList.add("active-nav");
 });
