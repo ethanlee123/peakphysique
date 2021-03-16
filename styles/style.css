@@ -392,6 +392,36 @@ footer .btn.btn-outline-light.contact-us i {
   #firebaseui-auth-container .firebaseui-container .firebaseui-title {
     color: #D4DDD6; }
 
+.index-body .landing {
+  background-image: url("/images/gym-banner.jpg");
+  background-repeat: repeat-x;
+  height: 32%;
+  text-align: center;
+  width: 100%;
+  font-weight: bolder;
+  font-family: apex; }
+
+.index-body .title-font {
+  font-weight: bolder;
+  font-family: apex; }
+
+.index-body .title-font-color {
+  color: #83C3A3; }
+
+.index-body .login-buttons {
+  margin-bottom: 2%; }
+
+.index-body .form-format {
+  margin: 0 auto;
+  width: 400px;
+  max-width: 100%; }
+
+.index-body .title-margin {
+  margin-top: 2%; }
+
+.index-body .main-content {
+  margin-top: 50px; }
+
 .find-a-trainer .card {
   max-width: 400px;
   border: none;
@@ -649,6 +679,75 @@ footer .btn.btn-outline-light.contact-us i {
 .sign-up-user-info #profile-pic {
   font-size: 84pt;
   margin: 0; }
+
+.user-profile .msg-profile {
+  margin: 0 auto 50px auto; }
+
+.user-profile .trainer-name {
+  margin-top: 2%; }
+
+.user-profile .profile-pic {
+  border-radius: 50%; }
+
+.user-profile .card {
+  margin: 0 auto;
+  width: 80%;
+  min-width: 300px;
+  max-width: 900px; }
+
+.user-profile .msg-icon {
+  font-size: 1.5em;
+  margin-top: 3px; }
+
+.user-profile .fa-user-cog {
+  font-size: 1.5em;
+  margin-top: 3px; }
+
+.user-profile .profile-stats {
+  text-align: center;
+  width: 200px;
+  margin: 20px auto;
+  font-weight: bold; }
+
+.user-profile .profile-stats-clients > p {
+  margin-bottom: -2px; }
+
+.user-profile .profile-stats-sessions > p {
+  margin-bottom: -2px; }
+
+.user-profile .user-info {
+  margin: 2% auto;
+  width: 80%;
+  min-width: 300px;
+  max-width: 900px; }
+
+.user-profile .about-me {
+  display: table;
+  width: 100%; }
+
+.user-profile .about-me-row {
+  display: table-row; }
+
+.user-profile .about-me-title {
+  display: table-cell;
+  font-weight: bold;
+  padding-bottom: 25px; }
+
+.user-profile .about-me-answer {
+  display: table-cell;
+  text-align: right; }
+
+.user-profile .book-button {
+  /* can change font, font colour, font-weight */ }
+
+.user-profile .bold-primary {
+  /* color: #83C3A3; */ }
+
+.user-profile .text-align-right {
+  text-align: left; }
+
+.user-profile .card-background-color {
+  background-color: #232629; }
 
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)
