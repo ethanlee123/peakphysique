@@ -116,7 +116,7 @@
 
 </header>
 
-  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">   <!--breadcrumb, may take out-->
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="index.html">Home</a></li>
       <li class="breadcrumb-item"><a href="find-a-trainer.html">Find a Trainer</a></li>
@@ -131,13 +131,13 @@
   <div class="trainer-name d-flex justify-content-center gy-4">
     <a href=#>
       <i class="fas fa-envelope msg-icon"></i>
-    </a>
+    </a><!--.msg-icon-->                              <!--link to messages-notifications.html???-->
     <h2>Mike Tyson</h2>
-  </div>
+  </div><!--.trainer-name-->
 
   <div class="trainer-location d-flex justify-content-center gy-4">
     <h4><i class="fas fa-map-marker-alt"></i>Vancouver, BC</h4>
-  </div>
+  </div><!--.trainer-location-->
 
   <div class="profile-stats d-flex justify-content-between gy-4">
     <div class="profile-stats-clients">
@@ -149,35 +149,8 @@
       <p">Sessions</p>
     </div>
   </div>
-
-  <div class="card">
-    <a class="btn btn-primary" role="button" href="book-appointment.html">BOOK AN APPOINTMENT</a>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <h5>my availability</h5>
-    </div>
-    <div class="card-body">
-
-      <p class="card-text"><i class="fas fa-dollar-sign"></i>40 / hr</p>
-      <p class="card-text"><i class="fas fa-clock"></i>Available within the next 7 days.</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <h5>my qualifications</h5>
-    </div>
-    <div class="card-body">
-      <p class="card-text"><i class="fas fa-dumbbell"></i>Group Coaching, All-in-one Coaching</p>
-      <p class="card-text"><i class="fas fa-running"></i>HIIT, Yoga</p>
-      <p class="card-text"><i class="fas fa-user-check"></i>First Aid, ACE</p>
-    </div>
-  </div>
-
-  <div class="accordion accordion-flush bg-dark" id="accordionFlushExample">
-    <div class="accordion-item">
+  <div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item card-background-color">
       <h2 class="accordion-header" id="flush-headingOne">
         <button class="accordion-button collapsed bg-dark" type="button" data-bs-toggle="collapse"
           data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -189,25 +162,41 @@
         data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
           <div class="container">
-            <div class="row justify-content-between">
-              <div class="col-4 about-me">
+            <div class="row justify-content-between about-me">
+              <ul class="about-me-row" id="fav-workout">
+                <li class="about-me-title" id="fav-workout-title">Favourite Workout</li>
+                <li class="about-me-answer" id="fav-workout-answer">Deadlifts</li>
+              </ul>
+              <ul class="about-me-row" id="fav-cheatMeal">
+                <li class="about-me-title" id="fav-cheatMeal-title">Favourite Cheat Meal</li>
+                <li class="about-me-answer" id="fav-cheatMeal-answer">French Fries</li>
+              </ul>
+              <ul class="about-me-row" id="fav-fitnessGoals">
+                <li class="about-me-title" id="fav-fitnessGoals-title">Top Fitness Goal</li>
+                <li class="about-me-answer" id="fav-fitnessGoals-answer">Run a 5-min mile</li>
+              </ul>
+              <ul class="about-me-row" id="fav-website">
+                <li class="about-me-title" id="fav-website-title">Website</li>
+                <li class="about-me-answer" id="fav-website-answer">trainermike.com</li>
+              </ul>
+              <!-- <div class="col-4 about-me">
                 <p class="about-me-workout">Favourite Workout</p>
                 <p class="about-me-cheat-meal">Favourite Cheat Meal</p>
                 <p class="about-me-fitness-goals">Fitness Goals</p>
                 <p class="about-me-website">Website</p>
               </div>
-              <div class="col-4 about-me bold-primary text-align-right">
+              <div class="col-4 about-me">
                 <p class="about-me-workout">Deadlifts</p>
                 <p class="about-me-cheat-meal">French Fries</p>
                 <p class="about-me-fitness-goals">Deadlift 700lbs!</p>
-                <p class="about-me-website">trainermike.com</p>
+                <p class="about-me-website">trainermike.com</p> -->
               </div>
             </div>
         </div>
       </div>
     </div>
 
-    <div class="accordion-item">
+    <div class="accordion-item card-background-color">
       <h2 class="accordion-header" id="flush-headingTwo">
         <button class="accordion-button collapsed bg-dark" type="button" data-bs-toggle="collapse"
           data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
@@ -239,6 +228,32 @@
       </div>
     </div>
   </div>
+  </div>
+
+  <div class="card">
+    <a class="btn btn-primary book-button" role="button" href="book-appointment.html">BOOK AN APPOINTMENT</a>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h5>my availability</h5>
+    </div>
+    <div class="card-body">
+
+      <p class="card-text"><i class="fas fa-dollar-sign"></i>40 / hr</p>
+      <p class="card-text"><i class="fas fa-clock"></i>Available within the next 7 days.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h5>my qualifications</h5>
+    </div>
+    <div class="card-body">
+      <p class="card-text"><i class="fas fa-dumbbell"></i>Group Coaching, All-in-one Coaching</p>
+      <p class="card-text"><i class="fas fa-running"></i>HIIT, Yoga</p>
+      <p class="card-text"><i class="fas fa-user-check"></i>First Aid, ACE</p>
+    </div>
   </div>
 
   <footer class="d-grid top-buffer">

@@ -1,3 +1,59 @@
-body.find-a-trainer {
-    // display: none;
+.find-a-trainer {
+    $avatar-size: 50px;
+
+    .card {
+        max-width: 400px;
+        border: none;
+        @include box-shadow;
+
+        .card-header {
+            display: grid;
+            grid-template-columns: 50px 1fr;
+            gap: 0 1em;
+            font-family: $type-body;
+            background-color: $darkest;
+
+            .user-avatar {
+                grid-row: 1 / span 2;
+                position: relative;
+                padding-bottom: 100%;
+                height: 0;
+                overflow: hidden;
+                border-radius: 50%;
+
+                img {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                }
+            }
+
+            .trainer-name {
+                margin: 0;
+                line-height: 1;
+            }
+
+            .rating {
+                font-size: 0.75em;
+            }
+        }
+
+        .card-body {
+            i {
+                width: 1em;
+                color: $primary;
+            }
+
+            .view-profile {
+                display: block;
+                margin: 0 auto;
+                margin-top: 2em;
+                width: 50%;
+            }
+        }
+
+
+    }
 }
