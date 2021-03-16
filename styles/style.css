@@ -756,14 +756,11 @@ footer .btn.btn-outline-light.contact-us i {
 .user-profile .card-background-color {
   background-color: #232629; }
 
-.schedule .container-schedule-title {
-  margin: 0 auto; }
-
 .schedule .schedule-profile-pic {
   width: 100%; }
 
 .schedule .schedule-main {
-  width: 50%;
+  width: 90%;
   margin: 0 auto; }
 
 .schedule .schedule-tabs {
@@ -771,6 +768,9 @@ footer .btn.btn-outline-light.contact-us i {
 
 .schedule .schedule-hidden {
   display: none; }
+
+.schedule .card {
+  max-width: 640px; }
 
 .schedule .nav-tabs button {
   color: #D4DDD6; }
