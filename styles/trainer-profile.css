@@ -50,21 +50,61 @@
     min-width: 300px;
     max-width: 900px;
 }
-
-.about-me p {
+/* initial about-me */
+/* .about-me {  
     padding: 10px 0;
+    margin-right: 20px;
     font-weight: bold;
     word-wrap: break-word;
+} */
+
+.about-me {
+    display: table;
+    width: 100%;
 }
 
-.bold-primary {
-    color: #83C3A3;
+.about-me-row {
+    display: table-row;
+}
+
+.about-me-title {
+    display: table-cell;
     font-weight: bold;
+    padding-bottom: 25px;
+}
+.about-me-answer {
+    display: table-cell;
+    text-align: right;
+}
+
+.book-button {
+    /* can change font, font colour, font-weight */
+}
+
+
+
+
+.bold-primary {
+    /* color: #83C3A3; */
 }
 
 .text-align-right {
     text-align: left;
 }
+
+
+.card-background-color {
+    background-color: #232629;
+}
+
+
+
+/* sass file
+.background-color {
+    background-color: $card-cap-bg: 
+} */
+
+/******************************************* schedule.html styling *********************************/
 
 .container-schedule-title {
     margin: 0 auto;
@@ -74,11 +114,15 @@
     width: 100%;
 }
 
-.background-color {
-    background-color: #6c757d;
+.schedule-main {
+    width: 50%;
+    margin: 0 auto;
 }
 
-/* sass file
-.background-color {
-    background-color: $card-cap-bg: 
-} */
+.schedule-tabs {
+    margin-bottom: 10px;
+}
+
+.schedule-hidden {
+    display: none;
+}
