@@ -547,33 +547,40 @@ footer .btn.btn-outline-light.contact-us i {
 .initial-trainer-expertise .progress-bar {
   background-color: #1E242E; }
 
-.initial-platform-specific {
+.initial-platform-specific .main-content {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 50px; }
+
+.initial-platform-specific .top-buffer {
+  margin-top: 50px; }
+
+.initial-platform-specific h1, .initial-platform-specific .h1 {
+  margin: 0; }
+
+.initial-platform-specific ul.list-group {
+  padding: 0; }
+
+.initial-platform-specific .container {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 50px; }
+
+.initial-platform-specific i {
+  font-size: 20pt; }
+
+.initial-platform-specific .progress-bar {
   background-color: #1E242E; }
-  .initial-platform-specific .main-content {
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 50px; }
-  .initial-platform-specific .top-buffer {
-    margin-top: 50px; }
-  .initial-platform-specific h1, .initial-platform-specific .h1 {
-    margin: 0; }
-  .initial-platform-specific ul.list-group {
-    padding: 0; }
-  .initial-platform-specific .container {
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 50px; }
-  .initial-platform-specific i {
-    font-size: 20pt; }
-  .initial-platform-specific .progress-bar {
-    background-color: #1E242E; }
-  .initial-platform-specific .days .btn span {
-    min-width: 20px;
-    color: #D4DDD6; }
-  .initial-platform-specific .collaspe .btn {
-    padding: 6px 8px; }
-  .initial-platform-specific .fitness, .initial-platform-specific .wellness {
-    padding: 0; }
+
+.initial-platform-specific .days .btn span {
+  min-width: 20px;
+  color: #D4DDD6; }
+
+.initial-platform-specific .collaspe .btn {
+  padding: 6px 8px; }
+
+.initial-platform-specific .fitness, .initial-platform-specific .wellness {
+  padding: 0; }
 
 .login-sign-up {
   /* for "have an account and login buttons" */ }
