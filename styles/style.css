@@ -452,15 +452,17 @@ footer .btn.btn-outline-light.contact-us i {
   margin-right: 10px;
   color: #83C3A3; }
 
-.initial-trainer-setup i.icon-logo {
+.initial-trainer-setup #menu-logo {
   font-size: 2.5em;
-  color: #83C3A3;
   margin-right: 15px; }
 
 .initial-trainer-setup figure {
   margin: 0;
   margin-right: 0.5em;
   padding: 0; }
+
+.initial-trainer-setup span {
+  color: #83C3A3; }
 
 /* style sheet for sign up trainer */
 .trainer-create-account {
