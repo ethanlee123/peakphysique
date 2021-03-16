@@ -1,0 +1,83 @@
+.profile {
+    .background-color {
+        
+    }
+    .msg-profile {
+        margin: 0 auto 50px auto;
+    }
+    
+    .trainer-name {
+        margin-top: 2%;
+    }
+    
+    .profile-pic {
+        border-radius: 50%;
+    }
+    
+    .card {
+        margin: 0 auto;
+        width: 80%;
+        min-width: 300px;
+        max-width: 900px;
+    }
+    
+    .msg-icon {
+        font-size: 1.5em;
+        margin-top: 3px;
+    }
+    
+    .fa-user-cog {
+        font-size: 1.5em;
+        margin-top: 3px;
+    }
+    
+    .profile-stats {
+        text-align: center;
+        width: 200px;
+        margin: 20px auto;
+        font-weight: bold;
+    }
+    
+    .profile-stats-clients > p {
+        margin-bottom: -2px;
+    }
+    
+    .profile-stats-sessions > p {
+        margin-bottom: -2px;
+    }
+    
+    .accordion {
+        margin: 2% auto;
+        width: 80%;
+        min-width: 300px;
+        max-width: 900px;
+    }
+    
+    .about-me p {
+        padding: 10px 0;
+        font-weight: bold;
+        word-wrap: break-word;
+    }
+    
+    .bold-primary {
+        color: #83C3A3;
+        font-weight: bold;
+    }
+    
+    .text-align-right {
+        text-align: left;
+    }
+    
+    .container-schedule-title {
+        margin: 0 auto;
+    }
+    
+    .schedule-profile-pic {
+        width: 100%;
+    }
+    
+    .background-color {
+        background-color: #0e1115;
+    }
+}
+

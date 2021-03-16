@@ -19,7 +19,7 @@
     max-width: 900px;
 }
 
-.fa-envelope {
+.msg-icon {
     font-size: 1.5em;
     margin-top: 3px;
 }
@@ -54,6 +54,7 @@
 .about-me p {
     padding: 10px 0;
     font-weight: bold;
+    word-wrap: break-word;
 }
 
 .bold-primary {
@@ -62,7 +63,7 @@
 }
 
 .text-align-right {
-    text-align: right;
+    text-align: left;
 }
 
 .container-schedule-title {
@@ -70,5 +71,14 @@
 }
 
 .schedule-profile-pic {
-    width: 215px;
+    width: 100%;
 }
+
+.background-color {
+    background-color: #6c757d;
+}
+
+/* sass file
+.background-color {
+    background-color: $card-cap-bg: 
+} */
