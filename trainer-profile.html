@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Trainer Profile - Peak Physique</title>
+  <title>Profile - Peak Physique</title>
   <meta name="comp1800 boilerplate code" content="my bcit project">
   <meta name="author" content="BCIT">
 
@@ -36,7 +36,7 @@
 
 </head>
 
-<body id="body">
+<body id="body" class="profile">
 
   <!-------------------------------------->
   <!-- The following is HTML for layout -->
@@ -130,7 +130,7 @@
 
   <div class="trainer-name d-flex justify-content-center gy-4">
     <a href=#>
-      <i class="fas fa-envelope"></i>
+      <i class="fas fa-envelope msg-icon"></i>
     </a>
     <h2>Mike Tyson</h2>
   </div>
@@ -176,14 +176,15 @@
     </div>
   </div>
 
-  <div class="accordion accordion-flush" id="accordionFlushExample">
+  <div class="accordion accordion-flush bg-dark" id="accordionFlushExample">
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-headingOne">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+        <button class="accordion-button collapsed bg-dark" type="button" data-bs-toggle="collapse"
           data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
           about me
         </button>
       </h2>
+      
       <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
         data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
@@ -205,9 +206,10 @@
         </div>
       </div>
     </div>
+
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-headingTwo">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+        <button class="accordion-button collapsed bg-dark" type="button" data-bs-toggle="collapse"
           data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
           Updates
         </button>
@@ -236,6 +238,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 
   <footer class="d-grid top-buffer">
@@ -329,6 +332,7 @@
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
+    <script src="./scripts/components/header.js"></script>
 
 </body>
 
