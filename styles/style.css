@@ -640,11 +640,18 @@ footer .btn.btn-outline-light.contact-us i {
 
 .messages-notifications button {
   color: #D4DDD6; }
+  .messages-notifications button.nav-link.active {
+    color: #83C3A3;
+    font-weight: bolder; }
 
-.messages-notifications .main-content {
-  width: 90%;
-  margin: 0 auto;
-  margin-top: 50px; }
+.messages-notifications .tab-pane div {
+  margin: 10px 1.5em; }
+
+.messages-notifications .tab-pane p {
+  margin: 0; }
+
+.messages-notifications .tab-pane i {
+  font-size: 30pt; }
 
 /* style sheet for initial setup of trainer unique profile */
 .sign-up-user-info .top-buffer {

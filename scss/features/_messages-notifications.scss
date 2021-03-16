@@ -5,9 +5,23 @@
     }
     button {
         color: $secondary;
+        &.nav-link {
+            &.active {
+                @include tabs;
+            }
+        }
     }
-    .main-content {
-        @include content-center;
-    };
-        
+    .tab-pane {
+        div{
+            margin: 10px 1.5em;
+        }
+        p {
+            margin: 0;
+        }
+        i {
+            font-size: 30pt;
+        }
+        img {
+        }  
+    }
 }
