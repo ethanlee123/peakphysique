@@ -749,6 +749,29 @@ footer .btn.btn-outline-light.contact-us i {
 .user-profile .card-background-color {
   background-color: #232629; }
 
+.schedule .container-schedule-title {
+  margin: 0 auto; }
+
+.schedule .schedule-profile-pic {
+  width: 100%; }
+
+.schedule .schedule-main {
+  width: 50%;
+  margin: 0 auto; }
+
+.schedule .schedule-tabs {
+  margin-bottom: 10px; }
+
+.schedule .schedule-hidden {
+  display: none; }
+
+.schedule .nav-tabs button {
+  color: #D4DDD6; }
+
+.schedule .nav-tabs .nav-link.active {
+  color: #83C3A3;
+  font-weight: bolder; }
+
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

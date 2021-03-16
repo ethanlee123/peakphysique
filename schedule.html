@@ -2,380 +2,185 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Schedule - Peak Physique</title>
-    <meta name="comp1800 boilerplate code" content="my bcit project">
-    <meta name="author" content="BCIT">
+  <meta charset="utf-8">
+  <title>Schedule - Peak Physique</title>
+  <meta name="comp1800 boilerplate code" content="my bcit project">
+  <meta name="author" content="BCIT">
 
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="./images/favicon/site.webmanifest">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="./images/favicon/site.webmanifest">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
 
-    <!-- Bootstrap for Mobile-first, and JQuery -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <!-- Bootstrap for Mobile-first, and JQuery -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="./styles/fontello.css">
-    <script src="https://kit.fontawesome.com/beb9e55d0a.js" crossorigin="anonymous"></script>
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="./styles/fontello.css">
+  <script src="https://kit.fontawesome.com/beb9e55d0a.js" crossorigin="anonymous"></script>
 
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="./styles/style.css">
-    <link rel="stylesheet" href="./styles/trainer-profile.css">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./styles/style.css">
+  <!-- <link rel="stylesheet" href="./styles/trainer-profile.css"> -->
 </head>
 
 <body class="schedule" id="#body">
 
-    <!-------------------------------------->
-    <!-- The following is HTML for layout -->
-    <!-------------------------------------->
-    <!-- Header Navigation Bar -->
-    <header>
-      <div class="burger-menu" id="#burgerMenu">
-        <span class="top-bun"></span>
-        <span class="patty"></span>
-        <span class="btm-bun"></span>
-      </div><!--.burger-->
+  <!-------------------------------------->
+  <!-- The following is HTML for layout -->
+  <!-------------------------------------->
+  <!-- Header Navigation Bar -->
+  <header-component></header-component>
 
-      <a href="./index.html" class="logo">
-        <i class="icon icon-logo"></i>
-        <span class="text">Peak <b>Physique</b></span>
-      </a>
-      
-      <nav>
-        <a href="./index.html" class="logo">
-          <i class="icon icon-logo"></i>
-          <span class="text">Peak <b>Physique</b></span>
-        </a>
-        <ul>
-          <li><a class="user-profile" href="#0">
-            <i class="fas fa-user-circle"></i>
-            <div class="text">
-              <span class="greeting">Hello, John!</span>
-              <span class="edit-profile">Edit my <b>Profile</b></span>
-            </div><!--.text-->
-          </a></li>
-          <li class="messages"><a href="#0">
-            <span id="notifications" class="notifications"></span>
-            <i class="fas fa-inbox"></i>        
-            <span class="text">Check my <b>messages</b></span>
-          </a></li>
-          <li><a href="./index.html">
-            <i class="fas fa-home"></i>
-            Home
-          </a></li>
-          <li><a href="#0">
-            <i class="fas fa-clock"></i>
-            My fitness <b>schedule</b>
-          </a></li>
-          <li><a href="./find-a-trainer.html">
-            <i class="fas fa-user"></i>
-            Find a <b>trainer</b>
-          </a></li>
-          <li><a href="#0">
-            <i class="fas fa-users"></i>
-            Join a <b>group class</b>
-          </a></li>
-        </ul>
-      </nav>
+  <div class="container-schedule-title">
+    <h1 class="display-4">schedule</h1>
+  </div>
 
-      <div class="account">
-        <i class="fas fa-user-plus"></i>
-        <button id="signupBtn" class="btn btn-outline-light login">Log In</button>
-        <button id="signupBtn" class="btn btn-primary signup">Sign Up</button>
-        <div class="user">
-          <a class="user-profile" href="#0">
-            <i class="fas fa-user-circle"></i>
-            <div class="text">
-              <span class="greeting">Hello, John!</span>
-              <span class="edit-profile">Edit my <b>Profile</b></span>
-            </div><!--.text-->
-          </a><!--.user-profile-->
-          <a class="messages" href="#0">
-            <div class="icon">
-              <span id="notifications" class="notifications"></span>
-              <i class="fas fa-inbox"></span></i>                
-            </div><!--.icon-->
-          </a><!--.message-->
-        </div><!--.user-->
-
-        <button id="signupBtn" class="btn btn-outline-light logout">Log Out</button>          
-      </div><!--.account-->
-
-  </header>
-
-    <div class="container-schedule-title">
-        <h1 class="display-4">schedule</h1>
-    </div>
-
-<div class="schedule-main">
+  <div class="schedule-main">
     <nav>
-      <div class="nav nav-tabs schedule-tabs" id="nav-tab" role="tablist">
-        <button class="nav-link active" id="nav-upcoming-tab" data-bs-toggle="tab" data-bs-target="#nav-upcoming" type="button" role="tab" aria-controls="nav-upcoming" aria-selected="true">Upcoming</button>
-        <button class="nav-link" id="nav-completed-tab" data-bs-toggle="tab" data-bs-target="#nav-completed" type="button" role="tab" aria-controls="nav-completed" aria-selected="false">Completed</button>
+      <div class="nav nav-tabs schedule-tabs d-flex justify-content-around" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="nav-upcoming-tab" data-bs-toggle="tab" data-bs-target="#nav-upcoming"
+          type="button" role="tab" aria-controls="nav-upcoming" aria-selected="true">Upcoming</button>
+        <button class="nav-link" id="nav-completed-tab" data-bs-toggle="tab" data-bs-target="#nav-completed"
+          type="button" role="tab" aria-controls="nav-completed" aria-selected="false">Completed</button>
       </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
       <div class="tab-pane fade show active" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
         <div class="container-schedule">
-        <div class="card mb-3" style="max-width: 640px;">
+
+          <div class="card mb-3" style="max-width: 640px;">
             <div class="row g-0">
               <div class="col-md-4">
-                <a href="./trainer-profile.html"> 
-                    <img class="schedule-profile-pic" src="/images/trainer-profile-pic.jpg" alt="trainer profile pic">
+                <a href="./user-profile.html">
+                  <img class="schedule-profile-pic" src="/images/trainer-profile-pic.jpg" alt="trainer profile pic">
                 </a>
               </div>
               <div class="col-md-8">
                 <div class="card-body">
-                  <a href="./trainer-profile.html">
+                  <a href="./user-profile.html">
                     <h5 class="card-title">Trainer Mike</h5>
                   </a>
                   <h5 class="card-title">Thursday Mar 11, 2021</h5>
                   <h6 class>8pm to 9pm</h6>
                   <p class="card-text">Yoga with Mike at Stanley Park</p>
-                  <a href="#" class="btn btn-primary">Add to Calendar</a>
-                  <a class="card-text">
-                    <small class="text-muted">Cancel</small>
-                  </a>
-                </div>
-              </div>
-            </div><!--.row.g-0-->
-        </div><!--.card.mb-3-->
-  
-        <div class="card mb-3" style="max-width: 640px;">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img class="schedule-profile-pic" src="/images/trainer-profile-pic.jpg" alt="trainer profile pic">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <a href="./trainer-profile.html">
-                  <h5 class="card-title">Trainer Mike</h5>
-                </a>
-                <h5 class="card-title">Sunday Mar 15, 2021</h5>
-                <h6 class>8pm to 9pm</h6>
-                <p class="card-text">Yoga with Mike at Stanley Park</p>
-                <a href="#" class="btn btn-primary">Add to Calendar</a>
-                <a class="card-text"><small class="text-muted">Cancel</small></a>
-              </div>
-            </div>
-          </div>
-        </div><!--.card.mb-3-->
-  
-        <div class="card mb-3" style="max-width: 640px;">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img class="schedule-profile-pic" src="/images/trainer-profile-pic.jpg" alt="trainer profile pic">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <a href="./trainer-profile.html">
-                  <h5 class="card-title">Trainer Mike</h5>
-                </a>
-                <h5 class="card-title">Monday Mar 22, 2021</h5>
-                <h6 class>8pm to 9pm</h6>
-                <p class="card-text">Yoga with Mike at Stanley Park</p>
-                <a href="#" class="btn btn-primary">Add to Calendar</a>
-                <a class="card-text"><small class="text-muted">Cancel</small></p>
-              </div>
-            </div>
-          </div>
-        </div><!--.card.mb-3-->
-      </div><!--.container-schedule-->
-    </div>
-      <div class="tab-pane fade" id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">
-        <div class="container-schedule">
-          <div class="card mb-3" style="max-width: 640px;">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <a href="./trainer-profile.html"> 
-                      <img class="schedule-profile-pic" src="/images/trainer-profile-pic.jpg" alt="trainer profile pic">
-                  </a>
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <a href="./trainer-profile.html">
-                      <h5 class="card-title">Trainer Mike</h5>
-                    </a>
-                    <h5 class="card-title">Thursday Feb 20, 2021</h5>
-                    <h6 class>12pm to 2pm</h6>
-                    <p class="card-text">Yoga with Mike at Stanley Park</p>
-                    <a href="#" class="btn btn-primary schedule-hidden">Add to Calendar</a>
-                    <a class="card-text schedule-hidden">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn btn-primary">Add to Calendar</a>
+                    <a class="card-text">
                       <small class="text-muted">Cancel</small>
                     </a>
                   </div>
                 </div>
-              </div><!--.row.g-0-->
-          </div><!--.card.mb-3-->
+              </div>
+            </div>
+            <!--.row.g-0-->
           </div>
+          <!--.card.mb-3-->
+
+          <div class="card mb-3" style="max-width: 640px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img class="schedule-profile-pic" src="/images/trainer-profile-pic.jpg" alt="trainer profile pic">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <a href="./user-profile.html">
+                    <h5 class="card-title">Trainer Mike</h5>
+                  </a>
+                  <h5 class="card-title">Sunday Mar 15, 2021</h5>
+                  <h6 class>8pm to 9pm</h6>
+                  <p class="card-text">Yoga with Mike at Stanley Park</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn btn-primary">Add to Calendar</a>
+                    <a class="card-text">
+                      <small class="text-muted">Cancel</small>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--.card.mb-3-->
+
+          <div class="card mb-3" style="max-width: 640px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img class="schedule-profile-pic" src="/images/trainer-profile-pic.jpg" alt="trainer profile pic">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <a href="./user-profile.html">
+                    <h5 class="card-title">Trainer Mike</h5>
+                  </a>
+                  <h5 class="card-title">Monday Mar 22, 2021</h5>
+                  <h6 class>8pm to 9pm</h6>
+                  <p class="card-text">Yoga with Mike at Stanley Park</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn btn-primary">Add to Calendar</a>
+                    <a class="card-text">
+                      <small class="text-muted">Cancel</small>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--.card.mb-3-->
+        </div>
+        <!--.container-schedule-->
+      </div>
+      <div class="tab-pane fade" id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">
+        <div class="container-schedule">
+          <div class="card mb-3" style="max-width: 640px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <a href="./user-profile.html">
+                  <img class="schedule-profile-pic" src="/images/trainer-profile-pic.jpg" alt="trainer profile pic">
+                </a>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <a href="./user-profile.html">
+                    <h5 class="card-title">Trainer Mike</h5>
+                  </a>
+                  <h5 class="card-title">Thursday Feb 20, 2021</h5>
+                  <h6 class>12pm to 2pm</h6>
+                  <p class="card-text">Yoga with Mike at Stanley Park</p>
+                  <a href="#" class="btn btn-primary schedule-hidden">Add to Calendar</a>
+                  <a class="card-text schedule-hidden">
+                    <small class="text-muted">Cancel</small>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!--.row.g-0-->
+          </div>
+          <!--.card.mb-3-->
+        </div>
       </div>
     </div>
-</div> 
+  </div>
 
 
-    <footer class="d-grid">
-      <a class="btn btn-outline-none scroll-to-top" href="#body">
-        <i class="fas fa-arrow-circle-up"></i> Scroll to Top
-      </a>
+  <footer-component></footer-component>
+  <!----------------------------------------------->
+  <!-- JS: Boostrap, Firebase, API related    -->
+  <!----------------------------------------------->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+  </script>
 
-      <nav class="desktop" id="footerNavDesktop">
-        
-        <div class="category services">
-          <span class="heading">
-            <i class="fas fa-dumbbell"></i> Services
-          </span>
-          <ul>
-            <li><a href="./find-a-trainer.html">Find a Trainer</a></li>
-            <li><a href="#0">Join a Group Class</a></li>
-          </ul>
-        </div><!--.category.services-->
-
-        <div class="category about">
-          <span class="heading">
-            <i class="fas fa-users"></i> About
-          </span>
-          <ul>
-            <li><a href="#0">About Us</a></li>
-            <li><a href="#0">FAQ</a></li>
-            <li><a href="#0">Policies</a></li>
-            <li><a href="#0">Careers</a></li>
-          </ul>
-        </div><!--.category.about-->
-
-        <div class="category copyright">
-          <span class="heading">
-            <i class="icon-logo"></i> &#169 2021
-          </span>
-        </div><!--.category.copyright-->
-
-        <div class="category social">
-          <button class="btn btn-outline-light contact-us">
-            <i class="fas fa-envelope"></i> Contact Us
-          </button>
-
-          <ul class="social-media">
-            <li><a href="#0">
-              <i class="fab fa-facebook-f"></i>
-            </a></li>
-            <li><a href="#0">
-              <i class="fab fa-instagram"></i>
-            </a></li>
-            <li><a href="#0">
-              <i class="fab fa-twitter"></i>
-            </a></li>
-            <li><a href="https://github.com/ethanlee123/peakphysique">
-              <i class="fab fa-github"></i>
-            </a></li>            
-          </ul>
-        </div><!--.category.social-->
-      </nav>      
-
-      <nav class="accordion mobile" id="footerNavMobile">
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#servicesLinks"
-              aria-expanded="false"
-              aria-controls="servicesLinks"
-            >
-              <i class="fas fa-dumbbell"></i> Services
-            </button>
-          </h2>
-          <ul class="collapse nav flex-column" id="servicesLinks">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Find a Trainer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Join a Group Class</a>
-            </li>
-          </ul>
-        </div><!--.accordion-item-->
-        
-        <div class="accordion-item about-us">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#aboutLinks"
-              aria-expanded="false"
-              aria-controls="aboutLinks"
-            >
-              <i class="fas fa-users"></i> About
-            </button>
-          </h2>
-          <ul class="collapse nav flex-column" id="aboutLinks">
-            <li class="nav-item">
-              <a class="nav-link" href="#">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">FAQ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Policies</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Careers</a>
-            </li>
-          </ul>
-        </div><!--.about-us-->
-
-        <div class="accordion-item no-children">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-            >
-            <i class="fas fa-envelope"></i> Contact Us
-            </button>
-          </h2>
-        </div><!--.contact-us-->
-        
-        <div class="accordion-item no-children">
-          <div class="accordion-button collapsed">
-            <div class="col copyright">
-              <i class="icon-logo"></i> &#169 2021
-            </div>
-            <div class="col social-media">
-              <a href="#0">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="#0">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="#0">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="https://github.com/ethanlee123/peakphysique">
-                <i class="fab fa-github"></i>
-              </a>          
-            </div>
-          </div>
-        </div><!--.accordion-item-->
-
-      </nav>
-    </footer>
-    <!----------------------------------------------->
-    <!-- JS: Boostrap, Firebase, API related    -->
-    <!----------------------------------------------->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-    </script>
-
-    <!--------------------------------------------------------------------->
-    <!-- JS files: Your own JavaScript functions included here    -->
-    <!--------------------------------------------------------------------->
-    <script src="./scripts/components/header.js"></script>
+  <!--------------------------------------------------------------------->
+  <!-- JS files: Your own JavaScript functions included here    -->
+  <!--------------------------------------------------------------------->
+  <script type="module" src="scripts/components/header.js"></script>
+  <script type="module" src="scripts/components/footer.js"></script>
 </body>
 
 </html>

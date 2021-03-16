@@ -1,6 +1,33 @@
 .schedule {
-
+    .container-schedule-title {
+        margin: 0 auto;
+    }
+    
+    .schedule-profile-pic {
+        width: 100%;
+    }
+    
+    .schedule-main {
+        width: 50%;
+        margin: 0 auto;
+    }
+    
     .schedule-tabs {
-        
+        margin-bottom: 10px;
+    }
+    
+    .schedule-hidden {
+        display: none;
+    }
+    .nav-tabs {
+        button {
+            color: $secondary;
+        }
+        .nav-link {
+            &.active {
+                color: $primary;
+                font-weight: bolder;
+            }   
+        }
     }
 }
