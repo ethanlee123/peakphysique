@@ -37,91 +37,76 @@
     <!-- Header Navigation Bar -->
     <header-component></header-component>
 
-    <div class="container d-grid gap-3 main-content">
-      <div class="row section-title">
-        <h1 class="display-4">Find a <b>trainer</b>.</h1>
-        <span>This is a placeholder for the trainer directory users can browse through.</span>        
-    </div><!--.section-title-->
+    <main>
+      <section class="banner">
+        <div class="text">
+          <h1 class="section-title">Find <b>the one</b> today.</h1>
+          <div class="subtext">
+            Choose from a diverse selection of personal trainers and other fitness professionals, and work closely with them to meet your health goals. 
+          </div><!--.subtext-->        
+        </div><!--.text-->
 
-      <div class="row">
-        <div class="col input-group">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search"
-            aria-label="Search"
-            aria-describedby="searchBarTrainers"
-          >
-          <button class="input-group-text search-btn" id="searchBarTrainers">
-            <i class="bi bi-search"></i>
+        <div class="toggle-filters filters">
+          
+          <button class="toggle-filter-drawer">
+            And <b>so much more</b>.
           </button>
-        </div><!--.col.input-group-->
-      </div><!--.row-->
+        </div><!--.filter-btns-->
+      </section><!--.banner-->
 
-      <div class="row">
-        <div class="col d-grid">
-          <input class="btn btn-primary" type="submit" value="Search">          
+      <!--.search-bar-->
+      <!--.set-filters-->
+      <!--.reset-filters-->
+
+      <section class="results-meta">
+        <span class="results-found">Showing <span id="displayedTrainers">6</span> out of <b><span id="totalTrainers">10</span> trainers</b> found.</span>
+        <!--sorter dropdown-->
+      </section><!--.results-found-->
+
+      <section class="trainer-list">
+        <div class="card">
+          <h5 class="card-header">
+            <div class="user-avatar">
+              <img src="https://vz.cnwimg.com/thumb-1200x/wp-content/uploads/2010/03/Fabio-e1603764807834.jpg" alt="Trainy McTrainface avatar">
+              <span class="initials">TM</span>
+            </div>
+            
+            <span class="trainer-name">Trainy McTrainface</span>
+            <span class="rating"><i class="fas fa-star"></i><span class="text">4.5</span></span>
+          </h5><!--.card-header-->
+
+          <div class="card-body">
+            <div class="info type-of-service">
+              <i class="fas fa-globe"></i>
+              <span class="text">Custom Workout Regiment ... and 2 more</span>
+            </div><!--.info.type-of-service-->
+
+            <div class="info expertise">
+              <i class="fas fa-dumbbell"></i>
+              <span class="text">Bodybuilding, HIIT ... and 2 more</span>
+            </div><!--.info.expertise-->
+
+            <div class="info rate">
+              <i class="fas fa-dollar-sign"></i>
+              <span class="text">40 / hr</span>
+            </div><!--.info.rate-->
+
+            <div class="info availability">
+              <i class="fas fa-clock"></i>
+              <span class="text">Available within the next <b>7 days</b>.</span>
+            </div><!--.info.availability-->
+
+            <button class="btn btn-outline-light view-profile">
+              View Profile
+            </button>
+          </div><!--.card-body-->
         </div>
-      </div><!--.row-->
+      </section>      
 
-      <div class="row">
-        <div class="col d-grid">
-          <button class="btn btn-secondary">
-            <i class="bi bi-funnel-fill"></i> Set Filters
-          </button><!--.btn.btn-secondary-->
-        </div><!--.col.d-grid-->
-        <div class="col d-grid">
-          <button class="btn btn-outline-none">
-            <i class="bi bi-arrow-clockwise"></i> Reset Filters
-          </button><!--.btn.btn-outline-none-->
-        </div><!--.col.d-grid-->
-      </div><!--.row-->
+      <div class="drawer filters filter-drawer">
 
-      <div class="row">
-        <span class="col">
-          Showing <span class="displayed-results">5</span> of <b><span class="total-results">10 trainer(s)</span></b> found.
-        </span>
-      </div><!--.row-->
-
-      <div class="row">
-        <div class="col">
-          <div class="card">
-            <div class="card-header">
-              <img src="https://dummyimage.com/50x50/000/fff.jpg" class="rounded-circle float-start" alt="...">
-              <h5 class="card-title">Trainer Name</h5>
-              <p class="card-text"><i class="bi bi-geo-alt-fill"></i> Vancouver, BC</p>
-            </div><!--.card-header-->
-            <div class="card-body d-grid">
-              <p class="card-text"><i class="fas fa-dumbbell"></i> With supporting text below as a natural lead-in to additional content.</p>
-              <p class="card-text"><i class="fas fa-dollar-sign"></i> With supporting text below as a natural lead-in to additional content.</p>
-              <p class="card-text"><i class="far fa-check-circle"></i> With supporting text below as a natural lead-in to additional content.</p>
-              <p class="card-text"><i class="fas fa-clock"></i> With supporting text below as a natural lead-in to additional content.</p>
-              <a href="trainer-profile.html" class="btn btn-primary">View Profile</a>
-            </div><!--.card-body.d-grid-->
-          </div><!--.card-->
-        </div><!--.col-->          
-      </div><!--.row-->
-
-      <div class="row">
-        <div class="col">
-          <nav aria-label="...">
-            <ul class="pagination justify-content-center">
-              <li class="page-item disabled">
-                <span class="page-link">Previous</span>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item active" aria-current="page">
-                <span class="page-link">2</span>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-              </li>
-            </ul>
-          </nav>
-        </div><!--.col-->
-      </div><!--.row-->
-    </div><!--.container-->
+      </div><!--.drawer.filters.filter-drawer-->
+    </main>
 
     <footer-component></footer-component>
     <!----------------------------------------------->

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 @font-face {
   font-family: 'apex';
   src: url("../fonts/apexmk2-boldextended-webfont.woff2") format("woff2"), url("../fonts/apexmk2-boldextended-webfont.woff") format("woff");
@@ -6,6 +7,9 @@
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
   font-family: "apex"; }
+
+body {
+  font-family: "Roboto", sans-serif; }
 
 .accordion {
   background: #0a0c0f; }
@@ -387,6 +391,45 @@ footer .btn.btn-outline-light.contact-us i {
   background: #1E242E; }
   #firebaseui-auth-container .firebaseui-container .firebaseui-title {
     color: #D4DDD6; }
+
+.find-a-trainer .card {
+  max-width: 400px;
+  border: none;
+  -webkit-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8); }
+  .find-a-trainer .card .card-header {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 0 1em;
+    font-family: "Roboto", sans-serif;
+    background-color: #0a0c0f; }
+    .find-a-trainer .card .card-header .user-avatar {
+      grid-row: 1 / span 2;
+      position: relative;
+      padding-bottom: 100%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 50%; }
+      .find-a-trainer .card .card-header .user-avatar img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0; }
+    .find-a-trainer .card .card-header .trainer-name {
+      margin: 0;
+      line-height: 1; }
+    .find-a-trainer .card .card-header .rating {
+      font-size: 0.75em; }
+  .find-a-trainer .card .card-body i {
+    width: 1em;
+    color: #83C3A3; }
+  .find-a-trainer .card .card-body .view-profile {
+    display: block;
+    margin: 0 auto;
+    margin-top: 2em;
+    width: 50%; }
 
 .initial-trainer-setup .top-buffer {
   margin-top: 50px; }
