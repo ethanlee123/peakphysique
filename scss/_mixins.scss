@@ -23,6 +23,23 @@
   box-shadow: $top $left $blur $size $color;
 }
 
+@mixin box-shadow-transparent($top: 0, $left: 4px, $blur: 8px, $size: 1px, $color: rgba(0, 0, 0, 0.35)) {
+  -webkit-box-shadow: $top $left $blur $size $color,
+                      $top $left $blur $size $color inset;
+  -moz-box-shadow: $top $left $blur $size $color,
+                   $top $left $blur $size $color inset;
+  box-shadow: $top $left $blur $size $color,
+              $top $left $blur $size $color inset;
+}
+
+@mixin drop-shadow($offset-x: 0.5rem, $offset-y: 0.25rem, $blur-radius: 0.25rem, $colour: rgba(0, 0, 0, 0.85)) {
+  filter: drop-shadow($offset-x $offset-y $blur-radius $colour);
+}
+
+@mixin text-shadow($offset-x: 0.25rem, $offset-y: 0.25rem, $blur-radius: 0.25rem, $colour: rgba(0, 0, 0, 0.85)) {
+  text-shadow: $offset-x $offset-y $blur-radius $colour;
+}
+
 
 @mixin top-buffer-trainer {
     margin-top: 50px;

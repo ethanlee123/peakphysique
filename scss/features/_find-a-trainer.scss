@@ -1,9 +1,10 @@
 .find-a-trainer {
     $avatar-size: 50px;
+    $main-padding: 2em;
 
     main {
         margin: 0 auto;
-        padding: 2em;
+        padding: $main-padding;
         max-width: 2560px;
     }
 
@@ -13,16 +14,91 @@
     }
 
     .banner {
+        position: relative;
         text-align: center;
         font-size: 1.5em;
 
-        .section-title {
-            font-size: 3em;
+        .text {
+            margin-bottom: 2em;
+
+            .section-title {
+                font-size: 3em;
+                @include text-shadow;
+            }
+            
+            .subtext {
+                max-width: 800px;
+                margin: 0 auto;
+            }            
         }
-        
-        .subtext {
-            max-width: 800px;
-            margin: 0 auto;
+
+        .toggle-filters {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: baseline;
+
+            button {
+                background: none;
+                border: none;
+                box-shadow: none;
+                color: $light;
+                text-transform: uppercase;
+                font-family: $type-heading;
+            }
+
+            .toggle-filter {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-right: 1em;
+                word-wrap: break-word;
+                font-size: 0.6em;
+
+                &:hover {
+                    img {
+                        @include drop-shadow($blur-radius: 0.1rem);
+                    }
+
+                    .text {
+                        @include text-shadow;
+                        color: $info;
+                    }
+                }
+
+                &.active {
+                    .disabled-logo {
+                        display: none;
+                    }
+                }
+
+                &:not(.active) {
+                    .active-logo {
+                        display: none;
+                    }
+                }
+
+                img {
+                    margin-bottom: 1em;
+                    height: 75px;
+                    @include drop-shadow;
+                }
+            }
+
+            .toggle-filter-drawer {
+                flex: 2;
+            }
+        }
+
+        .banner-img {
+            display: block;
+            position: absolute;
+            top: -$main-padding;
+            right: 0;
+            width: 100%;
+            object-fit: cover;
+            filter: opacity(50%);
+            z-index: -9999;
         }
     }
 
@@ -55,8 +131,15 @@
         }
 
         .filter-btn {
+            filter: drop-shadow(1rem 1rem 1rem rgba(0, 0, 0, 1));
             &.no-filters {
                 .filters-applied {
+                    display: none;
+                }
+            }
+
+            &:not(.no-filters) {
+                .set-filters {
                     display: none;
                 }
             }
@@ -95,6 +178,11 @@
             border: none;
             @include box-shadow;
 
+            i {
+                width: 1em;
+                color: $primary;
+            }
+
             .card-header {
                 display: grid;
                 grid-template-columns: 50px 1fr;
@@ -131,11 +219,6 @@
 
             .card-body {
                 padding: 1em 2em;
-
-                i {
-                    width: 1em;
-                    color: $primary;
-                }
 
                 .view-profile {
                     display: block;
