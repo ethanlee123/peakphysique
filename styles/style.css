@@ -392,6 +392,10 @@ footer .btn.btn-outline-light.contact-us i {
   #firebaseui-auth-container .firebaseui-container .firebaseui-title {
     color: #D4DDD6; }
 
+.find-a-trainer i {
+  width: 1em;
+  color: #83C3A3; }
+
 .find-a-trainer .card {
   max-width: 400px;
   border: none;
@@ -422,9 +426,6 @@ footer .btn.btn-outline-light.contact-us i {
       line-height: 1; }
     .find-a-trainer .card .card-header .rating {
       font-size: 0.75em; }
-  .find-a-trainer .card .card-body i {
-    width: 1em;
-    color: #83C3A3; }
   .find-a-trainer .card .card-body .view-profile {
     display: block;
     margin: 0 auto;
