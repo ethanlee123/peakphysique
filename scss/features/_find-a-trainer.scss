@@ -1,6 +1,11 @@
 .find-a-trainer {
     $avatar-size: 50px;
 
+    i {
+        width: 1em;
+        color: $primary;
+    }
+
     .card {
         max-width: 400px;
         border: none;
@@ -41,11 +46,6 @@
         }
 
         .card-body {
-            i {
-                width: 1em;
-                color: $primary;
-            }
-
             .view-profile {
                 display: block;
                 margin: 0 auto;
