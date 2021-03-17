@@ -2,7 +2,6 @@
     .top-buffer {
         @include top-buffer-trainer;
     }
-
     h1 {
         padding-top: 5px;
         padding-bottom: 5px;
@@ -12,15 +11,12 @@
     #progress {
         @include progress-text;
     }
-
     .profile-pic {
         border-radius: 50%;
     }
-
     .card {
         margin: 0 5%;
     }
-
     #accordionUpdate {
         margin: 0 5%;
     }
@@ -31,33 +27,31 @@
             }
         }
     }
-
     i {
         @include hover-state {
             color: $darkest;
         }
-
         &.menu {
             font-size: 47px;
             margin-right: 0;
             margin-right: 10px;
             color: $primary;
         }
-
-        &.icon-logo {
-            font-size: 2.5em;
-            color: $primary;
-            margin-right: 15px;
-        }
-
-
     } 
+    // Logo inside main content not header
+    #menu-logo {
+        font-size: 2.5em;
+        margin-right: 15px;
+    }
     figure {
         margin: 0;
         margin-right: 0.5em;
-        padding: 0;
-        
+        padding: 0;     
     }
+    // text color primary (mint)
+    span {
+        color: $primary;
+    } 
 }
 
 

@@ -27,5 +27,3 @@ customElements.define("header-component", Header);
 window.addEventListener("resize", () => {
     document.body.classList.remove("active-nav");
 });
-
-

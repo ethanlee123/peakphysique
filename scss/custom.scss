@@ -13,6 +13,7 @@
 @import "./components/footer";
 @import "./components/auth";
 
+@import "./index";
 @import "./features/find-a-trainer";
 @import "./features/initial-trainer-setup";
 @import "./features/trainer-create-account";
@@ -22,6 +23,7 @@
 @import "./features/login-sign-up";
 @import "./features/messages-notifications";
 @import "./features/sign-up-user-info";
-
+@import "./features/user-profile";
+@import "./features/schedule";
 
 @import "../node_modules/bootstrap/scss/bootstrap";

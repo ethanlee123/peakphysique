@@ -1,6 +1,30 @@
 .schedule {
-
+    .schedule-profile-pic {
+        width: 100%;
+    }
+    
+    .schedule-main {
+        width: 90%;
+        margin: 0 auto;
+    }
+    
     .schedule-tabs {
-        
+        margin-bottom: 10px;
+    }
+    .schedule-hidden {
+        display: none;
+    }
+    .card {
+        max-width: 640px;
+    }
+    .nav-tabs {
+        button {
+            color: $secondary;
+        }
+        .nav-link {
+            &.active {
+                @include tabs;
+            }   
+        }
     }
 }

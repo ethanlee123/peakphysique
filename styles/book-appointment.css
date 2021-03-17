@@ -9,6 +9,7 @@
 
 .landing {
     background-image: url('../images/gym-banner.jpg');
+    background-repeat: repeat-x;
     height: 32%;
     text-align: center;
     width: 100%;
@@ -38,3 +39,8 @@
 .title-margin {
     margin-top: 2%;
 }
+
+
+/* **************************************************** */
+/* CONVERTED TO SCSS (_index.scss). NO LONGER USED */
+/* **************************************************** */

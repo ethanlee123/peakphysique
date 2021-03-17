@@ -15,9 +15,6 @@
     .container {
         @include content-center;
     }
-    i {
-        font-size: 20pt;
-    }
     .progress-bar {
         background-color: $dark;
     }
