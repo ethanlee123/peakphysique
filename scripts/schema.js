@@ -44,6 +44,7 @@ var trainer = {
     },
 }
 
+
 // User includes both trainer and client
 var user = {
     age: -1, // integer
@@ -64,8 +65,13 @@ var user = {
     location: new firebase.firestore.Geopoint(37.422, 122.084), // Retrieved automatically
     profilePic: "", //uploaded by the user
     rating: -1, // integer, range 1 - 5
-    role: "" // String, client or trainer or null, if they haven't set it yet
+    role: "", // String, client or trainer or null, if they haven't set it yet
+    confirmationId: [
+        "",
+        ""
+    ]
 };
+
 
 // use this for seeing user profiles
 var userProfile = {
@@ -117,20 +123,6 @@ var appointments = {
     trainerFirstName: "",
     trainerLasttName: "",
     confirmationId: "",
-
-    appointments: 
-    [
-        {
-            date: new firebase.firestore.Timestamp.now(), // returns Timestamp object
-            time: "", // String, morning or afternoon or evening
-            available: true // boolean
-        },
-        {
-            date: new firebase.firestore.Timestamp.fromDate(new Date("March 16 2021")),
-            time: "", // String, morning or afternoon or evening
-            available: false   // boolean
-        }
-    ],
 }
 
 
@@ -152,3 +144,18 @@ const conversations = [
         ],
     }
 ];
+
+
+// appointments: 
+// [
+//     {
+//         date: new firebase.firestore.Timestamp.now(), // returns Timestamp object
+//         time: "", // String, morning or afternoon or evening
+//         available: true // boolean
+//     },
+//     {
+//         date: new firebase.firestore.Timestamp.fromDate(new Date("March 16 2021")),
+//         time: "", // String, morning or afternoon or evening
+//         available: false   // boolean
+//     }
+// ],
