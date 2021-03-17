@@ -1,10 +1,10 @@
 .find-a-trainer {
     $avatar-size: 50px;
-    position: relative;
+    $main-padding: 2em;
 
     main {
         margin: 0 auto;
-        padding: 2em;
+        padding: $main-padding;
         max-width: 2560px;
     }
 
@@ -14,6 +14,7 @@
     }
 
     .banner {
+        position: relative;
         text-align: center;
         font-size: 1.5em;
 
@@ -77,11 +78,13 @@
         }
 
         .banner-img {
+            display: block;
             position: absolute;
-            top: 0;
+            top: -$main-padding;
             right: 0;
             width: 100%;
-            filter: opacity(30%);
+            object-fit: cover;
+            filter: opacity(50%);
             z-index: -9999;
         }
     }
