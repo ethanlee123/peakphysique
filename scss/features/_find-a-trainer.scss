@@ -16,13 +16,63 @@
         text-align: center;
         font-size: 1.5em;
 
-        .section-title {
-            font-size: 3em;
+        .text {
+            margin-bottom: 2em;
+
+            .section-title {
+                font-size: 3em;
+            }
+            
+            .subtext {
+                max-width: 800px;
+                margin: 0 auto;
+            }            
         }
-        
-        .subtext {
-            max-width: 800px;
-            margin: 0 auto;
+
+        .toggle-filters {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: baseline;
+
+            button {
+                background: none;
+                border: none;
+                box-shadow: none;
+                color: $light;
+                text-transform: uppercase;
+                font-family: $type-heading;
+            }
+
+            .toggle-filter {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-right: 1em;
+                word-wrap: break-word;
+                font-size: 0.5em;
+
+                &.active {
+                    .disabled-logo {
+                        display: none;
+                    }
+                }
+
+                &:not(.active) {
+                    .active-logo {
+                        display: none;
+                    }
+                }
+
+                img {
+                    margin-bottom: 1em;
+                    height: 75px;
+                }
+            }
+
+            .toggle-filter-drawer {
+                flex: 2;
+            }
         }
     }
 
@@ -95,6 +145,11 @@
             border: none;
             @include box-shadow;
 
+            i {
+                width: 1em;
+                color: $primary;
+            }
+
             .card-header {
                 display: grid;
                 grid-template-columns: 50px 1fr;
@@ -131,11 +186,6 @@
 
             .card-body {
                 padding: 1em 2em;
-
-                i {
-                    width: 1em;
-                    color: $primary;
-                }
 
                 .view-profile {
                     display: block;

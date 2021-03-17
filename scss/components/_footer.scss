@@ -98,6 +98,12 @@ footer {
             i {
                 font-size: 1.5em;
             }
+
+            @include hover-state {
+                i {
+                    color: $light;
+                }
+            }
         }
 
     }
