@@ -1,3 +1,4 @@
+//Sprint 1: ...
   // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyAjZGN7j00ud_vfpIlt-enOlSAqpjNhWBI",
