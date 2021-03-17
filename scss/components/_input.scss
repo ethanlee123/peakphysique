@@ -1,0 +1,10 @@
+input {
+    &[type=text] {
+        color: $darkest;
+
+        @include hover-state {
+            color: $darkest;
+        }
+    }
+
+}

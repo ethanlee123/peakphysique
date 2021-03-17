@@ -16,7 +16,8 @@ header {
         grid-template-columns: 2fr 5fr 1fr;
         align-items: center;
         gap: 1rem;
-        width: 100%;        
+        width: 100%;
+        font-size: 1.25em;  
     }
 
     a {
@@ -212,6 +213,10 @@ header {
                 }
             }
         }
+    }
+
+    .logo {
+        text-transform: uppercase;
     }
 
     & > .logo {

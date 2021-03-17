@@ -3,10 +3,6 @@ body {
     flex-direction: column;
     min-height: 100vh;
 
-    b {
-        color: $primary;
-    }
-
     i {
         margin-right: 1em;
 
@@ -16,24 +12,5 @@ body {
         }
     }
 
-    .btn {
-        @include box-shadow($blur: 20px);
 
-        @include hover-state {
-            background-color: $darker;
-            color: $primary;
-            font-weight: bold;
-        }
-        
-
-        &.btn-outline-light {
-            box-shadow: none;
-
-            @include hover-state {
-                background-color: $light;
-                color: $dark;
-                @include box-shadow;
-            }
-        }
-    }
 }

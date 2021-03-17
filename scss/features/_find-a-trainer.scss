@@ -9,6 +9,7 @@
 
     section {
         margin-bottom: 2em;
+        width: 100%;
     }
 
     .banner {
@@ -68,6 +69,12 @@
                 color: $primary;
                 @include box-shadow;
             }
+        }
+    }
+
+    .results-meta {
+        b {
+            color: $light;
         }
     }
     

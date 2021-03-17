@@ -6,10 +6,6 @@ footer {
 
     i {
         color: $primary;
-
-        @include hover-state {
-            color: $dark;
-        }
     }
 
     li {
@@ -19,6 +15,12 @@ footer {
     .scroll-to-top {
         color: $info;
         box-shadow: none;
+
+        @include hover-state {
+            i {
+                color: $light;
+            }
+        }
 
         i {
             color: $info;
@@ -101,6 +103,12 @@ footer {
     }
 
     .btn.btn-outline-light.contact-us {
+        @include hover-state {
+            i {
+                color: $darker;
+            }
+        }
+
         i {
             color: $light;
         }
