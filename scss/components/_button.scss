@@ -1,5 +1,6 @@
 button {
     @include box-shadow($blur: 20px);
+    // @include drop-shadow;
 
     @include hover-state {
         background-color: $darker;
@@ -9,12 +10,22 @@ button {
     
 
     &.btn-outline-light {
-        box-shadow: none;
+        @include box-shadow-transparent;
+        @include text-shadow($blur-radius: 0.5rem);
 
         @include hover-state {
             background-color: $light;
             color: $dark;
             @include box-shadow;
+            text-shadow: none;
+        }
+    }
+
+    &.btn-outline-none {
+        @include text-shadow;
+
+        @include hover-state {
+            text-shadow: none;
         }
     }
 }

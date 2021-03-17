@@ -38,13 +38,21 @@ button {
     color: #83C3A3;
     font-weight: bold; }
   button.btn-outline-light {
-    box-shadow: none; }
+    -webkit-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.35), 0 4px 8px 1px rgba(0, 0, 0, 0.35) inset;
+    -moz-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.35), 0 4px 8px 1px rgba(0, 0, 0, 0.35) inset;
+    box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.35), 0 4px 8px 1px rgba(0, 0, 0, 0.35) inset;
+    text-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.85); }
     button.btn-outline-light:hover, button.btn-outline-light:active, button.btn-outline-light:focus {
       background-color: #D4DDD6;
       color: #1E242E;
       -webkit-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
       -moz-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
-      box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8); }
+      box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
+      text-shadow: none; }
+  button.btn-outline-none {
+    text-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.85); }
+    button.btn-outline-none:hover, button.btn-outline-none:active, button.btn-outline-none:focus {
+      text-shadow: none; }
 
 input[type=text] {
   color: #0a0c0f; }
@@ -463,7 +471,8 @@ footer .btn.btn-outline-light.contact-us i {
   .find-a-trainer .banner .text {
     margin-bottom: 2em; }
     .find-a-trainer .banner .text .section-title {
-      font-size: 3em; }
+      font-size: 3em;
+      text-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.85); }
     .find-a-trainer .banner .text .subtext {
       max-width: 800px;
       margin: 0 auto; }
@@ -492,7 +501,8 @@ footer .btn.btn-outline-light.contact-us i {
         display: none; }
       .find-a-trainer .banner .toggle-filters .toggle-filter img {
         margin-bottom: 1em;
-        height: 75px; }
+        height: 75px;
+        filter: drop-shadow(0.5rem 0.25rem 0.25rem rgba(0, 0, 0, 0.85)); }
     .find-a-trainer .banner .toggle-filters .toggle-filter-drawer {
       flex: 2; }
   .find-a-trainer .banner .banner-img {
@@ -526,8 +536,12 @@ footer .btn.btn-outline-light.contact-us i {
       .find-a-trainer .search-and-filter .search-bar .search-btn i {
         margin: 0;
         color: #1E242E; }
-  .find-a-trainer .search-and-filter .filter-btn.no-filters .filters-applied {
-    display: none; }
+  .find-a-trainer .search-and-filter .filter-btn {
+    filter: drop-shadow(1rem 1rem 1rem black); }
+    .find-a-trainer .search-and-filter .filter-btn.no-filters .filters-applied {
+      display: none; }
+    .find-a-trainer .search-and-filter .filter-btn:not(.no-filters) .set-filters {
+      display: none; }
   .find-a-trainer .search-and-filter .reset-filters-btn {
     box-shadow: none; }
     .find-a-trainer .search-and-filter .reset-filters-btn:hover, .find-a-trainer .search-and-filter .reset-filters-btn:active, .find-a-trainer .search-and-filter .reset-filters-btn:focus {

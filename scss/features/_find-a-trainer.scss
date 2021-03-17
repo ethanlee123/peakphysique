@@ -23,6 +23,7 @@
 
             .section-title {
                 font-size: 3em;
+                @include text-shadow;
             }
             
             .subtext {
@@ -69,6 +70,7 @@
                 img {
                     margin-bottom: 1em;
                     height: 75px;
+                    @include drop-shadow;
                 }
             }
 
@@ -118,8 +120,15 @@
         }
 
         .filter-btn {
+            filter: drop-shadow(1rem 1rem 1rem rgba(0, 0, 0, 1));
             &.no-filters {
                 .filters-applied {
+                    display: none;
+                }
+            }
+
+            &:not(.no-filters) {
+                .set-filters {
                     display: none;
                 }
             }
