@@ -1,5 +1,6 @@
 .find-a-trainer {
     $avatar-size: 50px;
+    position: relative;
 
     main {
         margin: 0 auto;
@@ -73,6 +74,15 @@
             .toggle-filter-drawer {
                 flex: 2;
             }
+        }
+
+        .banner-img {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            filter: opacity(30%);
+            z-index: -9999;
         }
     }
 
