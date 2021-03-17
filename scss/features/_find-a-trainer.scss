@@ -3,13 +3,82 @@
 
     main {
         margin: 0 auto;
+        padding: 2em;
+        max-width: 2560px;
+    }
+
+    section {
+        margin-bottom: 2em;
+    }
+
+    .banner {
+        text-align: center;
+        font-size: 1.5em;
+
+        .section-title {
+            font-size: 3em;
+        }
+        
+        .subtext {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    }
+
+    .search-and-filter {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1em;
+
+        @include tablet {
+            grid-template-columns: 1fr minmax(15%, 150px) minmax(15%, 150px);
+        }
+
+        .search-bar {
+            @include box-shadow;
+            grid-column: 1 / span 2;
+
+            @include tablet {
+                grid-column: 1;
+            }
+
+            .search-btn {
+                background-color: $primary;
+                border: none;
+                
+                i {
+                    margin: 0;
+                    color: $dark;
+                }
+            }
+        }
+
+        .filter-btn {
+            &.no-filters {
+                .filters-applied {
+                    display: none;
+                }
+            }
+        }
+
+        .reset-filters-btn {
+            box-shadow: none;
+
+            @include hover-state {
+                color: $primary;
+                @include box-shadow;
+            }
+        }
     }
     
     .trainer-list {
         margin: 0 auto;
-        max-width: 1440px;
         display: grid;
         gap: 1em;
+
+        @include tablet {
+            grid-template-columns: repeat(2, 1fr);
+        }
         
         @include desktop {
             grid-template-columns: repeat(3, 1fr);
@@ -54,6 +123,8 @@
             }
 
             .card-body {
+                padding: 1em 2em;
+
                 i {
                     width: 1em;
                     color: $primary;

@@ -17,7 +17,7 @@
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"w
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
     <!-- Icons -->
@@ -55,8 +55,35 @@
       </section><!--.banner-->
 
       <!--.search-bar-->
-      <!--.set-filters-->
-      <!--.reset-filters-->
+
+      <section class="search-and-filter">
+        <div class="input-group search-bar">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search"
+            aria-label="Search"
+            aria-describedby="searchBarTrainers"
+          >
+          <button class="input-group-text search-btn" id="searchBarTrainers">
+            <i class="fas fa-search"></i>
+          </button>
+        </div><!--.input-group-->
+
+        <button class="btn btn-primary filter-btn no-filters">
+          <i class="fas fa-filter"></i>
+          <span class="set-filters">Set Filters</span>
+          <span class="filters-applied">Filters Applied</span>
+        </button>
+
+        <button class="btn btn-outline-none reset-filters-btn">
+          <i class="fas fa-undo"></i>
+          Reset filters
+        </button>
+        <!--.reset-filters-->
+      </section><!--search-and-filter-->
+
+
 
       <section class="results-meta">
         <span class="results-found">Showing <span id="displayedTrainers">6</span> out of <b><span id="totalTrainers">10</span> trainers</b> found.</span>
