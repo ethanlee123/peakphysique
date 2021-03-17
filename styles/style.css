@@ -412,7 +412,7 @@ footer .social-media {
   footer .social-media a i {
     font-size: 1.5em; }
   footer .social-media a:hover i, footer .social-media a:active i, footer .social-media a:focus i {
-    color: #D4DDD6; }
+    color: #0444AC; }
 
 footer .btn.btn-outline-light.contact-us:hover i, footer .btn.btn-outline-light.contact-us:active i, footer .btn.btn-outline-light.contact-us:focus i {
   color: #0e1115; }
@@ -494,7 +494,12 @@ footer .btn.btn-outline-light.contact-us i {
       align-items: center;
       margin-right: 1em;
       word-wrap: break-word;
-      font-size: 0.5em; }
+      font-size: 0.6em; }
+      .find-a-trainer .banner .toggle-filters .toggle-filter:hover img {
+        filter: drop-shadow(0.5rem 0.25rem 0.1rem rgba(0, 0, 0, 0.85)); }
+      .find-a-trainer .banner .toggle-filters .toggle-filter:hover .text {
+        text-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.85);
+        color: #0444AC; }
       .find-a-trainer .banner .toggle-filters .toggle-filter.active .disabled-logo {
         display: none; }
       .find-a-trainer .banner .toggle-filters .toggle-filter:not(.active) .active-logo {
