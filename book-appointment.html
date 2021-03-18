@@ -238,8 +238,16 @@
     <script type="module" src="./scripts/components/footer.js"></script>
     <script>
       $( function() {
-        $( "#datepicker" ).datepicker();
-      } );
+        $( "#datepicker" ).datepicker({
+          showAnim: "fold",
+          showButtonPanel: true,
+          showMonthAfterYear: true,
+          showOn: "both",
+          showOtherMonths: true,
+          minDate: 0,
+          showOptions: { direction: "up" }
+        });
+      });
     </script>
 
 </body>
