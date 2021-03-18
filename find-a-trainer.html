@@ -108,7 +108,7 @@
           </button>
         </div><!--.input-group-->
 
-        <button class="btn btn-outline-light filter-btn no-filters" id="setFilterBtn">
+        <button class="btn btn-outline-light filter-btn no-filters toggle-filter-drawer" id="setFilterBtn">
           <i class="fas fa-filter"></i>
           <span class="set-filters">Set Filters</span>
           <span class="filters-applied">Filters Applied</span>
@@ -358,8 +358,8 @@
         </div><!--.card-->
       </section>      
 
-      <div class="drawer filters filter-drawer">
-        <button class="exit-drawer"></button>
+      <div class="drawer filters filter-drawer" id="filterDrawer">
+        <button class="exit-drawer" id="exitDrawer"></button>
         <h2 class="drawer-title">Filter <b>trainers</b></h2>
         
         <form class="filter-form" action="">

@@ -2,11 +2,12 @@
     $avatar-size: 50px;
     $main-padding: 2em;
     $exit-icon-size: 2em;
+    $drawer-width: 400px;
+    overflow-x: hidden;
 
     main {
-        margin: 0 auto;
         padding: $main-padding;
-        max-width: 2560px;
+        max-width: 1800px;
     }
 
     section {
@@ -240,16 +241,23 @@
     .filter-drawer {
         position: fixed;
         top: 0;
-        right: 0;
+        right: -100%;
         bottom: 0;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         padding: 2em;
-        width: 400px;
+        width: 0;
         background-color: $darkest;
-        @include box-shadow;
         z-index: 999999;
+        transition: 0.5s;
+        @include box-shadow;
+
+
+        &.active {
+            right: 0;
+            width: $drawer-width;
+        }
 
         .exit-drawer {
             align-self: flex-end;

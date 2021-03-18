@@ -1,8 +1,13 @@
 // ### Variables ###
+// ###### DOM Variables ######
 const bannerImg = document.getElementById("bannerImg");
 const banner = document.getElementById("banner");
 const filterToggles = document.querySelectorAll("button.toggle-filter");
+const filterDrawerToggles = document.querySelectorAll(".toggle-filter-drawer");
+const exitDrawerToggle = document.getElementById("exitDrawer");
+const filterDrawer = document.getElementById("filterDrawer");
 const setFilterBtn = document.getElementById("setFilterBtn");
+// ###########################
 
 var filters = {
     value: [],
@@ -36,7 +41,7 @@ const positionBannerImgHorizontally = () => {
 }
 
 const resizeBannerImgHeight = () => {
-    bannerImg.style.height = `${(banner.offsetHeight)}px`;
+    bannerImg.style.height = `${(banner.offsetHeight * 1.15)}px`;
 }
 
 // ### Event Listeners ###
@@ -50,14 +55,28 @@ window.addEventListener("resize", () => {
     resizeBannerImgHeight();
 });
 
-filterToggles.forEach((filterToggle) => {
-    filterToggle.addEventListener("click", () => {
-        if (filterToggle.classList.contains("active")) {
-            filterToggle.classList.remove("active");
+filterToggles.forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+        if (toggle.classList.contains("active")) {
+            toggle.classList.remove("active");
         } else {
-            filterToggle.classList.add("active");
+            toggle.classList.add("active");
         }
     })
+});
+
+filterDrawerToggles.forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+        if (filterDrawer.classList.contains("active")) {
+            filterDrawer.classList.remove("active");
+        } else {
+            filterDrawer.classList.add("active");
+        }
+    })
+});
+
+exitDrawerToggle.addEventListener("click", () => {
+    filterDrawer.classList.remove("active");
 });
 
 // #######################
