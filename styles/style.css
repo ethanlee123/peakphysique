@@ -562,6 +562,8 @@ footer .btn.btn-outline-light.contact-us i {
         box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8); }
   .find-a-trainer .results-meta b {
     color: #D4DDD6; }
+  .find-a-trainer .spinner-border {
+    display: none; }
   .find-a-trainer .trainer-list {
     margin: 0 auto;
     display: grid;
