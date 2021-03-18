@@ -610,6 +610,62 @@ footer .btn.btn-outline-light.contact-us i {
         margin-top: 2em;
         width: 50%; }
 
+.find-a-trainer .filter-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2em;
+  width: 400px;
+  background-color: #0a0c0f;
+  -webkit-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
+  z-index: 999999; }
+  .find-a-trainer .filter-drawer .exit-drawer {
+    align-self: flex-end;
+    position: relative;
+    width: 2em;
+    height: 2em;
+    background: none;
+    border: none;
+    box-shadow: none;
+    cursor: pointer; }
+    .find-a-trainer .filter-drawer .exit-drawer:before, .find-a-trainer .filter-drawer .exit-drawer:after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 0.4em;
+      border-radius: 2em;
+      background: #D4DDD6; }
+    .find-a-trainer .filter-drawer .exit-drawer:before {
+      transform: rotate(45deg); }
+    .find-a-trainer .filter-drawer .exit-drawer:after {
+      transform: rotate(-45deg); }
+  .find-a-trainer .filter-drawer .drawer-title {
+    margin-top: 1em;
+    margin-bottom: 2em; }
+  .find-a-trainer .filter-drawer .filter-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column; }
+    .find-a-trainer .filter-drawer .filter-form .form-input {
+      margin-bottom: 1em; }
+    .find-a-trainer .filter-drawer .filter-form .gender {
+      display: flex; }
+      .find-a-trainer .filter-drawer .filter-form .gender .form-check {
+        margin-right: 1em; }
+  .find-a-trainer .filter-drawer .filter-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em; }
+    .find-a-trainer .filter-drawer .filter-btns button {
+      width: 100%; }
+
 .initial-trainer-setup .top-buffer {
   margin-top: 50px; }
 

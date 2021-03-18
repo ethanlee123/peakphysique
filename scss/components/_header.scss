@@ -162,10 +162,6 @@ header {
 
         body.active-nav & {
             width: 1.5em;
-            // position: fixed;
-            // left: $drawer-width;
-            // transform: translateX(-200%);
-            // width: 1.5em;
         }
 
         @include desktop {

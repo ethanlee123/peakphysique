@@ -1,6 +1,7 @@
 .find-a-trainer {
     $avatar-size: 50px;
     $main-padding: 2em;
+    $exit-icon-size: 2em;
 
     main {
         margin: 0 auto;
@@ -234,6 +235,83 @@
 
 
         }        
+    }
+
+    .filter-drawer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 2em;
+        width: 400px;
+        background-color: $darkest;
+        @include box-shadow;
+        z-index: 999999;
+
+        .exit-drawer {
+            align-self: flex-end;
+            position: relative;
+            width: $exit-icon-size;
+            height: $exit-icon-size;
+            background: none;
+            border: none;
+            box-shadow: none;
+            cursor: pointer;
+
+            &:before, &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: $exit-icon-size / 5;
+                border-radius: 2em;
+                background: $light;
+            }
+
+            &:before {
+                transform: rotate(45deg);
+            }
+
+            &:after {
+                transform: rotate(-45deg);
+            }
+        }
+
+        .drawer-title {
+            margin-top: 1em;
+            margin-bottom: 2em;
+        }
+
+        .filter-form {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+
+            .form-input {
+                margin-bottom: 1em;
+            }
+
+            .gender {
+                display: flex;
+
+                .form-check {
+                    margin-right: 1em;
+                }
+            }
+        }
+
+        .filter-btns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1em;
+
+            button {
+                width: 100%;
+            }
+        }
     }
 
 }
