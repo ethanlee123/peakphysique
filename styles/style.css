@@ -821,6 +821,9 @@ footer .btn.btn-outline-light.contact-us i {
 .initial-platform-specific .fitness, .initial-platform-specific .wellness {
   padding: 0; }
 
+.initial-platform-specific #first-session {
+  font-size: 30pt; }
+
 .login-sign-up {
   /* for "have an account and login buttons" */ }
   .login-sign-up .container {

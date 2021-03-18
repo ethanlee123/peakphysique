@@ -32,3 +32,15 @@ firebase.auth().onAuthStateChanged(function(user) {
     console.log("user is not signed in");
     }
 });
+
+
+//put below code into firebase-queries during live share
+const db = firebase.firestore();
+function writeUserRole(role) {
+    
+}
+
+// When user clicks button set "role" field respectively
+document.getElementById("client").addEventListener("click", writeUserRole(client));
+document.getElementById("trainer").addEventListener("click", writeUserRole(trainer));
+
