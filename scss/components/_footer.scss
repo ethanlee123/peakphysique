@@ -35,6 +35,10 @@ footer {
             display: none;
         }
 
+        h2 {
+            font-family: $type-body;
+        }
+
         .social-media {
             justify-content: flex-end;
 
