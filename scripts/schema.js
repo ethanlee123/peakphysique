@@ -1,16 +1,16 @@
 // will use this for editing trainer profile
 var trainer = {
+    user_id: "",
     age: -1, // integer
     email: "",
-    firstSessionFree: null, // boolean
+
     gender: "", // String male, female, other, or prefer not to say
-    hourlyRate: 0, // integer
     location: new firebase.firestore.Geopoint(37.422, 122.084), // Retrieved automatically
      // String, link to website
     rating: -1, // integer, range 1 - 5
     totalClients: -1, // integer
     totalSessions: -1, // integer
-    profilePic: "./profile-pic.jpg", // String path to file?
+    profilePic: "/images/profile-placeholder.svg", // String path to file?
     expertise: {
         certification: "path to file?",
         yearsOfExperience: 0, // integer
@@ -29,7 +29,10 @@ var trainer = {
     },
     platformSpecific: {
         generalAvailability: ["sun", "mon", "tue", "wed", "thu", "fri", "sat"],
-        time: ["morning", "afternoon", "evening"]
+        time: ["morning", "afternoon", "evening"],
+        hourlyRate: 0, // integer
+        deposit: 0,
+        firstSessionFree: null, // boolean
     },
     posts: [
         {
@@ -47,6 +50,7 @@ var trainer = {
 
 // User includes both trainer and client
 var user = {
+    user_id: "",
     age: -1, // integer
     email: "",
     name: {
@@ -75,6 +79,7 @@ var user = {
 
 // use this for seeing user profiles
 var userProfile = {
+    user_id: "",
     name: {
         first: "",
         last: ""
@@ -120,9 +125,11 @@ var appointments = {
     clientProfilePic: "",
     clientFirstName: "",
     clientLasttName: "",
+    client_user_id: "", //user_id
     trainerProfilePic: "",
     trainerFirstName: "",
     trainerLasttName: "",
+    trainer_user_id: "", //user_id
     confirmationId: "",
 }
 
@@ -162,11 +169,11 @@ const conversations = [
 // ],
 
 
-appointments (collection)
-    upcoming (document)
-        ... what we currently have ...
+// appointments (collection)
+//     upcoming (document)
+//         ... what we currently have ...
 
-    trainerAvailability (document)
-        traineName:...
-        generalAvailability:...
-        trainerUpcoming:...
+//     trainerAvailability (document)
+//         traineName:...
+//         generalAvailability:...
+//         trainerUpcoming:...
