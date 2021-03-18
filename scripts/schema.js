@@ -113,6 +113,7 @@ var userProfile = {
 // use this for my schedule page
 var appointments = {
     date: new firebase.firestore.Timestamp.fromDate(new Date("March 16 2021")), // Timestamp
+    time: "", // String morning, afternoon, or evening
     location: "",
     completed: false, // boolean default false
     sessionTitle: "",
@@ -159,3 +160,13 @@ const conversations = [
 //         available: false   // boolean
 //     }
 // ],
+
+
+appointments (collection)
+    upcoming (document)
+        ... what we currently have ...
+
+    trainerAvailability (document)
+        traineName:...
+        generalAvailability:...
+        trainerUpcoming:...

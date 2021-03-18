@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Book An Appointment - Peak Physique</title>
+    <title>Confirm Booking - Peak Physique</title>
     <meta name="comp1800 boilerplate code" content="my bcit project">
     <meta name="author" content="BCIT">
 
@@ -124,20 +124,17 @@
   </header>
 
     <div class="container">
-      <h1 class="display-4"><span class="title-font">Book an <span class="title-font-color">appointment</span></span>
+      <h1 class="display-4"><span class="title-font">Appointment <span class="title-font-color">Confirmation</span></span>
       </h1>
       <hr>
-      <h3 class="display-7">A message from [insert trainer name]</h3>
-      <p>[insert trainer message]</p>
+      <h3 class="display-7">Thank you for booking with [insert trainer name]!</h3>
+      <p>Session: </p>
+      <p>Date: </p>
+      <p>Time: </p>
+      <p>Location: </p>
       <hr>
-      <div class="mb-3">
-        <p>Date: <input type="text" id="datepicker"></p>
-      </div>
-      <div class="mb-3">
-        <label for="comments" class="form-label">Comments</label>
-        <textarea class="form-control font-black" id="comments" rows="3"></textarea>
-      </div>
-      <a class="btn btn-primary book-button" role="button" href="confirm-book.html">BOOK</a>
+      <p>Your message to [insert trainer name]: [insert message]</p>
+      <input class="btn btn-primary" type="submit" value="CONFIRM">
     </div>
 
     <footer class="d-grid top-buffer">
@@ -238,16 +235,8 @@
     <script type="module" src="./scripts/components/footer.js"></script>
     <script>
       $( function() {
-        $( "#datepicker" ).datepicker({
-          showAnim: "fold",
-          showButtonPanel: true,
-          showMonthAfterYear: true,
-          showOn: "both",
-          showOtherMonths: true,
-          minDate: 0,
-          showOptions: { direction: "up" }
-        });
-      });
+        $( "#datepicker" ).datepicker();
+      } );
     </script>
 
 </body>

@@ -984,6 +984,9 @@ footer .btn.btn-outline-light.contact-us i {
   color: #83C3A3;
   font-weight: bolder; }
 
+.sign-up-success .text-uppercase {
+  text-transform: uppercase; }
+
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
