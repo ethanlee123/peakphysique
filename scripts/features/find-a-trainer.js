@@ -1,11 +1,12 @@
 import { debounce } from "../util/debounce.js";
 
 // ### Test Data ###
-const trainer = {
-    name: "",
+const trainerCard = {
 
 };
-const trainers = [trainer];
+
+const trainerCards = [];
+// #################
 
 const filtersDefault = {
     wellness: [],
@@ -70,6 +71,7 @@ var filters = {
 // ##################
 
 const positionBannerImgHorizontally = () => {
+    console.log("running...");
     const bannerWidth = banner.offsetWidth;
     const windowWidth = window.innerWidth;
     bannerImg.style.right = `${(bannerWidth - windowWidth) / 2}px`;
@@ -93,8 +95,8 @@ const setFilterToggles = () => {
         });            
     }
 
-    newFilters["fitnessExclude"].length === 0 && delete newFilters.typeOfServiceExclude;
-    newFilters["wellnessExclude"].length === 0 && delete newFilters.expertiseExclude;
+    newFilters["fitnessExclude"].length === 0 && delete newFilters["fitnessExclude"];
+    newFilters["wellnessExclude"].length === 0 && delete newFilters["wellnessExclude"];
 
     filters.values = newFilters;
 }

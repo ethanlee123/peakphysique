@@ -50,6 +50,7 @@ const trainer = {
         instagram: "instagram.com/trainermike", // String, link to social media
         website: "https://trainermike.com"
     },
+    bookingMsg: "If this is your first session with me, please make sure to include your fitness goals. Additional information I will need includes your BMI, any dietary restrictions, and any specific muscles you would like to target. Thank you!"
 }
 
 
