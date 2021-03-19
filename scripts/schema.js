@@ -16,7 +16,12 @@ const trainer = {
     totalClients: -1, // integer
     totalSessions: -1, // integer
     profilePic: "/images/profile-placeholder.svg", // String path to file?
-    certification: "path to file?",
+    certification: [
+        {
+            name: "",
+            file: ""
+        }
+    ],
     yearsOfExperience: 0, // integer
     expertise: {
         fitness: [

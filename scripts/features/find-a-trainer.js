@@ -71,7 +71,6 @@ var filters = {
 // ##################
 
 const positionBannerImgHorizontally = () => {
-    console.log("running...");
     const bannerWidth = banner.offsetWidth;
     const windowWidth = window.innerWidth;
     bannerImg.style.right = `${(bannerWidth - windowWidth) / 2}px`;
