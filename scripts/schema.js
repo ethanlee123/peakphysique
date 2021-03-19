@@ -33,8 +33,6 @@ const trainer = {
         last: ""
     },
     platformSpecific: {
-        // generalAvailability: ["sun", "mon", "tue", "wed", "thu", "fri", "sat"],
-        // time: ["morning", "afternoon", "evening"],
         hourlyRate: 0, // integer
         deposit: 0,
         firstSessionFree: null, // boolean
