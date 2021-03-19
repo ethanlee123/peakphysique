@@ -1,6 +1,6 @@
 //Sprint 1: ...
   // Your web app's Firebase configuration
-  var firebaseConfig = {
+  const firebaseConfig = {
     apiKey: "AIzaSyAjZGN7j00ud_vfpIlt-enOlSAqpjNhWBI",
     authDomain: "peak-physique-a0c48.firebaseapp.com",
     projectId: "peak-physique-a0c48",

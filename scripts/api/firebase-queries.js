@@ -117,7 +117,7 @@ export function createUser() {
                 if(!docSnapshot.exists) {
                     let names = user.displayName.split(" ", 2);
                     userCollect.doc(user.uid).set({
-                        user_id: user.uid,
+                        userId: user.uid,
                         email: user.email,
                         name: {
                             first: names[0],
