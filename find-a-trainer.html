@@ -47,37 +47,67 @@
         </div><!--.text-->
 
         <div class="toggle-filters filters">
-          <button class="toggle-filter macro-coaching active" id="macroCoaching">
+          <button
+            class="toggle-filter macro-coaching active"
+            id="macroCoaching"
+            data-field="typeOfService"
+            data-filter="macro coaching"
+          >
             <img class="active-logo" src="./images/icons/macro-coaching.svg" alt="Macro coaching filter toggle">
             <img class="disabled-logo" src="./images/icons/macro-coaching-02.svg" alt="Macro coaching filter toggle">
             <span class="text">Macro coaching</span>
           </button><!--.filter-toggle.macro-coaching-->
           
-          <button class="toggle-filter custom-workout-regimen active" id="customWorkoutRegimen">
+          <button
+            class="toggle-filter custom-workout-regimen active"
+            id="customWorkoutRegimen"
+            data-field="typeOfService"
+            data-filter="custom workout regimen"
+          >
             <img class="active-logo" src="./images/icons/custom-workout-regimen.svg" alt="Custom workout regimen filter toggle">
             <img class="disabled-logo" src="./images/icons/custom-workout-regimen-02.svg" alt="Custom workout regimen filter toggle">
             <span class="text">Custom workout regimen</span>
           </button><!--.filter-toggle.custom-workout-regimen-->          
 
-          <button class="toggle-filter all-in-one-coaching active" id="allInOneCoaching">
+          <button
+            class="toggle-filter all-in-one-coaching active"
+            id="allInOneCoaching"
+            data-field="typeOfService"
+            data-filter="all-in-one coaching"
+          >
             <img class="active-logo" src="./images/icons/all-in-one-coaching.svg" alt="All-in-one-coacing filter toggle">
             <img class="disabled-logo" src="./images/icons/all-in-one-coaching-02.svg" alt="All-in-one-coacing filter toggle">
             <span class="text">All-in-one coaching</span>
           </button><!--.filter-toggle.all-in-one-coacing-->          
 
-          <button class="toggle-filter bodybuilding active" id="bodybuilding">
+          <button
+            class="toggle-filter bodybuilding active"
+            id="bodybuilding"
+            data-field="expertise"
+            data-filter="bodybuilding"
+          >
             <img class="active-logo" src="./images/icons/bodybuilding.svg" alt="Bodybuilding filter toggle">
             <img class="disabled-logo" src="./images/icons/bodybuilding-02.svg" alt="Bodybuilding filter toggle">
             <span class="text">Bodybuilding</span>
           </button><!--.filter-toggle.bodybuilding-->          
 
-          <button class="toggle-filter endurance-training active" id="enduranceTraining">
+          <button
+            class="toggle-filter endurance-training active"
+            id="enduranceTraining"
+            data-field="expertise"
+            data-filter="endurance training"
+          >
             <img class="active-logo" src="./images/icons/endurance-training.svg" alt="Endurance training filter toggle">
             <img class="disabled-logo" src="./images/icons/endurance-training-02.svg" alt="Endurance training filter toggle">
             <span class="text">Endurance training</span>
           </button><!--.filter-toggle.endurance-training-->          
 
-          <button class="toggle-filter weight-loss active" id="weightLoss">
+          <button
+            class="toggle-filter weight-loss active"
+            id="weightLoss"
+            data-field="expertise"
+            data-filter="weight loss"
+          >
             <img class="active-logo" src="./images/icons/weight-loss.svg" alt="Weight loss filter toggle">
             <img class="disabled-logo" src="./images/icons/weight-loss-02.svg" alt="Weight loss filter toggle">
             <span class="text">Weight loss</span>
@@ -114,7 +144,7 @@
           <span class="filters-applied">Filters Applied</span>
         </button>
 
-        <button class="btn btn-outline-none reset-filters-btn">
+        <button class="btn btn-outline-none reset-filters reset-filters-btn">
           <i class="fas fa-undo"></i>
           Reset filters
         </button>
@@ -445,7 +475,7 @@
     <!--------------------------------------------------------------------->
     <script type="module" src="./scripts/components/header.js"></script>
     <script type="module" src="./scripts/components/footer.js"></script>
-    <script src="./scripts/find-a-trainer.js"></script>
+    <script type="module" src="./scripts/features/find-a-trainer.js"></script>
 </body>
 
 </html>
