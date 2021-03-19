@@ -75,10 +75,6 @@ const user = {
     profilePic: "", //uploaded by the user
     rating: -1, // integer, range 1 - 5
     role: "", // String, client or trainer or null, if they haven't set it yet
-    confirmationId: [
-        "",
-        ""
-    ]
 };
 
 
@@ -122,11 +118,12 @@ const userProfile = {
 
 // use this for my schedule page
 const appointments = {
+    // Get this from jquery date picker
     date: new firebase.firestore.Timestamp.fromDate(new Date("March 16 2021")), // Timestamp
     time: "", // String morning, afternoon, or evening
-    location: "",
+    // location: "",
     completed: false, // boolean default false
-    sessionTitle: "",
+    // sessionTitle: "",
     clientProfilePic: "",
     clientFirstName: "",
     clientLasttName: "",
@@ -135,7 +132,6 @@ const appointments = {
     trainerFirstName: "",
     trainerLasttName: "",
     trainer_user_id: "", //user_id
-    confirmationId: "",
     initialMsgFromClient: ""
 }
 
