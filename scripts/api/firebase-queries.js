@@ -1,5 +1,9 @@
 // Sprint 2: reading/writing to firebase
+import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
+// firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+// Get user collection in firestore
+const userCollect = db.collection("user");
 
 function displayTrainerInfo(){
   console.log("hello from displayTrainerInfo! :)");
@@ -88,4 +92,55 @@ function writeUserProfile() {
     });
 
 }
-writeUserProfile();   
+// writeUserProfile();   
+
+export function personalizedWelcome(selector) {
+    // Only authenticated users, can be set in firebase console storage "rules" tab
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {        
+            // Set personalize welcome message
+            selector.innerText = user.displayName;
+        } else {
+            // No user is signed in.
+            console.log("user is not signed in");
+        }
+    });
+}
+
+export function createUser() {
+    // Only authenticated users, can be set in firebase console storage "rules" tab
+    firebase.auth().onAuthStateChanged(function(user) {
+        const userRef = userCollect.doc(user.uid);
+        
+        userRef.get()
+            .then((docSnapshot) => {
+                if(!docSnapshot.exists) {
+                    let names = user.displayName.split(" ", 2);
+                    userCollect.doc(user.uid).set({
+                        user_id: user.uid,
+                        email: user.email,
+                        name: {
+                            first: names[0],
+                            last: names[1]
+                        }, 
+                        role: null,
+                    })
+                }
+            })
+    });
+}
+
+export function setUserRole(userRole) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (userRole == "trainer") {
+            return userCollect.doc(user.uid).update({
+                role: "trainer"
+            });
+        } else if (userRole == "client") {
+            return userCollect.doc(user.uid).update({
+                role:"client"
+            });
+        }
+    });
+}
+

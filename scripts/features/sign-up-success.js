@@ -1,46 +1,25 @@
-// import { displayName } from "/scripts/api/firebase_api_team37.js";
-var firebaseConfig = {
-    apiKey: "AIzaSyAjZGN7j00ud_vfpIlt-enOlSAqpjNhWBI",
-    authDomain: "peak-physique-a0c48.firebaseapp.com",
-    projectId: "peak-physique-a0c48",
-    storageBucket: "peak-physique-a0c48.appspot.com",
-    messagingSenderId: "278845824422",
-    appId: "1:278845824422:web:31464ec47ef880324e4367"
-  };
+import { personalizedWelcome, createUser, setUserRole } from "/scripts/api/firebase-queries.js";
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
+// the entire query will be put into firebase-queries (when we live share) and 
+// this script will import the necessary functions (queries)
 const nameId = document.querySelector("#name");
-var displayName, email, photoUrl, uid, emailVerified;
+const clientBtn = document.getElementById("client");
+const trainerBtn = document.getElementById("trainer");
+// console.log(clientBtn);
 
-// firebase doc: manage users
-firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-        displayName = user.displayName;
-        email = user.email;
-        photoUrl = user.photoURL;
-        emailVerified = user.emailVerified;
-        uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-                        // this value to authenticate with your backend server, if
-                        // you have one. Use User.getToken() instead.
-        
-        // Set personalize welcome message
-        nameId.innerText = displayName;
-    } else {
-    // No user is signed in.
-    console.log("user is not signed in");
-    }
-});
+personalizedWelcome(nameId);
 
-
-//put below code into firebase-queries during live share
-const db = firebase.firestore();
-function writeUserRole(role) {
-    
-}
+createUser();
 
 // When user clicks button set "role" field respectively
-document.getElementById("client").addEventListener("click", writeUserRole(client));
-document.getElementById("trainer").addEventListener("click", writeUserRole(trainer));
+// Once selected cannot be changed even with the back button/refreshing
+clientBtn.onclick = function() {
+    setUserRole("client");
+};
+trainerBtn.onclick = function() {
+    setUserRole("trainer");
+};
+
+
+// disable btn after clicked on by adding disabled attr
 
