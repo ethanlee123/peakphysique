@@ -1,6 +1,6 @@
 header {
     $burger-size: 1em;
-    $drawer-width: 375px;
+    $drawer-width: 350px;
     $transition-time: 300;
 
     display: flex;
@@ -162,10 +162,6 @@ header {
 
         body.active-nav & {
             width: 1.5em;
-            // position: fixed;
-            // left: $drawer-width;
-            // transform: translateX(-200%);
-            // width: 1.5em;
         }
 
         @include desktop {

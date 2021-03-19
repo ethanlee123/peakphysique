@@ -1,11 +1,13 @@
 .find-a-trainer {
     $avatar-size: 50px;
     $main-padding: 2em;
+    $exit-icon-size: 2em;
+    $drawer-width: 350px;
+    overflow-x: hidden;
 
     main {
-        margin: 0 auto;
         padding: $main-padding;
-        max-width: 2560px;
+        max-width: 1800px;
     }
 
     section {
@@ -34,7 +36,7 @@
 
         .toggle-filters {
             display: flex;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             align-items: baseline;
 
             button {
@@ -73,6 +75,17 @@
                 }
 
                 &:not(.active) {
+                    &:hover {
+                        .disabled-logo {
+                            display: none;
+                        }
+
+                        .active-logo {
+                            display: block;
+                            opacity: 0.3;
+                        }
+                    }
+
                     .active-logo {
                         display: none;
                     }
@@ -160,9 +173,45 @@
     }
 
     .results-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        @include tablet {
+            flex-direction: row;
+        }
+
         b {
             color: $light;
         }
+
+        .results-found {
+            margin-right: 0.5em;
+        }
+
+        .sorters {
+            display: flex;
+            width: 350px;
+
+            .text {
+                white-space: nowrap;
+                margin-right: 0.5em;
+            }
+
+            select {
+                margin-right: 0.5em;
+                padding-top: 0;
+                padding-bottom: 0;
+                color: $info;
+                text-decoration: underline;
+                background-color: transparent;
+                border: none;
+            }
+        }
+    }
+    
+    .spinner-border {
+        display: none;
     }
     
     .trainer-list {
@@ -234,6 +283,96 @@
 
 
         }        
+    }
+
+    .filter-drawer {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 2em;
+        width: 0;
+        background-color: $darkest;
+        z-index: 999999;
+        transition: 0.5s;
+        @include box-shadow;
+
+
+        &.active {
+            right: 0;
+            width: $drawer-width;
+        }
+
+        .exit-drawer {
+            align-self: flex-end;
+            position: relative;
+            width: $exit-icon-size;
+            height: $exit-icon-size;
+            background: none;
+            border: none;
+            box-shadow: none;
+            cursor: pointer;
+
+            @include hover-state {
+                &:before, &:after {
+                    background: $primary;
+                }
+            }
+
+            &:before, &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: $exit-icon-size / 5;
+                border-radius: 2em;
+                background: $light;
+            }
+
+            &:before {
+                transform: rotate(45deg);
+            }
+
+            &:after {
+                transform: rotate(-45deg);
+            }
+        }
+
+        .drawer-title {
+            margin-top: 1em;
+            margin-bottom: 2em;
+        }
+
+        .filter-form {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+
+            .form-input {
+                margin-bottom: 1em;
+            }
+
+            .gender {
+                display: flex;
+
+                .form-check {
+                    margin-right: 1em;
+                }
+            }
+        }
+
+        .filter-btns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1em;
+
+            button {
+                width: 100%;
+            }
+        }
     }
 
 }

@@ -1,4 +1,5 @@
 footer {
+
     a {
         color: $light;
         text-decoration: none;
@@ -32,6 +33,10 @@ footer {
 
         @include desktop {
             display: none;
+        }
+
+        h2 {
+            font-family: $type-body;
         }
 
         .social-media {
