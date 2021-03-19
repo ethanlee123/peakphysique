@@ -155,29 +155,3 @@ const conversations = {
         }
     }
 }
-
-
-
-// appointments: 
-// [
-//     {
-//         date: new firebase.firestore.Timestamp.now(), // returns Timestamp object
-//         time: "", // String, morning or afternoon or evening
-//         available: true // boolean
-//     },
-//     {
-//         date: new firebase.firestore.Timestamp.fromDate(new Date("March 16 2021")),
-//         time: "", // String, morning or afternoon or evening
-//         available: false   // boolean
-//     }
-// ],
-
-
-// appointments (collection)
-//     upcoming (document)
-//         ... what we currently have ...
-
-//     trainerAvailability (document)
-//         traineName:...
-//         generalAvailability:...
-//         trainerUpcoming:...
