@@ -1,4 +1,4 @@
-import { getTemplate } from "./getTemplate.js";
+import { getTemplate } from "../util/getTemplate.js";
 
 const path = "../../common/header.html";
 var isLoggedIn = false;

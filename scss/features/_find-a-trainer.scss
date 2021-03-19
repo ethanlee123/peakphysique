@@ -2,7 +2,7 @@
     $avatar-size: 50px;
     $main-padding: 2em;
     $exit-icon-size: 2em;
-    $drawer-width: 400px;
+    $drawer-width: 350px;
     overflow-x: hidden;
 
     main {
@@ -36,7 +36,7 @@
 
         .toggle-filters {
             display: flex;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             align-items: baseline;
 
             button {
@@ -75,6 +75,17 @@
                 }
 
                 &:not(.active) {
+                    &:hover {
+                        .disabled-logo {
+                            display: none;
+                        }
+
+                        .active-logo {
+                            display: block;
+                            opacity: 0.3;
+                        }
+                    }
+
                     .active-logo {
                         display: none;
                     }
@@ -162,9 +173,45 @@
     }
 
     .results-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        @include tablet {
+            flex-direction: row;
+        }
+
         b {
             color: $light;
         }
+
+        .results-found {
+            margin-right: 0.5em;
+        }
+
+        .sorters {
+            display: flex;
+            width: 350px;
+
+            .text {
+                white-space: nowrap;
+                margin-right: 0.5em;
+            }
+
+            select {
+                margin-right: 0.5em;
+                padding-top: 0;
+                padding-bottom: 0;
+                color: $info;
+                text-decoration: underline;
+                background-color: transparent;
+                border: none;
+            }
+        }
+    }
+    
+    .spinner-border {
+        display: none;
     }
     
     .trainer-list {
@@ -268,6 +315,12 @@
             border: none;
             box-shadow: none;
             cursor: pointer;
+
+            @include hover-state {
+                &:before, &:after {
+                    background: $primary;
+                }
+            }
 
             &:before, &:after {
                 content: '';
