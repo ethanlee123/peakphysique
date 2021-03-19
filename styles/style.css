@@ -517,6 +517,11 @@ footer .btn.btn-outline-light.contact-us i {
           color: #0444AC; }
         .find-a-trainer .banner .toggle-filters .toggle-filter.active .disabled-logo {
           display: none; }
+        .find-a-trainer .banner .toggle-filters .toggle-filter:not(.active):hover .disabled-logo {
+          display: none; }
+        .find-a-trainer .banner .toggle-filters .toggle-filter:not(.active):hover .active-logo {
+          display: block;
+          opacity: 0.3; }
         .find-a-trainer .banner .toggle-filters .toggle-filter:not(.active) .active-logo {
           display: none; }
         .find-a-trainer .banner .toggle-filters .toggle-filter:not(.active) .text {
@@ -570,8 +575,31 @@ footer .btn.btn-outline-light.contact-us i {
         -webkit-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
         -moz-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
         box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8); }
-  .find-a-trainer .results-meta b {
-    color: #D4DDD6; }
+  .find-a-trainer .results-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; }
+    @media (min-width: 800px) {
+      .find-a-trainer .results-meta {
+        flex-direction: row; } }
+    .find-a-trainer .results-meta b {
+      color: #D4DDD6; }
+    .find-a-trainer .results-meta .results-found {
+      margin-right: 0.5em; }
+    .find-a-trainer .results-meta .sorters {
+      display: flex;
+      width: 350px; }
+      .find-a-trainer .results-meta .sorters .text {
+        white-space: nowrap;
+        margin-right: 0.5em; }
+      .find-a-trainer .results-meta .sorters select {
+        margin-right: 0.5em;
+        padding-top: 0;
+        padding-bottom: 0;
+        color: #0444AC;
+        text-decoration: underline;
+        background-color: transparent;
+        border: none; }
   .find-a-trainer .spinner-border {
     display: none; }
   .find-a-trainer .trainer-list {

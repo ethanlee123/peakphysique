@@ -1,5 +1,28 @@
 import { debounce } from "../util/debounce.js";
 
+// ### Test Data ###
+const trainer = {
+    name: "",
+
+};
+const trainers = [trainer];
+
+const filtersDefault = {
+    wellness: [],
+    wellnessExclude: [],
+    fitness: [],
+    fitnessExclude: [],
+    ratePerSession: {
+        min: undefined,
+        max: undefined
+    },
+    firstSessionFree: undefined,
+    yearsOfExperience: undefined,
+    gender: undefined,
+    distance: undefined
+};
+// #################
+
 // ### Variables ###
 // ###### DOM Variables ######
 const bannerImg = document.getElementById("bannerImg");
@@ -10,35 +33,22 @@ const exitDrawerToggle = document.getElementById("exitDrawer");
 const filterDrawer = document.getElementById("filterDrawer");
 const setFilterBtn = document.getElementById("setFilterBtn");
 const resetFilters = document.querySelectorAll(".reset-filters");
+const searchBar = document.getElementById("search");
+const sortBy = document.getElementById("sortBy");
+const sortOrder = document.getElementById("sortOrder");
 // ###########################
 
 const debounceTime = 250;
 let searchQuery = "";
 let sort = {
-    field: "",
+    field: "name",
     descending: false
 }
-const filtersDefault = {
-    typeOfService: [],
-    typeOfServiceExclude: [],
-    expertise: [],
-    expertiseExclude: [],
-    ratePerSession: {
-        min: undefined,
-        max: undefined
-    },
-    firstSessionFree: undefined,
-    yearsOfExperience: undefined,
-    certifications: [],
-    gender: undefined,
-    distance: undefined
-};
 var filters = {
     value: {},
     
     updateFilterButtons() {
         if (Object.keys(this.value).length !== 0) {
-            console.log("filters detected...");
             setFilterBtn.classList.remove("no-filters", "btn-outline-light");
             setFilterBtn.classList.add("btn-primary");
         } else {
@@ -71,8 +81,8 @@ const resizeBannerImgHeight = () => {
 
 const setFilterToggles = () => {
     let newFilters = filters.values;
-    newFilters["typeOfServiceExclude"] = [];
-    newFilters["expertiseExclude"] = [];
+    newFilters["wellnessExclude"] = [];
+    newFilters["fitnessExclude"] = [];
     
     const excludedFilters = document.querySelectorAll(".toggle-filter:not(.active)");
     if (excludedFilters) {
@@ -83,8 +93,8 @@ const setFilterToggles = () => {
         });            
     }
 
-    newFilters["typeOfServiceExclude"].length === 0 && delete newFilters.typeOfServiceExclude;
-    newFilters["expertiseExclude"].length === 0 && delete newFilters.expertiseExclude;
+    newFilters["fitnessExclude"].length === 0 && delete newFilters.typeOfServiceExclude;
+    newFilters["wellnessExclude"].length === 0 && delete newFilters.expertiseExclude;
 
     filters.values = newFilters;
 }
@@ -118,14 +128,38 @@ filterToggles.forEach((toggle) => {
     toggle.addEventListener("click", debounce(setFilterToggles, debounceTime));
 });
 
-filterDrawerToggles.forEach((toggle) => {
-    toggle.addEventListener("click", () => {
-        if (filterDrawer.classList.contains("active")) {
-            filterDrawer.classList.remove("active");
-        } else {
-            filterDrawer.classList.add("active");
-        }
-    });
+searchBar.addEventListener("keyup", debounce(() => {
+    const query = searchBar.value.trim();
+    if (query && query !== searchQuery) {
+        searchQuery = query;
+    }
+}, debounceTime));
+
+sortBy.addEventListener("change", (event) => {
+    const sortByValue = event.target.value;
+    const ascending = sortOrder.querySelector(".asc");
+    const descending = sortOrder.querySelector(".desc");
+
+    switch (sortByValue) {
+        case "name":
+            ascending.innerHTML = "A - Z";
+            descending.innerHTML = "Z - A";
+            break;
+        case "rate":
+            ascending.innerHTML = "Lowest - Highest";
+            descending.innerHTML = "Highest - Lowest";
+            break;
+        case "rating":
+            ascending.innerHTML = "Lowest - Highest";
+            descending.innerHTML = "Highest - Lowest";
+            break;
+    }
+
+    sort.field = sortByValue;
+});
+
+sortOrder.addEventListener("change", () => {
+    sort.descending = !sort.descending;
 });
 
 resetFilters.forEach((btn) => {
@@ -135,7 +169,17 @@ resetFilters.forEach((btn) => {
             resetFilterToggles();
         }
     }, debounceTime));
-})
+});
+
+filterDrawerToggles.forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+        if (filterDrawer.classList.contains("active")) {
+            filterDrawer.classList.remove("active");
+        } else {
+            filterDrawer.classList.add("active");
+        }
+    });
+});
 
 exitDrawerToggle.addEventListener("click", () => {
     filterDrawer.classList.remove("active");

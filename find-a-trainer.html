@@ -50,7 +50,7 @@
           <button
             class="toggle-filter macro-coaching active"
             id="macroCoaching"
-            data-field="typeOfService"
+            data-field="wellness"
             data-filter="macro coaching"
           >
             <img class="active-logo" src="./images/icons/macro-coaching.svg" alt="Macro coaching filter toggle">
@@ -61,29 +61,40 @@
           <button
             class="toggle-filter custom-workout-regimen active"
             id="customWorkoutRegimen"
-            data-field="typeOfService"
+            data-field="wellness"
             data-filter="custom workout regimen"
           >
             <img class="active-logo" src="./images/icons/custom-workout-regimen.svg" alt="Custom workout regimen filter toggle">
             <img class="disabled-logo" src="./images/icons/custom-workout-regimen-02.svg" alt="Custom workout regimen filter toggle">
             <span class="text">Custom workout regimen</span>
-          </button><!--.filter-toggle.custom-workout-regimen-->          
-
+          </button><!--.filter-toggle.custom-workout-regimen-->
+          
           <button
-            class="toggle-filter all-in-one-coaching active"
-            id="allInOneCoaching"
-            data-field="typeOfService"
-            data-filter="all-in-one coaching"
+            class="toggle-filter weight-loss active"
+            id="weightLoss"
+            data-field="wellness"
+            data-filter="weight loss"
           >
-            <img class="active-logo" src="./images/icons/all-in-one-coaching.svg" alt="All-in-one-coacing filter toggle">
-            <img class="disabled-logo" src="./images/icons/all-in-one-coaching-02.svg" alt="All-in-one-coacing filter toggle">
-            <span class="text">All-in-one coaching</span>
-          </button><!--.filter-toggle.all-in-one-coacing-->          
+            <img class="active-logo" src="./images/icons/weight-loss.svg" alt="Weight loss filter toggle">
+            <img class="disabled-logo" src="./images/icons/weight-loss-02.svg" alt="Weight loss filter toggle">
+            <span class="text">Weight loss</span>
+          </button><!--.filter-toggle.-->     
+    
+          <button
+            class="toggle-filter yoga active"
+            id="yoga"
+            data-field="fitness"
+            data-filter="yoga"
+          >
+            <img class="active-logo" src="./images/icons/yoga.svg" alt="Yoga filter toggle">
+            <img class="disabled-logo" src="./images/icons/yoga-02.svg" alt="Yoga filter toggle">
+            <span class="text">Yoga</span>
+          </button><!--.filter-toggle.yoga-->     
 
           <button
             class="toggle-filter bodybuilding active"
             id="bodybuilding"
-            data-field="expertise"
+            data-field="fitness"
             data-filter="bodybuilding"
           >
             <img class="active-logo" src="./images/icons/bodybuilding.svg" alt="Bodybuilding filter toggle">
@@ -94,24 +105,13 @@
           <button
             class="toggle-filter endurance-training active"
             id="enduranceTraining"
-            data-field="expertise"
+            data-field="fitness"
             data-filter="endurance training"
           >
             <img class="active-logo" src="./images/icons/endurance-training.svg" alt="Endurance training filter toggle">
             <img class="disabled-logo" src="./images/icons/endurance-training-02.svg" alt="Endurance training filter toggle">
             <span class="text">Endurance training</span>
-          </button><!--.filter-toggle.endurance-training-->          
-
-          <button
-            class="toggle-filter weight-loss active"
-            id="weightLoss"
-            data-field="expertise"
-            data-filter="weight loss"
-          >
-            <img class="active-logo" src="./images/icons/weight-loss.svg" alt="Weight loss filter toggle">
-            <img class="disabled-logo" src="./images/icons/weight-loss-02.svg" alt="Weight loss filter toggle">
-            <span class="text">Weight loss</span>
-          </button><!--.filter-toggle.-->          
+          </button><!--.filter-toggle.endurance-training-->               
 
           <button class="toggle-filter-drawer">
 
@@ -127,6 +127,7 @@
       <section class="search-and-filter">
         <div class="input-group search-bar">
           <input
+            id="search"
             type="text"
             class="form-control"
             placeholder="Search"
@@ -157,7 +158,21 @@
 
       <section class="results-meta">
         <span class="results-found">Showing <span id="displayedTrainers">6</span> out of <b><span id="totalTrainers">10</span> trainers</b> found.</span>
-        <!--sorter dropdown-->
+        
+        <div class="sorters">
+          <span class="text">Sort by</span>
+
+          <select name="sortBy" id="sortBy">
+            <option value="name">Name</option>
+            <option value="rate">Rate</option>
+            <option value="rating">Rating</option>
+          </select>
+
+          <select name="sortOrder" id="sortOrder">
+            <option class="asc" value="ascending">A - Z</option>
+            <option class="desc" value="descending">Z - A</option>
+          </select>
+        </div><!--.sorters-->
       </section><!--.results-found-->
 
       <section class="trainer-list">
