@@ -119,30 +119,55 @@
       <!--.user-->
 
       <button id="signupBtn" class="btn btn-outline-light logout">Log Out</button>
-    </div>
-    <!--.account-->
-
-  </header>
-
-    <div class="container">
-      <h1 class="display-4"><span class="title-font">Book an <span class="title-font-color">appointment</span></span>
-      </h1>
-      <hr>
-      <h3 class="display-7">A message from [insert trainer name]</h3>
-      <p id="firstName1">[insert trainer message]</p>
-      <hr>
-      <div class="mb-3">
-        <p>Date: <input type="text" id="datepicker"></p>
       </div>
-      <div class="mb-3">
-        <label for="comments" class="form-label">Comments</label>
-        <textarea class="form-control font-black" id="comments" rows="3"></textarea>
-      </div>
-      <a class="btn btn-primary book-button" role="button" href="schedule.html">BOOK</a>
-    </div>
+      <!--.account-->
 
-    <footer-component></footer-component>
-    <!----------------------------------------------->
+      </header>
+
+      <div class="container">
+        <h1 class="display-4"><span class="title-font">Book an <span class="title-font-color">appointment</span></span>
+        </h1>
+        <hr>
+        <h3 class="display-7">A message from [insert trainer name]</h3>
+        <p id="firstName1">[insert trainer message]</p>
+        <hr>
+        <div class="mb-3">
+          <p>Date: <input type="text" id="datepicker"></p>
+        </div>
+        <div class="mb-3">
+          <label for="comments" class="form-label">Comments</label>
+          <textarea class="form-control font-black" id="comments" rows="3"></textarea>
+        </div>
+        <!-- <a class="btn btn-primary book-button" role="button" href="schedule.html">BOOK</a> -->
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          BOOK
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Confirm Booking</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Thank you for choosing Peak Physique! We know you could just go to the gym, but this is cool too.
+              </div>
+              <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                <!-- <button type="button" class="btn btn-primary">Confirm</button> -->
+                <a class="btn btn-primary book-button" role="button" href="schedule.html">CONFIRM</a> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer-component></footer-component>
+      <!----------------------------------------------->
     <!-- JS: Boostrap, Firebase, API related    -->
     <!----------------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"

@@ -73,7 +73,8 @@ input.form-check-input:checked[type=radio] {
     color: #D4DDD6; }
 
 .modal {
-  color: #1E242E; }
+  color: #1E242E;
+  z-index: 9999; }
 
 body {
   display: flex;
@@ -202,7 +203,7 @@ header {
     width: 1em;
     height: 1em;
     cursor: pointer;
-    z-index: 9999; }
+    z-index: 999; }
     body.active-nav header .burger-menu {
       width: 1.5em; }
     @media (min-width: 1200px) {
