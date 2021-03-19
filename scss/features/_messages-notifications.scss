@@ -13,15 +13,42 @@
     }
     .tab-pane {
         div{
-            margin: 10px 1.5em;
+            margin: 20px 1.5em;
         }
         p {
             margin: 0;
         }
         i {
-            font-size: 30pt;
+            font-size: 40pt;
+        }
+    }
+    small {
+        color: darken($light, 35%);
+    }
+    .message {
+        display: grid;
+        grid-template:
+        "profile-pic user-name timestamp" 30px
+        "profile-pic message ." 20px
+        / 60px 3fr 1fr;
+        i {
+            grid-area: profile-pic;
+        }
+        h1 {
+            margin: 0;
+            grid-area: user-name;
+            font-size: 15pt;
+            align-self: end;
+        }
+        p {
+            grid-area: message;
+        }
+        small {
+            grid-area: timestamp;
+            justify-self: end;
         }
         img {
-        }  
+            display: none;
+        }
     }
 }

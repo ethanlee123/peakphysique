@@ -900,13 +900,34 @@ footer .btn.btn-outline-light.contact-us i {
     font-weight: bolder; }
 
 .messages-notifications .tab-pane div {
-  margin: 10px 1.5em; }
+  margin: 20px 1.5em; }
 
 .messages-notifications .tab-pane p {
   margin: 0; }
 
 .messages-notifications .tab-pane i {
-  font-size: 30pt; }
+  font-size: 40pt; }
+
+.messages-notifications small, .messages-notifications .small {
+  color: #708e77; }
+
+.messages-notifications .message {
+  display: grid;
+  grid-template: "profile-pic user-name timestamp" 30px "profile-pic message ." 20px / 60px 3fr 1fr; }
+  .messages-notifications .message i {
+    grid-area: profile-pic; }
+  .messages-notifications .message h1, .messages-notifications .message .h1 {
+    margin: 0;
+    grid-area: user-name;
+    font-size: 15pt;
+    align-self: end; }
+  .messages-notifications .message p {
+    grid-area: message; }
+  .messages-notifications .message small, .messages-notifications .message .small {
+    grid-area: timestamp;
+    justify-self: end; }
+  .messages-notifications .message img {
+    display: none; }
 
 /* style sheet for initial setup of trainer unique profile */
 .sign-up-user-info .top-buffer {
