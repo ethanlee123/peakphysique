@@ -1,9 +1,14 @@
 // will use this for editing trainer profile
-var trainer = {
+export const fitnessOptions = [
+    "bpdy building", "power lifting", "crossfit", "yoga", "pilates", "cycling", "boxing / kickboxing", 
+"climbing", "tai chi", "outdoor", "dance", "endurance"];
+export const wellnessOptions = [
+    "nutrition", "macro coaching", "physical therapy", "chiropractor", "body treatments", "weight loss", "custom workout regimen"]
+
+const trainer = {
     user_id: "",
     age: -1, // integer
     email: "",
-
     gender: "", // String male, female, other, or prefer not to say
     location: new firebase.firestore.Geopoint(37.422, 122.084), // Retrieved automatically
      // String, link to website
@@ -11,9 +16,9 @@ var trainer = {
     totalClients: -1, // integer
     totalSessions: -1, // integer
     profilePic: "/images/profile-placeholder.svg", // String path to file?
+    certification: "path to file?",
+    yearsOfExperience: 0, // integer
     expertise: {
-        certification: "path to file?",
-        yearsOfExperience: 0, // integer
         fitness: [
             "body building",
             "power lifting"
@@ -28,8 +33,8 @@ var trainer = {
         last: ""
     },
     platformSpecific: {
-        generalAvailability: ["sun", "mon", "tue", "wed", "thu", "fri", "sat"],
-        time: ["morning", "afternoon", "evening"],
+        // generalAvailability: ["sun", "mon", "tue", "wed", "thu", "fri", "sat"],
+        // time: ["morning", "afternoon", "evening"],
         hourlyRate: 0, // integer
         deposit: 0,
         firstSessionFree: null, // boolean
@@ -49,7 +54,7 @@ var trainer = {
 
 
 // User includes both trainer and client
-var user = {
+const user = {
     user_id: "",
     age: -1, // integer
     email: "",
@@ -78,7 +83,7 @@ var user = {
 
 
 // use this for seeing user profiles
-var userProfile = {
+const userProfile = {
     user_id: "",
     name: {
         first: "",
@@ -116,7 +121,7 @@ var userProfile = {
 
 
 // use this for my schedule page
-var appointments = {
+const appointments = {
     date: new firebase.firestore.Timestamp.fromDate(new Date("March 16 2021")), // Timestamp
     time: "", // String morning, afternoon, or evening
     location: "",
@@ -131,6 +136,7 @@ var appointments = {
     trainerLasttName: "",
     trainer_user_id: "", //user_id
     confirmationId: "",
+    initialMsgFromClient: ""
 }
 
 
