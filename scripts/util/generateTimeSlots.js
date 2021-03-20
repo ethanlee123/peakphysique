@@ -1,6 +1,6 @@
 export const generateTimeSlots = ({availability, numDays = 28, startDate = new Date(Date.now())}) => {
     const offset = startDate.getDay();
-    const days = Object.keys(availability);
+    const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
     let currentDate = startDate;
     let timeSlots = [];
 
@@ -41,6 +41,16 @@ const availabilityTest2 = {
 };
 
 const availabilityTest3 = {
+    monday: ["afternoon"],
+    sunday: ["morning"],
+    wednesday: ["morning", "afternoon"],
+    tuesday: ["evening"],
+    friday: ["afternoon", "evening"],
+    saturday: ["morning", "afternoon", "evening"],
+    thursday: ["morning", "evening"],
+};
+
+const availabilityTest4 = {
     sunday: [],
     monday: ["morning", "evening"],
     tuesday: [],
@@ -53,11 +63,13 @@ const availabilityTest3 = {
 const test1 = generateTimeSlots({availability: availabilityTest});
 const test2 = generateTimeSlots({availability: availabilityTest2});
 const test3 = generateTimeSlots({availability: availabilityTest3});
-const test4 = generateTimeSlots({availability: availabilityTest2, numDays: 7});
-const test5 = generateTimeSlots({availability: availabilityTest2, numDays: 7, startDate: new Date("Mar 26 2021")});
+const test4 = generateTimeSlots({availability: availabilityTest4});
+const test5 = generateTimeSlots({availability: availabilityTest2, numDays: 7});
+const test6 = generateTimeSlots({availability: availabilityTest2, numDays: 7, startDate: new Date("Mar 26 2021")});
 
 console.log("test1", test1);
 console.log("test2", test2);
 console.log("test3", test3);
 console.log("test4", test4);
 console.log("test5", test5);
+console.log("test6", test6);
