@@ -1,4 +1,4 @@
-const generateTimeSlots = ({availability, numDays = 28, startDate = new Date(Date.now())}) => {
+export const generateTimeSlots = ({availability, numDays = 28, startDate = new Date(Date.now())}) => {
     const offset = startDate.getDay();
     const days = Object.keys(availability);
     let currentDate = startDate;
@@ -54,7 +54,7 @@ const test1 = generateTimeSlots({availability: availabilityTest});
 const test2 = generateTimeSlots({availability: availabilityTest2});
 const test3 = generateTimeSlots({availability: availabilityTest3});
 const test4 = generateTimeSlots({availability: availabilityTest2, numDays: 7});
-const test5 = generateTimeSlots({availability: availabilityTest2, numDays: 7, startDate: new Date(2021, 03, 26)});
+const test5 = generateTimeSlots({availability: availabilityTest2, numDays: 7, startDate: new Date("Mar 26 2021")});
 
 console.log("test1", test1);
 console.log("test2", test2);
