@@ -5,23 +5,39 @@ const db = firebase.firestore();
 // Get user collection in firestore
 const userCollect = db.collection("user");
 
-function displayTrainerInfo(){
+export function displayTrainerInfo(){
   console.log("hello from displayTrainerInfo! :)");
   db.collection("trainer").get() // gets the entire collection??
   .then(function(c){
       c.forEach(function(doc){
-          let trainerFirstName = doc.data().firstName;             //gets the first name field
+          let trainerFirstName = doc.data().name.first;             //gets the first name field
           console.log(trainerFirstName);
-          let trainerLastName = doc.data().lastName;             //gets the last name field
+          let trainerLastName = doc.data().name.last;             //gets the last name field
           console.log(trainerLastName);
           let totalClients = doc.data().totalClients;        //gets the totalClients ID field
           console.log(totalClients);
           let totalSessions = doc.data().totalSessions;        //gets the totalSessions ID field
           console.log(totalSessions);
-          document.getElementById(trainerFirstName).innerText = trainerFirstName;
-          document.getElementById(trainerLastName).innerText = trainerLastName;
-          document.getElementById(totalClients).innerText = totalClients;
-          document.getElementById(totalSessions).innerText = totalSessions;
+          let hourlyRate = doc.data().platformSpecific.hourlyRate;
+          console.log(hourlyRate);
+          let services = doc.data().platformSpecific.services;
+          console.log(services);
+          let expertise = doc.data().platformSpecific.expertise;
+          console.log(expertise);
+          let certifications = doc.data().platformSpecific.certifications;
+          console.log(certifications);
+          let location = doc.data().location;
+          console.log(location);
+          document.getElementById('trainerFirstName').innerText = trainerFirstName;
+          document.getElementById('trainerLastName').innerText = trainerLastName;
+          document.getElementById('totalClients').innerText = totalClients;
+          document.getElementById('totalSessions').innerText = totalSessions;
+          document.getElementById('hourlyRate').innerText = hourlyRate;
+          document.getElementById('services').innerText = services;
+          document.getElementById('expertise').innerText = expertise;
+          document.getElementById('certifications').innerText = certifications;
+          document.getElementById('location').innerText = location;
+
       })
 
   })
@@ -144,3 +160,44 @@ export function setUserRole(userRole) {
     });
 }
 
+export function displayScheduleInfo(){
+    console.log("Schedule Info! :)");
+    db.collection("schedule").get() // gets the entire collection??
+    .then(function(s){
+        s.forEach(function(doc){
+            let trainerFirstName = doc.data().trainerFirstName;            
+            console.log(trainerFirstName);
+            let trainerLastName = doc.data().trainerLastName;            
+            console.log(trainerLastName);
+            let time = doc.data().time;            
+            console.log(time);
+            let date = doc.data().date;            
+            console.log(date);
+            // let bookingMsg = doc.data().bookingMsg;            
+            // console.log(bookingMsg);                             // trainer booking msg or client msg???
+
+            let completed = doc.data().completed;
+            console.log(completed);                                 // completed appointment
+
+            document.getElementById('trainerFirstName').innerText = trainerFirstName;
+            document.getElementById('trainerLastName').innerText = trainerLastName;
+            document.getElementById('appt-time').innerText = time;
+            document.getElementById('appt-date').innerText = date;
+
+
+            // sets "add to Calendar" and "cancel" buttons as hidden if appointment completed
+            if (completed == true) {
+                let completedBtn = document.getElementsByClassName('hideScheduleBtn');
+                for (let i = 0; i < completedBtn.length; i++) {
+                    completedBtn[i].style.display = "none";
+                }
+                
+            }
+            // document.getElementById('bookingMsg').innerText = bookingMsg;
+
+
+  
+        })
+  
+    })
+  }
