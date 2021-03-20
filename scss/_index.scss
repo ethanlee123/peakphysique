@@ -1,8 +1,9 @@
 .index-body {
+
     .landing {
-        background-image: url('/images/gym-banner.jpg');
+        background-image: url('/images/gym-banner.jfif');
         background-repeat: repeat-x;
-        height: 32%;
+        height: 300px;
         text-align: center;
         width: 100%;
         font-weight: bolder;
@@ -12,6 +13,7 @@
     .title-font {
         font-weight: bolder;
         font-family: apex;
+        text-shadow: 5px 5px 5px #000000;
     }
     
     .title-font-color {
@@ -19,7 +21,11 @@
     }
     
     .login-buttons {
-        margin-bottom: 2%;
+        margin-top: 3%;
+    }
+
+    .description-font {
+        text-shadow: 2px 2px 2px #000000;
     }
     
     .form-format {
@@ -29,7 +35,7 @@
     }
     
     .title-margin {
-        margin-top: 2%;
+        margin-top: 5%;
     }
     .main-content {
         @include top-buffer-trainer;
