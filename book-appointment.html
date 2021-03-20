@@ -29,7 +29,7 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="./styles/style.css">
-    <link rel="stylesheet" href="./styles/book-appointment.css">
+    <!-- <link rel="stylesheet" href="./styles/book-appointment.css"> -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet" />
     
 
@@ -42,97 +42,30 @@
   <!-------------------------------------->
   <!-- Header Navigation Bar -->
   <header-component></header-component>
-  <header>
-    <div class="burger-menu" id="#burgerMenu">
-      <span class="top-bun"></span>
-      <span class="patty"></span>
-      <span class="btm-bun"></span>
-    </div>
-    <!--.burger-->
-
-    <a href="./index.html" class="logo">
-      <i class="icon icon-logo"></i>
-      <span class="text">Peak <b>Physique</b></span>
-    </a>
-
-    <nav>
-      <a href="./index.html" class="logo">
-        <i class="icon icon-logo"></i>
-        <span class="text">Peak <b>Physique</b></span>
-      </a>
-      <ul>
-        <li><a class="user-profile" href="#0">
-            <i class="fas fa-user-circle"></i>
-            <div class="text">
-              <span class="greeting">Hello, John!</span>
-              <span class="edit-profile">Edit my <b>Profile</b></span>
-            </div>
-            <!--.text-->
-          </a></li>
-        <li class="messages"><a href="#0">
-            <span id="notifications" class="notifications"></span>
-            <i class="fas fa-inbox"></i>
-            <span class="text">Check my <b>messages</b></span>
-          </a></li>
-        <li><a href="./index.html">
-            <i class="fas fa-home"></i>
-            Home
-          </a></li>
-        <li><a href="#0">
-            <i class="fas fa-clock"></i>
-            My fitness <b>schedule</b>
-          </a></li>
-        <li><a href="./find-a-trainer.html">
-            <i class="fas fa-user"></i>
-            Find a <b>trainer</b>
-          </a></li>
-        <li><a href="#0">
-            <i class="fas fa-users"></i>
-            Join a <b>group class</b>
-          </a></li>
-      </ul>
-    </nav>
-
-    <div class="account">
-      <i class="fas fa-user-plus"></i>
-      <button id="signupBtn" class="btn btn-outline-light login">Log In</button>
-      <button id="signupBtn" class="btn btn-primary signup">Sign Up</button>
-      <div class="user">
-        <a class="user-profile" href="#0">
-          <i class="fas fa-user-circle"></i>
-          <div class="text">
-            <span class="greeting">Hello, John!</span>
-            <span class="edit-profile">Edit my <b>Profile</b></span>
-          </div>
-          <!--.text-->
-        </a>
-        <!--.user-profile-->
-        <a class="messages" href="#0">
-          <div class="icon">
-            <span id="notifications" class="notifications"></span>
-            <i class="fas fa-inbox"></span></i>
-          </div>
-          <!--.icon-->
-        </a>
-        <!--.message-->
-      </div>
-      <!--.user-->
-
-      <button id="signupBtn" class="btn btn-outline-light logout">Log Out</button>
-      </div>
-      <!--.account-->
-
-      </header>
 
       <div class="container">
         <h1 class="display-4"><span class="title-font">Book an <span class="title-font-color">appointment</span></span>
         </h1>
         <hr>
-        <h3 class="display-7">A message from [insert trainer name]</h3>
-        <p id="firstName1">[insert trainer message]</p>
+        <h3 class="display-7" id="trainerFirstName">A message from <span id="nwSBk8XpWLbq47TaarLgfBuenKH2">[insert trainer name]</span></h3>
+        <p id="CNFitnSvSBREvgylpqdAPeydDk12">[insert trainer message]</p>
         <hr>
-        <div class="mb-3">
-          <p>Date: <input type="text" id="datepicker"></p>
+        <div class="d-flex">
+          <!-- <div class="row"> -->
+            <div class="mb-3 p-2">
+              <p>Date: <input type="text" id="datepicker"></p>
+            </div>
+            <div class="dropdown p-2">
+              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                Time Slot
+              </button>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                <li><a class="dropdown-item" href="#">Morning</a></li>
+                <li><a class="dropdown-item" href="#">Afternoon</a></li>
+                <li><a class="dropdown-item" href="#">Evening</a></li>
+              </ul>
+            </div>
+          <!-- </div> -->
         </div>
         <div class="mb-3">
           <label for="comments" class="form-label">Comments</label>
@@ -175,14 +108,19 @@
     </script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="./scripts/api/firebase_api_team37.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+    <script type="module" src="./scripts/api/firebase_api_team37.js"></script>
+    <script type="module" src="./scripts/api/firebase-queries.js"></script>
 
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
-    <script src="./scripts/components/header.js"></script>
+    <script type="module" src="./scripts/components/header.js"></script>
     <script type="module" src="./scripts/components/footer.js"></script>
-    <script>
+    <script type="module">
       $( function() {
         $( "#datepicker" ).datepicker({
           showAnim: "fold",
@@ -191,25 +129,63 @@
           showOn: "both",
           showOtherMonths: true,
           minDate: 0,
+          maxDate: "+1m"
         });
       });
 
       const db = firebase.firestore();
 
-      function displayCities() {
-            db.collection("trainer").get()
-            .then(function (snap) {
-                snap.forEach(function (doc) {
+      function displayBookInfo() {
+            db.collection("schedule").get()
+            .then(function (q) {
+                q.forEach(function (doc) {
+                    var m = doc.data().trainerFirstName;
+                    console.log(m);
                     var n = doc.data().bookingMsg;
                     console.log(n);
-                    var trainerName = doc.data().firstName;
-                    console.log(trainerName);
-                    document.getElementById(trainerName).innerText = n;
+                    var trainerID = doc.data().trainer_user_id;
+                    console.log(trainerID);
+                    var clientID = doc.data().client_user_id;
+                    console.log(clientID);
+                    document.getElementById(trainerID).innerText = m;
+                    document.getElementById(clientID).innerText = n;
                 })
             })
         }
-        displayCities();
+        displayBookInfo();
+
+        function writeUserProfile() {
+
+        var scheduleRef = db.collection("schedule");
+
+        scheduleRef.add({
+          // Get this from jquery date picker
+          date: new firebase.firestore.Timestamp.fromDate(new Date("March 16 2021")), // Timestamp
+          time: "", // String morning, afternoon, or evening
+          // location: "",
+          completed: false, // boolean default false
+          clientProfilePic: "",
+          clientFirstName: "",
+          clientLasttName: "",
+          client_user_id: "", //user_id
+          trainerProfilePic: "",
+          trainerFirstName: "",
+          trainerLastName: "",
+          trainer_user_id: "", //user_id
+          initialMsgFromClient: "",
+          bookingMsg: "" 
+        });
+
+}
+
+      // getCollection(){
+      //   return this.firestore.collection("schedule")
+      // }
+      
+      // getCollection();
+
     </script>
+    
 
 </body>
 

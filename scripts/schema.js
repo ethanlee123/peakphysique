@@ -76,7 +76,7 @@ const trainerOnly = {
     name: {
         first: "",
         last: ""
-    }
+    },
     // bookingMsg: "" 
 
 }
@@ -135,9 +135,10 @@ const schedule = {
     client_user_id: "", //user_id
     trainerProfilePic: "",
     trainerFirstName: "",
-    trainerLasttName: "",
+    trainerLastName: "",
     trainer_user_id: "", //user_id
-    initialMsgFromClient: ""
+    initialMsgFromClient: "",
+    bookingMsg: ""
 }
 
 
