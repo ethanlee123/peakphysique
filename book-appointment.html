@@ -119,18 +119,9 @@
     <!--------------------------------------------------------------------->
     <script type="module" src="./scripts/components/header.js"></script>
     <script type="module" src="./scripts/components/footer.js"></script>
+    <script src="./scripts/components/date-picker.js"></script>
     <script type="module">
-      $( function() {
-        $( "#datepicker" ).datepicker({
-          showAnim: "fold",
-          showButtonPanel: true,
-          showMonthAfterYear: true,
-          showOn: "both",
-          showOtherMonths: true,
-          minDate: 0,
-          maxDate: "+1m"
-        });
-      });
+      
 
       const db = firebase.firestore();
 
@@ -138,10 +129,10 @@
             db.collection("schedule").get()
             .then(function (q) {
                 q.forEach(function (doc) {
-                    var m = doc.data().trainerFirstName;
-                    console.log(m);
-                    var n = doc.data().bookingMsg;
-                    console.log(n);
+                    var trainerFirstName = doc.data().trainerFirstName;
+                    console.log(trainerFirstName);
+                    var bookingMsg = doc.data().bookingMsg;
+                    console.log(bookingMsg);
                     var trainerID = doc.data().trainer_user_id;
                     console.log(trainerID);
                     var clientID = doc.data().client_user_id;
