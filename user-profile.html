@@ -66,12 +66,12 @@
       </a>
       <!--.msg-icon-->
       <!--link to messages-notifications.html???-->
-      <h2><span id="trainerFirstName">First</span><span id="trainerLastName"> Last</span></h2>
+      <h2><span id="trainerFirstName">First</span> <span id="trainerLastName">Last</span></h2>
     </div>
     <!--.trainer-name-->
 
     <div class="trainer-location d-flex justify-content-center gy-4">
-      <h4><i class="fas fa-map-marker-alt"></i>Vancouver, BC</h4>
+      <h4><i class="fas fa-map-marker-alt"></i><span id="location">Vancouver, BC</span></h4>
     </div>
     <!--.trainer-location-->
 
@@ -115,17 +115,6 @@
                   <li class="about-me-title" id="fav-website-title">Website</li>
                   <li class="about-me-answer" id="fav-website-answer">trainermike.com</li>
                 </ul>
-                <!-- <div class="col-4 about-me">
-                <p class="about-me-workout">Favourite Workout</p>
-                <p class="about-me-cheat-meal">Favourite Cheat Meal</p>
-                <p class="about-me-fitness-goals">Fitness Goals</p>
-                <p class="about-me-website">Website</p>
-              </div>
-              <div class="col-4 about-me">
-                <p class="about-me-workout">Deadlifts</p>
-                <p class="about-me-cheat-meal">French Fries</p>
-                <p class="about-me-fitness-goals">Deadlift 700lbs!</p>
-                <p class="about-me-website">trainermike.com</p> -->
               </div>
             </div>
           </div>
@@ -178,7 +167,7 @@
       </div>
       <div class="card-body">
 
-        <p class="card-text"><i class="fas fa-dollar-sign"></i>40 / hr</p>
+        <p class="card-text"><i class="fas fa-dollar-sign"></i><span id="hourlyRate">40</span> / hr</p>
         <p class="card-text"><i class="fas fa-clock"></i>Available within the next 7 days.</p>
       </div>
     </div>
@@ -188,9 +177,9 @@
         <h5>my qualifications</h5>
       </div>
       <div class="card-body">
-        <p class="card-text"><i class="fas fa-dumbbell"></i>Group Coaching, All-in-one Coaching</p>
-        <p class="card-text"><i class="fas fa-running"></i>HIIT, Yoga</p>
-        <p class="card-text"><i class="fas fa-user-check"></i>First Aid, ACE</p>
+        <p class="card-text" id="services"><i class="fas fa-dumbbell"></i>Group Coaching, All-in-one Coaching</p>
+        <p class="card-text" id="expertise"><i class="fas fa-running"></i>HIIT, Yoga</p>
+        <p class="card-text" id="certifications"><i class="fas fa-user-check"></i>First Aid, ACE</p>
       </div>
     </div>
   </div>
@@ -213,8 +202,9 @@
   <!--------------------------------------------------------------------->
   <script type="module" src="scripts/components/header.js"></script>
   <script type="module" src="scripts/components/footer.js"></script>
-  <script src="scripts/api/firebase_api_team37.js"></script>
-  <script src="scripts/api/firebase-queries.js"></script>
+  <script type="module" src="scripts/api/firebase_api_team37.js"></script>
+  <script type="module" src="scripts/api/firebase-queries.js"></script>
+  <script type="module" src="/scripts/features/user-profile.js"></script>
 
 </body>
 
