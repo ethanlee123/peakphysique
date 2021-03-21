@@ -7,7 +7,7 @@ const userCollect = db.collection("user");
 
 export function displayTrainerInfo(){
   console.log("hello from displayTrainerInfo! :)");
-  db.collection("trainer").get() // gets the entire collection??
+  db.collection("trainer").get() 
   .then(function(c){
       c.forEach(function(doc){
           let trainerFirstName = doc.data().name.first;             //gets the first name field
@@ -20,14 +20,18 @@ export function displayTrainerInfo(){
           console.log(totalSessions);
           let hourlyRate = doc.data().platformSpecific.hourlyRate;  // WILL CHANGE TO MATCH NESTED COLLECTIONS AS 
           console.log(hourlyRate);                                  // DONE IN userProfile SCHEMA.JS
-          let services = doc.data().platformSpecific.services;
+          let services = doc.data().platformSpecific.services;      // change to wellness options?
           console.log(services);
-          let expertise = doc.data().platformSpecific.expertise;
+          let expertise = doc.data().platformSpecific.expertise;    // change to fitness options?
           console.log(expertise);
           let certifications = doc.data().platformSpecific.certifications;
           console.log(certifications);
           let location = doc.data().location;
           console.log(location);
+          let availability = doc.data().availability;
+          console.log(availability);
+          
+
           document.getElementById('trainerFirstName').innerText = trainerFirstName;
           document.getElementById('trainerLastName').innerText = trainerLastName;
           document.getElementById('totalClients').innerText = totalClients;
@@ -37,6 +41,7 @@ export function displayTrainerInfo(){
           document.getElementById('expertise').innerText = expertise;
           document.getElementById('certifications').innerText = certifications;
           document.getElementById('location').innerText = location;
+          document.getElementById('availability').innerText = availability;
 
       })
 
@@ -226,5 +231,31 @@ export function trainerProfilePosts() {
             document.getElementById('postDate').innerText = postDate;
             document.getElementById('postMessage').innerText = postMsg;
             document.getElementById('postTitle').innerText = postTitle;
+        })
+    }
+
+    // about me section for user
+    export function displayAboutMe(){
+        console.log("About Me Section :)");
+        db.collection("user").get() // gets the entire collection??
+        .then(function(c){
+            c.forEach(function(doc){
+                let cheatMeal = doc.data().about.favCheatMeal;            
+                console.log(cheatMeal);   
+                let workout = doc.data().about.favWorkout;             
+                console.log(workout);      
+                let fitnessLevel = doc.data().about.fitnessLevel;             
+                console.log(fitnessLevel);      
+                let fitnessGoal = doc.data().about.fitnessGoal;             
+                console.log(fitnessGoal);      
+                let website = doc.data().about.website;             
+                console.log(website);      
+      
+                document.getElementById('fav-cheatMeal-answer').innerText = cheatMeal;
+                document.getElementById('fav-workout-answer').innerText = workout;
+                document.getElementById('fav-fitnessGoals-answer').innerText = fitnessGoal;
+                document.getElementById('fav-website-answer').innerText = website;
+                document.getElementById('fav-fitnessLevel-answer').innerText = fitnessLevel;
+            })
         })
     }
