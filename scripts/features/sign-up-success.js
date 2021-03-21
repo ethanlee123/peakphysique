@@ -1,4 +1,4 @@
-import { personalizedWelcome, createUser, setUserRole } from "/scripts/api/firebase-queries.js";
+import { personalizedWelcome, createUser, updateUserRole } from "/scripts/api/firebase-queries.js";
 
 // the entire query will be put into firebase-queries (when we live share) and 
 // this script will import the necessary functions (queries)
@@ -11,14 +11,24 @@ personalizedWelcome(nameId);
 
 createUser();
 
-// When user clicks button set "role" field respectively
-// Once selected cannot be changed even with the back button/refreshing
-clientBtn.onclick = function() {
-    setUserRole("client");
-};
-trainerBtn.onclick = function() {
-    setUserRole("trainer");
-};
+
+
+clientBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    updateUserRole("client");
+    setTimeout(function() {
+        window.location.href = "sign-up-profile-setup.html";
+    }, 500);
+}, false);
+
+trainerBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    updateUserRole("trainer");
+    setTimeout(function() {
+        window.location.href = "sign-up-profile-setup.html";
+    }, 500);
+    
+}, false);
 
 
 // disable btn after clicked on by adding disabled attr

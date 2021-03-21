@@ -2,8 +2,11 @@
 import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
 // firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-// Get user collection in firestore
-const userCollect = db.collection("user");
+// Reference to user collection, no document specified
+const userRef = db.collection("user");
+// Reference to trainerOnly collection, , no document specified
+const trainerOnlyRef = db.collection("trainerOnly");
+
 
 export function displayTrainerInfo(){
   console.log("hello from displayTrainerInfo! :)");
@@ -123,37 +126,109 @@ export function personalizedWelcome(selector) {
     });
 }
 
+// Asks user to allow/block locations
+export function getLocation() {
+    if (navigator.geolocation) {
+        // First param is "successCallback", second is "blockedCallback"
+        navigator.geolocation.getCurrentPosition(allowedLocation, blockedLocation);
+        
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+// Support: callback function for getLocation()
+function allowedLocation(position) {
+    firebase.auth().onAuthStateChanged(function(user) {
+
+    });
+    console.log(position.coords.longitude);
+    console.log(position.coords.latitude);
+}
+// Support: callback function for getLocation()
+function blockedLocation(error) {
+    if(error.code == 1) {
+        alert("Allow locations helps us show you people near your area");
+    } else if(error.code == 2) {
+        alert("The network is down or the positioning service can't be reached.");
+    } else if(error.code == 3) {
+        alert("The attempt timed out before it could get the location data.");
+    } else {
+        alert("Geolocation failed due to unknown error.");
+    }
+}
+
+// creates document id with user uid in both user and trainerOnly collectinos
 export function createUser() {
     // Only authenticated users, can be set in firebase console storage "rules" tab
-    firebase.auth().onAuthStateChanged(function(user) {
-        const userRef = userCollect.doc(user.uid);
-        
-        userRef.get()
-            .then((docSnapshot) => {
-                if(!docSnapshot.exists) {
-                    let names = user.displayName.split(" ", 2);
-                    userCollect.doc(user.uid).set({
-                        userId: user.uid,
-                        email: user.email,
-                        name: {
-                            first: names[0],
-                            last: names[1]
-                        }, 
-                        role: null,
-                    })
-                }
-            })
+    firebase.auth().onAuthStateChanged(function(user) { 
+        // Get ref to user collection with doc id = user UID, will return doc id, if it exists
+        userRef.doc(user.uid).get()
+        .then((docSnapshot) =>  {
+            // if user uid doesn't already exist in user collection 
+            if(!docSnapshot.exists) {
+                // Returns list with 2 items separated by the first space
+                let names = user.displayName.split(" ", 2);
+                userRef.doc(user.uid).set({
+                    userId: user.uid,
+                    email: user.email,
+                    firstName: names[0],
+                    lastName: names[1],
+                    name: user.displayName,
+                    fitnessGoals: "",
+                    age: null,
+                    phoneNumber: "",
+                    gender: "",
+                    location: new firebase.firestore.GeoPoint(37.422, 122.084),
+                    favCheatMeal: "",
+                    favWorkout: "",
+                    fitnessLevel: "",
+                    gender: null, 
+                    profilePic: "", 
+                    rating: null, 
+                    facebook: "",
+                    instagram: "",
+                    role: null,
+                });
+                trainerOnlyRef.doc(user.uid).set({
+                    userId: user.uid,
+                    firstName: names[0],
+                    lastName: names[1],
+                    name: user.displayName,
+                    website: "",
+                    hourlyRate: null,
+                    deposit: null,
+                    firstSessionFree: null,
+                    yearsOfExperience: null,
+                    rating: null,
+                    fitness: [],
+                    wellness: [],
+                    certifications: [], // strArr
+                    availability: {
+                        monday: [], // strArr; morning, afternoon or evening
+                        tuesday: [],
+                        wednesday: [],
+                        thursday: [],
+                        friday: [],
+                        saturday: [],
+                        sunday: []
+                    }
+                });
+            };
+        });
     });
 }
 
-export function setUserRole(userRole) {
+// Set role field in user collection
+export function updateUserRole(userRole) {
     firebase.auth().onAuthStateChanged(function(user) {
+        const userDocRef = userRef.doc(user.uid);
         if (userRole == "trainer") {
-            return userCollect.doc(user.uid).update({
+            userDocRef.update({
                 role: "trainer"
-            });
+            })
         } else if (userRole == "client") {
-            return userCollect.doc(user.uid).update({
+            userDocRef.update({
                 role:"client"
             });
         }
