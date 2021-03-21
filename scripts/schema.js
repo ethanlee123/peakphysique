@@ -72,6 +72,7 @@ const openSlots = {
 const posts = {
     userId: "",
     date: new firebase.firestore.Timestamp.now(),
+    title: "Message Title",
     message: "Hello world!"
 }
 
