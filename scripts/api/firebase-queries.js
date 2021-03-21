@@ -18,8 +18,8 @@ export function displayTrainerInfo(){
           console.log(totalClients);
           let totalSessions = doc.data().totalSessions;        //gets the totalSessions ID field
           console.log(totalSessions);
-          let hourlyRate = doc.data().platformSpecific.hourlyRate;
-          console.log(hourlyRate);
+          let hourlyRate = doc.data().platformSpecific.hourlyRate;  // WILL CHANGE TO MATCH NESTED COLLECTIONS AS 
+          console.log(hourlyRate);                                  // DONE IN userProfile SCHEMA.JS
           let services = doc.data().platformSpecific.services;
           console.log(services);
           let expertise = doc.data().platformSpecific.expertise;
@@ -201,3 +201,30 @@ export function displayScheduleInfo(){
   
     })
   }
+
+  // hides sections of profile depending on if user or trainer
+export function hideUserSections(){
+    let userSection = document.getElementsByClassName('hideUserSection');
+    console.log("hiding user sections");
+    for (let i = 0; i< userSection.length; i++) {
+        userSection[i].style.display = "none";
+    }
+}
+
+// gets user post and posts to "Updates" section
+export function trainerProfilePosts() {
+    console.log("Profile Posts :)");
+    db.collection("trainer").doc("x4FAASQ2nGzvN4UL7rjB").get()         // pulls from "Chuck Norris" doc
+    .then(function(doc){
+            let postDate = doc.data().posts[0].date.toDate();
+            console.log(postDate);
+            let postMsg = doc.data().posts[0].message;
+            console.log(postMsg);
+            let postTitle= doc.data().posts[0].title;
+            console.log(postTitle);
+
+            document.getElementById('postDate').innerText = postDate;
+            document.getElementById('postMessage').innerText = postMsg;
+            document.getElementById('postTitle').innerText = postTitle;
+        })
+    }
