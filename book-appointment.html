@@ -29,7 +29,7 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="./styles/style.css">
-    <!-- <link rel="stylesheet" href="./styles/book-appointment.css"> -->
+    <link rel="stylesheet" href="./styles/book-appointment.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet" />
     
 
@@ -71,7 +71,6 @@
           <label for="comments" class="form-label">Comments</label>
           <textarea class="form-control font-black" id="comments" rows="3"></textarea>
         </div>
-        <!-- <a class="btn btn-primary book-button" role="button" href="schedule.html">BOOK</a> -->
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
           BOOK
@@ -120,18 +119,9 @@
     <!--------------------------------------------------------------------->
     <script type="module" src="./scripts/components/header.js"></script>
     <script type="module" src="./scripts/components/footer.js"></script>
+    <script src="./scripts/components/date-picker.js"></script>
     <script type="module">
-      $( function() {
-        $( "#datepicker" ).datepicker({
-          showAnim: "fold",
-          showButtonPanel: true,
-          showMonthAfterYear: true,
-          showOn: "both",
-          showOtherMonths: true,
-          minDate: 0,
-          maxDate: "+1m"
-        });
-      });
+      
 
       const db = firebase.firestore();
 
@@ -139,10 +129,10 @@
             db.collection("schedule").get()
             .then(function (q) {
                 q.forEach(function (doc) {
-                    var m = doc.data().trainerFirstName;
-                    console.log(m);
-                    var n = doc.data().bookingMsg;
-                    console.log(n);
+                    var trainerFirstName = doc.data().trainerFirstName;
+                    console.log(trainerFirstName);
+                    var bookingMsg = doc.data().bookingMsg;
+                    console.log(bookingMsg);
                     var trainerID = doc.data().trainer_user_id;
                     console.log(trainerID);
                     var clientID = doc.data().client_user_id;
@@ -158,22 +148,14 @@
 
         var scheduleRef = db.collection("schedule");
 
+        document.querySelectorAll('input'); //Getting form data with javascript
+
         scheduleRef.add({
           // Get this from jquery date picker
           date: new firebase.firestore.Timestamp.fromDate(new Date("March 16 2021")), // Timestamp
           time: "", // String morning, afternoon, or evening
           // location: "",
-          completed: false, // boolean default false
-          clientProfilePic: "",
-          clientFirstName: "",
-          clientLasttName: "",
-          client_user_id: "", //user_id
-          trainerProfilePic: "",
-          trainerFirstName: "",
-          trainerLastName: "",
-          trainer_user_id: "", //user_id
-          initialMsgFromClient: "",
-          bookingMsg: "" 
+          initialMsgFromClient: ""
         });
 
 }
