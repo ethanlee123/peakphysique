@@ -76,15 +76,16 @@
     <!--.trainer-location-->
 
     <div class="profile-stats d-flex justify-content-between gy-4">
-      <div class="profile-stats-clients">
+      <div class="profile-stats-clients hideUserSection">
         <p id="totalClients">0</p>
         <p>Clients</p>
       </div>
-      <div class="profile-stats-sessions">
+      <div class="profile-stats-sessions hideUserSection">
         <p id="totalSessions">0</p>
         <p">Sessions</p>
       </div>
     </div>
+
     <div class="accordion accordion-flush user-info" id="accordionFlushExample">
       <div class="accordion-item card-background-color">
         <h2 class="accordion-header" id="flush-headingOne">
@@ -121,7 +122,7 @@
         </div>
       </div>
 
-      <div class="accordion-item card-background-color">
+      <div class="accordion-item card-background-color hideUserSection">
         <h2 class="accordion-header" id="flush-headingTwo">
           <button class="accordion-button collapsed bg-dark" type="button" data-bs-toggle="collapse"
             data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
@@ -134,10 +135,10 @@
             <div class="list-group">
               <a href="#" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1">Stanley Park Yoga Session</h5>
-                  <small>Feb 21</small>
+                  <h5 class="mb-1" id="postTitle">Stanley Park Yoga Session</h5>
+                  <small id="postDate">Feb 21</small>
                 </div>
-                <p class="mb-1">I'll be at hosting a yoga class at Stanley Park on Saturday March 06. Book with me now
+                <p class="mb-1" id="postMessage">I'll be at hosting a yoga class at Stanley Park on Saturday March 06. Book with me now
                   to
                   save a spot!</p>
               </a>
@@ -157,11 +158,11 @@
     </div>
 
 
-    <div class="card">
+    <div class="card hideUserSection">
       <a class="btn btn-primary book-button" role="button" href="book-appointment.html">BOOK AN APPOINTMENT</a>
     </div>
 
-    <div class="card">
+    <div class="card hideUserSection">
       <div class="card-header">
         <h5>my availability</h5>
       </div>
@@ -172,7 +173,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card hideUserSection">
       <div class="card-header">
         <h5>my qualifications</h5>
       </div>
