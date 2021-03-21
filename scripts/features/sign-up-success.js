@@ -5,17 +5,15 @@ import { personalizedWelcome, createUser, updateUserRole } from "/scripts/api/fi
 const nameId = document.querySelector("#name");
 const clientBtn = document.getElementById("client");
 const trainerBtn = document.getElementById("trainer");
-// console.log(clientBtn);
 
 personalizedWelcome(nameId);
-
 createUser();
 
-
-
 clientBtn.addEventListener("click", function(event) {
+    // Stops anchor tag from its default action, loading next page
     event.preventDefault();
     updateUserRole("client");
+    // Delays redirecting to next page, so updateUserRole() can finish executing
     setTimeout(function() {
         window.location.href = "sign-up-profile-setup.html";
     }, 500);
@@ -30,6 +28,5 @@ trainerBtn.addEventListener("click", function(event) {
     
 }, false);
 
-
-// disable btn after clicked on by adding disabled attr
+// disable the button after it is clicked and has loaded next page...
 
