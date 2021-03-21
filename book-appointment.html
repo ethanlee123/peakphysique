@@ -20,7 +20,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
 
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
@@ -30,7 +29,7 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/book-appointment.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet" />
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet" /> -->
     
 
 </head>
@@ -47,8 +46,8 @@
         <h1 class="display-4"><span class="title-font">Book an <span class="title-font-color">appointment</span></span>
         </h1>
         <hr>
-        <h3 class="display-7" id="trainerFirstName">A message from <span id="nwSBk8XpWLbq47TaarLgfBuenKH2">[insert trainer name]</span></h3>
-        <p id="CNFitnSvSBREvgylpqdAPeydDk12">[insert trainer message]</p>
+        <h3 class="display-7">A message from <span id="trainerFirstName">[insert trainer name]</span></h3>
+        <p id="bookingMsg">[insert trainer message]</p>
         <hr>
         <div class="d-flex">
           <!-- <div class="row"> -->
@@ -129,42 +128,67 @@
             db.collection("schedule").get()
             .then(function (q) {
                 q.forEach(function (doc) {
+                    // var trainerID = doc.data().trainer_user_id;
+                    // console.log(trainerID);
+
                     var trainerFirstName = doc.data().trainerFirstName;
                     console.log(trainerFirstName);
                     var bookingMsg = doc.data().bookingMsg;
                     console.log(bookingMsg);
-                    var trainerID = doc.data().trainer_user_id;
-                    console.log(trainerID);
-                    var clientID = doc.data().client_user_id;
-                    console.log(clientID);
-                    document.getElementById(trainerID).innerText = m;
-                    document.getElementById(clientID).innerText = n;
+                    
+                    // var clientID = doc.data().client_user_id;
+                    // console.log(clientID);
+                    document.getElementById("trainerFirstName").innerText = trainerFirstName;
+                    document.getElementById("bookingMsg").innerText = bookingMsg;
                 })
             })
-        }
-        displayBookInfo();
+      }
+      displayBookInfo();
 
-        function writeUserProfile() {
+      function writeUserProfile() {
 
         var scheduleRef = db.collection("schedule");
 
-        document.querySelectorAll('input'); //Getting form data with javascript
+        // document.querySelectorAll('input'); //Getting form data with javascript
 
         scheduleRef.add({
           // Get this from jquery date picker
-          date: new firebase.firestore.Timestamp.fromDate(new Date("March 16 2021")), // Timestamp
-          time: "", // String morning, afternoon, or evening
-          // location: "",
-          initialMsgFromClient: ""
+        date: new firebase.firestore.Timestamp.fromDate(new Date("March 16 2021")), // Timestamp
+        time: "", // String morning, afternoon, or evening
+        // location: "",
+        initialMsgFromClient: ""
         });
-
-}
+      }
 
       // getCollection(){
       //   return this.firestore.collection("schedule")
       // }
       
       // getCollection();
+
+      function writeAppointmentSchedule() {
+        var scheduleRef = db.collection("schedule");
+
+        scheduleRef.add({
+          // Get this from jquery date picker
+        date: new firebase.firestore.Timestamp.fromDate(new Date("March 20 2021")), // Timestamp
+        time: "", // String morning, afternoon, or evening - user input from drop down selection
+        // location: "",
+        completed: false, // boolean default false
+        clientProfilePic: "https://i.dailymail.co.uk/1s/2021/03/03/23/40017992-9323427-image-m-25_1614815098810.jpg",
+        clientFirstName: "Soupy",
+        clientLasttName: "Kestrel",
+        clientUserId: "", //user_id
+        trainerProfilePic: "https://vz.cnwimg.com/thumb-1200x/wp-content/uploads/2010/03/Fabio-e1603764807834.jpg",
+        trainerFirstName: "Speckled",
+        trainerLastName: "Lamb",
+        trainerUserId: "", //user_id
+        initialMsgFromClient: "Hello darkness my old friend", //user input from comments form
+        bookingMsg: "I've come to talk with you again" //pull from trainer collection
+      });
+
+      writeAppointmentSchedule();
+}
 
     </script>
     
