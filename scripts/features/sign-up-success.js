@@ -6,8 +6,8 @@ const nameId = document.querySelector("#name");
 const clientBtn = document.getElementById("client");
 const trainerBtn = document.getElementById("trainer");
 
-personalizedWelcome(nameId);
 createUser();
+personalizedWelcome(nameId);
 
 clientBtn.addEventListener("click", function(event) {
     // Stops anchor tag from its default action, loading next page

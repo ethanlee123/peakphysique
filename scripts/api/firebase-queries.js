@@ -116,13 +116,18 @@ function writeUserProfile() {
 export function personalizedWelcome(selector) {
     // Only authenticated users, can be set in firebase console storage "rules" tab
     firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {        
-            // Set personalize welcome message
-            selector.innerText = user.displayName;
-        } else {
-            // No user is signed in.
-            console.log("user is not signed in");
-        }
+        const userRefDoc = userRef.doc(user.uid);
+        userRefDoc.get()
+        .then((doc) => {
+            if (user) {        
+                // Set personalize welcome message
+                selector.innerText = doc.data().firstName;
+            } else {
+                // No user is signed in.
+                selector.innerText = "John Doe";
+                console.log("user is not signed in");
+            }
+        });
     });
 }
 
