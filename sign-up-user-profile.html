@@ -44,50 +44,50 @@
         <div class="d-flex justify-content-center align-items-center flex-column bg transparent top-buffer">
             <i class="fas fa-user-circle" id="profile-pic"></i>
             <p><span id="name">James John</span></p>
-            <label for="customRange1" class="form-label">Radius of Travel <span id="radius">50</span> km</label>
-            <input type="range" class="form-range" step="5" id="customRange1">
+            <label class="form-label">Radius of Travel <span for="customRange1" id="radius">25</span> km</label>
+            <input type="range" class="form-range" step="1" id="customRange1" min="5" max="50" value="25" oninput="radius.innerText = this.value"/>
         </div>
 
         <div class="row top-buffer d-flex justify-content-center">
             <ul class="list-group no-padding mb-5" id="list-items">
                 <li class="form-floating">
-                    <input type="tel" id="phone" class="form-control bg-transparent" placeholder="Tell us a bit about yourself"
+                    <input id="phone" type="tel" class="form-control bg-transparent" placeholder="Tell us a bit about yourself"
                         maxlength="80">
                     <label for="phone">Phone Number</label>
                 </li>
 
                 <li class="form-floating mb-5">
-                    <input class="form-control bg-transparent" placeholder="Leave a comment here"
+                    <input id="city" class="form-control bg-transparent" placeholder="Leave a comment here"
                         maxlength="30"></input>
                     <label for="floatingTextarea">City</label>
                 </li>
 
                 <li class="form-floating">
-                    <textarea class="form-control bg-transparent" placeholder="Tell us a bit about yourself"
+                    <textarea id="bio" class="form-control bg-transparent" placeholder="Tell us a bit about yourself"
                         maxlength="80"></textarea>
                     <label for="floatingTextarea2">Tell us a bit about yourself</label>
                 </li>
 
                 <li class="form-floating">
-                    <input class="form-control bg-transparent" placeholder="chest press"
+                    <input id="workout" class="form-control bg-transparent" placeholder="chest press"
                         maxlength="30"></input>
                     <label for="floatingTextarea">Favourite Workout</label>
                 </li>
 
                 <li class="form-floating">
-                    <input class="form-control bg-transparent" placeholder="Leave a comment here"
+                    <input id="meal" class="form-control bg-transparent" placeholder="Leave a comment here"
                         maxlength="30"></input>
                     <label for="floatingTextarea">Favourite Cheat Meal</label>
                 </li>
 
                 <li class="form-floating mb-3">
-                    <input class="form-control bg-transparent" placeholder="Leave a comment here"
+                    <input id="fact" class="form-control bg-transparent" placeholder="Leave a comment here"
                         maxlength="30"></input>
                     <label for="floatingTextarea">Random fact about you</label>
                 </li>
 
                 <li class="form-floating">
-                    <input class="form-control bg-transparent" placeholder="Leave a comment here"
+                    <input id="website" class="form-control bg-transparent" placeholder="Leave a comment here"
                         maxlength="30"></input>
                     <label for="floatingTextarea">Your website URL</label>
                 </li>
@@ -150,15 +150,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
     </script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
     
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
     <script type="module" src="scripts/components/header.js"></script>
     <script type="module" src="scripts/components/footer.js"></script>
-    <!-- <script src="/scripts/api/sign-up-user-profile-queries.js"></script> -->
+    <script type="module" src="/scripts/features/sign-up-user-profile.js"></script>
     
 </body>
 
