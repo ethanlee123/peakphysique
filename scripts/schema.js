@@ -27,6 +27,8 @@ const user = {
     facebook: "",
     instagram: "",
     role: "", // String, client or trainer or null, if they haven't set it yet
+    about: "",
+    randomFact: ""
 }
 
 // Use for filtering
