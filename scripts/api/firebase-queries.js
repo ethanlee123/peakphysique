@@ -1,5 +1,6 @@
 // Sprint 2: reading/writing to firebase
 import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
+// import { reverseGeo } from "/scripts/api/here_api.js"
 // firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 // Reference to user collection, no document specified
@@ -148,12 +149,16 @@ export function personalizedWelcome(selector) {
         .then((doc) => {
             if (user) {        
                 // Set personalize welcome message
-                selector.innerText = doc.data().firstName;
+                return selector.innerText = doc.data().firstName;
             } else {
                 // No user is signed in.
                 selector.innerText = "John Doe";
                 console.log("user is not signed in");
             }
+        }).catch((err) => {
+            // If doc is not yet created, get name from displayName rather than db
+            console.log("Error: ", err);
+            selector.innerText = user.displayName
         });
     });
 }
@@ -172,15 +177,19 @@ export function getLocation() {
 // Support: callback function for getLocation()
 function allowedLocation(position) {
     firebase.auth().onAuthStateChanged(function(user) {
-
+        userRef.doc(user.uid).update({ 
+            location: new firebase.firestore.GeoPoint(position.coords.latitude, position.coords.longitude),
+        });
     });
     console.log(position.coords.longitude);
     console.log(position.coords.latitude);
+
+    // reverseGeo(position.coords.latitude, position.coords.longitude);
 }
 // Support: callback function for getLocation()
 function blockedLocation(error) {
     if(error.code == 1) {
-        alert("Allow locations helps us show you people near your area");
+        alert("Allow locations helps us show you people near your");
     } else if(error.code == 2) {
         alert("The network is down or the positioning service can't be reached.");
     } else if(error.code == 3) {
@@ -221,6 +230,9 @@ export function createUser() {
                     facebook: "",
                     instagram: "",
                     role: null,
+                    about: null,
+                    randomFact: null,
+                    radius: null
                 });
                 trainerOnlyRef.doc(user.uid).set({
                     userId: user.uid,
@@ -264,6 +276,67 @@ export function updateUserRole(userRole) {
                 role:"client"
             });
         }
+    });
+}
+
+// Displays trainer profile information
+export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        // Get doc from trainerOnly collection
+        trainerOnlyRef.doc(user.uid).get()
+        .then(trainerDoc => {
+            websiteUrl.value = trainerDoc.data().website;
+        }).catch(err => {
+            // If doc is undefined, user is not a trainer
+            console.log("error: ", err);
+        });
+
+        // Get doc from user collection
+        userRef.doc(user.uid).get()
+        .then(doc => {
+            fullName.innerText = doc.data().name;
+            phoneNum.value = doc.data().phoneNumber;
+            // city.value = doc.data().city;
+            bio.value = doc.data().about;
+            workout.value = doc.data().favWorkout;
+            cheatMeal.value = doc.data().favCheatMeal;
+            randFact.value = doc.data().randomFact;
+            radiusDisplay.innerText= doc.data().radius;
+        });
+    });
+}
+
+// Updates db when trainer clicks save and return
+export function updateProfileInfo(websiteUrl, phoneNum, bio, workout, cheatMeal, randFact, radiusTravel) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        // Get doc from user collection
+        userRef.doc(user.uid).update({
+            // No option to update name
+            phoneNumber: phoneNum.value,
+            // city: userCity.value,
+            about: bio.value,
+            favWorkout: workout.value,
+            favCheatMeal: cheatMeal.value,
+            randomFact: randFact.value,
+            radius: radiusTravel.value,
+        }).then(() => {
+            updateTrainerInfo(websiteUrl);
+            console.log("updateTrainerInfo called");
+        })
+    });
+}
+
+function updateTrainerInfo(websiteUrl = "") {
+    firebase.auth().onAuthStateChanged(function(user) {
+        // Get doc from trainerOnly collection
+        trainerOnlyRef.doc(user.uid).update({
+            website: websiteUrl.value,
+        }).then(() => {
+            console.log("successfully update user website url");
+            window.location.href = "sign-up-profile-setup.html";
+        }).catch(err => {
+            console.log("error: ", error);
+        });
     });
 }
 
