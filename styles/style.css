@@ -483,6 +483,12 @@ footer .btn.btn-outline-light.contact-us i {
   width: 50%;
   margin-top: 6%; }
 
+.index-body #time-slot {
+  color: #1E242E; }
+
+.index-body .form-select {
+  color: #1E242E; }
+
 .find-a-trainer {
   overflow-x: hidden; }
   .find-a-trainer main {

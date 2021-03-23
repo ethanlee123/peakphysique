@@ -55,15 +55,13 @@
             <div class="mb-3 p-2">
               <p>Date: <input type="text" id="datepicker"></p>
             </div>
-            <div class="dropdown p-2">
-              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                Time Slot
-              </button>
-              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                <li><a class="dropdown-item" href="#">Morning</a></li>
-                <li><a class="dropdown-item" href="#">Afternoon</a></li>
-                <li><a class="dropdown-item" href="#">Evening</a></li>
-              </ul>
+            <div class="mb-3 p-2">
+              <select class="form-select" id="time-slot" aria-label="Default select example">
+                <option id="time-slot" selected>Time Slot</option>
+                <option id="time-slot" value="1">Morning</option>
+                <option id="time-slot" value="2">Afternoon</option>
+                <option id="time-slot" value="3">Evening</option>
+              </select>
             </div>
           <!-- </div> -->
         </div>
