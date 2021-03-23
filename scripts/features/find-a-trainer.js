@@ -1,4 +1,5 @@
 import { debounce } from "../util/debounce.js";
+import { fitnessOptions, wellnessOptions, availabilityDays } from "../schema.js";
 
 // ### Test Data ###
 const trainerCard = {
@@ -73,6 +74,18 @@ var filters = {
 };
 // ##################
 
+const capitalizeWords = (str) => {
+    return str.replace(/\w\S*/g, text => {
+        return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
+    });
+}
+
+const createOptions = (stringArr) => {
+    return stringArr.map(string => {
+        return [capitalizeWords(string), string];
+    });
+}
+
 const positionBannerImgHorizontally = () => {
     const bannerWidth = banner.offsetWidth;
     const windowWidth = window.innerWidth;
@@ -127,26 +140,20 @@ rangeSliders.forEach(slider =>
 
 // ### jQuery - Dropdown Checkbox ###
 // items: [label, value, selected?, disabled?]
-const expertiseFilter = $("#expertiseFilter").filterMultiSelect({
-    items: [
-        ["Calisthenics", "calisthenics"],
-        ["Tai Chi", "tai chi"],
-        ["Yoga", "yoga"],
-    ],
+const fitnessOptionsFilter = $("#fitnessOptionsFilter").filterMultiSelect({
+    items: createOptions(fitnessOptions),
     selectAllText: "Select All"
 });
-expertiseFilter.selectAll();
+fitnessOptionsFilter.selectAll();
+
+const wellnessOptionsFilter = $("#wellnessOptionsFilter").filterMultiSelect({
+    items: createOptions(wellnessOptions),
+    selectAllText: "Select All"
+});
+wellnessOptionsFilter.selectAll();
 
 const availabilityFilter = $("#availabilityFilter").filterMultiSelect({
-    items: [
-        ["Monday", "monday"],
-        ["Tuesday", "tuesday"],
-        ["Wednesday", "wednesday"],
-        ["Thursday", "thursday"],
-        ["Friday", "friday"],
-        ["Saturday", "saturday"],
-        ["Sunday", "sunday"],
-    ],
+    items: createOptions(availabilityDays),
     selectAllText: "Select All"
 });
 availabilityFilter.selectAll();

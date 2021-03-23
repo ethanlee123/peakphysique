@@ -412,16 +412,25 @@
         <h2 class="drawer-title">Filter <b>trainers</b></h2>
         
         <form class="filter-form" action="">
-
-          <div class="form-input expertise">
-            <label for="expertise" class="form-label">Expertise</label>
+          <div class="form-input fitness-options">
+            <label for="fitness-options" class="form-label">Fitness Options</label>
             <select
-              name="expertise"
-              id="expertiseFilter"
+              name="fitness-options"
+              id="fitnessOptionsFilter"
               multiple
             >
             </select>
-          </div><!--.expertise-->
+          </div><!--.fitness-options-->
+
+          <div class="form-input wellness-options">
+            <label for="wellness-options" class="form-label">Wellness Options</label>
+            <select
+              name="wellness-options"
+              id="wellnessOptionsFilter"
+              multiple
+            >
+            </select>
+          </div><!--.wellness-options-->
           
           <div class="form-input availability">
             <label for="expertise" class="form-label">Availability</label>
@@ -431,7 +440,7 @@
               multiple
             >
             </select>
-          </div><!--.expertise-->
+          </div><!--.availability-->
 
           <div class="form-input rate-per-session">
             <label for="ratePerSession" class="form-label">Rate Per Session</label>
