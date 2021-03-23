@@ -49,13 +49,6 @@ export function displayTrainerInfo(){
 }
 // displayTrainerInfo();
 
-const getCollection = async (collectionName) => {
-    return await db.collection(collectionName).get()
-      .then((response) => {
-        return response.docs.map(doc => doc.data());
-      });
-}
-
 function writeUserProfile() {
     var trainerRef = db.collection("trainer");
 
@@ -276,3 +269,36 @@ export function trainerProfilePosts() {
             })
         })
     }
+
+const getCollection = async ({
+        collectionName,
+        sort,
+        limit,
+        filters = null,
+        startAfter = null
+    }) => {
+        let query = db.collection(collectionName);
+     
+        query = query.orderBy(sort.by, sort.order);
+        if (startAfter) {
+            query = query.startAfter(startAfter);
+        }
+        query = query.limit(limit);
+     
+        filters && filters.forEach((filter) => {
+            if (filter) {
+                query = query.where(filter.field, filter.operator,
+                        filter.value);
+            }
+        });
+     
+        let collection = await query.get();
+        return collection.docs.map(doc => {
+            return {
+                doc: doc,
+                id: doc.id,
+                data: doc.data()
+            };
+        });
+    }
+    
