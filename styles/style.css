@@ -517,7 +517,7 @@ footer .btn.btn-outline-light.contact-us i {
   margin-top: 3%; }
 
 .index-body .description-font {
-  text-shadow: 2px 2px 2px #000000; }
+  text-shadow: 1px 1px 1px #000000; }
 
 .index-body .form-format {
   margin: 0 auto;
@@ -531,7 +531,11 @@ footer .btn.btn-outline-light.contact-us i {
   margin-top: 50px; }
 
 .index-body #comments {
-  color: black; }
+  color: #1E242E; }
+
+.index-body #carouselExampleCaptions {
+  width: 50%;
+  margin-top: 6%; }
 
 .find-a-trainer {
   overflow-x: hidden; }

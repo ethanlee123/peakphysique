@@ -25,7 +25,7 @@
     }
 
     .description-font {
-        text-shadow: 2px 2px 2px #000000;
+        text-shadow: 1px 1px 1px #000000;
     }
     
     .form-format {
@@ -42,6 +42,11 @@
     }
 
     #comments {
-        color: black;
+        color: $dark;
+    }
+
+    #carouselExampleCaptions {
+        width: 50%;
+        margin-top: 6%;
     }
 }
