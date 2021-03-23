@@ -1,0 +1,54 @@
+.filter-multi-select.dropdown {
+    .dropdown-menu {
+        @include box-shadow;
+    }
+
+    .viewbar {
+        position: relative;
+        padding: 0;
+        background: $darkest;
+        border: none;
+
+        &:before {
+            position: absolute;
+            top: 50%;
+            right: 0;
+        }
+
+        .selected-items {
+            .item {
+                background: $primary;
+                color: $darkest;
+                text-transform: uppercase;
+                font-size: 0.75rem;
+                font-weight: bold;
+
+                button {
+                    background: none;
+                    box-shadow: none;
+                    color: $darkest;
+                }
+            }
+        }        
+    }
+
+    .filter.dropdown-item {
+        button {
+            display: none;
+        }
+    }
+
+    .items {
+        .custom-control {
+            .custom-control-label {
+                &:after {
+                    background: $primary;
+                }
+            }
+        }
+    }
+
+
+
+
+}

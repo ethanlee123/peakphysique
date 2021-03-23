@@ -1,9 +1,14 @@
 // will use this for editing trainer profile
 export const fitnessOptions = [
-    "bpdy building", "power lifting", "crossfit", "yoga", "pilates", "cycling", "boxing / kickboxing", 
-"climbing", "tai chi", "outdoor", "dance", "endurance"];
+    "body building", "power lifting", "crossfit", "yoga", "pilates", "cycling", "boxing / kickboxing", 
+"climbing", "tai chi", "outdoor", "dance", "endurance"
+];
 export const wellnessOptions = [
-    "nutrition", "macro coaching", "physical therapy", "chiropractor", "body treatments", "weight loss", "custom workout regimen"]
+    "nutrition", "macro coaching", "physical therapy", "chiropractor", "body treatments", "weight loss", "custom workout regimen"
+];
+export const availabilityDays = [
+    "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"
+];
 
 // User includes both trainer and client
 const user = {

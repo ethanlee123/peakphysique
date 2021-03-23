@@ -1,4 +1,5 @@
 import { debounce } from "../util/debounce.js";
+import { fitnessOptions, wellnessOptions, availabilityDays } from "../schema.js";
 
 // ### Test Data ###
 const trainerCard = {
@@ -6,22 +7,6 @@ const trainerCard = {
 };
 
 const trainerCards = [];
-// #################
-
-const filtersDefault = {
-    wellness: [],
-    wellnessExclude: [],
-    fitness: [],
-    fitnessExclude: [],
-    ratePerSession: {
-        min: undefined,
-        max: undefined
-    },
-    firstSessionFree: undefined,
-    yearsOfExperience: undefined,
-    gender: undefined,
-    distance: undefined
-};
 // #################
 
 // ### Variables ###
@@ -37,14 +22,34 @@ const resetFilters = document.querySelectorAll(".reset-filters");
 const searchBar = document.getElementById("search");
 const sortBy = document.getElementById("sortBy");
 const sortOrder = document.getElementById("sortOrder");
+const rangeSliders = document.querySelectorAll(".range-slider");
+
+// const expertiseFilter = document.getElementById("expertiseFilter");
+// const ratePerSession = document.getElementById("ratePerSession");
+// const yearsOfExperience = document.getElementById("yearsOfExperience");
+// const distanceFromUser = document.getElementById("distanceFromUser");
 // ###########################
 
 const debounceTime = 250;
-let searchQuery = "";
-let sort = {
+var searchQuery = "";
+var sort = {
     field: "name",
     descending: false
 }
+const filtersDefault = {
+    wellness: [],
+    wellnessExclude: [],
+    fitness: [],
+    fitnessExclude: [],
+    ratePerSession: {
+        min: undefined,
+        max: undefined
+    },
+    firstSessionFree: undefined,
+    yearsOfExperience: undefined,
+    gender: undefined,
+    distance: undefined
+};
 var filters = {
     value: {},
     
@@ -66,9 +71,20 @@ var filters = {
         this.value = filters;
         this.updateFilterButtons();
     }
-
 };
 // ##################
+
+const capitalizeWords = (str) => {
+    return str.replace(/\w\S*/g, text => {
+        return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
+    });
+}
+
+const createOptions = (stringArr) => {
+    return stringArr.map(string => {
+        return [capitalizeWords(string), string];
+    });
+}
 
 const positionBannerImgHorizontally = () => {
     const bannerWidth = banner.offsetWidth;
@@ -105,6 +121,43 @@ const resetFilterToggles = () => {
         !toggle.classList.contains("active") && toggle.classList.add("active");
     })
 }
+
+// ### jQuery - Range Sliders ###
+// ##############################
+rangeSliders.forEach(slider => 
+    noUiSlider.create(slider, {
+        start: [0, 100],
+        step: 1,
+        range: {
+            "min": 0,
+            "max": 100
+        },
+        connect: true,
+        tooltips: true
+    })
+);
+
+
+// ### jQuery - Dropdown Checkbox ###
+// items: [label, value, selected?, disabled?]
+const fitnessOptionsFilter = $("#fitnessOptionsFilter").filterMultiSelect({
+    items: createOptions(fitnessOptions),
+    selectAllText: "Select All"
+});
+fitnessOptionsFilter.selectAll();
+
+const wellnessOptionsFilter = $("#wellnessOptionsFilter").filterMultiSelect({
+    items: createOptions(wellnessOptions),
+    selectAllText: "Select All"
+});
+wellnessOptionsFilter.selectAll();
+
+const availabilityFilter = $("#availabilityFilter").filterMultiSelect({
+    items: createOptions(availabilityDays),
+    selectAllText: "Select All"
+});
+availabilityFilter.selectAll();
+// ##################################
 
 // ### Event Listeners ###
 window.addEventListener("load", () => {

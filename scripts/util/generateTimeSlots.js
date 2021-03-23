@@ -4,7 +4,7 @@ export const generateTimeSlots = ({availability, numDays = 28, startDate = new D
     let currentDate = startDate;
     let timeSlots = [];
 
-    for (let i = offset; i <= (numDays + offset); i++) {
+    for (let i = offset; i < (numDays + offset); i++) {
         const index = i < 7 ? i : i % 7;
         const date = i === offset ? startDate : currentDate.setDate(currentDate.getDate() + 1);
         const formattedDate = new Intl.DateTimeFormat("en-us").format(date);
