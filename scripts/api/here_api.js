@@ -30,3 +30,5 @@ function reverseGeo(latitude, longitude) {
 };
 
 reverseGeo();
+
+// city to geopoint
