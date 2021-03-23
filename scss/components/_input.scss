@@ -23,6 +23,12 @@ input {
 
 }
 
+select {
+    &.form-select {
+        color: $dark;
+    }
+}
+
 .input-label {
     display: block;
 }

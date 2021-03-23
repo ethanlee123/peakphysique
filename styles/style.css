@@ -70,6 +70,9 @@ input.form-check-input:checked[type=radio] {
   border-color: #D4DDD6;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%2383C3A3'/%3e%3c/svg%3e"); }
 
+select.form-select {
+  color: #1E242E; }
+
 .input-label {
   display: block; }
 
