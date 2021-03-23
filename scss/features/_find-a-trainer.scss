@@ -24,8 +24,16 @@
             margin-bottom: 2em;
 
             .section-title {
-                font-size: 3em;
+                font-size: 1.5em;
                 @include text-shadow;
+
+                @include tablet {
+                    font-size: 2em;
+                }
+
+                @include desktop {
+                    font-size: 3em;
+                }
             }
             
             .subtext {
@@ -368,6 +376,14 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                width: 0px;
+                background: transparent;
+            }
+
 
             .form-input {
                 margin-bottom: 1em;
@@ -383,6 +399,7 @@
         }
 
         .filter-btns {
+            margin: 1rem 0;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1em;
