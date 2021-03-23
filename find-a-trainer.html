@@ -423,8 +423,15 @@
             </select>
           </div><!--.expertise-->
           
-
-          <!--times available-->
+          <div class="form-input availability">
+            <label for="expertise" class="form-label">Availability</label>
+            <select
+              name="availability"
+              id="availabilityFilter"
+              multiple
+            >
+            </select>
+          </div><!--.expertise-->
 
           <div class="form-input rate-per-session">
             <label for="ratePerSession" class="form-label">Rate Per Session</label>
@@ -445,21 +452,22 @@
 
           <!--certifications-->
 
+          <label for="gender" class="form-label input-label">Gender</label>
           <div class="form-input gender">
             <div class="form-check any">
-              <input class="form-check-input" type="radio" name="gender" id="genderAny" checked>
+              <input class="form-check-input" type="radio" name="gender" id="genderAny" value="any" checked>
               <label class="form-check-label" for="genderAny">
                 Any
               </label>
             </div><!--.any-->
-            <div class="form-check male">
-              <input class="form-check-input" type="radio" name="gender" id="genderMale">
+            <div class="form-check female">
+              <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male">
               <label class="form-check-label" for="genderMale">
                 Male
               </label>
             </div>
             <div class="form-check female">
-              <input class="form-check-input" type="radio" name="gender" id="genderFemale">
+              <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female">
               <label class="form-check-label" for="genderFemale">
                 Female
               </label>

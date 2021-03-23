@@ -133,10 +133,23 @@ const expertiseFilter = $("#expertiseFilter").filterMultiSelect({
         ["Tai Chi", "tai chi"],
         ["Yoga", "yoga"],
     ],
-    selectAllText: "Select All",
-    allowEnablingandDisabling: false
+    selectAllText: "Select All"
 });
 expertiseFilter.selectAll();
+
+const availabilityFilter = $("#availabilityFilter").filterMultiSelect({
+    items: [
+        ["Monday", "monday"],
+        ["Tuesday", "tuesday"],
+        ["Wednesday", "wednesday"],
+        ["Thursday", "thursday"],
+        ["Friday", "friday"],
+        ["Saturday", "saturday"],
+        ["Sunday", "sunday"],
+    ],
+    selectAllText: "Select All"
+});
+availabilityFilter.selectAll();
 // ##################################
 
 // ### Event Listeners ###
