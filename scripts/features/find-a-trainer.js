@@ -8,6 +8,33 @@ const trainerCard = {
 const trainerCards = [];
 // #################
 
+// ### Variables ###
+// ###### DOM Variables ######
+const bannerImg = document.getElementById("bannerImg");
+const banner = document.getElementById("banner");
+const filterToggles = document.querySelectorAll("button.toggle-filter");
+const filterDrawerToggles = document.querySelectorAll(".toggle-filter-drawer");
+const exitDrawerToggle = document.getElementById("exitDrawer");
+const filterDrawer = document.getElementById("filterDrawer");
+const setFilterBtn = document.getElementById("setFilterBtn");
+const resetFilters = document.querySelectorAll(".reset-filters");
+const searchBar = document.getElementById("search");
+const sortBy = document.getElementById("sortBy");
+const sortOrder = document.getElementById("sortOrder");
+const rangeSliders = document.querySelectorAll(".range-slider");
+
+// const expertiseFilter = document.getElementById("expertiseFilter");
+// const ratePerSession = document.getElementById("ratePerSession");
+// const yearsOfExperience = document.getElementById("yearsOfExperience");
+// const distanceFromUser = document.getElementById("distanceFromUser");
+// ###########################
+
+const debounceTime = 250;
+var searchQuery = "";
+var sort = {
+    field: "name",
+    descending: false
+}
 const filtersDefault = {
     wellness: [],
     wellnessExclude: [],
@@ -22,29 +49,6 @@ const filtersDefault = {
     gender: undefined,
     distance: undefined
 };
-// #################
-
-// ### Variables ###
-// ###### DOM Variables ######
-const bannerImg = document.getElementById("bannerImg");
-const banner = document.getElementById("banner");
-const filterToggles = document.querySelectorAll("button.toggle-filter");
-const filterDrawerToggles = document.querySelectorAll(".toggle-filter-drawer");
-const exitDrawerToggle = document.getElementById("exitDrawer");
-const filterDrawer = document.getElementById("filterDrawer");
-const setFilterBtn = document.getElementById("setFilterBtn");
-const resetFilters = document.querySelectorAll(".reset-filters");
-const searchBar = document.getElementById("search");
-const sortBy = document.getElementById("sortBy");
-const sortOrder = document.getElementById("sortOrder");
-// ###########################
-
-const debounceTime = 250;
-let searchQuery = "";
-let sort = {
-    field: "name",
-    descending: false
-}
 var filters = {
     value: {},
     
@@ -66,7 +70,6 @@ var filters = {
         this.value = filters;
         this.updateFilterButtons();
     }
-
 };
 // ##################
 
@@ -105,6 +108,36 @@ const resetFilterToggles = () => {
         !toggle.classList.contains("active") && toggle.classList.add("active");
     })
 }
+
+// ### jQuery - Range Sliders ###
+// ##############################
+rangeSliders.forEach(slider => 
+    noUiSlider.create(slider, {
+        start: [0, 100],
+        step: 1,
+        range: {
+            "min": 0,
+            "max": 100
+        },
+        connect: true,
+        tooltips: true
+    })
+);
+
+
+// ### jQuery - Dropdown Checkbox ###
+// items: [label, value, selected?, disabled?]
+const expertiseFilter = $("#expertiseFilter").filterMultiSelect({
+    items: [
+        ["Calisthenics", "calisthenics"],
+        ["Tai Chi", "tai chi"],
+        ["Yoga", "yoga"],
+    ],
+    selectAllText: "Select All",
+    allowEnablingandDisabling: false
+});
+expertiseFilter.selectAll();
+// ##################################
 
 // ### Event Listeners ###
 window.addEventListener("load", () => {

@@ -76,6 +76,60 @@ input.form-check-input:checked[type=radio] {
   color: #1E242E;
   z-index: 9999; }
 
+.range-slider {
+  margin-bottom: 1.5rem;
+  -webkit-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8); }
+  .range-slider.noUi-target.noUi-ltr.noUi-horizontal.noUi-txt-dir-ltr {
+    height: 0.5rem; }
+  .range-slider .noUi-connects {
+    background: rgba(212, 221, 214, 0.1);
+    -webkit-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.35), 0 4px 8px 1px rgba(0, 0, 0, 0.35) inset;
+    -moz-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.35), 0 4px 8px 1px rgba(0, 0, 0, 0.35) inset;
+    box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.35), 0 4px 8px 1px rgba(0, 0, 0, 0.35) inset; }
+  .range-slider .noUi-connect {
+    height: 0.5rem;
+    background: #83C3A3; }
+  .range-slider .noUi-handle {
+    border-radius: 50%;
+    cursor: pointer; }
+    .range-slider .noUi-handle.noUi-handle-upper, .range-slider .noUi-handle.noUi-handle-lower {
+      height: 1rem;
+      width: 1rem;
+      transform: translateX(-50%);
+      -webkit-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
+      -moz-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8); }
+    .range-slider .noUi-handle:before, .range-slider .noUi-handle:after {
+      display: none; }
+    .range-slider .noUi-handle .noUi-tooltip {
+      border: none;
+      background: none;
+      color: #D4DDD6;
+      bottom: 0;
+      transform: translate(-50%, 100%); }
+
+.filter-multi-select.dropdown .placeholder {
+  color: #1E242E; }
+
+.filter-multi-select.dropdown .viewbar .selected-items .item {
+  background: #83C3A3;
+  color: #0a0c0f;
+  text-transform: uppercase;
+  font-size: 0.75rem; }
+  .filter-multi-select.dropdown .viewbar .selected-items .item button {
+    background: none;
+    box-shadow: none; }
+    .filter-multi-select.dropdown .viewbar .selected-items .item button:hover, .filter-multi-select.dropdown .viewbar .selected-items .item button:active, .filter-multi-select.dropdown .viewbar .selected-items .item button:focus {
+      color: #0a0c0f; }
+
+.filter-multi-select.dropdown .filter.dropdown-item button {
+  display: none; }
+
+.filter-multi-select.dropdown .items .custom-control .custom-control-label:after {
+  background: #83C3A3; }
+
 body {
   display: flex;
   flex-direction: column;

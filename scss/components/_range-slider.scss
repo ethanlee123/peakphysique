@@ -1,0 +1,44 @@
+.range-slider {
+    margin-bottom: 1.5rem;
+    @include box-shadow;
+
+    &.noUi-target.noUi-ltr.noUi-horizontal.noUi-txt-dir-ltr {
+        height: 0.5rem;
+    }
+
+    .noUi-connects {
+        background: rgba($light, 0.1);
+        @include box-shadow-transparent;
+    }
+
+    .noUi-connect {
+        height: 0.5rem;
+        background: $primary;
+    }
+
+    .noUi-handle {
+        border-radius: 50%;
+        cursor: pointer;
+
+        &.noUi-handle-upper, &.noUi-handle-lower {
+            height: 1rem;
+            width: 1rem;
+            transform: translateX(-50%);
+            @include box-shadow;
+        }
+
+        &:before, &:after {
+            display: none;
+        }
+
+        .noUi-tooltip {
+            border: none;
+            background: none;
+            color: $light;
+            bottom: 0;
+            transform: translate(-50%, 100%);
+        }
+    }
+
+
+}

@@ -1,0 +1,45 @@
+.filter-multi-select.dropdown {
+    .placeholder {
+        color: $dark;
+    }
+
+    .viewbar {
+        .selected-items {
+            .item {
+                background: $primary;
+                color: $darkest;
+                text-transform: uppercase;
+                font-size: 0.75rem;
+
+                button {
+                    background: none;
+                    box-shadow: none;
+
+                    @include hover-state {
+                        color: $darkest;
+                    }
+                }
+            }
+        }        
+    }
+
+    .filter.dropdown-item {
+        button {
+            display: none;
+        }
+    }
+
+    .items {
+        .custom-control {
+            .custom-control-label {
+                &:after {
+                    background: $primary;
+                }
+            }
+        }
+    }
+
+
+
+
+}
