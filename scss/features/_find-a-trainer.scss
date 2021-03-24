@@ -24,8 +24,16 @@
             margin-bottom: 2em;
 
             .section-title {
-                font-size: 3em;
+                font-size: 1.5em;
                 @include text-shadow;
+
+                @include tablet {
+                    font-size: 2em;
+                }
+
+                @include desktop {
+                    font-size: 3em;
+                }
             }
             
             .subtext {
@@ -368,6 +376,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
             overflow-y: scroll;
 
             &::-webkit-scrollbar {

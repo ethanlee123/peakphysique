@@ -59,6 +59,9 @@ input[type=text] {
   input[type=text]:hover, input[type=text]:active, input[type=text]:focus {
     color: #0a0c0f; }
 
+input.form-check-input {
+  cursor: pointer; }
+
 input.form-check-input:checked[type=checkbox] {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%230a0c0f' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e"); }
 
@@ -66,6 +69,9 @@ input.form-check-input:checked[type=radio] {
   background: #0a0c0f;
   border-color: #D4DDD6;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%2383C3A3'/%3e%3c/svg%3e"); }
+
+select.form-select {
+  color: #1E242E; }
 
 .input-label {
   display: block; }
@@ -552,6 +558,12 @@ footer .btn.btn-outline-light.contact-us i {
   width: 50%;
   margin-top: 6%; }
 
+.index-body #time-slot {
+  color: #1E242E; }
+
+.index-body .form-select {
+  color: #1E242E; }
+
 .find-a-trainer {
   overflow-x: hidden; }
   .find-a-trainer main {
@@ -567,8 +579,14 @@ footer .btn.btn-outline-light.contact-us i {
     .find-a-trainer .banner .text {
       margin-bottom: 2em; }
       .find-a-trainer .banner .text .section-title {
-        font-size: 3em;
+        font-size: 1.5em;
         text-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.85); }
+        @media (min-width: 800px) {
+          .find-a-trainer .banner .text .section-title {
+            font-size: 2em; } }
+        @media (min-width: 1200px) {
+          .find-a-trainer .banner .text .section-title {
+            font-size: 3em; } }
       .find-a-trainer .banner .text .subtext {
         max-width: 800px;
         margin: 0 auto; }
@@ -791,6 +809,7 @@ footer .btn.btn-outline-light.contact-us i {
       flex: 1;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
       overflow-y: scroll; }
       .find-a-trainer .filter-drawer .filter-form::-webkit-scrollbar {
         width: 0px;

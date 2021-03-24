@@ -63,19 +63,6 @@ const trainerOnly = {
     }
 }
 
-const openSlots = {
-    trainerId: "",
-    slots: [
-        {
-            date: "",
-            time: ""            
-        }
-    ]
-    // expired slots should automatically be removed
-    // when slots are booked, remove slot ...
-    // ... and write to schedule collection
-}
-
 // Use this for user profiles with "updates"
 const posts = {
     userId: "",
