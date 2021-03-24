@@ -6,8 +6,11 @@ const nameId = document.querySelector("#name");
 const clientBtn = document.getElementById("client");
 const trainerBtn = document.getElementById("trainer");
 
-createUser();
-personalizedWelcome(nameId);
+async function displayName() {
+    let response = await createUser();
+    personalizedWelcome(nameId);
+}
+displayName();
 
 clientBtn.addEventListener("click", function(event) {
     // Stops anchor tag from its default action, loading next page
