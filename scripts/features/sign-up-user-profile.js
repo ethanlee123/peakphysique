@@ -27,7 +27,6 @@ displayProfileInfo(fullName, phoneNum, bio, favWorkout, favCheatMeal, randFact, 
 saveReturnBtn.addEventListener("click", function(event) {
     event.preventDefault();
     updateProfileInfo(websiteUrl, phoneNum, bio, favWorkout, favCheatMeal, randFact, radius);
-
 })
     
 
