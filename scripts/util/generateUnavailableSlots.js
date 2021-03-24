@@ -1,23 +1,41 @@
-export const generateTimeSlots = ({availability, numDays = 28, startDate = new Date(Date.now())}) => {
-    const offset = startDate.getDay();
+export const generateUnavailableSlots = ({availability, numDays = 28, startDate = new Date(Date.now())}) => {
     const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+    const offset = startDate.getDay();
     let currentDate = startDate;
-    let timeSlots = [];
+    let unavailability = {
+        sunday: [],
+        monday: [],
+        tuesday: [],
+        wednesday: [],
+        thursday: [],
+        friday: []
+    };
+    let unavailableSlots = [];
+
+    days.forEach(day => {
+        const unavailableTimes = ["morning", "afternoon", "evening"];
+        availability[day].forEach(time => {
+            const index = unavailableTimes.indexOf(time);
+            unavailableTimes.splice(index, 1);
+        });
+        
+        unavailability[`${day}`] = unavailableTimes;
+    });
 
     for (let i = offset; i < (numDays + offset); i++) {
         const index = i < 7 ? i : i % 7;
         const date = i === offset ? startDate : currentDate.setDate(currentDate.getDate() + 1);
         const formattedDate = new Intl.DateTimeFormat("en-us").format(date);
 
-        availability[days[index]].forEach((time) => {
-            timeSlots.push({
+        unavailability[days[index]].forEach((time) => {
+            unavailableSlots.push({
                 date: formattedDate,
                 time: time
             });
         });
     }
     
-    return timeSlots;
+    return unavailableSlots;
 };
 
 const availabilityTest = {
@@ -60,12 +78,12 @@ const availabilityTest4 = {
     saturday: []
 };
 
-const test1 = generateTimeSlots({availability: availabilityTest});
-const test2 = generateTimeSlots({availability: availabilityTest2});
-const test3 = generateTimeSlots({availability: availabilityTest3});
-const test4 = generateTimeSlots({availability: availabilityTest4});
-const test5 = generateTimeSlots({availability: availabilityTest2, numDays: 7});
-const test6 = generateTimeSlots({availability: availabilityTest2, numDays: 7, startDate: new Date("Mar 26 2021")});
+const test1 = generateUnavailableSlots({availability: availabilityTest});
+const test2 = generateUnavailableSlots({availability: availabilityTest2});
+const test3 = generateUnavailableSlots({availability: availabilityTest3});
+const test4 = generateUnavailableSlots({availability: availabilityTest4});
+const test5 = generateUnavailableSlots({availability: availabilityTest2, numDays: 7});
+const test6 = generateUnavailableSlots({availability: availabilityTest2, numDays: 7, startDate: new Date("Mar 26 2021")});
 
 console.log("test1", test1);
 console.log("test2", test2);
