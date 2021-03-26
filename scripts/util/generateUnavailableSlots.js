@@ -78,16 +78,16 @@ const availabilityTest4 = {
     saturday: []
 };
 
-const test1 = generateUnavailableSlots({availability: availabilityTest});
-const test2 = generateUnavailableSlots({availability: availabilityTest2});
-const test3 = generateUnavailableSlots({availability: availabilityTest3});
-const test4 = generateUnavailableSlots({availability: availabilityTest4});
-const test5 = generateUnavailableSlots({availability: availabilityTest2, numDays: 7});
-const test6 = generateUnavailableSlots({availability: availabilityTest2, numDays: 7, startDate: new Date("Mar 26 2021")});
+// const test1 = generateUnavailableSlots({availability: availabilityTest});
+// const test2 = generateUnavailableSlots({availability: availabilityTest2});
+// const test3 = generateUnavailableSlots({availability: availabilityTest3});
+// const test4 = generateUnavailableSlots({availability: availabilityTest4});
+// const test5 = generateUnavailableSlots({availability: availabilityTest2, numDays: 7});
+// const test6 = generateUnavailableSlots({availability: availabilityTest2, numDays: 7, startDate: new Date("Mar 26 2021")});
 
-console.log("test1", test1);
-console.log("test2", test2);
-console.log("test3", test3);
-console.log("test4", test4);
-console.log("test5", test5);
-console.log("test6", test6);
+// console.log("test1", test1);
+// console.log("test2", test2);
+// console.log("test3", test3);
+// console.log("test4", test4);
+// console.log("test5", test5);
+// console.log("test6", test6);

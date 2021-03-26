@@ -112,25 +112,27 @@ function writeUserProfile() {
 }
 // writeUserProfile();   
 
-function writeAppointmentSchedule() {
+export function writeAppointmentSchedule() {
     var scheduleRef = db.collection("schedule");
 
+    var user = firebase.auth().currentUser;
+
     scheduleRef.add({
-      // Get this from jquery date picker
-    date: new firebase.firestore.Timestamp.fromDate(new Date("March 20 2021")), // Timestamp
-    time: "", // String morning, afternoon, or evening
-    // location: "",
-    completed: false, // boolean default false
-    clientProfilePic: "https://i.dailymail.co.uk/1s/2021/03/03/23/40017992-9323427-image-m-25_1614815098810.jpg",
-    clientFirstName: "Soupy",
-    clientLasttName: "Kestrel",
-    clientUserId: "", //user_id
-    trainerProfilePic: "https://vz.cnwimg.com/thumb-1200x/wp-content/uploads/2010/03/Fabio-e1603764807834.jpg",
-    trainerFirstName: "Speckled",
-    trainerLastName: "Lamb",
-    trainerUserId: "", //user_id
-    initialMsgFromClient: "", //user input from comments form
-    bookingMsg: "" //pull from trainer collection
+        // Get this from jquery date picker
+        date: datepicker.value, // Timestamp
+        time: timeSlot.value, // String morning, afternoon, or evening
+        // location: "",
+        completed: false, // boolean default false
+        clientProfilePic: user.profilePic,
+        clientFirstName: user.firstName,
+        clientLastName: user.lastName,
+        clientUserId: user.uid, //user_id
+        trainerProfilePic: trainerId.profilePic,
+        trainerFirstName: trainerId.firstName,
+        trainerLastName: trainerId.lastName,
+        trainerUserId: trainerId, //user_id
+        initialMsgFromClient: comments.value, //user input from comments form
+        bookingMsg: trainerId.bookingMsg //pull from trainer collection
     });
 }
 
