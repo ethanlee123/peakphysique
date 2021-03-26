@@ -11,14 +11,14 @@
         }
     }
 
-    .landing {
-        background-repeat: repeat-x;
-        height: 300px;
-        text-align: center;
-        width: 100%;
-        font-weight: bolder;
-        font-family: apex;
-    }
+    // .landing {
+    //     background-repeat: repeat-x;
+    //     height: 300px;
+    //     text-align: center;
+    //     width: 100%;
+    //     font-weight: bolder;
+    //     font-family: apex;
+    // }
     
     .title-font {
         font-weight: bolder;
@@ -29,13 +29,6 @@
     
     .title-font-color {
         color: #83C3A3;
-    }
-    
-    .login-buttons {
-        position: absolute;
-        top:50%;
-        left:50%;
-        transform: translate(-50%, -50%);
     }
 
     .description-font {
@@ -71,18 +64,41 @@
 
         .carousel-item {
             height: 100vh;
-            z-index: -9;
 
             img {
                 height: 100%;
                 object-fit: cover;
-                filter: brightness(50%);
+                filter: brightness(40%);
             }            
         }
 
         .carousel-control-next,
         .carousel-control-prev {
             box-shadow: none;
-        }       
+        }
+        
+        .caption {
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+
+            h1 {
+                font-size: 3em;
+            }
+
+            .description-font {
+                margin-bottom: 3rem;
+                max-width: 600px;
+                font-size: 1.5em;
+            }
+
+            .btn {
+                font-family: $type-heading;
+                text-transform: uppercase;
+                font-size: 1.5em;
+            }
+        }
     }
 }
