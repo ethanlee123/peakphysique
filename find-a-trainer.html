@@ -155,7 +155,7 @@
       </div><!--.spinner-border-->
 
       <section class="results-meta">
-        <!-- <span class="results-found">Showing <span id="displayedTrainers">6</span> out of <b><span id="totalTrainers">10</span> trainers</b> found.</span> -->
+        <span class="results-found">Showing <span id="displayedTrainers">6</span> out of <b><span id="totalTrainers">10</span> trainers</b> found.</span>
         
         <div class="sorters">
           <span class="text">Sort by</span>
@@ -176,12 +176,15 @@
       <section class="trainer-list" id="trainerList">
       </section>
       
-      <section class="pagination">
+      <section class="pagination" id="pagination">
         <button class="paginate previous" id="previous">
           <i class="fas fa-arrow-right"></i>          
         </button>
 
-        <span class="text">Page <span class="page-num">1</span></span>
+        <span class="page-num">
+          <span class="one selected">1</span>
+          <span class="two">2</span>
+        </span>
 
         <button class="paginate next" id="next">
           <i class="fas fa-arrow-right"></i>          

@@ -104,6 +104,7 @@ const sortOrder = document.getElementById("sortOrder");
 const rangeSliders = document.querySelectorAll(".range-slider");
 const trainerList = document.getElementById("trainerList");
 const trainerCardTemplate = await getTemplate(pathToTrainerCard);
+const pagination = document.getElementById("pagination");
 
 // const expertiseFilter = document.getElementById("expertiseFilter");
 // const ratePerSession = document.getElementById("ratePerSession");

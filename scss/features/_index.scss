@@ -1,7 +1,14 @@
 .index-body {
+    position: relative;
 
-    body {
-        position: relative;
+    header {
+        margin: 0;
+    }
+
+    footer {
+        .scroll-to-top {
+            display: none;
+        }
     }
 
     .landing {
@@ -57,7 +64,25 @@
         width: 100%;
     }
 
-    .carousel-images {
-        filter: opacity(0.8);
+    
+    .carousel {
+        margin: 0;
+        padding: 0;
+
+        .carousel-item {
+            height: 100vh;
+            z-index: -9;
+
+            img {
+                height: 100%;
+                object-fit: cover;
+                filter: brightness(50%);
+            }            
+        }
+
+        .carousel-control-next,
+        .carousel-control-prev {
+            box-shadow: none;
+        }       
     }
 }

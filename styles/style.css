@@ -517,55 +517,59 @@ footer .btn.btn-outline-light.contact-us:hover i, footer .btn.btn-outline-light.
 footer .btn.btn-outline-light.contact-us i {
   color: #D4DDD6; }
 
-.index-body body {
+.index-body {
   position: relative; }
-
-.index-body .landing {
-  background-repeat: repeat-x;
-  height: 300px;
-  text-align: center;
-  width: 100%;
-  font-weight: bolder;
-  font-family: apex; }
-
-.index-body .title-font {
-  font-weight: bolder;
-  font-family: apex;
-  text-shadow: 1px 1px 1px #000000;
-  font-size: 2rem; }
-
-.index-body .title-font-color {
-  color: #83C3A3; }
-
-.index-body .login-buttons {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); }
-
-.index-body .description-font {
-  text-shadow: 1px 1px 1px #000000;
-  font-size: 1rem; }
-
-.index-body .form-format {
-  margin: 0 auto;
-  width: 400px;
-  max-width: 100%; }
-
-.index-body .title-margin {
-  margin-top: 5%; }
-
-.index-body .main-content {
-  margin-top: 50px; }
-
-.index-body #comments {
-  color: #1E242E; }
-
-.index-body #carouselExampleCaptions {
-  width: 100%; }
-
-.index-body .carousel-images {
-  filter: opacity(0.8); }
+  .index-body header {
+    margin: 0; }
+  .index-body footer .scroll-to-top {
+    display: none; }
+  .index-body .landing {
+    background-repeat: repeat-x;
+    height: 300px;
+    text-align: center;
+    width: 100%;
+    font-weight: bolder;
+    font-family: apex; }
+  .index-body .title-font {
+    font-weight: bolder;
+    font-family: apex;
+    text-shadow: 1px 1px 1px #000000;
+    font-size: 2rem; }
+  .index-body .title-font-color {
+    color: #83C3A3; }
+  .index-body .login-buttons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+  .index-body .description-font {
+    text-shadow: 1px 1px 1px #000000;
+    font-size: 1rem; }
+  .index-body .form-format {
+    margin: 0 auto;
+    width: 400px;
+    max-width: 100%; }
+  .index-body .title-margin {
+    margin-top: 5%; }
+  .index-body .main-content {
+    margin-top: 50px; }
+  .index-body #comments {
+    color: #1E242E; }
+  .index-body #carouselExampleCaptions {
+    width: 100%; }
+  .index-body .carousel {
+    margin: 0;
+    padding: 0; }
+    .index-body .carousel .carousel-item {
+      height: 100vh;
+      z-index: -9; }
+      .index-body .carousel .carousel-item img {
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(50%); }
+    .index-body .carousel .carousel-control-next,
+    .index-body .carousel .carousel-control-prev {
+      box-shadow: none; }
 
 .find-a-trainer {
   overflow-x: hidden; }
@@ -776,7 +780,7 @@ footer .btn.btn-outline-light.contact-us i {
     display: flex;
     justify-content: center;
     width: 100%;
-    padding: 1rem; }
+    padding: 2rem; }
     .find-a-trainer .pagination .paginate {
       background: none;
       color: #D4DDD6;
@@ -785,7 +789,8 @@ footer .btn.btn-outline-light.contact-us i {
       .find-a-trainer .pagination .paginate:hover, .find-a-trainer .pagination .paginate:active, .find-a-trainer .pagination .paginate:focus {
         color: #0444AC; }
       .find-a-trainer .pagination .paginate.previous {
-        transform: rotate(-180deg); }
+        transform: rotate(-180deg);
+        display: none; }
   .find-a-trainer .filter-drawer {
     position: fixed;
     top: 0;
