@@ -264,7 +264,7 @@ const getAvailabilityText = (availability) => {
     return `Available ${text}`;
 }
 
-const renderTrainerCards = () => {
+const renderTrainerCards = (trainers) => {
     trainerList.innerHTML = "";
 
     trainers.forEach(trainer => {
