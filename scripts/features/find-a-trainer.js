@@ -347,14 +347,7 @@ window.addEventListener("resize", () => {
 });
 
 filterToggles.forEach((toggle) => {
-    toggle.addEventListener("click", () => {
-        if (toggle.classList.contains("active")) {
-            toggle.classList.remove("active");
-        } else {
-            toggle.classList.add("active");
-        }
-    });
-
+    toggle.addEventListener("click", () => toggle.classList.toggle("active"));
     toggle.addEventListener("click", debounce(setFilterToggles, debounceTime));
 });
 
