@@ -297,6 +297,7 @@ const renderTrainerCards = (trainers) => {
     });
 }
 renderTrainerCards(trainers);
+
 // ### jQuery - Range Sliders ###
 
 rangeSliders.forEach(slider => 

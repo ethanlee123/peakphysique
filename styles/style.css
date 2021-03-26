@@ -772,6 +772,20 @@ footer .btn.btn-outline-light.contact-us i {
           text-transform: uppercase;
           background: #83C3A3;
           color: #1E242E; }
+  .find-a-trainer .pagination {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem; }
+    .find-a-trainer .pagination .paginate {
+      background: none;
+      color: #D4DDD6;
+      box-shadow: none;
+      border: none; }
+      .find-a-trainer .pagination .paginate:hover, .find-a-trainer .pagination .paginate:active, .find-a-trainer .pagination .paginate:focus {
+        color: #0444AC; }
+      .find-a-trainer .pagination .paginate.previous {
+        transform: rotate(-180deg); }
   .find-a-trainer .filter-drawer {
     position: fixed;
     top: 0;

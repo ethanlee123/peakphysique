@@ -324,6 +324,28 @@
         }        
     }
 
+    .pagination {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 1rem;
+
+        .paginate {
+            background: none;
+            color: $light;
+            box-shadow: none;
+            border: none;
+
+            @include hover-state {
+                color: $info;
+            }
+
+            &.previous {
+                transform: rotate(-180deg);
+            }
+        }
+    }
+
     .filter-drawer {
         position: fixed;
         top: 0;
