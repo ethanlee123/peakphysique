@@ -251,7 +251,7 @@ const getAvailabilityText = (availability) => {
                 "";
 
     if (text) {
-        if (!availableDays) {
+        if (availableDays.length === 0) {
             return text;
         }
         availableDays = availableDays.filter(day => !days[text.toLowerCase()].includes(day));

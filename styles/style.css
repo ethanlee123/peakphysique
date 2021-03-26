@@ -765,6 +765,7 @@ footer .btn.btn-outline-light.contact-us i {
           width: 50%; }
         .find-a-trainer .trainer-list .card .card-body .info {
           display: flex;
+          align-items: center;
           margin-bottom: 0.5rem; }
         .find-a-trainer .trainer-list .card .card-body .free-trial {
           margin-left: 0.5rem;
