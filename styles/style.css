@@ -568,7 +568,7 @@ footer .btn.btn-outline-light.contact-us i {
   overflow-x: hidden; }
   .find-a-trainer main {
     padding: 2em;
-    max-width: 1800px; }
+    max-width: 1600px; }
   .find-a-trainer section {
     margin-bottom: 2em;
     width: 100%; }
@@ -760,6 +760,14 @@ footer .btn.btn-outline-light.contact-us i {
           margin: 0 auto;
           margin-top: 2em;
           width: 50%; }
+        .find-a-trainer .trainer-list .card .card-body .info {
+          display: flex;
+          margin-bottom: 0.5rem; }
+        .find-a-trainer .trainer-list .card .card-body .free-trial {
+          margin-left: 0.5rem;
+          text-transform: uppercase;
+          background: #83C3A3;
+          color: #1E242E; }
   .find-a-trainer .filter-drawer {
     position: fixed;
     top: 0;

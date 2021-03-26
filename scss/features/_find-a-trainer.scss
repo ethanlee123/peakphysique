@@ -7,7 +7,7 @@
 
     main {
         padding: $main-padding;
-        max-width: 1800px;
+        max-width: 1600px;
     }
 
     section {
@@ -304,6 +304,18 @@
                     margin: 0 auto;
                     margin-top: 2em;
                     width: 50%;
+                }
+
+                .info {
+                    display: flex;
+                    margin-bottom: 0.5rem;
+                }
+
+                .free-trial {
+                    margin-left: 0.5rem;
+                    text-transform: uppercase;
+                    background: $primary;
+                    color: $dark;
                 }
             }
 
