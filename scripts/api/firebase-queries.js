@@ -136,25 +136,6 @@ export function writeAppointmentSchedule() {
     });
 }
 
-export function updateProfileInfo(websiteUrl, phoneNum, bio, workout, cheatMeal, randFact, radiusTravel) {
-    firebase.auth().onAuthStateChanged(function(user) {
-        // Get doc from user collection
-        userRef.doc(user.uid).update({
-            // No option to update name
-            phoneNumber: phoneNum.value,
-            // city: userCity.value,
-            about: bio.value,
-            favWorkout: workout.value,
-            favCheatMeal: cheatMeal.value,
-            randomFact: randFact.value,
-            radius: radiusTravel.value,
-        }).then(() => {
-            updateTrainerInfo(websiteUrl);
-            console.log("updateTrainerInfo called");
-        })
-    });
-}
-
 export function personalizedWelcome(selector) {
     // Only authenticated users, can be set in firebase console storage "rules" tab
     firebase.auth().onAuthStateChanged(function(user) {
