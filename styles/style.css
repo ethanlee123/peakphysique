@@ -793,12 +793,10 @@ footer .btn.btn-outline-light.contact-us i {
           background: #83C3A3;
           color: #1E242E; }
   .find-a-trainer .pagination {
-    display: flex;
     justify-content: center;
     width: 100%;
-    padding: 2rem; }
-    .find-a-trainer .pagination:not(.has-pages) {
-      display: none; }
+    padding: 2rem;
+    display: none; }
     .find-a-trainer .pagination .paginate {
       background: none;
       color: #D4DDD6;
@@ -809,6 +807,13 @@ footer .btn.btn-outline-light.contact-us i {
       .find-a-trainer .pagination .paginate.previous {
         transform: rotate(-180deg);
         display: none; }
+    .find-a-trainer .pagination .page-nums span {
+      margin-right: 0.5rem;
+      cursor: pointer; }
+      .find-a-trainer .pagination .page-nums span:hover, .find-a-trainer .pagination .page-nums span:active, .find-a-trainer .pagination .page-nums span:focus {
+        color: #0444AC; }
+      .find-a-trainer .pagination .page-nums span.current-page {
+        color: #0444AC; }
   .find-a-trainer .filter-drawer {
     position: fixed;
     top: 0;
