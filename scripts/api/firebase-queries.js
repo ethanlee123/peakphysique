@@ -1,13 +1,15 @@
 // Sprint 2: reading/writing to firebase
 import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
 // import { reverseGeo } from "/scripts/api/here_api.js"
+
 // firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+
 // Reference to user collection, no document specified
 const userRef = db.collection("user");
+
 // Reference to trainerOnly collection, , no document specified
 const trainerOnlyRef = db.collection("trainerOnly");
-
 
 export function displayTrainerInfo(){
   console.log("hello from displayTrainerInfo! :)");
@@ -227,7 +229,8 @@ export function createUser() {
                     role: null,
                     about: null,
                     randomFact: null,
-                    radius: null
+                    radius: null,
+                    city: null,
                 });
                 trainerOnlyRef.doc(user.uid).set({
                     userId: user.uid,
@@ -297,6 +300,7 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
             cheatMeal.value = doc.data().favCheatMeal;
             randFact.value = doc.data().randomFact;
             radiusDisplay.innerText= doc.data().radius;
+            userCity.value = doc.date().city;
         });
     });
 }
@@ -306,6 +310,7 @@ export function updateProfileInfo(websiteUrl, phoneNum, bio, workout, cheatMeal,
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from user collection
         userRef.doc(user.uid).update({
+
             // No option to update name
             phoneNumber: phoneNum.value,
             // city: userCity.value,
