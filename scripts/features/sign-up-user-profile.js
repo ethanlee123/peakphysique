@@ -1,6 +1,5 @@
 import { displayProfileInfo, updateProfileInfo, getLocation } from "/scripts/api/firebase-queries.js";
 
-
 // Reference to Phone Number input field, use .value to modify/set
 const phoneNum = document.getElementById("phone");
 
@@ -27,7 +26,7 @@ const saveReturnBtn = document.getElementById("next-btn");
 getLocation();
 
 // Displays user profile information on edit profile
-displayProfileInfo(fullName, phoneNum, bio, favWorkout, favCheatMeal, randFact, websiteUrl, radius, radiusDisplay);
+displayProfileInfo(fullName, phoneNum, bio, favWorkout, favCheatMeal, randFact, websiteUrl, radius, radiusDisplay, userCity);
 
 // Updates firebase
 saveReturnBtn.addEventListener("click", function(event) {
