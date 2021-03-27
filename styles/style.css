@@ -1227,6 +1227,9 @@ footer .btn.btn-outline-light.contact-us i {
 .sign-up-success .text-uppercase {
   text-transform: uppercase; }
 
+.misc .images {
+  display: flex; }
+
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

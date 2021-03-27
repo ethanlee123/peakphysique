@@ -82,7 +82,7 @@ const trainer3 = {
         sunday: []
     }
 };
-const totalTrainers = 14;
+const totalTrainers = 13;
 let trainers = [];
 const generateFabios = (arr, max, obj1, obj2, obj3) => {
     let randomNum;
