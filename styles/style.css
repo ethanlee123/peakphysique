@@ -517,6 +517,27 @@ footer .btn.btn-outline-light.contact-us:hover i, footer .btn.btn-outline-light.
 footer .btn.btn-outline-light.contact-us i {
   color: #D4DDD6; }
 
+.user-avatar {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(212, 221, 214, 0.1); }
+  .user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; }
+  .user-avatar .initials {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "apex";
+    white-space: nowrap;
+    color: #83C3A3;
+    text-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.85); }
+
 .index-body {
   position: relative; }
   .index-body header {
@@ -744,18 +765,10 @@ footer .btn.btn-outline-light.contact-us i {
         gap: 0 1em;
         font-family: "Roboto", sans-serif;
         background-color: #0a0c0f; }
+        .find-a-trainer .trainer-list .card .card-header .trainer-name {
+          text-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.85); }
         .find-a-trainer .trainer-list .card .card-header .user-avatar {
-          grid-row: 1 / span 2;
-          overflow: hidden;
-          border-radius: 50%;
-          width: 50px;
-          height: 50px; }
-          .find-a-trainer .trainer-list .card .card-header .user-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; }
-          .find-a-trainer .trainer-list .card .card-header .user-avatar .initials {
-            display: none; }
+          grid-row: 1 / span 2; }
         .find-a-trainer .trainer-list .card .card-header .trainer-name {
           margin: 0;
           line-height: 1; }
@@ -784,6 +797,8 @@ footer .btn.btn-outline-light.contact-us i {
     justify-content: center;
     width: 100%;
     padding: 2rem; }
+    .find-a-trainer .pagination:not(.has-pages) {
+      display: none; }
     .find-a-trainer .pagination .paginate {
       background: none;
       color: #D4DDD6;
