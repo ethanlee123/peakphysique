@@ -426,7 +426,7 @@ export function trainerProfilePosts() {
         })
     }
 
-const getCollection = async ({
+export const getCollection = async ({
         collectionName,
         sort,
         limit,
@@ -434,12 +434,10 @@ const getCollection = async ({
         startAfter = null
     }) => {
         let query = db.collection(collectionName);
-     
-        query = query.orderBy(sort.by, sort.order);
-        if (startAfter) {
-            query = query.startAfter(startAfter);
-        }
-        query = query.limit(limit);
+
+        query = sort ? query.orderBy(sort.by, sort.order) : query;
+        query = startAfter ? query.orderBy(sort.by, sort.order) : query;
+        query = limit ? query.limit(limit) : query; 
      
         filters && filters.forEach((filter) => {
             if (filter) {
@@ -450,14 +448,10 @@ const getCollection = async ({
      
         let collection = await query.get();
         return collection.docs.map(doc => {
-            return {
-                doc: doc,
-                id: doc.id,
-                data: doc.data()
-            };
+            return doc.data();
         });
     }
-    
+
 // retrieves trainer availablity data
 export function checkAvailability() {
     db.collection("trainerAvailability").get()
