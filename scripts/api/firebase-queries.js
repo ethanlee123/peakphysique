@@ -112,6 +112,7 @@ function writeUserProfile() {
 }
 // writeUserProfile();   
 
+// creates a document in schedule collection for the booked appointment
 export function writeAppointmentSchedule() {
     var scheduleRef = db.collection("schedule");
 
@@ -457,3 +458,14 @@ const getCollection = async ({
         });
     }
     
+// retrieves trainer availablity data
+export function checkAvailability() {
+    db.collection("trainerAvailability").get()
+    .then(function (q) {
+        q.forEach(function (doc) {
+            // unavailability is an array of dates: dd MM yyyy
+            var unavailability = doc.data();
+            console.log(unavailability);
+        })
+    })
+}
