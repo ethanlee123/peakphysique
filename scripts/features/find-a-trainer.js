@@ -126,40 +126,26 @@ const pageNums = document.getElementById("pageNums");
 // const yearsOfExperience = document.getElementById("yearsOfExperience");
 // const distanceFromUser = document.getElementById("distanceFromUser");
 
-var searchQuery = "";
 var sort = {
     field: "name",
     descending: false
 }
-const filtersDefault = {
-    wellness: [],
-    wellnessExclude: [],
-    fitness: [],
-    fitnessExclude: [],
-    ratePerSession: {
-        min: undefined,
-        max: undefined
-    },
-    firstSessionFree: undefined,
-    yearsOfExperience: undefined,
-    gender: undefined,
-    distance: undefined
-};
 
 var filters = {
     value: {},
-
     get values() {
         return this.value;
     },
 
     set values(filters) {
+        const noFilters = Object.keys(this.value).length === 0 && true;
         this.value = filters;
-        this.updateFilterButtons();
+        this.updateFilterButtons(noFilters);
+        !noFilters && this.filterCards(trainers);
     },
 
-    updateFilterButtons() {
-        if (Object.keys(this.value).length !== 0) {
+    updateFilterButtons(noFilters) {
+        if (noFilters) {
             setFilterBtn.classList.remove("no-filters", "btn-outline-light");
             setFilterBtn.classList.add("btn-primary");
         } else {
@@ -167,6 +153,36 @@ var filters = {
             setFilterBtn.classList.add("no-filters", "btn-outline-light");
         }
     },
+
+    default: {
+        name: "",
+        wellness: [],
+        wellnessExclude: [],
+        fitness: [],
+        fitnessExclude: [],
+        ratePerSession: {
+            min: undefined,
+            max: undefined
+        },
+        firstSessionFree: undefined,
+        yearsOfExperience: undefined,
+        gender: undefined,
+        distance: undefined
+    },
+
+    filterCards(cardList) {
+        let filteredList = cardList;
+
+        for (const filter in this.value) {
+            if (typeof filter === "string") {
+                filteredList = filteredList.filter(trainer => trainer[filter].toLowerCase().includes(this.value[filter].toLowerCase()));
+            }
+
+            console.log("filteredList", filteredList);
+        }
+
+        return filteredList;
+    }
 };
 
 var page = {
@@ -416,8 +432,10 @@ filterToggles.forEach((toggle) => {
 
 searchBar.addEventListener("keyup", debounce(() => {
     const query = searchBar.value.trim();
-    if (query && query !== searchQuery) {
-        searchQuery = query;
+    if (query !== filters?.values?.name) {
+        let newFilters = filters.values;
+        newFilters["name"] = query;
+        filters.values = newFilters;
     }
 }, debounceTime));
 
@@ -459,11 +477,7 @@ resetFilters.forEach((btn) => {
 
 filterDrawerToggles.forEach((toggle) => {
     toggle.addEventListener("click", () => {
-        if (filterDrawer.classList.contains("active")) {
-            filterDrawer.classList.remove("active");
-        } else {
-            filterDrawer.classList.add("active");
-        }
+        filterDrawer.classList.toggle("active");
     });
 });
 
