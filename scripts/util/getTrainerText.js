@@ -1,4 +1,9 @@
-export const getAvailabilityText = (availability) => {
+const insertText = (parentNode, selector, text) => {
+    const element = parentNode.querySelector(selector);
+    element.appendChild(document.createTextNode(text));
+}
+
+const getAvailabilityText = (availability) => {
     const dayShorthand = {
         monday: "Mon",
         tuesday: "Tue",
@@ -38,3 +43,21 @@ export const getAvailabilityText = (availability) => {
 
     return `Available ${text}`;
 }
+
+const getExpertiseText = (expertiseArr) => {
+    let text = "";
+
+    if (expertiseArr.length === 0) {
+        text = "No expertise listed.";
+    } else {
+        for (let i = 0; i <= 1 && i < expertiseArr.length; i++) {
+            text += i === 0 ? expertiseArr[i] : `, ${expertiseArr[i]}`;
+        }
+
+        text += expertiseArr.length > 3 ? ` and ${expertiseArr.length} more.` : "";
+    }
+
+    return text;
+}
+
+export { insertText, getAvailabilityText, getExpertiseText };

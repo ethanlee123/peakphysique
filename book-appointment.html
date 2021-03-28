@@ -57,10 +57,10 @@
             </div>
             <div class="mb-3 ms-3">
               <select class="form-select form-select-sm" aria-label="Default select example">
-                <option selected>Time Slot</option>
-                <option value="1">Morning</option>
-                <option value="2">Afternoon</option>
-                <option value="3">Evening</option>
+                <option selected id="timeSlots">Time Slot</option>
+                <option value="1" id="morning">Morning</option>
+                <option value="2" id="afternoon">Afternoon</option>
+                <option value="3" id="evening">Evening</option>
               </select>
             </div>
           <!-- </div> -->
@@ -170,21 +170,21 @@
         var scheduleRef = db.collection("schedule");
 
         scheduleRef.add({
-        // Get this from jquery date picker
-        date: new firebase.firestore.Timestamp.fromDate(new Date("March 20 2021")), // Timestamp
-        time: "Afternoon", // String morning, afternoon, or evening - user input from drop down selection
-        // location: "",
-        completed: false, // boolean default false
-        clientProfilePic: "https://i.dailymail.co.uk/1s/2021/03/03/23/40017992-9323427-image-m-25_1614815098810.jpg",
-        clientFirstName: "Speckled",
-        clientLasttName: "Lamb",
-        clientUserId: "CNFitnSvSBREvgylpqdAPeydDk12", //user_id
-        trainerProfilePic: "https://vz.cnwimg.com/thumb-1200x/wp-content/uploads/2010/03/Fabio-e1603764807834.jpg",
-        trainerFirstName: "Soupy",
-        trainerLastName: "Kestrel",
-        trainerUserId: "nwSBk8XpWLbq47TaarLgfBuenKH2", //user_id
-        bookingMsg: "Hello darkness my old friend", //pull from trainer collection
-        initialMsgFromClient: "I've come to talk with you again" //user input from comments form
+          // Get this from jquery date picker
+          date: new firebase.firestore.Timestamp.fromDate(new Date("March 20 2021")), // Timestamp
+          time: "Afternoon", // String morning, afternoon, or evening - user input from drop down selection
+          // location: "",
+          completed: false, // boolean default false
+          clientProfilePic: "https://i.dailymail.co.uk/1s/2021/03/03/23/40017992-9323427-image-m-25_1614815098810.jpg",
+          clientFirstName: "Speckled",
+          clientLasttName: "Lamb",
+          clientUserId: "CNFitnSvSBREvgylpqdAPeydDk12", //user_id
+          trainerProfilePic: "https://vz.cnwimg.com/thumb-1200x/wp-content/uploads/2010/03/Fabio-e1603764807834.jpg",
+          trainerFirstName: "Soupy",
+          trainerLastName: "Kestrel",
+          trainerUserId: "nwSBk8XpWLbq47TaarLgfBuenKH2", //user_id
+          bookingMsg: "Hello darkness my old friend", //pull from trainer collection
+          initialMsgFromClient: "I've come to talk with you again" //user input from comments form
         });
 
       }

@@ -3,6 +3,12 @@ footer {
     a {
         color: $light;
         text-decoration: none;
+
+        @include hover-state {
+            .coming-soon {
+                background: $primary;
+            }
+        }
     }
 
     i {
@@ -50,6 +56,11 @@ footer {
                 }
             }
         }
+
+        .coming-soon {
+            background: $darkest;
+            color: $dark;
+        }
     }
 
     .desktop {
@@ -93,6 +104,11 @@ footer {
                 }
             }
         }
+
+        .coming-soon {
+            background: $dark;
+            color: $darkest;
+        }
     }
 
     .social-media {
@@ -123,5 +139,10 @@ footer {
         i {
             color: $light;
         }
+    }
+
+    .coming-soon {
+        margin-left: 0.5rem;
+        text-transform: uppercase;
     }
 }

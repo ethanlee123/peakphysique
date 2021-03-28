@@ -1,7 +1,8 @@
 import { debounce } from "../util/debounce.js";
 import { fitnessOptions, wellnessOptions, availabilityDays } from "../schema.js";
 import { getTemplate } from "../util/getTemplate.js";
-import { getAvailabilityText } from "../util/getAvailabilityText.js";
+import { insertText, getExpertiseText, getAvailabilityText } from "../util/getTrainerText.js";
+import { getUserAvatar } from "../util/getUserAvatar.js";
 
 // ### Test Data ###
 const trainer1 = {
@@ -9,7 +10,7 @@ const trainer1 = {
     firstName: "Fabio",
     lastName: "Lous",
     name: "Fabio Lous",
-    profilePic: "https://vz.cnwimg.com/thumb-1200x/wp-content/uploads/2010/03/Fabio-e1603764807834.jpg",
+    profilePic: "",
     website: "fabiolous.com",
     hourlyRate: 23,
     deposit: null,
@@ -81,11 +82,24 @@ const trainer3 = {
         sunday: []
     }
 };
-
-const trainers = [trainer1, trainer2, trainer3, trainer1, trainer3, trainer2];
+const totalTrainers = 13;
+const generateFabios = (max, obj1, obj2, obj3) => {
+    let randomNum;
+    let fabios = [];
+    for(let i = 0; i < max; i++) {
+        randomNum = Math.floor(Math.random() * Math.floor(3));
+        randomNum === 0 ? fabios.push({...obj1}) :
+            randomNum === 1 ? fabios.push({...obj2}) :
+            fabios.push({...obj3});
+        fabios[i].userId = `${fabios[i].userId}-0${i}`;
+    }
+    return fabios;
+}
+const trainersData = generateFabios(totalTrainers, trainer1, trainer2, trainer3);
 // #################
 
 // ### Variables ###
+// ###### Constants ######
 const pathToTrainerCard = "../../common/trainer-card.html";
 const debounceTime = 250;
 const pageSize = 6;
@@ -106,37 +120,109 @@ const rangeSliders = document.querySelectorAll(".range-slider");
 const trainerList = document.getElementById("trainerList");
 const trainerCardTemplate = await getTemplate(pathToTrainerCard);
 const pagination = document.getElementById("pagination");
-
+const paginationBtns = document.querySelectorAll("button.paginate");
+const pageNums = document.getElementById("pageNums");
+const resultsFound = document.getElementById("resultsFound");
 // const expertiseFilter = document.getElementById("expertiseFilter");
 // const ratePerSession = document.getElementById("ratePerSession");
 // const yearsOfExperience = document.getElementById("yearsOfExperience");
 // const distanceFromUser = document.getElementById("distanceFromUser");
-// ###########################
 
-var searchQuery = "";
+var trainers = {
+    _all: [],
+    _toDisplay: [],
+
+    set display(trainers) {
+        this._toDisplay = trainers;
+        this.renderTrainerCards(this.getPage(trainers, 0, pageSize));
+        page.total = Math.ceil(trainers.length / pageSize);
+    },
+
+    set all(trainers) {
+        this._all = trainers;
+        this.display = trainers;
+    },
+
+    get display() {
+        return this._toDisplay;
+    },
+
+    get all() {
+        return this._all;
+    },
+
+    paginate(page) {
+        this.renderTrainerCards(this.getPage(this._toDisplay, page, pageSize));
+    },
+
+    getPage (arr, pageNum, pageSize) {
+        const startIndex = pageNum * pageSize;
+        const endIndex = startIndex + pageSize;
+        const isLastPage = arr.length - (pageSize * pageNum) < pageSize && true;
+    
+        if (isLastPage) {
+            return arr.slice(startIndex);
+        }
+        return arr.slice(startIndex, endIndex);
+    },
+
+    renderTrainerCards (trainers) {
+        trainerList.innerHTML = "";
+    
+        trainers.forEach(trainer => {
+    
+            const trainerCard = document.importNode(trainerCardTemplate.content, true);
+            const expertiseArr = trainer.fitness.concat(trainer.wellness);
+    
+            insertText(trainerCard, ".trainer-name", trainer.name);
+            insertText(trainerCard, ".rating", trainer.rating.toFixed(1));
+            insertText(trainerCard, ".rate .text", `${trainer.hourlyRate} / hr`);
+            insertText(trainerCard, ".expertise .text", getExpertiseText(expertiseArr));
+            insertText(trainerCard, ".availability .text", getAvailabilityText(trainer.availability));
+            getUserAvatar({user: trainer, parentNode: trainerCard});
+    
+            if (trainer.firstSessionFree) {
+                const badge = document.createElement("span");
+                badge.classList.add("badge", "free-trial");
+                badge.appendChild(document.createTextNode("Free trial"));
+    
+                const hourlyRate = trainerCard.querySelector(".rate .text");
+                hourlyRate.appendChild(badge);
+            }
+    
+            const viewProfile = trainerCard.querySelector(".view-profile");
+            viewProfile.addEventListener("click", () => {
+                localStorage.setItem("trainerProfileToDisplay", JSON.stringify(trainer));
+                window.location.href = "../../user-profile.html";
+            });
+    
+            trainerList.appendChild(trainerCard);
+        });
+    },    
+};
+
 var sort = {
     field: "name",
     descending: false
 }
-const filtersDefault = {
-    wellness: [],
-    wellnessExclude: [],
-    fitness: [],
-    fitnessExclude: [],
-    ratePerSession: {
-        min: undefined,
-        max: undefined
-    },
-    firstSessionFree: undefined,
-    yearsOfExperience: undefined,
-    gender: undefined,
-    distance: undefined
-};
+
 var filters = {
-    value: {},
-    
-    updateFilterButtons() {
-        if (Object.keys(this.value).length !== 0) {
+    _value: {},
+    get values() {
+        return this._value;
+    },
+
+    set values(filters) {
+        const noFilters = Object.keys(this._value).length === 0 && true;
+        this._value = filters;
+        this.updateFilterButtons(noFilters);
+        if (!noFilters) {
+            trainers.display = this.applyFilters(trainers.all);
+        }
+    },
+
+    updateFilterButtons(noFilters) {
+        if (noFilters) {
             setFilterBtn.classList.remove("no-filters", "btn-outline-light");
             setFilterBtn.classList.add("btn-primary");
         } else {
@@ -145,14 +231,128 @@ var filters = {
         }
     },
 
-    get values() {
-        return this.value;
+    default: {
+        name: "",
+        wellness: [],
+        wellnessExclude: [],
+        fitness: [],
+        fitnessExclude: [],
+        ratePerSession: {
+            min: undefined,
+            max: undefined
+        },
+        firstSessionFree: undefined,
+        yearsOfExperience: undefined,
+        gender: undefined,
+        distance: undefined
     },
 
-    set values(filters) {
-        this.value = filters;
-        this.updateFilterButtons();
+    applyFilters(cardList) {
+        let filteredList = cardList;
+
+        for (const filter in this._value) {
+            if (typeof filter === "string") {
+                filteredList = filteredList.filter(trainer => 
+                    trainer[filter].toLowerCase().includes(this._value[filter].toLowerCase()));
+            }
+
+            console.log("filteredList", filteredList);
+        }
+
+        return filteredList;
     }
+};
+
+var page = {
+    _currentPage: 0,
+    _totalPages: 0,
+
+    get current() {
+        return this._currentPage;
+    },
+
+    get total() {
+        return this._totalPages;
+    },
+
+    set current(current) {
+        this._currentPage = current;
+        this.renderPaginationBtns();
+        this.styleCurrentPageNum();
+        this.renderResultsFound();
+        trainers.paginate(current);
+    },
+
+    set total(total) {
+        this._totalPages = total;
+        this._currentPage = 0;
+        this.renderPagination();
+        total > 1 && this.styleCurrentPageNum();
+        this.renderResultsFound();
+    },
+
+    renderPageNum(num) {
+        const pageNum = document.createElement("span");
+        pageNum.appendChild(document.createTextNode(num));
+        pageNum.setAttribute("data-page", `${num - 1}`);
+        return pageNum;
+    },
+
+    renderPagination() {
+        if (this._totalPages <= 1) {
+            pagination.style.display = "none";
+        } else {
+            pagination.style.display = "flex";
+            pageNums.innerHTML = "";
+            
+            const numsToRender = this._totalPages < 3 ? this._totalPages :
+                                    this._totalPages > 3 && this._totalPages <= 5 ? 2 : 3;
+            for (let i = 1; i <= numsToRender; i++) {
+                pageNums.appendChild(this.renderPageNum(i));
+            }
+    
+            if (numsToRender < this._totalPages) {
+                pageNums.appendChild(document.createTextNode("... "));
+                pageNums.appendChild(this.renderPageNum(this._totalPages));
+            }
+
+            const nums = pageNums.querySelectorAll("span");
+            nums.forEach(num => {
+                num.addEventListener("click", () => {
+                    this.current = num.dataset.page;
+                });
+            });
+        }
+    },
+
+    renderPaginationBtns() {
+        const prevBtn = pagination.querySelector("#previous");
+        const nextBtn = pagination.querySelector("#next");
+
+        prevBtn.style.display = this._currentPage === 0 ? "none" : "block";
+        nextBtn.style.display = this._currentPage === (this._totalPages - 1) ? "none" : "block";
+    },
+
+    renderResultsFound() {
+        if (trainers.display.length === 0) {
+            resultsFound.innerHTML = "";
+        } else {
+            const isFirstPage = this._currentPage === 0;
+            const isLastPage = this._currentPage === this._totalPages - 1;
+            const trainersShown = !isFirstPage && isLastPage ? (trainers.display.length % pageSize) :
+                                    isFirstPage && isLastPage ? trainers.display.length :
+                                    pageSize;
+            resultsFound.innerHTML = `Showing ${trainersShown} out of <b>${trainers.display.length} trainers</b> found.`;            
+        }
+    },
+    
+    styleCurrentPageNum() {
+        const previousPageNum = pagination.querySelector(".current-page");
+        previousPageNum?.classList?.remove("current-page");
+        
+        const currentPageNum = pagination.querySelector(`[data-page="${this._currentPage}"]`);
+        currentPageNum.classList.add("current-page");
+    },
 };
 // ##################
 
@@ -204,63 +404,7 @@ const resetFilterToggles = () => {
     })
 }
 
-const insertText = (parentNode, selector, text) => {
-    const element = parentNode.querySelector(selector);
-    element.appendChild(document.createTextNode(text));
-}
-
-const getExpertiseText = (expertiseArr) => {
-    let text = "";
-
-    if (expertiseArr.length === 0) {
-        text = "No expertise listed.";
-    } else {
-        for (let i = 0; i <= 1 && i < expertiseArr.length; i++) {
-            text += i === 0 ? expertiseArr[i] : `, ${expertiseArr[i]}`;
-        }
-
-        text += expertiseArr.length > 3 ? ` and ${expertiseArr.length} more.` : "";
-    }
-
-    return text;
-}
-
-const renderTrainerCards = (trainers) => {
-    trainerList.innerHTML = "";
-
-    trainers.forEach(trainer => {
-
-        const trainerCard = document.importNode(trainerCardTemplate.content, true);
-        const expertiseArr = trainer.fitness.concat(trainer.wellness);
-
-        insertText(trainerCard, ".trainer-name", trainer.name);
-        insertText(trainerCard, ".rating", trainer.rating.toFixed(1));
-        insertText(trainerCard, ".rate .text", `${trainer.hourlyRate} / hr`);
-        insertText(trainerCard, ".expertise .text", getExpertiseText(expertiseArr));
-        insertText(trainerCard, ".availability .text", getAvailabilityText(trainer.availability));
-
-        if (trainer.firstSessionFree) {
-            const badge = document.createElement("span");
-            badge.classList.add("badge", "free-trial");
-            badge.appendChild(document.createTextNode("Free trial"));
-
-            const hourlyRate = trainerCard.querySelector(".rate .text");
-            hourlyRate.appendChild(badge);
-        }
-
-        const viewProfile = trainerCard.querySelector(".view-profile");
-        viewProfile.addEventListener("click", () => {
-            localStorage.setItem("trainerProfileToDisplay", JSON.stringify(trainer));
-            window.location.href = "../../user-profile.html";
-        });
-
-        trainerList.appendChild(trainerCard);
-    });
-}
-renderTrainerCards(trainers);
-
 // ### jQuery - Range Sliders ###
-
 rangeSliders.forEach(slider => 
     noUiSlider.create(slider, {
         start: [0, 100],
@@ -297,16 +441,6 @@ availabilityFilter.selectAll();
 // ##################################
 
 // ### Event Listeners ###
-window.addEventListener("load", () => {
-    positionBannerImgHorizontally();
-    resizeBannerImgHeight();    
-});
-
-window.addEventListener("resize", () => {
-    positionBannerImgHorizontally();
-    resizeBannerImgHeight();
-});
-
 filterToggles.forEach((toggle) => {
     toggle.addEventListener("click", () => toggle.classList.toggle("active"));
     toggle.addEventListener("click", debounce(setFilterToggles, debounceTime));
@@ -314,8 +448,10 @@ filterToggles.forEach((toggle) => {
 
 searchBar.addEventListener("keyup", debounce(() => {
     const query = searchBar.value.trim();
-    if (query && query !== searchQuery) {
-        searchQuery = query;
+    if (query !== filters?.values?.name) {
+        let newFilters = filters.values;
+        newFilters["name"] = query;
+        filters.values = newFilters;
     }
 }, debounceTime));
 
@@ -357,11 +493,7 @@ resetFilters.forEach((btn) => {
 
 filterDrawerToggles.forEach((toggle) => {
     toggle.addEventListener("click", () => {
-        if (filterDrawer.classList.contains("active")) {
-            filterDrawer.classList.remove("active");
-        } else {
-            filterDrawer.classList.add("active");
-        }
+        filterDrawer.classList.toggle("active");
     });
 });
 
@@ -369,7 +501,22 @@ exitDrawerToggle.addEventListener("click", () => {
     filterDrawer.classList.remove("active");
 });
 
+paginationBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        btn.classList.contains("next") ? page.current++ : page.current--;
+    });
+});
+
+window.addEventListener("resize", () => {
+    positionBannerImgHorizontally();
+    resizeBannerImgHeight();
+
+});
 // #######################
 
-positionBannerImgHorizontally();
-resizeBannerImgHeight();
+const initialRender = () => {
+    positionBannerImgHorizontally();
+    resizeBannerImgHeight();    
+    trainers.all = trainersData;
+}
+initialRender();
