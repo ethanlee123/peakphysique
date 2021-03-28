@@ -310,7 +310,6 @@ export function updateProfileInfo(websiteUrl, phoneNum, bio, workout, cheatMeal,
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from user collection
         userRef.doc(user.uid).update({
-
             // No option to update name
             phoneNumber: phoneNum.value,
             // city: userCity.value,
@@ -336,6 +335,53 @@ function updateTrainerInfo(websiteUrl = "") {
             window.location.href = "sign-up-profile-setup.html";
         }).catch(err => {
             console.log("error: ", error);
+        });
+    });
+}
+
+export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        // Get doc from trainerOnly collection
+        trainerOnlyRef.doc(user.uid).update({
+            // For now you can only add one certificate
+            certifications: firebase.firestore.FieldValue.arrayUnion(certTitle.value),
+            // Convert String to int before updating
+            yearsOfExperience: parseInt(yearsExp.value, 10),
+            fitness: fitnessList,
+            wellness: wellnessList,
+        }).then(() => {
+            console.log("successfully update trainerOnly collection");
+            window.location.href = "sign-up-profile-setup.html";
+        }).catch(err => {
+            console.log("error: ", error);
+        });
+    });
+}
+
+export function displayExpertise(certTitle, yearsExp) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        let fitnessList = [];
+        // Get doc from trainerOnly collection
+        trainerOnlyRef.doc(user.uid).get()
+        .then((doc) => {
+            let wellnessList = [];
+            // For now you can only add one certificate
+            certTitle.value = doc.data().certifications[0],
+            // Convert String to int before updating
+            yearsExp.value = doc.data().yearsOfExperience,
+            // fitnessList = doc.data().fitness
+            // wellnessList = doc.data().wellness
+            doc.data().fitness.forEach(ele => {
+                fitnessList.push(ele);
+            })
+            doc.data().wellness.forEach(ele => {
+                wellnessList.push(ele);
+            })
+        }).then(() => {
+            return fitnessList;
+
+        }).catch(err => {
+            console.log("error: ", err);
         });
     });
 }
