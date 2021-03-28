@@ -314,14 +314,10 @@
     }
 
     .pagination {
-        display: flex;
         justify-content: center;
         width: 100%;
         padding: 2rem;
-        
-        &:not(.has-pages) {
-            display: none;
-        }
+        display: none;
 
         .paginate {
             background: none;
@@ -336,6 +332,21 @@
             &.previous {
                 transform: rotate(-180deg);
                 display: none;
+            }
+        }
+
+        .page-nums {
+            span {
+                margin-right: 0.5rem;
+                cursor: pointer;
+
+                @include hover-state {
+                    color: $info;
+                }
+
+                &.current-page {
+                    color: $info;
+                }
             }
         }
     }

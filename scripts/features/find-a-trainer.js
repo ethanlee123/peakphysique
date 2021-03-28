@@ -82,7 +82,7 @@ const trainer3 = {
         sunday: []
     }
 };
-const totalTrainers = 14;
+const totalTrainers = 13;
 let trainers = [];
 const generateFabios = (arr, max, obj1, obj2, obj3) => {
     let randomNum;
@@ -98,6 +98,7 @@ generateFabios(trainers, totalTrainers, trainer1, trainer2, trainer3);
 // #################
 
 // ### Variables ###
+// ###### Constants ######
 const pathToTrainerCard = "../../common/trainer-card.html";
 const debounceTime = 250;
 const pageSize = 6;
@@ -118,12 +119,12 @@ const rangeSliders = document.querySelectorAll(".range-slider");
 const trainerList = document.getElementById("trainerList");
 const trainerCardTemplate = await getTemplate(pathToTrainerCard);
 const pagination = document.getElementById("pagination");
-
+const paginationBtns = document.querySelectorAll("button.paginate");
+const pageNums = document.getElementById("pageNums");
 // const expertiseFilter = document.getElementById("expertiseFilter");
 // const ratePerSession = document.getElementById("ratePerSession");
 // const yearsOfExperience = document.getElementById("yearsOfExperience");
 // const distanceFromUser = document.getElementById("distanceFromUser");
-// ###########################
 
 var searchQuery = "";
 var sort = {
@@ -144,9 +145,19 @@ const filtersDefault = {
     gender: undefined,
     distance: undefined
 };
+
 var filters = {
     value: {},
-    
+
+    get values() {
+        return this.value;
+    },
+
+    set values(filters) {
+        this.value = filters;
+        this.updateFilterButtons();
+    },
+
     updateFilterButtons() {
         if (Object.keys(this.value).length !== 0) {
             setFilterBtn.classList.remove("no-filters", "btn-outline-light");
@@ -156,15 +167,84 @@ var filters = {
             setFilterBtn.classList.add("no-filters", "btn-outline-light");
         }
     },
+};
 
-    get values() {
-        return this.value;
+var page = {
+    currentPage: 0,
+    totalPages: 0,
+
+    get current() {
+        return this.currentPage;
     },
 
-    set values(filters) {
-        this.value = filters;
-        this.updateFilterButtons();
-    }
+    get total() {
+        return this.totalPages;
+    },
+
+    set current(current) {
+        this.currentPage = current;
+        this.renderPaginationBtns();
+        this.styleCurrentPageNum();
+        renderTrainerCards(getPage(trainers, this.currentPage, pageSize), trainerList);
+    },
+
+    set total(total) {
+        this.totalPages = total;
+        this.currentPage = 0;
+        total > 1 && this.renderPagination();
+        this.styleCurrentPageNum();
+    },
+
+    renderPageNum(num) {
+        const pageNum = document.createElement("span");
+        pageNum.appendChild(document.createTextNode(num));
+        pageNum.setAttribute("data-page", `${num - 1}`);
+        return pageNum;
+    },
+
+    renderPagination() {
+        if (this.totalPages <= 1) {
+            pagination.style.display = "none";
+        } else {
+            pagination.style.display = "flex";
+            
+            const numsToRender = this.totalPages > 3 && this.totalPages <= 5 ? 2 : 3;
+            for (let i = 1; i <= numsToRender; i++) {
+                pageNums.appendChild(this.renderPageNum(i));
+            }
+    
+            if (numsToRender < this.totalPages) {
+                pageNums.appendChild(document.createTextNode("... "));
+                pageNums.appendChild(this.renderPageNum(this.totalPages));
+            }
+
+            const nums = pageNums.querySelectorAll("span");
+            nums.forEach(num => {
+                num.addEventListener("click", () => {
+                    this.currentPage = num.dataset.page;
+                    this.renderPaginationBtns();
+                    this.styleCurrentPageNum();
+                    renderTrainerCards(getPage(trainers, this.currentPage, pageSize), trainerList);
+                });
+            });
+        }
+    },
+
+    renderPaginationBtns() {
+        const prevBtn = pagination.querySelector("#previous");
+        const nextBtn = pagination.querySelector("#next");
+
+        prevBtn.style.display = this.currentPage === 0 ? "none" : "block";
+        nextBtn.style.display = this.currentPage === (this.totalPages - 1) ? "none" : "block";
+    },
+    
+    styleCurrentPageNum() {
+        const previousPageNum = pagination.querySelector(".current-page");
+        previousPageNum?.classList?.remove("current-page");
+        
+        const currentPageNum = pagination.querySelector(`[data-page="${this.currentPage}"]`);
+        currentPageNum.classList.add("current-page");
+    },
 };
 // ##################
 
@@ -207,13 +287,13 @@ const getPage = (arr, pageNum, pageSize) => {
     const isLastPage = arr.length - (pageSize * pageNum) < pageSize && true;
 
     if (isLastPage) {
-        return arr.slices(startIndex);
+        return arr.slice(startIndex);
     }
     return arr.slice(startIndex, endIndex);
 }
 
-const renderTrainerCards = (trainers) => {
-    trainerList.innerHTML = "";
+const renderTrainerCards = (trainers, parentNode) => {
+    parentNode.innerHTML = "";
 
     trainers.forEach(trainer => {
 
@@ -242,7 +322,7 @@ const renderTrainerCards = (trainers) => {
             window.location.href = "../../user-profile.html";
         });
 
-        trainerList.appendChild(trainerCard);
+        parentNode.appendChild(trainerCard);
     });
 }
 
@@ -283,7 +363,6 @@ const resetFilterToggles = () => {
 }
 
 // ### jQuery - Range Sliders ###
-
 rangeSliders.forEach(slider => 
     noUiSlider.create(slider, {
         start: [0, 100],
@@ -392,8 +471,18 @@ exitDrawerToggle.addEventListener("click", () => {
     filterDrawer.classList.remove("active");
 });
 
+paginationBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        btn.classList.contains("next") ? page.current++ : page.current--;
+    });
+});
+
+
+
 // #######################
 
 positionBannerImgHorizontally();
 resizeBannerImgHeight();
-renderTrainerCards(getPage(trainers, 0, pageSize));
+renderTrainerCards(getPage(trainers, page.current, pageSize), trainerList);
+page.total = Math.ceil(trainers.length / pageSize);
+// page.total > 1 && renderPagination(page.total, pageSize, pagination);

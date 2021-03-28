@@ -445,6 +445,8 @@ main, .main-content {
 footer a {
   color: #D4DDD6;
   text-decoration: none; }
+  footer a:hover .coming-soon, footer a:active .coming-soon, footer a:focus .coming-soon {
+    background: #83C3A3; }
 
 footer i {
   color: #83C3A3; }
@@ -473,6 +475,9 @@ footer .mobile {
     justify-content: flex-end; }
     footer .mobile .social-media a:last-of-type i {
       margin-right: 0; }
+  footer .mobile .coming-soon {
+    background: #0a0c0f;
+    color: #1E242E; }
 
 footer .desktop {
   display: none;
@@ -502,6 +507,9 @@ footer .desktop {
     align-self: center; }
     footer .desktop .category.social .social-media {
       justify-content: flex-start; }
+  footer .desktop .coming-soon {
+    background: #1E242E;
+    color: #0a0c0f; }
 
 footer .social-media {
   display: flex;
@@ -516,6 +524,10 @@ footer .btn.btn-outline-light.contact-us:hover i, footer .btn.btn-outline-light.
 
 footer .btn.btn-outline-light.contact-us i {
   color: #D4DDD6; }
+
+footer .coming-soon {
+  margin-left: 0.5rem;
+  text-transform: uppercase; }
 
 .user-avatar {
   position: relative;
@@ -793,12 +805,10 @@ footer .btn.btn-outline-light.contact-us i {
           background: #83C3A3;
           color: #1E242E; }
   .find-a-trainer .pagination {
-    display: flex;
     justify-content: center;
     width: 100%;
-    padding: 2rem; }
-    .find-a-trainer .pagination:not(.has-pages) {
-      display: none; }
+    padding: 2rem;
+    display: none; }
     .find-a-trainer .pagination .paginate {
       background: none;
       color: #D4DDD6;
@@ -809,6 +819,13 @@ footer .btn.btn-outline-light.contact-us i {
       .find-a-trainer .pagination .paginate.previous {
         transform: rotate(-180deg);
         display: none; }
+    .find-a-trainer .pagination .page-nums span {
+      margin-right: 0.5rem;
+      cursor: pointer; }
+      .find-a-trainer .pagination .page-nums span:hover, .find-a-trainer .pagination .page-nums span:active, .find-a-trainer .pagination .page-nums span:focus {
+        color: #0444AC; }
+      .find-a-trainer .pagination .page-nums span.current-page {
+        color: #0444AC; }
   .find-a-trainer .filter-drawer {
     position: fixed;
     top: 0;
@@ -1221,6 +1238,19 @@ footer .btn.btn-outline-light.contact-us i {
 
 .sign-up-success .text-uppercase {
   text-transform: uppercase; }
+
+.misc .main-content {
+  position: relative;
+  max-width: 800px;
+  text-align: center; }
+  .misc .main-content figure {
+    max-width: 500px;
+    margin: 0 auto;
+    margin-bottom: 2rem; }
+  .misc .main-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; }
 
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)
