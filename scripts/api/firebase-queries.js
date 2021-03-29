@@ -255,7 +255,8 @@ export function createUser() {
                         friday: [],
                         saturday: [],
                         sunday: []
-                    }
+                    },
+                    bookingMessage: null,
                 });
             };
         });
@@ -278,7 +279,7 @@ export function updateUserRole(userRole) {
     });
 }
 
-// Displays trainer profile information
+// Displays trainer profile information. Parameters are references to a tag.
 export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
@@ -306,7 +307,7 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
     });
 }
 
-// Updates db when trainer clicks save and return
+// Updates db when trainer clicks save and return. Parameters are references to a tag.
 export function updateProfileInfo(websiteUrl, phoneNum, bio, workout, cheatMeal, randFact, radiusTravel) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from user collection
@@ -340,6 +341,7 @@ function updateTrainerInfo(websiteUrl = "") {
     });
 }
 
+// Parameters are references to a tag.
 export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
@@ -359,6 +361,7 @@ export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) 
     });
 }
 
+// Parameters are references to a tag.
 export function displayExpertise(certTitle, yearsExp) {
     firebase.auth().onAuthStateChanged(function(user) {
         let fitnessList = [];
@@ -386,6 +389,60 @@ export function displayExpertise(certTitle, yearsExp) {
         });
     });
 }
+
+// Parameters are references to a tag.
+export function updatePlatformSpecifics(rate, depositMin, freeSession, preBookingMsg) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        trainerOnlyRef.doc(user.uid).update({
+            hourlyRate: rate.value,
+            deposit: depositMin.value,
+            firstSessionFree: freeSession.checked,
+            bookingMessage: preBookingMsg.value,
+        }).then(() => {
+            console.log("successfully update trainerOnly collection");
+            window.location.href = "sign-up-profile-setup.html";
+        })
+    })
+}
+
+// Parameters are references to a tag.
+export function displayPlatformSpecifics(rate, depositMin, freeSession, preBookingMsg) {
+    firebase.auth().onAuthStateChanged(function(user) {
+
+        trainerOnlyRef.doc(user.uid).get()
+        .then(doc => {
+            rate.value = doc.data().hourlyRate;
+            depositMin.value = doc.data().deposit;
+            preBookingMsg.value = doc.data().bookingMessage;
+            // Returns a boolean value
+            freeSession.value = doc.data().firstSessionFree;
+        }).then(() => {
+            if (freeSession.value) {
+                freeSession.checked = true;
+            } else {
+                freeSession.checked = false;
+            }
+        }).catch(err => {
+            console.log("error: ", err);
+        });
+    })
+}
+// export const displayPlatformSpecifics = async (rate, depositMin, freeSession, preBookingMsg) => {
+//     firebase.auth().onAuthStateChanged(function(user) {
+
+//         trainerOnlyRef.doc(user.uid).get()
+//         .then(doc => {
+//             rate.value = doc.data().hourlyRate;
+//             depositMin.value = doc.data().deposit;
+//             preBookingMsg.value = doc.data().bookingMessage;
+//             freeSession.value = doc.data().firstSessionFree;
+//             return freeSession.value;
+//         }).catch(err => {
+//             console.log("error: ", err);
+//         });
+
+//     })
+// }
 
 export function displayScheduleInfo(){
     console.log("Schedule Info! :)");
