@@ -372,7 +372,7 @@ export function displayScheduleInfo(trainerFirstName, trainerLastName, apptTime,
     })
 }
 
-// cancels appointment, moves to completed.
+// cancels appointment, moves to completed.                                         //              TO COMPLETE
 export function cancelAppointment() {
     db.collection("schedule").get
 }
