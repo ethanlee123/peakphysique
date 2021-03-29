@@ -1,5 +1,8 @@
-import { displayScheduleInfo, writeAppointmentSchedule } from "/scripts/api/firebase-queries.js";
+import { displayBookInfo, writeAppointmentSchedule } from "/scripts/api/firebase-queries.js";
+import { generateUnavailableSlots } from "/scripts/util/generateUnavailableSlots.js";
 import { getTemplate } from "../util/getTemplate.js";
+
+displayBookInfo();
 
 // initial message from client
 const comments = document.getElementById("comments");
@@ -12,6 +15,14 @@ const confirmBtn = document.getElementById("confirm-btn")
 //     writeAppointmentSchedule(comments, timeSlot, date);
 // })
 
+function getTrainerAvailability() {
+    trainerOnlyRef.doc(localStorage.getItem("trainerProfileToDisplay")).get()
+    .then((doc) => {
+        var availability = doc.data().availability;
+        console.log(availability);
+        return availability;
+    });
+}
 // #### displayScheduleInfo variables
 const trainerFirstName = document.getElementById('trainerFirstName');
 const trainerLastName = document.getElementById('trainerLastName');
@@ -114,11 +125,6 @@ const renderCompletedScheduleCards = () => {
 renderCompletedScheduleCards();
 
 
-
-
-
-
-
 const cancelBtn = document.getElementsByClassName("cancelBtn");
 const trainerName = document.getELements
 
@@ -128,35 +134,34 @@ const trainerName = document.getELements
 // }
 // displayScheduleInfo();
 
-// creates timeslots for selected date
-function createTimeSlots() {
-    db.collection("trainerAvailability").get()
-    .then(function (q) {
-        q.forEach(function (doc) {
-            // unavailability is an array of dates: dd MM yyyy
-            var unavailability = doc.data();
-            console.log(unavailability);
-            // check each date for available timeslots to dynamically create dropdown selections
-            var timeSlot = $(unavailability).find('timeSlot').each(function(){
-                if(timeSlot != "Morning"){
-                    var morning = document.createElement('option');
-                    $('option').text("Morning");
-                    $("#timeSlots").append(morning);
-                }
-                if(timeSlot != "Afternoon"){
-                    var afternoon = document.createElement('option');
-                    $('option').text("Afternoon");
-                    $("#timeSlots").append(afternoon);
-                }
-                if(timeSlot != "Evening"){
-                    var evening = document.createElement('option');
-                    $('option').text("Evening");
-                    $("#timeSlots").append(evening);
-                }
-                });
-        })
-    })
+function createTimeSlots(date){
+    var morning = document.createElement('option');
+    morning.setAttribute("value", "1");
+    morning.text = "morning";
+
+    var afternoon = document.createElement('option');
+    afternoon.setAttribute("value", "2");
+    afternoon.text = "afternoon";
+
+    var evening = document.createElement('option');
+    evening.setAttribute("value", "3");
+    evening.text = "evening";
+
+    $("#time-slot").after(morning, afternoon, evening); 
     
+    for (const item in generateUnavailableSlots()) {
+        if (generateUnavailableSlots[item][0] == date){
+            if (generateUnavailableSlots[item][1] == "morning"){
+                morning.parentNode.removeChild(morning);
+            }
+            if (generateUnavailableSlots[item][1] == "afternoon"){
+                afternoon.parentNode.removeChild(afternoon);
+            }
+            if (generateUnavailableSlots[item][1] == "evening"){
+                evening.parentNode.removeChild(evening);
+            }
+        }  
+    }  
 }
 
 createTimeSlots();
