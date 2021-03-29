@@ -408,7 +408,6 @@ export function updatePlatformSpecifics(rate, depositMin, freeSession, preBookin
 // Parameters are references to a tag.
 export function displayPlatformSpecifics(rate, depositMin, freeSession, preBookingMsg) {
     firebase.auth().onAuthStateChanged(function(user) {
-
         trainerOnlyRef.doc(user.uid).get()
         .then(doc => {
             rate.value = doc.data().hourlyRate;
@@ -417,6 +416,7 @@ export function displayPlatformSpecifics(rate, depositMin, freeSession, preBooki
             // Returns a boolean value
             freeSession.value = doc.data().firstSessionFree;
         }).then(() => {
+            // Displays checkbox as (un)checked based on freeSession.value
             if (freeSession.value) {
                 freeSession.checked = true;
             } else {
@@ -427,22 +427,6 @@ export function displayPlatformSpecifics(rate, depositMin, freeSession, preBooki
         });
     })
 }
-// export const displayPlatformSpecifics = async (rate, depositMin, freeSession, preBookingMsg) => {
-//     firebase.auth().onAuthStateChanged(function(user) {
-
-//         trainerOnlyRef.doc(user.uid).get()
-//         .then(doc => {
-//             rate.value = doc.data().hourlyRate;
-//             depositMin.value = doc.data().deposit;
-//             preBookingMsg.value = doc.data().bookingMessage;
-//             freeSession.value = doc.data().firstSessionFree;
-//             return freeSession.value;
-//         }).catch(err => {
-//             console.log("error: ", err);
-//         });
-
-//     })
-// }
 
 export function displayScheduleInfo(){
     console.log("Schedule Info! :)");

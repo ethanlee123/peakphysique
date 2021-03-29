@@ -7,22 +7,10 @@ const preBookingMsg = document.getElementById("preBookingMsg");
 
 const saveReturn = document.getElementById("next-btn");
 
-// Should return a boolean
-
 displayPlatformSpecifics(rate, deposit, freeSession, preBookingMsg);
-
-
-
-// if (freeSessionVal == "true") {
-//     freeSession.checked == true;
-// }
-
-// console.log(freeSessionVal);
 
 saveReturn.addEventListener("click", function(e) {
     e.preventDefault();
     console.log("clicked save and return");
     updatePlatformSpecifics(rate, deposit, freeSession, preBookingMsg);
 })
-
-// console.log(freeSession.checked);
