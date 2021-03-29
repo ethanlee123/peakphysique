@@ -123,17 +123,24 @@ const pagination = document.getElementById("pagination");
 const paginationBtns = document.querySelectorAll("button.paginate");
 const pageNums = document.getElementById("pageNums");
 const resultsFound = document.getElementById("resultsFound");
-// const expertiseFilter = document.getElementById("expertiseFilter");
-// const ratePerSession = document.getElementById("ratePerSession");
-// const yearsOfExperience = document.getElementById("yearsOfExperience");
-// const distanceFromUser = document.getElementById("distanceFromUser");
+const ratePerSession = document.getElementById("ratePerSession");
+const yearsOfExperience = document.getElementById("yearsOfExperience");
+const distanceFromUser = document.getElementById("distanceFromUser");
 
 var trainers = {
     _all: [],
     _toDisplay: [],
+    _rate: {
+        min: 0,
+        max: 0
+    },
+    _experience: {
+        min: 0,
+        max: 0
+    },
 
     set display(trainers) {
-        this._toDisplay = trainers;
+        this._toDisplay = sort.sortList(trainers, sort.order);
         this.renderTrainerCards(this.getPage(trainers, 0, pageSize));
         page.total = Math.ceil(trainers.length / pageSize);
     },
@@ -141,6 +148,9 @@ var trainers = {
     set all(trainers) {
         this._all = trainers;
         this.display = trainers;
+        this._rate = this.getSliderRange("hourlyRate");
+        this._experience = this.getSliderRange("yearsOfExperience");
+        this.renderFilterSliders();
     },
 
     get display() {
@@ -149,6 +159,10 @@ var trainers = {
 
     get all() {
         return this._all;
+    },
+
+    get rate() {
+        return this._rate;
     },
 
     paginate(page) {
@@ -198,12 +212,87 @@ var trainers = {
     
             trainerList.appendChild(trainerCard);
         });
-    },    
+    },
+
+    getSliderRange(prop) {
+        const sortedList = sort.sortList(this._all, prop);
+        if (sortedList) {
+            return {min: sortedList[0][prop], max: sortedList[sortedList.length - 1][prop]};
+        }
+    },
+    
+    renderFilterSliders () {
+        const rateSlider = noUiSlider.create(ratePerSession, {
+            start: [this._rate.min, this._rate.max],
+            step: 1,
+            range: {
+                "min": this._rate.min,
+                "max": this._rate.max
+            },
+            connect: true,
+            tooltips: true
+        });
+
+        const experienceSlider = noUiSlider.create(yearsOfExperience, {
+            start: [this._experience.min, this._experience.max],
+            step: 1,
+            range: {
+                "min": this._experience.min,
+                "max": this._experience.max
+            },
+            connect: true,
+            tooltips: true
+        });
+
+        const distanceSlider = noUiSlider.create(distanceFromUser, {
+            start: [60],
+            step: 10,
+            range: {
+                "min": 10,
+                "max": 60
+            },
+            connect: true,
+            tooltips: true
+        });
+        
+    },
 };
 
 var sort = {
-    field: "name",
-    descending: false
+    _by: "name",
+    _order: "ascending",
+
+    set values({field, isDescending}) {
+        this._by = field;
+        this._order = isDescending ? "descending" : "ascending";
+        trainers.display = this.sortList(trainers.display, this._by, this._order);
+    },
+
+    get field() {
+        return this._by;
+    },
+
+    get order() {
+        return this._order;
+    },
+
+    get isDescending() {
+        if (this._order === "ascending") {
+            return false;
+        }
+        return true;
+    },
+
+    sortList(arr, sortBy, sortOrder = "ascending") {
+        let sortedList = arr.map(obj => ({...obj}));
+        sortedList = sortedList.sort((a, b) =>
+            a[sortBy] > b[sortBy] ? 1 :
+            a[sortBy] < b[sortBy] ? -1 : 0);
+        if (sortOrder == "descending") {
+            sortedList = sortedList.reverse();
+        }
+        return sortedList;
+    }
 }
 
 var filters = {
@@ -213,8 +302,8 @@ var filters = {
     },
 
     set values(filters) {
-        const noFilters = Object.keys(this._value).length === 0 && true;
         this._value = filters;
+        const noFilters = Object.keys(this._value).length === 0 && true;
         this.updateFilterButtons(noFilters);
         if (!noFilters) {
             trainers.display = this.applyFilters(trainers.all);
@@ -222,7 +311,7 @@ var filters = {
     },
 
     updateFilterButtons(noFilters) {
-        if (noFilters) {
+        if (!noFilters) {
             setFilterBtn.classList.remove("no-filters", "btn-outline-light");
             setFilterBtn.classList.add("btn-primary");
         } else {
@@ -251,7 +340,7 @@ var filters = {
         let filteredList = cardList;
 
         for (const filter in this._value) {
-            if (typeof filter === "string") {
+            if (typeof this._value[filter] === "string") {
                 filteredList = filteredList.filter(trainer => 
                     trainer[filter].toLowerCase().includes(this._value[filter].toLowerCase()));
             }
@@ -394,7 +483,6 @@ const setFilterToggles = () => {
 
     newFilters["fitnessExclude"].length === 0 && delete newFilters["fitnessExclude"];
     newFilters["wellnessExclude"].length === 0 && delete newFilters["wellnessExclude"];
-
     filters.values = newFilters;
 }
 
@@ -403,22 +491,6 @@ const resetFilterToggles = () => {
         !toggle.classList.contains("active") && toggle.classList.add("active");
     })
 }
-
-// ### jQuery - Range Sliders ###
-rangeSliders.forEach(slider => 
-    noUiSlider.create(slider, {
-        start: [0, 100],
-        step: 1,
-        range: {
-            "min": 0,
-            "max": 100
-        },
-        connect: true,
-        tooltips: true
-    })
-);
-// ##############################
-
 
 // ### jQuery - Dropdown Checkbox ###
 const fitnessOptionsFilter = $("#fitnessOptionsFilter").filterMultiSelect({
@@ -465,7 +537,7 @@ sortBy.addEventListener("change", (event) => {
             ascending.innerHTML = "A - Z";
             descending.innerHTML = "Z - A";
             break;
-        case "rate":
+        case "hourlyRate":
             ascending.innerHTML = "Lowest - Highest";
             descending.innerHTML = "Highest - Lowest";
             break;
@@ -475,11 +547,17 @@ sortBy.addEventListener("change", (event) => {
             break;
     }
 
-    sort.field = sortByValue;
+    sort.values = {
+        field: sortByValue,
+        isDescending: sort.isDescending
+    };
 });
 
 sortOrder.addEventListener("change", () => {
-    sort.descending = !sort.descending;
+    sort.values = {
+        field: sort.field,
+        isDescending: !sort.isDescending
+    };
 });
 
 resetFilters.forEach((btn) => {
