@@ -122,7 +122,7 @@ export function writeAppointmentSchedule() {
 
     scheduleRef.add({
         // Get this from jquery date picker
-        date: datepicker.value, // Timestamp
+        date: date.value, // Timestamp
         time: timeSlot.value, // String morning, afternoon, or evening
         // location: "",
         completed: false, // boolean default false
@@ -504,13 +504,40 @@ export const getCollection = async ({
     }
 
 // retrieves trainer availablity data
-export function checkAvailability() {
-    db.collection("trainerAvailability").get()
+// export function checkAvailability() {
+//     db.collection("trainerAvailability").where("trainerUserId", "==", user.uid).get()
+//     .then(function (q) {
+//         q.forEach(function (doc) {
+//             // unavailability is an array of dates: dd MM yyyy
+//             var unavailability = doc.data();
+//             console.log(unavailability);
+//         })
+//     })
+// }
+
+export function displayBookInfo() {
+    db.collection("schedule").get()
     .then(function (q) {
         q.forEach(function (doc) {
-            // unavailability is an array of dates: dd MM yyyy
-            var unavailability = doc.data();
-            console.log(unavailability);
+          var trainerFirstName = doc.data().trainerFirstName;
+          console.log(trainerFirstName);
+          var bookingMsg = doc.data().bookingMsg;
+          console.log(bookingMsg);
+          // var clientID = doc.data().client_user_id;
+          // console.log(clientID);
+          // var trainerID = doc.data().trainer_user_id;
+          // console.log(trainerID);
+          document.getElementById("trainerFirstName").innerText = trainerFirstName;
+          document.getElementById("bookingMsg").innerText = bookingMsg;
         })
     })
+}
+
+export function getTrainerAvailability() {
+    trainerOnlyRef.doc("trainerID").get()
+    .then((doc) => {
+        var availability = doc.data().availability;
+        console.log(availability);
+        return availability;
+    });
 }
