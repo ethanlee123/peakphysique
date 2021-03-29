@@ -101,6 +101,8 @@ select.form-select {
   .range-slider .noUi-connect {
     height: 0.5rem;
     background: #83C3A3; }
+  .range-slider .noUi-connects {
+    background: #83C3A3; }
   .range-slider .noUi-handle {
     border-radius: 50%;
     cursor: pointer; }
