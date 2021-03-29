@@ -122,7 +122,7 @@ export function writeAppointmentSchedule() {
 
     scheduleRef.add({
         // Get this from jquery date picker
-        date: datepicker.value, // Timestamp
+        date: date.value, // Timestamp
         time: timeSlot.value, // String morning, afternoon, or evening
         // location: "",
         completed: false, // boolean default false
@@ -340,6 +340,7 @@ function updateTrainerInfo(websiteUrl = "") {
     });
 }
 
+// export function displayScheduleInfo(trainerFirstName, trainerLastName, apptTime, apptDate) {
 export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
@@ -389,16 +390,16 @@ export function displayExpertise(certTitle, yearsExp) {
 
 export function displayScheduleInfo(){
     console.log("Schedule Info! :)");
-    db.collection("schedule").get() // gets the entire collection??
+    db.collection("schedule").get()
     .then(function(s){
         s.forEach(function(doc){
-            let trainerFirstName = doc.data().trainerFirstName;            
+            trainerFirstName.innerText = doc.data().trainerFirstName;            
             console.log(trainerFirstName);
-            let trainerLastName = doc.data().trainerLastName;            
+            trainerLastName.innerText  = doc.data().trainerLastName;            
             console.log(trainerLastName);
-            let time = doc.data().time;            
+            apptTime.innerText = doc.data().time;            
             console.log(time);
-            let date = doc.data().date;            
+            apptDate.innerText = doc.data().date;            
             console.log(date);
             // let bookingMsg = doc.data().bookingMsg;            
             // console.log(bookingMsg);                             // trainer booking msg or client msg???
@@ -406,10 +407,10 @@ export function displayScheduleInfo(){
             let completed = doc.data().completed;
             console.log(completed);                                 // completed appointment
 
-            document.getElementById('trainerFirstName').innerText = trainerFirstName;
-            document.getElementById('trainerLastName').innerText = trainerLastName;
-            document.getElementById('appt-time').innerText = time;
-            document.getElementById('appt-date').innerText = date;
+            // document.getElementById('trainerFirstName').innerText = trainerFirstName;
+            // document.getElementById('trainerLastName').innerText = trainerLastName;
+            // document.getElementById('appt-time').innerText = time;
+            // document.getElementById('appt-date').innerText = date;
 
 
             // sets "add to Calendar" and "cancel" buttons as hidden if appointment completed
@@ -423,6 +424,7 @@ export function displayScheduleInfo(){
         }) 
     })
 }
+
 
   // hides sections of profile depending on if user or trainer
 export function hideUserSections(){
@@ -504,13 +506,40 @@ export const getCollection = async ({
     }
 
 // retrieves trainer availablity data
-export function checkAvailability() {
-    db.collection("trainerAvailability").get()
+// export function checkAvailability() {
+//     db.collection("trainerAvailability").where("trainerUserId", "==", user.uid).get()
+//     .then(function (q) {
+//         q.forEach(function (doc) {
+//             // unavailability is an array of dates: dd MM yyyy
+//             var unavailability = doc.data();
+//             console.log(unavailability);
+//         })
+//     })
+// }
+
+export function displayBookInfo() {
+    db.collection("schedule").get()
     .then(function (q) {
         q.forEach(function (doc) {
-            // unavailability is an array of dates: dd MM yyyy
-            var unavailability = doc.data();
-            console.log(unavailability);
+          var trainerFirstName = doc.data().trainerFirstName;
+          console.log(trainerFirstName);
+          var bookingMsg = doc.data().bookingMsg;
+          console.log(bookingMsg);
+          // var clientID = doc.data().client_user_id;
+          // console.log(clientID);
+          // var trainerID = doc.data().trainer_user_id;
+          // console.log(trainerID);
+          document.getElementById("trainerFirstName").innerText = trainerFirstName;
+          document.getElementById("bookingMsg").innerText = bookingMsg;
         })
     })
+}
+
+export function getTrainerAvailability() {
+    trainerOnlyRef.doc("trainerID").get()
+    .then((doc) => {
+        var availability = doc.data().availability;
+        console.log(availability);
+        return availability;
+    });
 }
