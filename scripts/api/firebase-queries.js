@@ -425,10 +425,6 @@ export function displayScheduleInfo(){
     })
 }
 
-// cancels appointment, moves to completed.                                         //              TO COMPLETE
-export function cancelAppointment() {
-    db.collection("schedule").get
-}
 
   // hides sections of profile depending on if user or trainer
 export function hideUserSections(){

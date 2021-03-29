@@ -4,8 +4,17 @@ import { displayTrainerInfo, hideUserSections, trainerProfilePosts } from "/scri
 let trainerToDisplay = localStorage.getItem("trainerProfileToDisplay");
 trainerToDisplay = trainerToDisplay ? JSON.parse(trainerToDisplay) : window.location.href="./404.html";
 console.log(trainerToDisplay);
-localStorage.setItem("trainerProfileToDisplay", "");
+// localStorage.setItem("trainerProfileToDisplay", "");
+
+
+
 // displayTrainerInfo();
 // hideUserSections();
 // trainerProfilePosts();
 // displayAboutMe();
+
+
+// const bookAppt = document.querySelector(".book-button");
+// bookAppt.addEventListener("click", () => {
+//     localStorage.setItem("trainerID", JSON.stringify(trainerToDisplay))
+// });

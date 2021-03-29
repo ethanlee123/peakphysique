@@ -52,6 +52,7 @@ const renderScheduleCards = () => {
         insertText(scheduleCard, "#appt-date", schedule.data().date.toDate().toDateString());
         insertText(scheduleCard, "#appt-time", schedule.data().time);
 
+        // cancel button sets appointment to completed
         const cancelAppt = scheduleCard.querySelector(".cancelBtn");
         cancelAppt.addEventListener("click", () => {
             schedule.ref.update({completed: true})
@@ -100,6 +101,7 @@ const renderCompletedScheduleCards = () => {
 
         })
     })  
+    // hides buttons when appt is completed
     .then(() => {
         let cancelBtn = scheduleCompletedList.getElementsByClassName("hideScheduleBtn");
         
@@ -158,3 +160,9 @@ function createTimeSlots() {
 }
 
 createTimeSlots();
+
+
+// get trainerID from Book Appointment button on profile page
+// let trainerID = localStorage.getItem("trainerID");
+// trainerID = JSON.parse(trainerID);
+// console.log(trainerID);
