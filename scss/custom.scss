@@ -18,8 +18,9 @@
 @import "./components/header";
 @import "./components/main";
 @import "./components/footer";
+@import "./components/user-avatar";
 
-@import "./index";
+@import "./features/index";
 @import "./features/find-a-trainer";
 @import "./features/initial-trainer-setup";
 @import "./features/trainer-create-account";
@@ -32,5 +33,6 @@
 @import "./features/user-profile";
 @import "./features/schedule";
 @import "./features/sign-up-sucess";
+@import "./features/misc";
 
 @import "../node_modules/bootstrap/scss/bootstrap";

@@ -1,13 +1,15 @@
 // Sprint 2: reading/writing to firebase
 import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
 // import { reverseGeo } from "/scripts/api/here_api.js"
+
 // firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+
 // Reference to user collection, no document specified
 const userRef = db.collection("user");
+
 // Reference to trainerOnly collection, , no document specified
 const trainerOnlyRef = db.collection("trainerOnly");
-
 
 export function displayTrainerInfo(){
   console.log("hello from displayTrainerInfo! :)");
@@ -112,6 +114,7 @@ function writeUserProfile() {
 }
 // writeUserProfile();   
 
+// creates a document in schedule collection for the booked appointment
 export function writeAppointmentSchedule() {
     var scheduleRef = db.collection("schedule");
 
@@ -227,7 +230,8 @@ export function createUser() {
                     role: null,
                     about: null,
                     randomFact: null,
-                    radius: null
+                    radius: null,
+                    city: null,
                 });
                 trainerOnlyRef.doc(user.uid).set({
                     userId: user.uid,
@@ -297,6 +301,7 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
             cheatMeal.value = doc.data().favCheatMeal;
             randFact.value = doc.data().randomFact;
             radiusDisplay.innerText= doc.data().radius;
+            userCity.value = doc.date().city;
         });
     });
 }
@@ -335,7 +340,55 @@ function updateTrainerInfo(websiteUrl = "") {
     });
 }
 
-export function displayScheduleInfo(trainerFirstName, trainerLastName, apptTime, apptDate) {
+// export function displayScheduleInfo(trainerFirstName, trainerLastName, apptTime, apptDate) {
+export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        // Get doc from trainerOnly collection
+        trainerOnlyRef.doc(user.uid).update({
+            // For now you can only add one certificate
+            certifications: firebase.firestore.FieldValue.arrayUnion(certTitle.value),
+            // Convert String to int before updating
+            yearsOfExperience: parseInt(yearsExp.value, 10),
+            fitness: fitnessList,
+            wellness: wellnessList,
+        }).then(() => {
+            console.log("successfully update trainerOnly collection");
+            window.location.href = "sign-up-profile-setup.html";
+        }).catch(err => {
+            console.log("error: ", error);
+        });
+    });
+}
+
+export function displayExpertise(certTitle, yearsExp) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        let fitnessList = [];
+        // Get doc from trainerOnly collection
+        trainerOnlyRef.doc(user.uid).get()
+        .then((doc) => {
+            let wellnessList = [];
+            // For now you can only add one certificate
+            certTitle.value = doc.data().certifications[0],
+            // Convert String to int before updating
+            yearsExp.value = doc.data().yearsOfExperience,
+            // fitnessList = doc.data().fitness
+            // wellnessList = doc.data().wellness
+            doc.data().fitness.forEach(ele => {
+                fitnessList.push(ele);
+            })
+            doc.data().wellness.forEach(ele => {
+                wellnessList.push(ele);
+            })
+        }).then(() => {
+            return fitnessList;
+
+        }).catch(err => {
+            console.log("error: ", err);
+        });
+    });
+}
+
+export function displayScheduleInfo(){
     console.log("Schedule Info! :)");
     db.collection("schedule").get()
     .then(function(s){
@@ -430,7 +483,7 @@ export function trainerProfilePosts() {
         })
     }
 
-const getCollection = async ({
+export const getCollection = async ({
         collectionName,
         sort,
         limit,
@@ -438,12 +491,10 @@ const getCollection = async ({
         startAfter = null
     }) => {
         let query = db.collection(collectionName);
-     
-        query = query.orderBy(sort.by, sort.order);
-        if (startAfter) {
-            query = query.startAfter(startAfter);
-        }
-        query = query.limit(limit);
+
+        query = sort ? query.orderBy(sort.by, sort.order) : query;
+        query = startAfter ? query.orderBy(sort.by, sort.order) : query;
+        query = limit ? query.limit(limit) : query; 
      
         filters && filters.forEach((filter) => {
             if (filter) {
@@ -454,11 +505,18 @@ const getCollection = async ({
      
         let collection = await query.get();
         return collection.docs.map(doc => {
-            return {
-                doc: doc,
-                id: doc.id,
-                data: doc.data()
-            };
+            return doc.data();
         });
     }
-    
+
+// retrieves trainer availablity data
+export function checkAvailability() {
+    db.collection("trainerAvailability").get()
+    .then(function (q) {
+        q.forEach(function (doc) {
+            // unavailability is an array of dates: dd MM yyyy
+            var unavailability = doc.data();
+            console.log(unavailability);
+        })
+    })
+}

@@ -445,6 +445,8 @@ main, .main-content {
 footer a {
   color: #D4DDD6;
   text-decoration: none; }
+  footer a:hover .coming-soon, footer a:active .coming-soon, footer a:focus .coming-soon {
+    background: #83C3A3; }
 
 footer i {
   color: #83C3A3; }
@@ -473,6 +475,9 @@ footer .mobile {
     justify-content: flex-end; }
     footer .mobile .social-media a:last-of-type i {
       margin-right: 0; }
+  footer .mobile .coming-soon {
+    background: #0a0c0f;
+    color: #1E242E; }
 
 footer .desktop {
   display: none;
@@ -502,6 +507,9 @@ footer .desktop {
     align-self: center; }
     footer .desktop .category.social .social-media {
       justify-content: flex-start; }
+  footer .desktop .coming-soon {
+    background: #1E242E;
+    color: #0a0c0f; }
 
 footer .social-media {
   display: flex;
@@ -517,55 +525,87 @@ footer .btn.btn-outline-light.contact-us:hover i, footer .btn.btn-outline-light.
 footer .btn.btn-outline-light.contact-us i {
   color: #D4DDD6; }
 
-.index-body body {
+footer .coming-soon {
+  margin-left: 0.5rem;
+  text-transform: uppercase; }
+
+.user-avatar {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(212, 221, 214, 0.1); }
+  .user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; }
+  .user-avatar .initials {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "apex";
+    white-space: nowrap;
+    color: #83C3A3;
+    text-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.85); }
+
+.index-body {
   position: relative; }
-
-.index-body .landing {
-  background-repeat: repeat-x;
-  height: 300px;
-  text-align: center;
-  width: 100%;
-  font-weight: bolder;
-  font-family: apex; }
-
-.index-body .title-font {
-  font-weight: bolder;
-  font-family: apex;
-  text-shadow: 1px 1px 1px #000000;
-  font-size: 2rem; }
-
-.index-body .title-font-color {
-  color: #83C3A3; }
-
-.index-body .login-buttons {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); }
-
-.index-body .description-font {
-  text-shadow: 1px 1px 1px #000000;
-  font-size: 1rem; }
-
-.index-body .form-format {
-  margin: 0 auto;
-  width: 400px;
-  max-width: 100%; }
-
-.index-body .title-margin {
-  margin-top: 5%; }
-
-.index-body .main-content {
-  margin-top: 50px; }
-
-.index-body #comments {
-  color: #1E242E; }
-
-.index-body #carouselExampleCaptions {
-  width: 100%; }
-
-.index-body .carousel-images {
-  filter: opacity(0.8); }
+  .index-body header {
+    margin: 0; }
+  .index-body footer .scroll-to-top {
+    display: none; }
+  .index-body .title-font {
+    font-weight: bolder;
+    font-family: apex;
+    text-shadow: 1px 1px 1px #000000;
+    font-size: 2rem; }
+  .index-body .title-font-color {
+    color: #83C3A3; }
+  .index-body .description-font {
+    text-shadow: 1px 1px 1px #000000;
+    font-size: 1rem; }
+  .index-body .form-format {
+    margin: 0 auto;
+    width: 400px;
+    max-width: 100%; }
+  .index-body .title-margin {
+    margin-top: 5%; }
+  .index-body .main-content {
+    margin-top: 50px; }
+  .index-body #comments {
+    color: #1E242E; }
+  .index-body #carouselExampleCaptions {
+    width: 100%; }
+  .index-body .carousel {
+    margin: 0;
+    padding: 0; }
+    .index-body .carousel .carousel-item {
+      height: 100vh; }
+      .index-body .carousel .carousel-item img {
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(40%); }
+    .index-body .carousel .carousel-control-next,
+    .index-body .carousel .carousel-control-prev {
+      box-shadow: none; }
+    .index-body .carousel .caption {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center; }
+      .index-body .carousel .caption h1, .index-body .carousel .caption .h1 {
+        font-size: 3em; }
+      .index-body .carousel .caption .description-font {
+        margin-bottom: 3rem;
+        max-width: 600px;
+        font-size: 1.5em; }
+      .index-body .carousel .caption .btn {
+        font-family: "apex";
+        text-transform: uppercase;
+        font-size: 1.5em; }
 
 .find-a-trainer {
   overflow-x: hidden; }
@@ -737,18 +777,10 @@ footer .btn.btn-outline-light.contact-us i {
         gap: 0 1em;
         font-family: "Roboto", sans-serif;
         background-color: #0a0c0f; }
+        .find-a-trainer .trainer-list .card .card-header .trainer-name {
+          text-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.85); }
         .find-a-trainer .trainer-list .card .card-header .user-avatar {
-          grid-row: 1 / span 2;
-          overflow: hidden;
-          border-radius: 50%;
-          width: 50px;
-          height: 50px; }
-          .find-a-trainer .trainer-list .card .card-header .user-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; }
-          .find-a-trainer .trainer-list .card .card-header .user-avatar .initials {
-            display: none; }
+          grid-row: 1 / span 2; }
         .find-a-trainer .trainer-list .card .card-header .trainer-name {
           margin: 0;
           line-height: 1; }
@@ -772,6 +804,28 @@ footer .btn.btn-outline-light.contact-us i {
           text-transform: uppercase;
           background: #83C3A3;
           color: #1E242E; }
+  .find-a-trainer .pagination {
+    justify-content: center;
+    width: 100%;
+    padding: 2rem;
+    display: none; }
+    .find-a-trainer .pagination .paginate {
+      background: none;
+      color: #D4DDD6;
+      box-shadow: none;
+      border: none; }
+      .find-a-trainer .pagination .paginate:hover, .find-a-trainer .pagination .paginate:active, .find-a-trainer .pagination .paginate:focus {
+        color: #0444AC; }
+      .find-a-trainer .pagination .paginate.previous {
+        transform: rotate(-180deg);
+        display: none; }
+    .find-a-trainer .pagination .page-nums span {
+      margin-right: 0.5rem;
+      cursor: pointer; }
+      .find-a-trainer .pagination .page-nums span:hover, .find-a-trainer .pagination .page-nums span:active, .find-a-trainer .pagination .page-nums span:focus {
+        color: #0444AC; }
+      .find-a-trainer .pagination .page-nums span.current-page {
+        color: #0444AC; }
   .find-a-trainer .filter-drawer {
     position: fixed;
     top: 0;
@@ -1184,6 +1238,19 @@ footer .btn.btn-outline-light.contact-us i {
 
 .sign-up-success .text-uppercase {
   text-transform: uppercase; }
+
+.misc .main-content {
+  position: relative;
+  max-width: 800px;
+  text-align: center; }
+  .misc .main-content figure {
+    max-width: 500px;
+    margin: 0 auto;
+    margin-bottom: 2rem; }
+  .misc .main-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; }
 
 /*!
  * Bootstrap v5.0.0-beta2 (https://getbootstrap.com/)

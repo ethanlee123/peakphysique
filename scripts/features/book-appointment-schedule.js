@@ -124,3 +124,37 @@ const trainerName = document.getELements
     
 
 // }
+// displayScheduleInfo();
+
+// creates timeslots for selected date
+function createTimeSlots() {
+    db.collection("trainerAvailability").get()
+    .then(function (q) {
+        q.forEach(function (doc) {
+            // unavailability is an array of dates: dd MM yyyy
+            var unavailability = doc.data();
+            console.log(unavailability);
+            // check each date for available timeslots to dynamically create dropdown selections
+            var timeSlot = $(unavailability).find('timeSlot').each(function(){
+                if(timeSlot != "Morning"){
+                    var morning = document.createElement('option');
+                    $('option').text("Morning");
+                    $("#timeSlots").append(morning);
+                }
+                if(timeSlot != "Afternoon"){
+                    var afternoon = document.createElement('option');
+                    $('option').text("Afternoon");
+                    $("#timeSlots").append(afternoon);
+                }
+                if(timeSlot != "Evening"){
+                    var evening = document.createElement('option');
+                    $('option').text("Evening");
+                    $("#timeSlots").append(evening);
+                }
+                });
+        })
+    })
+    
+}
+
+createTimeSlots();

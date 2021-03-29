@@ -122,8 +122,6 @@
         <img class="banner-img" id="bannerImg" src="./images/trainer-directory-banner.jpg" alt="Find a trainer background">
       </section><!--.banner-->
 
-      <!--.search-bar-->
-
       <section class="search-and-filter">
         <div class="input-group search-bar">
           <input
@@ -157,7 +155,7 @@
       </div><!--.spinner-border-->
 
       <section class="results-meta">
-        <!-- <span class="results-found">Showing <span id="displayedTrainers">6</span> out of <b><span id="totalTrainers">10</span> trainers</b> found.</span> -->
+        <span class="results-found" id="resultsFound"></span>
         
         <div class="sorters">
           <span class="text">Sort by</span>
@@ -173,10 +171,24 @@
             <option class="desc" value="descending">Z - A</option>
           </select>
         </div><!--.sorters-->
-      </section><!--.results-found-->
+      </section><!--.results-meta-->
 
       <section class="trainer-list" id="trainerList">
-      </section>      
+      </section>
+      
+      <section class="pagination" id="pagination">
+        <button class="paginate previous" id="previous">
+          <i class="fas fa-arrow-right"></i>          
+        </button>
+
+        <span class="page-nums" id="pageNums">
+        </span>
+
+        <button class="paginate next" id="next">
+          <i class="fas fa-arrow-right"></i>          
+        </button>
+
+      </section><!--.pagination-->
 
       <div class="drawer filters filter-drawer" id="filterDrawer">
         <button class="exit-drawer" id="exitDrawer"></button>
