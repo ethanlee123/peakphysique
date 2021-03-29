@@ -22,16 +22,14 @@ var fitnessList = [];
 //Trainer selected wellness specializations
 var wellnessList = [];
 
-let twolists = displayExpertise(certTitle, years);
+displayExpertise(years, fitnessInp, wellnessInp);
 
-console.log(twolists);
-
-
-
+// Add and remove value to/from fitnessList
 fitnessInp.forEach((input) => {
-    // returns nodelist with one label
+    // returns nodelist with one label (one value)
     let label = input.labels;
     label[0].addEventListener("click", function(e) {
+        // Gets the lower case text of the label tag
         let nameOfSpec = label[0].innerText.toLowerCase();
         if (input.checked == false) {
             fitnessList.push(nameOfSpec);
@@ -44,14 +42,15 @@ fitnessInp.forEach((input) => {
     })
 })
 
-
+// Add and remove value to/from wellnessList
 wellnessInp.forEach((input) => {
     // returns nodelist with one label
     let label = input.labels;
     label[0].addEventListener("click", function(e) {
+        // Gets the lower case text of the label tag
         let nameOfSpec = label[0].innerText.toLowerCase();
         if (input.checked == false) {
-            fitnessList.push(nameOfSpec);
+            wellnessList.push(nameOfSpec);
         } else {
             // Get index of specific value based on name
             let index = wellnessList.indexOf(label[0]);

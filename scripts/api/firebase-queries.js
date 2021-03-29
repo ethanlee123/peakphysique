@@ -362,28 +362,36 @@ export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) 
 }
 
 // Parameters are references to a tag.
-export function displayExpertise(certTitle, yearsExp) {
+export function displayExpertise(yearsExp, fitnessInp, wellnessInp) {
     firebase.auth().onAuthStateChanged(function(user) {
-        let fitnessList = [];
+        var fitnessSpcList = [];
+        var wellnessServList = [];
         // Get doc from trainerOnly collection
         trainerOnlyRef.doc(user.uid).get()
         .then((doc) => {
-            let wellnessList = [];
-            // For now you can only add one certificate
-            certTitle.value = doc.data().certifications[0],
             // Convert String to int before updating
-            yearsExp.value = doc.data().yearsOfExperience,
-            // fitnessList = doc.data().fitness
-            // wellnessList = doc.data().wellness
-            doc.data().fitness.forEach(ele => {
-                fitnessList.push(ele);
-            })
-            doc.data().wellness.forEach(ele => {
-                wellnessList.push(ele);
-            })
+            yearsExp.value = doc.data().yearsOfExperience;
+            fitnessSpcList = doc.data().fitness;
+            wellnessServList = doc.data().wellness;
         }).then(() => {
-            return fitnessList;
-
+            // Iterate through nodeList of input tags
+            fitnessInp.forEach((input) => {
+                // Returns a nodeList of label tags, get lower case text of label
+                let text = input.labels[0].innerText.toLowerCase();
+                // Checks if text is a value of fitnessList
+                if (fitnessSpcList.includes(text)) {
+                    input.checked = true;
+                }
+            })
+            // Iterate through nodeList of input tags
+            wellnessInp.forEach((input) => {
+                // Returns a nodeList of label tags, get lower case text of label
+                let text = input.labels[0].innerText.toLowerCase();
+                // Checks if text is a value of fitnessList
+                if (wellnessServList.includes(text)) {
+                    input.checked = true;
+                }
+            })
         }).catch(err => {
             console.log("error: ", err);
         });
