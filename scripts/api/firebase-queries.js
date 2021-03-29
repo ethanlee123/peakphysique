@@ -2,8 +2,8 @@
 import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
 // import { reverseGeo } from "/scripts/api/here_api.js"
 
-// firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+const storage = firebase.storage();
 
 // Reference to user collection, no document specified
 const userRef = db.collection("user");
@@ -339,6 +339,22 @@ function updateTrainerInfo(websiteUrl = "") {
             console.log("error: ", error);
         });
     });
+}
+
+export function uploadProfileImg(imgPath) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        // Reference to logged in user specific storage
+        let storageRef = storage.ref("images/" + user.uid + ".jpg");
+        // Upload user selected file to cloud storage
+        storageRef.put(imgPath);
+        // Gets firebase storage url and updates respective field in document of user.uid
+        storageRef.getDownloadURL()
+        .then((url) => {
+            userRef.doc(user.uid).update({
+                profilePic: url,
+            })
+        })
+    })
 }
 
 // export function displayScheduleInfo(trainerFirstName, trainerLastName, apptTime, apptDate) {
