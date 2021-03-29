@@ -31,7 +31,7 @@
             transform: translateX(-50%);
             @include box-shadow;
         }
-
+        
         &:before, &:after {
             display: none;
         }

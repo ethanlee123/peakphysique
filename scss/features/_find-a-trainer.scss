@@ -448,6 +448,16 @@
                 width: 100%;
             }
         }
+
+        .range-slider {
+            font-size: 0.75rem;
+            
+            .noUi-tooltip {
+                position: absolute;
+                margin: 0;
+                padding: 0;
+            }
+        }
     }
 
 }

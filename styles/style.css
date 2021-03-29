@@ -895,6 +895,12 @@ footer .coming-soon {
       gap: 1em; }
       .find-a-trainer .filter-drawer .filter-btns button {
         width: 100%; }
+    .find-a-trainer .filter-drawer .range-slider {
+      font-size: 0.75rem; }
+      .find-a-trainer .filter-drawer .range-slider .noUi-tooltip {
+        position: absolute;
+        margin: 0;
+        padding: 0; }
 
 .initial-trainer-setup .top-buffer {
   margin-top: 50px; }
