@@ -340,6 +340,7 @@ function updateTrainerInfo(websiteUrl = "") {
     });
 }
 
+// export function displayScheduleInfo(trainerFirstName, trainerLastName, apptTime, apptDate) {
 export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
@@ -389,16 +390,16 @@ export function displayExpertise(certTitle, yearsExp) {
 
 export function displayScheduleInfo(){
     console.log("Schedule Info! :)");
-    db.collection("schedule").get() // gets the entire collection??
+    db.collection("schedule").get()
     .then(function(s){
         s.forEach(function(doc){
-            let trainerFirstName = doc.data().trainerFirstName;            
+            trainerFirstName.innerText = doc.data().trainerFirstName;            
             console.log(trainerFirstName);
-            let trainerLastName = doc.data().trainerLastName;            
+            trainerLastName.innerText  = doc.data().trainerLastName;            
             console.log(trainerLastName);
-            let time = doc.data().time;            
+            apptTime.innerText = doc.data().time;            
             console.log(time);
-            let date = doc.data().date;            
+            apptDate.innerText = doc.data().date;            
             console.log(date);
             // let bookingMsg = doc.data().bookingMsg;            
             // console.log(bookingMsg);                             // trainer booking msg or client msg???
@@ -406,10 +407,10 @@ export function displayScheduleInfo(){
             let completed = doc.data().completed;
             console.log(completed);                                 // completed appointment
 
-            document.getElementById('trainerFirstName').innerText = trainerFirstName;
-            document.getElementById('trainerLastName').innerText = trainerLastName;
-            document.getElementById('appt-time').innerText = time;
-            document.getElementById('appt-date').innerText = date;
+            // document.getElementById('trainerFirstName').innerText = trainerFirstName;
+            // document.getElementById('trainerLastName').innerText = trainerLastName;
+            // document.getElementById('appt-time').innerText = time;
+            // document.getElementById('appt-date').innerText = date;
 
 
             // sets "add to Calendar" and "cancel" buttons as hidden if appointment completed
@@ -422,6 +423,11 @@ export function displayScheduleInfo(){
             // document.getElementById('bookingMsg').innerText = bookingMsg;
         }) 
     })
+}
+
+// cancels appointment, moves to completed.                                         //              TO COMPLETE
+export function cancelAppointment() {
+    db.collection("schedule").get
 }
 
   // hides sections of profile depending on if user or trainer

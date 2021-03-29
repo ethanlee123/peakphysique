@@ -1,7 +1,6 @@
 import { displayBookInfo, writeAppointmentSchedule } from "/scripts/api/firebase-queries.js";
 import { generateUnavailableSlots } from "/scripts/util/generateUnavailableSlots.js";
-
-const db = firebase.firestore();
+import { getTemplate } from "../util/getTemplate.js";
 
 displayBookInfo();
 
@@ -11,10 +10,10 @@ const timeSlot = document.getElementById("time-slot");
 const date = document.getElementById("datepicker");
 const confirmBtn = document.getElementById("confirm-btn")
 
-confirmBtn.addEventListener("click", function(event) {
-    event.preventDefault();
-    writeAppointmentSchedule(comments, timeSlot, date);
-})
+// confirmBtn.addEventListener("click", function(event) {
+//     event.preventDefault();
+//     writeAppointmentSchedule(comments, timeSlot, date);
+// })
 
 function getTrainerAvailability() {
     trainerOnlyRef.doc(localStorage.getItem("trainerProfileToDisplay")).get()
@@ -24,6 +23,114 @@ function getTrainerAvailability() {
         return availability;
     });
 }
+// #### displayScheduleInfo variables
+const trainerFirstName = document.getElementById('trainerFirstName');
+const trainerLastName = document.getElementById('trainerLastName');
+const apptTime = document.getElementById('appt-time');
+const apptDate = document.getElementById('appt-date');
+
+// displayScheduleInfo(trainerFirstName, trainerLastName, apptTime, apptDate);
+// using renderScheduleCards instead
+
+
+// ##########   renderScheduleCards Variables
+const scheduleCardPath = "../../common/schedule-card.html";
+const scheduleCardTemplate = await getTemplate(scheduleCardPath);
+const scheduleList = document.getElementById("scheduleList");
+const scheduleCompletedList = document.getElementById("scheduleCompletedList");
+const db = firebase.firestore();
+const scheduleCollection = await db.collection("schedule").get();
+
+// inserts text inside cards
+const insertText = (parentNode, selector, text) => {
+    const element = parentNode.querySelector(selector);
+    element.appendChild(document.createTextNode(text));
+}
+
+// creates upcoming schedule cards based on firestore "schedule" collection
+const renderScheduleCards = () => {
+    scheduleList.innerHTML = "";
+
+    db.collection("schedule").where("completed", "==", false)
+    .get()
+    .then(function(s) {
+        s.forEach(schedule => {
+
+        const scheduleCard = document.importNode(scheduleCardTemplate.content, true);
+        
+        insertText(scheduleCard, ".trainerFirstName", schedule.data().trainerFirstName);
+        insertText(scheduleCard, ".trainerLastName", schedule.data().trainerLastName);
+        insertText(scheduleCard, "#appt-date", schedule.data().date.toDate().toDateString());
+        insertText(scheduleCard, "#appt-time", schedule.data().time);
+
+        const cancelAppt = scheduleCard.querySelector(".cancelBtn");
+        cancelAppt.addEventListener("click", () => {
+            schedule.ref.update({completed: true})
+        });
+
+        scheduleList.appendChild(scheduleCard);
+        })
+    });
+}
+renderScheduleCards();
+
+// sets appointment to completed in firestore if date is passed
+const completeAppt = () => {
+    var todayDate = new Date();
+
+    db.collection("schedule").get()
+    .then(function(s) {
+        s.forEach(schedule => {
+            if (schedule.data().date.toDate() < todayDate) {
+                schedule.ref.update({completed: true})
+            }
+        })
+    });
+}
+completeAppt();
+
+// moves completed schedule cards to completed based on firestore "schedule" collection
+const renderCompletedScheduleCards = () => {
+    scheduleCompletedList.innerHTML = "";
+
+    db.collection("schedule")
+    .where("completed", "==", true)
+    .orderBy("date", "asc")
+    .get()
+    .then(function(s) {
+        s.forEach(schedule => {
+
+        const scheduleCard = document.importNode(scheduleCardTemplate.content, true);
+        
+        insertText(scheduleCard, ".trainerFirstName", schedule.data().trainerFirstName);
+        insertText(scheduleCard, ".trainerLastName", schedule.data().trainerLastName);
+        insertText(scheduleCard, "#appt-date", schedule.data().date.toDate().toDateString());
+        insertText(scheduleCard, "#appt-time", schedule.data().time);
+
+        scheduleCompletedList.appendChild(scheduleCard);
+
+        })
+    })  
+    .then(() => {
+        let cancelBtn = scheduleCompletedList.getElementsByClassName("hideScheduleBtn");
+        
+        console.log(cancelBtn.length);
+        for (let i = 0; i < cancelBtn.length; i++) {
+            cancelBtn[i].style.display = "none";
+            }
+        })    
+}  
+renderCompletedScheduleCards();
+
+
+const cancelBtn = document.getElementsByClassName("cancelBtn");
+const trainerName = document.getELements
+
+// cancelBtn.addEventListener("click", function(e) {
+    
+
+// }
+// displayScheduleInfo();
 
 function createTimeSlots(date){
     var morning = document.createElement('option');
@@ -54,45 +161,5 @@ function createTimeSlots(date){
         }  
     }  
 }
-
-// creates timeslots for selected date
-// function createTimeSlots(date) {
-//     db.collection("trainerUnavailability").where("trainerUserId", "==", user.uid).get()
-//     .then((querySnapshot) => {
-//         querySnapshot.forEach((doc) => {
-//             // unavailability is an array of dates: dd MM yyyy
-//             var unavailability = doc.data();
-//             console.log(unavailability);
-//             // check each date for available timeslots to dynamically create dropdown selections
-//             var timeSlot = $(unavailability).find(date.value).each(function(){
-//                 if(timeSlot != "evening"){
-//                     var evening = document.createElement('option');
-//                     $('option').text("evening");
-//                     $("#time-slot").append(evening);
-//                 }
-//                 if(timeSlot != "afternoon"){
-//                     var afternoon = document.createElement('option');
-//                     $('option').text("afternoon");
-//                     $("#time-slot").append(afternoon);
-//                 }
-//                 if(timeSlot != "morning"){
-//                     var morning = document.createElement('option');
-//                     $('option').text("morning");
-//                     $("#time-slot").append(morning);
-//                 }
-//             });
-//         })
-//     })    
-// }
-
-// generateUnavailableSlots.forEach(time => {
-//     if (time == "morning"){
-//         morning.parentNode.removeChild(morning);
-//     } else if (time == "afternoon"){
-//         afternoon.parentNode.removeChild(afternoon);
-//     } else {
-//         evening.parentNode.removeChild(evening);
-//     }
-// });
 
 createTimeSlots();
