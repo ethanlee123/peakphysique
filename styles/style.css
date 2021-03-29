@@ -1148,9 +1148,17 @@ footer .coming-soon {
 .sign-up-user-info path {
   fill: #83C3A3; }
 
-.sign-up-user-info #profile-pic {
+.sign-up-user-info #profileImagePlaceHolder {
   font-size: 84pt;
   margin: 0; }
+
+.sign-up-user-info input[type=file] {
+  display: none; }
+
+.sign-up-user-info #userProfileImg {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%; }
 
 .user-profile .msg-profile {
   margin: 0 auto 50px auto; }

@@ -2,8 +2,8 @@
 import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
 // import { reverseGeo } from "/scripts/api/here_api.js"
 
-// firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+const storage = firebase.storage();
 
 // Reference to user collection, no document specified
 const userRef = db.collection("user");
@@ -255,7 +255,8 @@ export function createUser() {
                         friday: [],
                         saturday: [],
                         sunday: []
-                    }
+                    },
+                    bookingMessage: null,
                 });
             };
         });
@@ -278,7 +279,7 @@ export function updateUserRole(userRole) {
     });
 }
 
-// Displays trainer profile information
+// Displays trainer profile information. Parameters are references to a tag.
 export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
@@ -306,7 +307,7 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
     });
 }
 
-// Updates db when trainer clicks save and return
+// Updates db when trainer clicks save and return. Parameters are references to a tag.
 export function updateProfileInfo(websiteUrl, phoneNum, bio, workout, cheatMeal, randFact, radiusTravel) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from user collection
@@ -340,6 +341,22 @@ function updateTrainerInfo(websiteUrl = "") {
     });
 }
 
+export function uploadProfileImg(imgPath) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        // Reference to logged in user specific storage
+        let storageRef = storage.ref("images/" + user.uid + ".jpg");
+        // Upload user selected file to cloud storage
+        storageRef.put(imgPath);
+        // Gets firebase storage url and updates respective field in document of user.uid
+        storageRef.getDownloadURL()
+        .then((url) => {
+            userRef.doc(user.uid).update({
+                profilePic: url,
+            })
+        })
+    })
+}
+
 // export function displayScheduleInfo(trainerFirstName, trainerLastName, apptTime, apptDate) {
 export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) {
     firebase.auth().onAuthStateChanged(function(user) {
@@ -360,32 +377,79 @@ export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) 
     });
 }
 
-export function displayExpertise(certTitle, yearsExp) {
+// Parameters are references to a tag.
+export function displayExpertise(yearsExp, fitnessInp, wellnessInp) {
     firebase.auth().onAuthStateChanged(function(user) {
-        let fitnessList = [];
+        var fitnessSpcList = [];
+        var wellnessServList = [];
         // Get doc from trainerOnly collection
         trainerOnlyRef.doc(user.uid).get()
         .then((doc) => {
-            let wellnessList = [];
-            // For now you can only add one certificate
-            certTitle.value = doc.data().certifications[0],
             // Convert String to int before updating
-            yearsExp.value = doc.data().yearsOfExperience,
-            // fitnessList = doc.data().fitness
-            // wellnessList = doc.data().wellness
-            doc.data().fitness.forEach(ele => {
-                fitnessList.push(ele);
-            })
-            doc.data().wellness.forEach(ele => {
-                wellnessList.push(ele);
-            })
+            yearsExp.value = doc.data().yearsOfExperience;
+            fitnessSpcList = doc.data().fitness;
+            wellnessServList = doc.data().wellness;
         }).then(() => {
-            return fitnessList;
-
+            // Iterate through nodeList of input tags
+            fitnessInp.forEach((input) => {
+                // Returns a nodeList of label tags, get lower case text of label
+                let text = input.labels[0].innerText.toLowerCase();
+                // Checks if text is a value of fitnessList
+                if (fitnessSpcList.includes(text)) {
+                    input.checked = true;
+                }
+            })
+            // Iterate through nodeList of input tags
+            wellnessInp.forEach((input) => {
+                // Returns a nodeList of label tags, get lower case text of label
+                let text = input.labels[0].innerText.toLowerCase();
+                // Checks if text is a value of fitnessList
+                if (wellnessServList.includes(text)) {
+                    input.checked = true;
+                }
+            })
         }).catch(err => {
             console.log("error: ", err);
         });
     });
+}
+
+// Parameters are references to a tag.
+export function updatePlatformSpecifics(rate, depositMin, freeSession, preBookingMsg) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        trainerOnlyRef.doc(user.uid).update({
+            hourlyRate: rate.value,
+            deposit: depositMin.value,
+            firstSessionFree: freeSession.checked,
+            bookingMessage: preBookingMsg.value,
+        }).then(() => {
+            console.log("successfully update trainerOnly collection");
+            window.location.href = "sign-up-profile-setup.html";
+        })
+    })
+}
+
+// Parameters are references to a tag.
+export function displayPlatformSpecifics(rate, depositMin, freeSession, preBookingMsg) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        trainerOnlyRef.doc(user.uid).get()
+        .then(doc => {
+            rate.value = doc.data().hourlyRate;
+            depositMin.value = doc.data().deposit;
+            preBookingMsg.value = doc.data().bookingMessage;
+            // Returns a boolean value
+            freeSession.value = doc.data().firstSessionFree;
+        }).then(() => {
+            // Displays checkbox as (un)checked based on freeSession.value
+            if (freeSession.value) {
+                freeSession.checked = true;
+            } else {
+                freeSession.checked = false;
+            }
+        }).catch(err => {
+            console.log("error: ", err);
+        });
+    })
 }
 
 export function displayScheduleInfo(){
