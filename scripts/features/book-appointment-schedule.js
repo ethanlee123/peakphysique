@@ -4,6 +4,10 @@ import { getTemplate } from "../util/getTemplate.js";
 
 displayBookInfo();
 
+// get trainerID from Book Appointment button on profile page
+let trainerID = localStorage.getItem("trainerID");
+console.log(trainerID);
+
 // initial message from client
 const comments = document.getElementById("comments");
 const timeSlot = document.getElementById("time-slot");
@@ -167,7 +171,4 @@ function createTimeSlots(date){
 createTimeSlots();
 
 
-// get trainerID from Book Appointment button on profile page
-// let trainerID = localStorage.getItem("trainerID");
-// trainerID = JSON.parse(trainerID);
-// console.log(trainerID);
+

@@ -4,7 +4,7 @@ import { displayTrainerInfo, hideUserSections, trainerProfilePosts } from "/scri
 let trainerToDisplay = localStorage.getItem("trainerProfileToDisplay");
 trainerToDisplay = trainerToDisplay ? JSON.parse(trainerToDisplay) : window.location.href="./404.html";
 console.log(trainerToDisplay);
-// localStorage.setItem("trainerProfileToDisplay", "");
+localStorage.setItem("trainerProfileToDisplay", "")
 
 
 
@@ -14,7 +14,10 @@ console.log(trainerToDisplay);
 // displayAboutMe();
 
 
-// const bookAppt = document.querySelector(".book-button");
-// bookAppt.addEventListener("click", () => {
-//     localStorage.setItem("trainerID", JSON.stringify(trainerToDisplay))
-// });
+// Local storage to carry trainer ID onto book appt page
+// need to update to make sure local storage is cleared?
+const bookAppt = document.querySelector(".book-button");
+bookAppt.addEventListener("click", (e) => {
+    localStorage.setItem("trainerID", JSON.stringify(trainerToDisplay));
+    console.log(trainerToDisplay);
+});
