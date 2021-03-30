@@ -6,7 +6,8 @@ displayBookInfo();
 
 // get trainerID from Book Appointment button on profile page
 let trainerID = localStorage.getItem("trainerID");
-console.log(trainerID);
+trainerID = JSON.parse(trainerID);
+console.log(trainerID.availability);
 
 // initial message from client
 const comments = document.getElementById("comments");
@@ -153,7 +154,7 @@ function createTimeSlots(date){
 
     $("#time-slot").after(morning, afternoon, evening); 
     
-    for (const item in generateUnavailableSlots()) {
+    for (const item in generateUnavailableSlots(trainerID.availability)) {
         if (generateUnavailableSlots[item][0] == date){
             if (generateUnavailableSlots[item][1] == "morning"){
                 morning.parentNode.removeChild(morning);
