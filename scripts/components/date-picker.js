@@ -19,7 +19,21 @@ let trainerID = localStorage.getItem("trainerID");
 trainerID = JSON.parse(trainerID);
 // get array of unavailable dates
 // var $myBadDates = new Array("10 October 2010","21 November 2010","12 December 2010","13 January 2011","14 February 2011","15 March 2011");
-var $myBadDates = generateUnavailableSlots(trainerID.availability);
+
+var unavailableSlots = generateUnavailableSlots({availability: trainerID.availability});
+var badDates = [];
+for(var i = 0; i < unavailableSlots.length; i++) {
+  var hasDate = false;
+  for(var j = 0; j < badDates.length; j++) {
+    if (badDates[j] === unavailableSlots[i][0]) {
+      hasDate = true;
+    }
+  }
+  if (!hasDate) {
+    badDates[i] = unavailableSlots[i][0];
+  }
+}
+var $myBadDates = badDates;
 
 function checkBadDates(mydate){
   var $return=true;
