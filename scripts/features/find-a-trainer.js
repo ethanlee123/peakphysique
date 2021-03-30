@@ -1,110 +1,17 @@
-import { debounce } from "../util/debounce.js";
+import { getCollection } from "../api/firebase-queries.js";
+
 import { fitnessOptions, wellnessOptions, availabilityDays } from "../schema.js";
+
+import { debounce } from "../util/debounce.js";
 import { getTemplate } from "../util/getTemplate.js";
 import { insertText, getExpertiseText, getAvailabilityText } from "../util/getTrainerText.js";
 import { getUserAvatar } from "../util/getUserAvatar.js";
 import { getGeoPointDistance } from "../util/getGeoPointDistance.js";
 import { capitalizeWords } from "../util/capitalizeWords.js";
 
-// ### Test Data ###
-const trainer1 = {
-    userId: "fabio.lous",
-    firstName: "Fabio",
-    lastName: "Lous",
-    name: "Fabio Lous",
-    location: new firebase.firestore.GeoPoint(37.422, 122.084),
-    profilePic: "",
-    website: "fabiolous.com",
-    hourlyRate: 23,
-    deposit: null,
-    firstSessionFree: true,
-    yearsOfExperience: 78,
-    gender: "male",
-    rating: 4.3,
-    fitness: ["body building"],
-    wellness: ["custom workout regimen"],
-    certifications: [],
-    availability: {
-        monday: ["morning"],
-        tuesday: [],
-        wednesday: [],
-        thursday: [],
-        friday: ["evening"],
-        saturday: ["afternoon"],
-        sunday: []
-    }
-};
 
-const trainer2 = {
-    userId: "fabio.tiful",
-    firstName: "Fabio",
-    lastName: "Tiful",
-    name: "Fabio Tiful",
-    gender: "female",
-    location: new firebase.firestore.GeoPoint(49.18597990000001, -122.53902439999999),
-    profilePic: "https://vz.cnwimg.com/thumb-1200x/wp-content/uploads/2010/03/Fabio-e1603764807834.jpg",
-    website: "fabiotiful.com",
-    hourlyRate: 89,
-    deposit: null,
-    firstSessionFree: true,
-    yearsOfExperience: 12,
-    rating: 5,
-    fitness: ["body building", "yoga", "dance"],
-    wellness: ["weight loss", "custom workout regimen"],
-    certifications: [],
-    availability: {
-        monday: ["morning"],
-        tuesday: ["morning"],
-        wednesday: ["morning"],
-        thursday: ["morning"],
-        friday: ["evening"],
-        saturday: ["afternoon"],
-        sunday: []
-    }
-};
 
-const trainer3 = {
-    userId: "fabio.logy",
-    firstName: "Fabio",
-    lastName: "Logy",
-    name: "Fabio Logy",
-    gender: "female",
-    location: new firebase.firestore.GeoPoint(-78, 54),
-    profilePic: "https://vz.cnwimg.com/thumb-1200x/wp-content/uploads/2010/03/Fabio-e1603764807834.jpg",
-    website: "fabiology.com",
-    hourlyRate: 76,
-    deposit: null,
-    firstSessionFree: false,
-    yearsOfExperience: 12,
-    rating: 2,
-    fitness: ["bodybuilding", "yoga", "dance"],
-    wellness: ["weight loss", "custom workout regimen"],
-    certifications: [],
-    availability: {
-        monday: [],
-        tuesday: [],
-        wednesday: [],
-        thursday: [],
-        friday: [],
-        saturday: [],
-        sunday: []
-    }
-};
-const totalTrainers = 13;
-const generateFabios = (max, obj1, obj2, obj3) => {
-    let randomNum;
-    let fabios = [];
-    for(let i = 0; i < max; i++) {
-        randomNum = Math.floor(Math.random() * Math.floor(3));
-        randomNum === 0 ? fabios.push({...obj1}) :
-            randomNum === 1 ? fabios.push({...obj2}) :
-            fabios.push({...obj3});
-        fabios[i].userId = `${fabios[i].userId}-0${i}`;
-    }
-    return fabios;
-}
-const trainersData = generateFabios(totalTrainers, trainer1, trainer2, trainer3);
-// #################
+
 
 // ### Variables ###
 // ###### Constants ######
@@ -829,9 +736,16 @@ window.addEventListener("resize", () => {
 });
 // #######################
 
-const initialRender = () => {
+const initialRender = async () => {
     positionBannerImgHorizontally();
     resizeBannerImgHeight();    
-    trainers.all = trainersData;
+    trainers.all = await getCollection({
+        collectionName: "trainerOnly",
+        sort: {
+            by: sort.field,
+            order: sort.order === "descending" ? "desc" : "asc"
+        }
+    });
+    console.log(trainers);
 }
 initialRender();

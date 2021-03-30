@@ -178,6 +178,7 @@ header {
   @media (min-width: 1200px) {
     header {
       display: grid;
+      padding-top: 0.5em;
       padding-bottom: 0;
       align-items: center;
       grid-template-columns: 2fr 5fr 1fr;
