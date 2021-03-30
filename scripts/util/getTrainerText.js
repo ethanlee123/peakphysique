@@ -24,14 +24,13 @@ const getAvailabilityText = (availability) => {
     }
 
     let text =  availableDays.length === 0 ? "Currently not available" :
-                availableDays.length === 7 ?
-                    "Everyday" && availableDays.splice(0, availableDays.length) :
+                availableDays.length === 7 ? "Everyday" :
                 days.weekdays.every(day => availableDays.includes(day)) ? "Weekdays" :
                 days.weekends.every(day => availableDays.includes(day)) ? "Weekends" :
                 "";
 
     if (text) {
-        if (availableDays.length === 0) {
+        if (availableDays.length === 0 || availableDays.length === 7) {
             return text;
         }
         availableDays = availableDays.filter(day => !days[text.toLowerCase()].includes(day));

@@ -115,7 +115,7 @@ var trainers = {
             insertText(trainerCard, ".trainer-name", trainer.name);
             insertText(trainerCard, ".rating", trainer.rating.toFixed(1));
             insertText(trainerCard, ".rate .text", `${trainer.hourlyRate} / hr`);
-            insertText(trainerCard, ".expertise .text", capitalizeWords(getExpertiseText(expertiseArr)));
+            insertText(trainerCard, ".expertise .text", getExpertiseText(expertiseArr));
             insertText(trainerCard, ".availability .text", getAvailabilityText(trainer.availability));
             getUserAvatar({user: trainer, parentNode: trainerCard});
     
@@ -400,6 +400,7 @@ var page = {
     },
 
     set current(current) {
+        console.log("currentPage", current);
         this._currentPage = current;
         this.renderPaginationBtns();
         this.styleCurrentPageNum();
@@ -418,6 +419,7 @@ var page = {
     renderPageNum(num) {
         const pageNum = document.createElement("span");
         pageNum.appendChild(document.createTextNode(num));
+        pageNum.classList.add("page-num");
         pageNum.setAttribute("data-page", `${num - 1}`);
         return pageNum;
     },
@@ -472,10 +474,10 @@ var page = {
     
     styleCurrentPageNum() {
         const previousPageNum = pagination.querySelector(".current-page");
-        previousPageNum?.classList?.remove("current-page");
+        previousPageNum?.classList.remove("current-page");
         
         const currentPageNum = pagination.querySelector(`[data-page="${this._currentPage}"]`);
-        currentPageNum.classList.add("current-page");
+        currentPageNum?.classList.add("current-page");
     },
 };
 // ##################
@@ -746,6 +748,5 @@ const initialRender = async () => {
             order: sort.order === "descending" ? "desc" : "asc"
         }
     });
-    console.log(trainers);
 }
 initialRender();
