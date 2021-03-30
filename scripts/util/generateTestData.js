@@ -23,7 +23,12 @@ const photos = {
         "https://i.pinimg.com/originals/b6/a6/1d/b6a61db705b07ed609acd3df85f0ecc7.jpg",
         "https://img.srgcdn.com/e//cUFZNmp1SWdsaHpTbGtoeWN4Y24uanBn.jpg",
         "https://mk0precisionathmejxw.kinstacdn.com/wp-content/uploads/2020/01/PRECISIONPORTRAITS-JPhoto-7-scaled.jpg",
-        "https://secure.i.telegraph.co.uk/multimedia/archive/02859/BjMw_uuIIAA6Qp2_2859133c.jpg"
+        "https://secure.i.telegraph.co.uk/multimedia/archive/02859/BjMw_uuIIAA6Qp2_2859133c.jpg",
+        "https://miro.medium.com/max/2142/1*BxNk8KGquVojeJTqbu_uzg.jpeg",
+        "https://live.staticflickr.com/5691/30473508070_513ef907d9_b.jpg",
+        "https://i.pinimg.com/236x/ca/f0/ae/caf0ae6da78dc840936cd3125f22c730.jpg",
+        "http://i.imgur.com/L5p8A4a.jpg",
+        "https://i.redd.it/pqfa5c3cm7sy.jpg"
     ],
     male: [
         null,
@@ -35,33 +40,57 @@ const photos = {
         "https://pbs.twimg.com/media/C8WZT_IVwAA2qt7.jpg",
         "https://i.kym-cdn.com/photos/images/newsfeed/000/110/672/1301700505625.jpg",
         "https://media.npr.org/assets/img/2012/09/14/headshot---cropped_vert-b425b9d3553d0de2a586b5fb27743ab809088051.jpg",
-        "https://mirrorimages.co/wp-content/uploads/2017/10/Mike-Tyson-Head-Shoot.jpg"
+        "https://mirrorimages.co/wp-content/uploads/2017/10/Mike-Tyson-Head-Shoot.jpg",
+        "https://images6.fanpop.com/image/photos/43400000/Chris-Evans-interview-Variety-s-Actors-on-Actors-at-home-chris-evans-43454895-1080-1337.jpg",
+        "https://i.pinimg.com/originals/e4/0e/c6/e40ec689ff43d1500f3969cef60a3e83.jpg",
+        "https://i.pinimg.com/originals/1f/7b/6c/1f7b6cbdbe6424b28cb315f665be731d.jpg",
+        "https://64.media.tumblr.com/6d2379532129749a32d84fec4280faeb/tumblr_nykh3m9SHn1sh6br8o2_1280.jpg",
+        "https://i.pinimg.com/236x/7b/ff/7f/7bff7f37e66bd536d7405cfd283e7ff1.jpg"
     ]
 }
 
 const firstNames = {
     female: [
-        "Alice",
-        "Brenda",
-        "Carly",
-        "Dorothy",
-        "Edna",
-        "Felicity",
-        "Gladys",
-        "Holly",
-        "Isabella",
-        "Jasmine"
+        "Kristin",
+        "Karen",
+        "Lisa",
+        "Lucy",
+        "Melissa",
+        "Mandy",
+        "Nora",
+        "Olivia",
+        "Petra",
+        "Quincey",
+        "Riley",
+        "Samantha",
+        "Tiffany",
+        "Ursula",
+        "Victoria",
+        "Vanessa",
+        "Whitney",
+        "Yennefer",
+        "Zoey"
     ],
     male: [
-        "Alex",
-        "Bob",
-        "Casey",
-        "Derek",
-        "Fabio",
-        "Gordon",
-        "Heath",
-        "Isaiah",
-        "Jafar"
+        "Kevin",
+        "Lucas",
+        "Mark",
+        "Marcus",
+        "Nigel",
+        "Oscar",
+        "Peter",
+        "Quentin",
+        "Rhodes",
+        "Steven",
+        "Stephen",
+        "Tim",
+        "Timothy",
+        "Uldred",
+        "Vincent",
+        "Victoria",
+        "Wesley",
+        "Xander",
+        "Zac"
     ]
 };
 

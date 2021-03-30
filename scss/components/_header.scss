@@ -11,9 +11,10 @@ header {
     @include box-shadow;
             
     @include desktop {
-        display: grid;
-        padding-top: 0.5em;
+        padding-top: 0;
         padding-bottom: 0;
+        height: 2.5em;
+        display: grid;
         align-items: center;
         grid-template-columns: 2fr 5fr 1fr;
         align-items: center;
@@ -147,6 +148,11 @@ header {
                         display: none;
                     }
                 }
+            }
+
+            &.user-greeting,
+            &.messages {
+                align-self: center;
             }
         }
 

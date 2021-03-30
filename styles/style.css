@@ -177,9 +177,10 @@ header {
   box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8); }
   @media (min-width: 1200px) {
     header {
-      display: grid;
-      padding-top: 0.5em;
+      padding-top: 0;
       padding-bottom: 0;
+      height: 2.5em;
+      display: grid;
       align-items: center;
       grid-template-columns: 2fr 5fr 1fr;
       align-items: center;
@@ -276,6 +277,8 @@ header {
         @media (min-width: 1200px) {
           header nav li i::before {
             display: none; } }
+      header nav li.user-greeting, header nav li.messages {
+        align-self: center; }
     @media (min-width: 1200px) {
       header nav .current-page {
         border-bottom: 0.3rem solid #0444AC; } }
