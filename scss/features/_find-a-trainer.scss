@@ -458,6 +458,13 @@
                 padding: 0;
             }
         }
+
+        .distance-from-user {
+            .error-text {
+                font-size: 0.75rem;
+                color: $warning;
+            }
+        }
     }
 
 }

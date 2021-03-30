@@ -43,6 +43,7 @@ const trainerOnly = {
     firstName: "",
     lastName: "",
     name: "",
+    location: null,
     profilePic: "",
     gender: null,
     website: "",

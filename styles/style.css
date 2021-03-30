@@ -901,6 +901,9 @@ footer .coming-soon {
         position: absolute;
         margin: 0;
         padding: 0; }
+    .find-a-trainer .filter-drawer .distance-from-user .error-text {
+      font-size: 0.75rem;
+      color: #C84146; }
 
 .initial-trainer-setup .top-buffer {
   margin-top: 50px; }
