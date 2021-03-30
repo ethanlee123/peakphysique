@@ -4,6 +4,7 @@ import { getTemplate } from "../util/getTemplate.js";
 import { insertText, getExpertiseText, getAvailabilityText } from "../util/getTrainerText.js";
 import { getUserAvatar } from "../util/getUserAvatar.js";
 import { getGeoPointDistance } from "../util/getGeoPointDistance.js";
+import { capitalizeWords } from "../util/capitalizeWords.js";
 
 // ### Test Data ###
 const trainer1 = {
@@ -20,8 +21,8 @@ const trainer1 = {
     yearsOfExperience: 78,
     gender: "male",
     rating: 4.3,
-    fitness: ["Bodybuilding"],
-    wellness: ["Custom Workout Regimen"],
+    fitness: ["body building"],
+    wellness: ["custom workout regimen"],
     certifications: [],
     availability: {
         monday: ["morning"],
@@ -48,8 +49,8 @@ const trainer2 = {
     firstSessionFree: true,
     yearsOfExperience: 12,
     rating: 5,
-    fitness: ["Bodybuilding", "Yoga", "Dance"],
-    wellness: ["Weight Loss", "Custom Workout Regimen"],
+    fitness: ["body building", "yoga", "dance"],
+    wellness: ["weight loss", "custom workout regimen"],
     certifications: [],
     availability: {
         monday: ["morning"],
@@ -76,8 +77,8 @@ const trainer3 = {
     firstSessionFree: false,
     yearsOfExperience: 12,
     rating: 2,
-    fitness: ["Bodybuilding", "Yoga", "Dance"],
-    wellness: ["Weight Loss", "Custom Workout Regimen"],
+    fitness: ["bodybuilding", "yoga", "dance"],
+    wellness: ["weight loss", "custom workout regimen"],
     certifications: [],
     availability: {
         monday: [],
@@ -114,6 +115,7 @@ const pageSize = 6;
 // ###### DOM Variables ######
 const bannerImg = document.getElementById("bannerImg");
 const banner = document.getElementById("banner");
+const toggleBar = document.getElementById("toggleBar");
 const filterToggles = document.querySelectorAll("button.toggle-filter");
 const filterDrawerToggles = document.querySelectorAll(".toggle-filter-drawer");
 const exitDrawerToggle = document.getElementById("exitDrawer");
@@ -206,7 +208,7 @@ var trainers = {
             insertText(trainerCard, ".trainer-name", trainer.name);
             insertText(trainerCard, ".rating", trainer.rating.toFixed(1));
             insertText(trainerCard, ".rate .text", `${trainer.hourlyRate} / hr`);
-            insertText(trainerCard, ".expertise .text", getExpertiseText(expertiseArr));
+            insertText(trainerCard, ".expertise .text", capitalizeWords(getExpertiseText(expertiseArr)));
             insertText(trainerCard, ".availability .text", getAvailabilityText(trainer.availability));
             getUserAvatar({user: trainer, parentNode: trainerCard});
     
@@ -398,6 +400,7 @@ var filters = {
     },
 
     set values(filters) {
+        console.log("set values", filters);
         this._value = filters;
         const noFilters = Object.keys(this._value).length === 0 && true;
         this.updateFilterButtons(noFilters);
@@ -440,7 +443,7 @@ var filters = {
             }
 
             if (filter === "wellness" || filter === "fitness") {
-                filteredList = filteredList.filter(trainer => 
+                filteredList = filteredList.filter(trainer =>
                     trainer[filter].some(option => this._value[filter].includes(option.toLowerCase()))
                 );
             }
@@ -460,8 +463,6 @@ var filters = {
                     return getGeoPointDistance(trainerCoords, userLocation) < this._value[filter];
                 });
             }
-
-            console.log("filteredList", filteredList);
         }
 
         return filteredList;
@@ -572,12 +573,6 @@ var page = {
 };
 // ##################
 
-const capitalizeWords = (str) => {
-    return str.replace(/\w\S*/g, text => {
-        return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
-    });
-}
-
 const createOptions = (stringArr) => {
     return stringArr.map(string => {
         return [capitalizeWords(string), string];
@@ -594,29 +589,74 @@ const resizeBannerImgHeight = () => {
     bannerImg.style.height = `${(banner.offsetHeight * 1.15)}px`;
 }
 
-const setFilterToggles = () => {
-    let newFilters = filters.values;
-    newFilters["wellnessExclude"] = [];
-    newFilters["fitnessExclude"] = [];
-    
+const setFilterToggles = () => {    
     const excludedFilters = document.querySelectorAll(".toggle-filter:not(.active)");
     if (excludedFilters) {
         excludedFilters.forEach((filter) => {
-            const type = `${filter.dataset.field}Exclude`;
-            const value = filter.dataset.filter;
-            newFilters[type].push(value);
+            filter.dataset.field === "fitness" ?
+                fitnessOptionsFilter.deselectOption(filter.dataset.filter) :
+                wellnessOptionsFilter.deselectOption(filter.dataset.filter);
         });            
     }
 
-    newFilters["fitnessExclude"].length === 0 && delete newFilters["fitnessExclude"];
-    newFilters["wellnessExclude"].length === 0 && delete newFilters["wellnessExclude"];
-    filters.values = newFilters;
+    const includedFilters = document.querySelectorAll(".toggle-filter.active");
+    if (includedFilters) {
+        includedFilters.forEach((filter) => {
+            filter.dataset.field === "fitness" ?
+                fitnessOptionsFilter.selectOption(filter.dataset.filter) :
+                wellnessOptionsFilter.selectOption(filter.dataset.filter);
+        });
+    }
+
+    let filtersToApply = filters.values;
+
+    const selectedFitnessOptions = fitnessOptions.flatMap((option) =>
+        fitnessOptionsFilter.isOptionSelected(option) ? option : []);
+    if (selectedFitnessOptions.length !== fitnessOptions.length) {
+        filtersToApply.fitness = selectedFitnessOptions;
+    } else {
+        delete filtersToApply.fitness;
+    }
+
+    const selectedWellnessOptions = wellnessOptions.flatMap((option) =>
+        wellnessOptionsFilter.isOptionSelected(option) ? option : []);
+    if (selectedWellnessOptions.length !== wellnessOptions.length) {
+        filtersToApply.wellness = selectedWellnessOptions;
+    } else {
+        delete filtersToApply.wellness;
+    }
+
+    filters.values = filtersToApply;
+}
+
+const deactivateFilterToggles = () => {
+    filterToggles.forEach((toggle) => {
+        toggle.classList.contains("active") && toggle.classList.remove("active");
+    })
 }
 
 const resetFilterToggles = () => {
     filterToggles.forEach((toggle) => {
         !toggle.classList.contains("active") && toggle.classList.add("active");
     })
+}
+
+const syncFilterToggles = ({fitnessArr, wellnessArr}) => {
+    deactivateFilterToggles();
+
+    let activeFilters = [];
+
+    fitnessArr && fitnessArr.forEach(option => {
+        const matchingToggle = toggleBar.querySelector(`[data-filter="${option}"]`);
+        matchingToggle && activeFilters.push(matchingToggle);
+    });
+
+    wellnessArr && wellnessArr.forEach(option => {
+        const matchingToggle = toggleBar.querySelector(`[data-filter="${option}"]`);
+        matchingToggle && activeFilters.push(matchingToggle);
+    });
+
+    activeFilters.forEach(node => node.classList.add("active"));
 }
 
 // ### jQuery - Dropdown Checkbox ###
@@ -750,7 +790,11 @@ applyFilters.addEventListener("click", debounce(() => {
     }
 
     filters.values = filtersToApply;
-    console.log("filtersToApply", filtersToApply);
+
+    syncFilterToggles({
+        fitnessArr: selectedFitnessOptions,
+        wellnessArr: selectedWellnessOptions
+    });
 }, debounceTime));
 
 resetFilters.forEach((btn) => {
