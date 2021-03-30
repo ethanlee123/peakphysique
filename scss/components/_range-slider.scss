@@ -17,6 +17,10 @@
         background: $primary;
     }
 
+    .noUi-connects {
+        background: $primary;
+    }
+
     .noUi-handle {
         border-radius: 50%;
         cursor: pointer;
@@ -27,7 +31,7 @@
             transform: translateX(-50%);
             @include box-shadow;
         }
-
+        
         &:before, &:after {
             display: none;
         }

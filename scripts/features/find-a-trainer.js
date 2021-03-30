@@ -16,6 +16,7 @@ const trainer1 = {
     deposit: null,
     firstSessionFree: true,
     yearsOfExperience: 78,
+    gender: "male",
     rating: 4.3,
     fitness: ["Bodybuilding"],
     wellness: ["Custom Workout Regimen"],
@@ -36,6 +37,7 @@ const trainer2 = {
     firstName: "Fabio",
     lastName: "Tiful",
     name: "Fabio Tiful",
+    gender: "female",
     profilePic: "https://vz.cnwimg.com/thumb-1200x/wp-content/uploads/2010/03/Fabio-e1603764807834.jpg",
     website: "fabiotiful.com",
     hourlyRate: 89,
@@ -62,6 +64,7 @@ const trainer3 = {
     firstName: "Fabio",
     lastName: "Logy",
     name: "Fabio Logy",
+    gender: "female",
     profilePic: "https://vz.cnwimg.com/thumb-1200x/wp-content/uploads/2010/03/Fabio-e1603764807834.jpg",
     website: "fabiology.com",
     hourlyRate: 76,
@@ -116,24 +119,34 @@ const resetFilters = document.querySelectorAll(".reset-filters");
 const searchBar = document.getElementById("search");
 const sortBy = document.getElementById("sortBy");
 const sortOrder = document.getElementById("sortOrder");
-const rangeSliders = document.querySelectorAll(".range-slider");
 const trainerList = document.getElementById("trainerList");
 const trainerCardTemplate = await getTemplate(pathToTrainerCard);
 const pagination = document.getElementById("pagination");
 const paginationBtns = document.querySelectorAll("button.paginate");
 const pageNums = document.getElementById("pageNums");
 const resultsFound = document.getElementById("resultsFound");
-// const expertiseFilter = document.getElementById("expertiseFilter");
-// const ratePerSession = document.getElementById("ratePerSession");
-// const yearsOfExperience = document.getElementById("yearsOfExperience");
-// const distanceFromUser = document.getElementById("distanceFromUser");
+const applyFilters = document.getElementById("applyFilters");
+const ratePerSession = document.getElementById("ratePerSession");
+const yearsOfExperience = document.getElementById("yearsOfExperience");
+const distanceFromUser = document.getElementById("distanceFromUser");
+const firstSessionFree = document.getElementById("firstSessionFree");
+const genderFilter = document.getElementsByName("gender");
+
 
 var trainers = {
     _all: [],
     _toDisplay: [],
+    _rate: {
+        min: 0,
+        max: 0
+    },
+    _experience: {
+        min: 0,
+        max: 0
+    },
 
     set display(trainers) {
-        this._toDisplay = trainers;
+        this._toDisplay = sort.sortList(trainers, sort.order);
         this.renderTrainerCards(this.getPage(trainers, 0, pageSize));
         page.total = Math.ceil(trainers.length / pageSize);
     },
@@ -141,6 +154,9 @@ var trainers = {
     set all(trainers) {
         this._all = trainers;
         this.display = trainers;
+        this._rate = this.getSliderRange("hourlyRate");
+        this._experience = this.getSliderRange("yearsOfExperience");
+        this.renderFilterSliders();
     },
 
     get display() {
@@ -149,6 +165,14 @@ var trainers = {
 
     get all() {
         return this._all;
+    },
+
+    get rate() {
+        return this._rate;
+    },
+
+    get experience() {
+        return this._experience;
     },
 
     paginate(page) {
@@ -198,12 +222,119 @@ var trainers = {
     
             trainerList.appendChild(trainerCard);
         });
-    },    
+    },
+
+    getSliderRange(prop) {
+        const sortedList = sort.sortList(this._all, prop);
+        if (sortedList) {
+            return {min: sortedList[0][prop], max: sortedList[sortedList.length - 1][prop]};
+        }
+    },
+    
+    renderFilterSliders () {
+        noUiSlider.create(ratePerSession, {
+            start: [this._rate.min, this._rate.max],
+            step: 1,
+            range: {
+                "min": this._rate.min,
+                "max": this._rate.max
+            },
+            connect: true,
+            tooltips: true,
+            format: {
+                to: (value) => {
+                    return `$${Math.round(value)}`;
+                },
+                from: (value) => {
+                    return Number(value.replace("$", ""));
+                }
+            }
+        });
+
+        noUiSlider.create(yearsOfExperience, {
+            start: [this._experience.min, this._experience.max],
+            step: 1,
+            range: {
+                "min": this._experience.min,
+                "max": this._experience.max
+            },
+            connect: true,
+            tooltips: true,
+            format: {
+                to: (value) => {
+                    return `${Math.round(value)} years`;
+                },
+                from: (value) => {
+                    return Number(value.replace(" years", ""));
+                }
+            }
+        });
+
+        noUiSlider.create(distanceFromUser, {
+            start: [60],
+            step: 10,
+            range: {
+                "min": 10,
+                "max": 60
+            },
+            connect: true,
+            tooltips: true,
+            format: {
+                to: (value) => {
+                    if (value === 60) {
+                        return "Any";
+                    } else {
+                        return `< ${value}`;
+                    }
+                },
+                from: (value) => {
+                    if (value === "Any") {
+                        return 60;
+                    } else {
+                        return Number(value.replace("< ", ""));
+                    }
+                }
+            }
+        });
+        
+    },
 };
 
 var sort = {
-    field: "name",
-    descending: false
+    _by: "name",
+    _order: "ascending",
+
+    set values({field, isDescending}) {
+        this._by = field;
+        this._order = isDescending ? "descending" : "ascending";
+        trainers.display = this.sortList(trainers.display, this._by, this._order);
+    },
+
+    get field() {
+        return this._by;
+    },
+
+    get order() {
+        return this._order;
+    },
+
+    get isDescending() {
+        if (this._order === "ascending") {
+            return false;
+        }
+        return true;
+    },
+
+    sortList(arr, sortBy, sortOrder = "ascending") {
+        let sortedList = arr.map(obj => ({...obj}));
+        sortedList = sortedList.sort((a, b) =>
+            a[sortBy] > b[sortBy] ? 1 :
+            a[sortBy] < b[sortBy] ? -1 : 0);
+        if (sortOrder == "descending") {
+            sortedList = sortedList.reverse();
+        }
+        return sortedList;
+    }
 }
 
 var filters = {
@@ -213,16 +344,20 @@ var filters = {
     },
 
     set values(filters) {
-        const noFilters = Object.keys(this._value).length === 0 && true;
         this._value = filters;
+        const noFilters = Object.keys(this._value).length === 0 && true;
         this.updateFilterButtons(noFilters);
         if (!noFilters) {
             trainers.display = this.applyFilters(trainers.all);
+        } else {
+            console.log("resetta stone");
+            this.resetFilters();
+            trainers.display = trainers.all;
         }
     },
 
     updateFilterButtons(noFilters) {
-        if (noFilters) {
+        if (!noFilters) {
             setFilterBtn.classList.remove("no-filters", "btn-outline-light");
             setFilterBtn.classList.add("btn-primary");
         } else {
@@ -251,15 +386,28 @@ var filters = {
         let filteredList = cardList;
 
         for (const filter in this._value) {
-            if (typeof filter === "string") {
-                filteredList = filteredList.filter(trainer => 
+            if (filter === "name") {
+                filteredList = filteredList.filter(trainer =>  
                     trainer[filter].toLowerCase().includes(this._value[filter].toLowerCase()));
+            }
+
+            if (filter === "gender" || filter === "firstSessionFree") {
+                filteredList = filteredList.filter(trainer =>  
+                    trainer[filter] === this._value[filter]);
             }
 
             console.log("filteredList", filteredList);
         }
 
         return filteredList;
+    },
+
+    resetFilters() {
+        genderFilter[0].checked = true;
+        firstSessionFree.checked = false;
+        ratePerSession.noUiSlider.reset();
+        yearsOfExperience.noUiSlider.reset();
+        distanceFromUser.noUiSlider.reset();
     }
 };
 
@@ -394,7 +542,6 @@ const setFilterToggles = () => {
 
     newFilters["fitnessExclude"].length === 0 && delete newFilters["fitnessExclude"];
     newFilters["wellnessExclude"].length === 0 && delete newFilters["wellnessExclude"];
-
     filters.values = newFilters;
 }
 
@@ -403,22 +550,6 @@ const resetFilterToggles = () => {
         !toggle.classList.contains("active") && toggle.classList.add("active");
     })
 }
-
-// ### jQuery - Range Sliders ###
-rangeSliders.forEach(slider => 
-    noUiSlider.create(slider, {
-        start: [0, 100],
-        step: 1,
-        range: {
-            "min": 0,
-            "max": 100
-        },
-        connect: true,
-        tooltips: true
-    })
-);
-// ##############################
-
 
 // ### jQuery - Dropdown Checkbox ###
 const fitnessOptionsFilter = $("#fitnessOptionsFilter").filterMultiSelect({
@@ -465,7 +596,7 @@ sortBy.addEventListener("change", (event) => {
             ascending.innerHTML = "A - Z";
             descending.innerHTML = "Z - A";
             break;
-        case "rate":
+        case "hourlyRate":
             ascending.innerHTML = "Lowest - Highest";
             descending.innerHTML = "Highest - Lowest";
             break;
@@ -475,12 +606,61 @@ sortBy.addEventListener("change", (event) => {
             break;
     }
 
-    sort.field = sortByValue;
+    sort.values = {
+        field: sortByValue,
+        isDescending: sort.isDescending
+    };
 });
 
 sortOrder.addEventListener("change", () => {
-    sort.descending = !sort.descending;
+    sort.values = {
+        field: sort.field,
+        isDescending: !sort.isDescending
+    };
 });
+
+applyFilters.addEventListener("click", debounce(() => {
+    const filtersToApply = {};
+
+    if (firstSessionFree.checked) {
+        filtersToApply.firstSessionFree = firstSessionFree.checked;
+    }
+
+    genderFilter.forEach(filter => {
+        if (filter.checked && filter.value !== "any") {
+            filtersToApply.gender = filter.value;
+        }
+    })
+
+    const rateValues = ratePerSession.noUiSlider.get().map(value => {
+        return Number(value.replace("$", ""));
+    });
+    if (rateValues[0] !== trainers.rate.min && rateValues[1] !== trainers.rate.max) {
+        filtersToApply.hourlyRate = {min: rateValues[0], max: rateValues[1]};     
+    }
+
+    const experienceValues = yearsOfExperience.noUiSlider.get().map(value => {
+        return Number(value.replace(" years", ""));
+    });
+    if (experienceValues[0] !== trainers.experience.min && experienceValues[1] !== trainers.experience.max) {
+        filtersToApply.yearsOfExperience = {min: experienceValues[0], max: experienceValues[1]};        
+    }
+
+    if (filters.name) {
+        filtersToApply.name = filters.name;
+    }
+
+    if (filters.wellnessExclude) {
+        filtersToApply.wellnessExclude = filters.wellnessExclude;
+    }
+
+    if (filters.fitnessExclude) {
+        filtersToApply.fitnessExclude = filters.fitnessExclude;
+    }
+
+    filters.values = filtersToApply;
+    console.log("filtersToApply", filtersToApply);
+}, debounceTime));
 
 resetFilters.forEach((btn) => {
     btn.addEventListener("click", debounce(() => {
