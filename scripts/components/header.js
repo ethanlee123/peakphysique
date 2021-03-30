@@ -25,15 +25,15 @@ class Header extends HTMLElement {
                 handleLogOut();
                 showCurrentPage();
 
-                let user = localStorage.getItem("user");
-                console.log(user);
-                if (user) {
-                    user = JSON.parse(user);
-                    editGreeting(user.firstName);
-                    if (document.body.classList.contains("logged-out")) {
-                        document.body.classList.remove("logged-out");
-                    }
-                }
+                // let user = localStorage.getItem("user");
+                // console.log(user);
+                // if (user) {
+                //     user = JSON.parse(user);
+                //     editGreeting(user.firstName);
+                //     if (document.body.classList.contains("logged-out")) {
+                //         document.body.classList.remove("logged-out");
+                //     }
+                // }
             });
 
     }
@@ -73,4 +73,4 @@ window.addEventListener("resize", () => {
     document.body.classList.remove("active-nav");
 });
 
-watchUser();
+// watchUser();

@@ -455,7 +455,7 @@ var page = {
         const prevBtn = pagination.querySelector("#previous");
         const nextBtn = pagination.querySelector("#next");
 
-        prevBtn.style.display = this._currentPage === 0 ? "none" : "block";
+        prevBtn.style.display = Number(this._currentPage) === 0 ? "none" : "block";
         nextBtn.style.display = Number(this._currentPage) === (this._totalPages - 1) ? "none" : "block";
     },
 
