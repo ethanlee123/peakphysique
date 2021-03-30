@@ -463,9 +463,9 @@ var page = {
         if (trainers.display.length === 0) {
             resultsFound.innerHTML = "";
         } else {
-            const isFirstPage = this._currentPage === 0;
-            const isLastPage = this._currentPage === this._totalPages - 1;
-            const trainersShown = !isFirstPage && isLastPage ? (trainers.display.length % pageSize) :
+            const isFirstPage = Number(this._currentPage) === 0;
+            const isLastPage = Number(this._currentPage) === this._totalPages - 1;
+            const trainersShown = !isFirstPage && isLastPage ? (trainers.display.length % pageSize !== 0 ? trainers.display.length % pageSize : pageSize ) :
                                     isFirstPage && isLastPage ? trainers.display.length :
                                     pageSize;
             resultsFound.innerHTML = `Showing ${trainersShown} out of <b>${trainers.display.length} trainers</b> found.`;            
@@ -726,9 +726,9 @@ exitDrawerToggle.addEventListener("click", () => {
 });
 
 paginationBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-        btn.classList.contains("next") ? page.current++ : page.current--;
-    });
+    btn.addEventListener("click", debounce(
+        () => btn.classList.contains("next") ? page.current++ : page.current--,
+        debounceTime));
 });
 
 window.addEventListener("resize", () => {

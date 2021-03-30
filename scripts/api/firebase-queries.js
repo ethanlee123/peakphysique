@@ -607,3 +607,21 @@ export function getTrainerAvailability() {
         return availability;
     });
 }
+
+export const watchUser = () => {
+    firebase.auth().onAuthStateChanged(async (user) => {
+
+        if (user) {
+            console.log("in watchUser", user);
+            localStorage.setItem("user", "");
+            const userDetails = await userRef.doc(user.uid).get();
+            localStorage.setItem("user", JSON.stringify(userDetails.data()));
+        } else {
+            localStorage.setItem("user", "");
+        }
+    })
+}
+
+export const logOutUser = async () => {
+    return await firebase.auth().signOut();
+}

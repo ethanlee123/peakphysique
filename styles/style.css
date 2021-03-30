@@ -563,7 +563,8 @@ footer .coming-soon {
 .index-body {
   position: relative; }
   .index-body header {
-    margin: 0; }
+    margin: 0;
+    z-index: 99999; }
   .index-body footer .scroll-to-top {
     display: none; }
   .index-body .title-font {
