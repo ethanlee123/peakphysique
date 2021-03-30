@@ -3,6 +3,7 @@ import { fitnessOptions, wellnessOptions, availabilityDays } from "../schema.js"
 import { getTemplate } from "../util/getTemplate.js";
 import { insertText, getExpertiseText, getAvailabilityText } from "../util/getTrainerText.js";
 import { getUserAvatar } from "../util/getUserAvatar.js";
+import { getGeoPointDistance } from "../util/getGeoPointDistance.js";
 
 // ### Test Data ###
 const trainer1 = {
@@ -10,6 +11,7 @@ const trainer1 = {
     firstName: "Fabio",
     lastName: "Lous",
     name: "Fabio Lous",
+    location: new firebase.firestore.GeoPoint(37.422, 122.084),
     profilePic: "",
     website: "fabiolous.com",
     hourlyRate: 23,
@@ -38,6 +40,7 @@ const trainer2 = {
     lastName: "Tiful",
     name: "Fabio Tiful",
     gender: "female",
+    location: new firebase.firestore.GeoPoint(49.18597990000001, -122.53902439999999),
     profilePic: "https://vz.cnwimg.com/thumb-1200x/wp-content/uploads/2010/03/Fabio-e1603764807834.jpg",
     website: "fabiotiful.com",
     hourlyRate: 89,
@@ -65,6 +68,7 @@ const trainer3 = {
     lastName: "Logy",
     name: "Fabio Logy",
     gender: "female",
+    location: new firebase.firestore.GeoPoint(-78, 54),
     profilePic: "https://vz.cnwimg.com/thumb-1200x/wp-content/uploads/2010/03/Fabio-e1603764807834.jpg",
     website: "fabiology.com",
     hourlyRate: 76,
@@ -129,10 +133,11 @@ const applyFilters = document.getElementById("applyFilters");
 const ratePerSession = document.getElementById("ratePerSession");
 const yearsOfExperience = document.getElementById("yearsOfExperience");
 const distanceFromUser = document.getElementById("distanceFromUser");
+const geolocationErrorText = document.getElementById("geolocationErrorText");
 const firstSessionFree = document.getElementById("firstSessionFree");
 const genderFilter = document.getElementsByName("gender");
 
-
+var userLocation;
 var trainers = {
     _all: [],
     _toDisplay: [],
@@ -230,6 +235,43 @@ var trainers = {
             return {min: sortedList[0][prop], max: sortedList[sortedList.length - 1][prop]};
         }
     },
+
+    getGeolocationPosition(options) {
+        return new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject, options);
+        })
+    },
+
+    async getGeolocation(errorText) {
+        const result = await this.getGeolocationPosition()
+            .then(response => {
+                const { coords: {latitude, longitude} } = response;
+                return {
+                    longitude: longitude,
+                    latitude: latitude
+                };
+            })
+            .catch(e => {
+                let error;
+                switch (e.code) {
+                    case 1:
+                        error = "Please allow geolocation permission to use this filter.";
+                        break;
+                    case 2:
+                        error = "An internal error occurred";
+                        break;
+                    case 3:
+                        error = ""
+                        break;
+                }
+                errorText.innerHTML = error;
+            });
+        if (result) {
+            userLocation = result;
+            errorText.innerHTML = "";
+            return result;
+        }
+    },
     
     renderFilterSliders () {
         noUiSlider.create(ratePerSession, {
@@ -284,17 +326,29 @@ var trainers = {
                     if (value === 60) {
                         return "Any";
                     } else {
-                        return `< ${value}`;
+                        return `< ${value}km`;
                     }
                 },
                 from: (value) => {
                     if (value === "Any") {
                         return 60;
                     } else {
-                        return Number(value.replace("< ", ""));
+                        return Number(value.replace("< |km", ""));
                     }
                 }
             }
+        });
+
+        distanceFromUser.noUiSlider.on("start", () => {
+            if (userLocation) {
+                return;
+            }
+            distanceFromUser.setAttribute("disabled", true);
+            this.getGeolocation(geolocationErrorText).then(() => {
+                if (userLocation) {
+                    distanceFromUser.removeAttribute("disabled"); 
+                }              
+            });
         });
         
     },
@@ -350,7 +404,6 @@ var filters = {
         if (!noFilters) {
             trainers.display = this.applyFilters(trainers.all);
         } else {
-            console.log("resetta stone");
             this.resetFilters();
             trainers.display = trainers.all;
         }
@@ -364,22 +417,6 @@ var filters = {
             setFilterBtn.classList.remove("btn-primary");
             setFilterBtn.classList.add("no-filters", "btn-outline-light");
         }
-    },
-
-    default: {
-        name: "",
-        wellness: [],
-        wellnessExclude: [],
-        fitness: [],
-        fitnessExclude: [],
-        ratePerSession: {
-            min: undefined,
-            max: undefined
-        },
-        firstSessionFree: undefined,
-        yearsOfExperience: undefined,
-        gender: undefined,
-        distance: undefined
     },
 
     applyFilters(cardList) {
@@ -396,6 +433,34 @@ var filters = {
                     trainer[filter] === this._value[filter]);
             }
 
+            if (filter === "hourlyRate" || filter === "yearsOfExperience") {
+                filteredList = filteredList.filter(trainer => 
+                    trainer[filter] >= this._value[filter].min &&
+                    trainer[filter] <= this._value[filter].max);
+            }
+
+            if (filter === "wellness" || filter === "fitness") {
+                filteredList = filteredList.filter(trainer => 
+                    trainer[filter].some(option => this._value[filter].includes(option.toLowerCase()))
+                );
+            }
+
+            if (filter === "availability") {
+                filteredList = filteredList.filter(trainer => 
+                    this._value[filter].some(option => trainer[filter][option].length !== 0)
+                );
+            }
+
+            if (filter === "location" && userLocation) {
+                filteredList = filteredList.filter(trainer => {
+                    const trainerCoords = {
+                        latitude: trainer[filter].latitude,
+                        longitude: trainer[filter].longitude
+                    };
+                    return getGeoPointDistance(trainerCoords, userLocation) < this._value[filter];
+                });
+            }
+
             console.log("filteredList", filteredList);
         }
 
@@ -403,6 +468,9 @@ var filters = {
     },
 
     resetFilters() {
+        fitnessOptionsFilter.selectAll();
+        wellnessOptionsFilter.selectAll();
+        availabilityFilter.selectAll();
         genderFilter[0].checked = true;
         firstSessionFree.checked = false;
         ratePerSession.noUiSlider.reset();
@@ -622,6 +690,24 @@ sortOrder.addEventListener("change", () => {
 applyFilters.addEventListener("click", debounce(() => {
     const filtersToApply = {};
 
+    const selectedFitnessOptions = fitnessOptions.flatMap((option) =>
+        fitnessOptionsFilter.isOptionSelected(option) ? option : []);
+    if (selectedFitnessOptions.length !== fitnessOptions.length) {
+        filtersToApply.fitness = selectedFitnessOptions;
+    }
+
+    const selectedWellnessOptions = wellnessOptions.flatMap((option) =>
+        wellnessOptionsFilter.isOptionSelected(option) ? option : []);
+    if (selectedWellnessOptions.length !== wellnessOptions.length) {
+        filtersToApply.wellness = selectedWellnessOptions;
+    }
+
+    const selectedAvailabilityOptions = availabilityDays.flatMap((option) =>
+        availabilityFilter.isOptionSelected(option) ? option : []);
+    if (selectedAvailabilityOptions.length !== availabilityDays.length) {
+        filtersToApply.availability = selectedAvailabilityOptions;
+    }
+
     if (firstSessionFree.checked) {
         filtersToApply.firstSessionFree = firstSessionFree.checked;
     }
@@ -635,15 +721,20 @@ applyFilters.addEventListener("click", debounce(() => {
     const rateValues = ratePerSession.noUiSlider.get().map(value => {
         return Number(value.replace("$", ""));
     });
-    if (rateValues[0] !== trainers.rate.min && rateValues[1] !== trainers.rate.max) {
+    if (rateValues[0] !== trainers.rate.min || rateValues[1] !== trainers.rate.max) {
         filtersToApply.hourlyRate = {min: rateValues[0], max: rateValues[1]};     
     }
 
     const experienceValues = yearsOfExperience.noUiSlider.get().map(value => {
         return Number(value.replace(" years", ""));
     });
-    if (experienceValues[0] !== trainers.experience.min && experienceValues[1] !== trainers.experience.max) {
+    if (experienceValues[0] !== trainers.experience.min || experienceValues[1] !== trainers.experience.max) {
         filtersToApply.yearsOfExperience = {min: experienceValues[0], max: experienceValues[1]};        
+    }
+
+    const distanceFromUserValue = Number(distanceFromUser.noUiSlider.get().replace("< ", "").replace("km", ""));
+    if (distanceFromUserValue) {
+        filtersToApply.location = distanceFromUserValue;
     }
 
     if (filters.name) {
