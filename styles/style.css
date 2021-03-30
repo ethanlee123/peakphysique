@@ -178,6 +178,7 @@ header {
   @media (min-width: 1200px) {
     header {
       display: grid;
+      padding-bottom: 0;
       align-items: center;
       grid-template-columns: 2fr 5fr 1fr;
       align-items: center;
@@ -274,6 +275,9 @@ header {
         @media (min-width: 1200px) {
           header nav li i::before {
             display: none; } }
+    @media (min-width: 1200px) {
+      header nav .current-page {
+        border-bottom: 0.3rem solid #0444AC; } }
   header .burger-menu {
     position: relative;
     grid-column: 1;

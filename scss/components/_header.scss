@@ -12,6 +12,7 @@ header {
             
     @include desktop {
         display: grid;
+        padding-bottom: 0;
         align-items: center;
         grid-template-columns: 2fr 5fr 1fr;
         align-items: center;
@@ -145,6 +146,13 @@ header {
                         display: none;
                     }
                 }
+            }
+        }
+
+        .current-page {
+
+            @include desktop {
+                border-bottom: 0.3rem solid $info;
             }
         }
     }
