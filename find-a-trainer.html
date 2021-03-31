@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 
-<body id="body" class="find-a-trainer">
+<body id="body" class="find-a-trainer logged-out">
 
     <!-------------------------------------->
     <!-- The following is HTML for layout -->
@@ -46,7 +46,7 @@
           </div><!--.subtext-->        
         </div><!--.text-->
 
-        <div class="toggle-filters filters">
+        <div class="toggle-filters filters" id="toggleBar">
           <button
             class="toggle-filter macro-coaching active"
             id="macroCoaching"
@@ -95,7 +95,7 @@
             class="toggle-filter bodybuilding active"
             id="bodybuilding"
             data-field="fitness"
-            data-filter="bodybuilding"
+            data-filter="body building"
           >
             <img class="active-logo" src="./images/icons/bodybuilding.svg" alt="Bodybuilding filter toggle">
             <img class="disabled-logo" src="./images/icons/bodybuilding-02.svg" alt="Bodybuilding filter toggle">
@@ -106,7 +106,7 @@
             class="toggle-filter endurance-training active"
             id="enduranceTraining"
             data-field="fitness"
-            data-filter="endurance training"
+            data-filter="endurance"
           >
             <img class="active-logo" src="./images/icons/endurance-training.svg" alt="Endurance training filter toggle">
             <img class="disabled-logo" src="./images/icons/endurance-training-02.svg" alt="Endurance training filter toggle">
@@ -310,6 +310,7 @@
     <script type="module" src="./scripts/components/header.js"></script>
     <script type="module" src="./scripts/components/footer.js"></script>
     <script type="module" src="./scripts/features/find-a-trainer.js"></script>
+    <script type="module" src="./scripts/util/generateTestData.js"></script>
 
     <script type="module" src="scripts/api/firebase_api_team37.js"></script>
     <script type="module" src="scripts/api/firebase-queries.js"></script>

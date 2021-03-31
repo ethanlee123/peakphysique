@@ -9,6 +9,9 @@ export const wellnessOptions = [
 export const availabilityDays = [
     "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"
 ];
+export const availabilityTimes = [
+    "morning", "afternoon", "evening"
+];
 
 // User includes both trainer and client
 const user = {
@@ -26,7 +29,6 @@ const user = {
     favWorkout: "",
     fitnessLevel: "",
     gender: "", // String male or female or other or prefer not to say
-    location: new firebase.firestore.GeoPoint(37.422, 122.084), // Retrieved automatically
     profilePic: "", //uploaded by the user
     rating: null, // integer, range 1 - 5
     facebook: "",
@@ -38,7 +40,7 @@ const user = {
 }
 
 // Use for filtering
-const trainerOnly = {
+export const trainerOnly = {
     userId: "",
     firstName: "",
     lastName: "",

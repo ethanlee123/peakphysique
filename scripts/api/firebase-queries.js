@@ -3,7 +3,7 @@ import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
 // import { reverseGeo } from "/scripts/api/here_api.js"
 
 const db = firebase.firestore();
-const storage = firebase.storage();
+const storage = firebase.storage;
 
 // Reference to user collection, no document specified
 const userRef = db.collection("user");
@@ -545,8 +545,8 @@ export function trainerProfilePosts() {
 
 export const getCollection = async ({
         collectionName,
-        sort,
-        limit,
+        sort = null,
+        limit = null,
         filters = null,
         startAfter = null
     }) => {
@@ -569,17 +569,17 @@ export const getCollection = async ({
         });
     }
 
-// retrieves trainer availablity data
-// export function checkAvailability() {
-//     db.collection("trainerAvailability").where("trainerUserId", "==", user.uid).get()
-//     .then(function (q) {
-//         q.forEach(function (doc) {
-//             // unavailability is an array of dates: dd MM yyyy
-//             var unavailability = doc.data();
-//             console.log(unavailability);
-//         })
-//     })
-// }
+export const massWriteTrainers = (trainerArr) => {
+    trainerArr.forEach(trainer => {
+        db.collection("trainerOnly").doc(trainer.userId).set(trainer)
+        .then(() => {
+            console.log("Successfully added trainers.");
+        })
+        .catch((e) => {
+            console.log(e);
+        })
+    })
+}
 
 export function displayBookInfo() {
     db.collection("schedule").get()
@@ -606,4 +606,22 @@ export function getTrainerAvailability() {
         console.log(availability);
         return availability;
     });
+}
+
+export const watchUser = () => {
+    firebase.auth().onAuthStateChanged(async (user) => {
+
+        if (user) {
+            console.log("in watchUser", user);
+            localStorage.setItem("user", "");
+            const userDetails = await userRef.doc(user.uid).get();
+            localStorage.setItem("user", JSON.stringify(userDetails.data()));
+        } else {
+            localStorage.setItem("user", "");
+        }
+    })
+}
+
+export const logOutUser = async () => {
+    return await firebase.auth().signOut();
 }
