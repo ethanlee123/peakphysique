@@ -2,7 +2,7 @@ import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
 // import { reverseGeo } from "/scripts/api/here_api.js"
 
 const db = firebase.firestore();
-const storage = firebase.storage;
+const storage = firebase.storage();
 
 // Reference to user collection, no document specified
 const userRef = db.collection("user");
