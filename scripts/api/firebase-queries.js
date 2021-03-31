@@ -260,7 +260,14 @@ export function updateProfileInfo(websiteUrl, phoneNum, bio, workout, cheatMeal,
             randomFact: randFact.value,
             radius: radiusTravel.value,
         }).then(() => {
-            updateTrainerInfo(websiteUrl);
+            userRef.doc(user.uid).get()
+            .then(doc => {
+                let role = doc.data().role;
+                if (role == "trainer") {
+                    updateTrainerInfo(websiteUrl);
+                }
+                window.location.href = "schedule.html";
+            })
             console.log("updateTrainerInfo called");
         })
     });
@@ -270,12 +277,12 @@ function updateTrainerInfo(websiteUrl = "") {
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
         trainerOnlyRef.doc(user.uid).update({
-            website: websiteUrl.value,
+            website: websiteUrl.value
         }).then(() => {
-            console.log("successfully update user website url");
             window.location.href = "sign-up-profile-setup.html";
+            console.log("successfully update user website url");
         }).catch(err => {
-            console.log("error: ", error);
+            console.log("Error: ", err);
         });
     });
 }
