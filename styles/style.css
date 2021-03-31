@@ -412,18 +412,22 @@ header {
     display: flex; }
     body.logged-out header .user-profile {
       display: none; }
-    header .user-profile i {
-      margin: 0; }
-      body.active-nav header .user-profile i {
+    header .user-profile .user-avatar {
+      margin: 0;
+      width: 30px;
+      height: 30px; }
+      body.active-nav header .user-profile .user-avatar {
         margin-right: 0.5em; }
       @media (min-width: 800px) {
-        header .user-profile i {
+        header .user-profile .user-avatar {
           margin-right: 1em; } }
-      header .user-profile i::before {
+      header .user-profile .user-avatar::before {
         font-size: 1.5em; }
         @media (min-width: 1200px) {
-          header .user-profile i::before {
+          header .user-profile .user-avatar::before {
             display: block; } }
+    header .user-profile .initials {
+      font-size: 0.6em; }
     header .user-profile .text {
       display: none; }
       body.active-nav header .user-profile .text {

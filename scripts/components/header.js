@@ -1,6 +1,7 @@
 import { logOutUser } from "../api/firebase-queries.js";
 
 import { getTemplate } from "../util/getTemplate.js";
+import { getUserAvatar } from "../util/getUserAvatar.js";
 
 const path = "../../common/header.html";
 var isLoggedIn = {
@@ -44,11 +45,15 @@ class Header extends HTMLElement {
                 let user = localStorage.getItem("user");
                 if (user) {
                     user = JSON.parse(user);
-                    console.log(user);
+
                     editGreeting(user.firstName);
+                    const userAvatar = document.querySelectorAll(".user-avatar");
+                    userAvatar.forEach(node => getUserAvatar({
+                        user: user,
+                        parentNode: node
+                    }));
                     isLoggedIn.value = true;
                 }
-
                 handleLogOut();
             });
 
