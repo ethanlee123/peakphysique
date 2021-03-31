@@ -32,7 +32,12 @@
     .firebaseui-label, .firebaseui-input {
         color: $light;
     }
+
     .text-mint {
         color: $primary;
+    }
+
+    .firebaseui-info-bar.firebaseui-id-info-bar {
+        display: none;
     }
 }

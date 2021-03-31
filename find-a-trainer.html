@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 
-<body id="body" class="find-a-trainer logged-out">
+<body id="body" class="logged-out find-a-trainer">
 
     <!-------------------------------------->
     <!-- The following is HTML for layout -->
@@ -128,7 +128,7 @@
             id="search"
             type="text"
             class="form-control"
-            placeholder="Search"
+            placeholder="Search trainer name"
             aria-label="Search"
             aria-describedby="searchBarTrainers"
           >
@@ -154,7 +154,7 @@
         <span class="sr-only">Loading...</span>
       </div><!--.spinner-border-->
 
-      <section class="results-meta">
+      <section class="results-meta" id="resultsMeta">
         <span class="results-found" id="resultsFound"></span>
         
         <div class="sorters">
@@ -172,6 +172,19 @@
           </select>
         </div><!--.sorters-->
       </section><!--.results-meta-->
+
+      <section class="no-results" id="noResults">
+        <img src="./images/minions-2.gif" alt="Team 37 hard at work finding you a trainer">
+        <h2>We searched far and wide...</h2>
+        <p>but it looks like we're having trouble finding what you're looking for. You could always try:</p>
+        <ul class="recommendations">
+          <li>Adjusting your filters</li>
+          <li>Entering fewer keywords</li>
+        </ul><!--.recommendations-->
+        <button class="btn btn-outline-light reset-filters">
+          Start Over
+        </button>
+      </section><!--.no-results-->
 
       <section class="trainer-list" id="trainerList">
       </section>

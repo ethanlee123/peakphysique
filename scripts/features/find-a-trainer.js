@@ -9,10 +9,6 @@ import { getUserAvatar } from "../util/getUserAvatar.js";
 import { getGeoPointDistance } from "../util/getGeoPointDistance.js";
 import { capitalizeWords } from "../util/capitalizeWords.js";
 
-
-
-
-
 // ### Variables ###
 // ###### Constants ######
 const pathToTrainerCard = "../../common/trainer-card.html";
@@ -37,6 +33,7 @@ const trainerCardTemplate = await getTemplate(pathToTrainerCard);
 const pagination = document.getElementById("pagination");
 const paginationBtns = document.querySelectorAll("button.paginate");
 const pageNums = document.getElementById("pageNums");
+const resultsMeta = document.getElementById("resultsMeta");
 const resultsFound = document.getElementById("resultsFound");
 const applyFilters = document.getElementById("applyFilters");
 const ratePerSession = document.getElementById("ratePerSession");
@@ -45,8 +42,25 @@ const distanceFromUser = document.getElementById("distanceFromUser");
 const geolocationErrorText = document.getElementById("geolocationErrorText");
 const firstSessionFree = document.getElementById("firstSessionFree");
 const genderFilter = document.getElementsByName("gender");
+const noResults = document.getElementById("noResults");
+const loader = document.getElementById("loader");
 
 var userLocation;
+
+var trainerListLoader = {
+    set isLoading(loading) {
+        if (loading) {
+            loader.style.display = "block";
+            resultsMeta.style.display = "none";
+            trainerList.style.display = "none";
+        } else {
+            loader.style.display = "none";
+            resultsMeta.style.display = "flex";
+            trainerList.style.display = "grid";
+        }
+    }
+};
+
 var trainers = {
     _all: [],
     _toDisplay: [],
@@ -60,7 +74,12 @@ var trainers = {
     },
 
     set display(trainers) {
-        this._toDisplay = sort.sortList(trainers, sort.order);
+        if (trainers.length === 0) {
+            this.showNoResults();
+        } else {
+            this.hideNoResults();
+            this._toDisplay = sort.sortList(trainers, sort.order);
+        }
         this.renderTrainerCards(this.getPage(trainers, 0, pageSize));
         page.total = Math.ceil(trainers.length / pageSize);
     },
@@ -261,6 +280,14 @@ var trainers = {
         });
         
     },
+
+    hideNoResults() {
+        noResults.style.display = "none";
+    },
+
+    showNoResults() {
+        noResults.style.display = "block";
+    }
 };
 
 var sort = {
@@ -376,6 +403,7 @@ var filters = {
     },
 
     resetFilters() {
+        searchBar.value = "";
         fitnessOptionsFilter.selectAll();
         wellnessOptionsFilter.selectAll();
         availabilityFilter.selectAll();
@@ -455,7 +483,7 @@ var page = {
         const prevBtn = pagination.querySelector("#previous");
         const nextBtn = pagination.querySelector("#next");
 
-        prevBtn.style.display = this._currentPage === 0 ? "none" : "block";
+        prevBtn.style.display = Number(this._currentPage) === 0 ? "none" : "block";
         nextBtn.style.display = Number(this._currentPage) === (this._totalPages - 1) ? "none" : "block";
     },
 
@@ -596,9 +624,11 @@ filterToggles.forEach((toggle) => {
 
 searchBar.addEventListener("keyup", debounce(() => {
     const query = searchBar.value.trim();
-    if (query !== filters?.values?.name) {
+    if (query !== filters?.values?.name &&
+            (filters?.values?.name || query)) {
         let newFilters = filters.values;
         newFilters["name"] = query;
+        !query && delete newFilters.name;
         filters.values = newFilters;
     }
 }, debounceTime));
@@ -740,7 +770,8 @@ window.addEventListener("resize", () => {
 
 const initialRender = async () => {
     positionBannerImgHorizontally();
-    resizeBannerImgHeight();    
+    resizeBannerImgHeight();
+    trainerListLoader.isLoading = true;    
     trainers.all = await getCollection({
         collectionName: "trainerOnly",
         sort: {
@@ -748,5 +779,6 @@ const initialRender = async () => {
             order: sort.order === "descending" ? "desc" : "asc"
         }
     });
+    trainerListLoader.isLoading = false;
 }
 initialRender();
