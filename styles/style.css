@@ -1101,6 +1101,8 @@ footer .coming-soon {
     color: #D4DDD6; }
   .login-sign-up .text-mint {
     color: #83C3A3; }
+  .login-sign-up .firebaseui-info-bar.firebaseui-id-info-bar {
+    display: none; }
 
 .messages-notifications .top-buffer {
   margin-top: 50px; }
