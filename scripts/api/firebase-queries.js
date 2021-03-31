@@ -1,4 +1,3 @@
-// Sprint 2: reading/writing to firebase
 import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
 // import { reverseGeo } from "/scripts/api/here_api.js"
 
@@ -53,66 +52,6 @@ export function displayTrainerInfo(){
 
   })
 }
-// displayTrainerInfo();
-
-function writeUserProfile() {
-    var trainerRef = db.collection("trainer");
-
-    trainerRef.add({
-        firstName: "firstName1",
-        lastName: "lastName1",
-        location: new firebase.firestore.GeoPoint(37.422, 122.084), // GeoPoint(double latitude, double longitude)
-        gender: "Male",
-        age: "28",
-        profilePic: "./profile-pic.jpg",
-        website: "trainermike.com",
-        services: [
-            "test1",
-            "test2",
-            "test3"
-        ],
-        expertise: [
-            "bodybuilding",
-            "endurance training",
-            "weight loss"
-        ],
-        hourlyRate: 40,
-        firstSessionFree: true,
-        appointments: 
-        [
-            {
-                date: new firebase.firestore.Timestamp.now(),
-                time: "Morning",
-                available: true
-            },
-            {
-                date: "9999-12-31T23:59:59Z",
-                time: "Afternoon",
-                available: false
-            }
-        ],
-        yearsOfExperience: 3,
-        totalClients: 5,
-        totalSessions: 10,
-        posts: [
-            {
-                date: "9999-12-31T23:59:59Z",
-                message: "Hello world!"
-            }
-        ],
-        certifications: [
-            "blah",
-            "yadda",
-            "toodles"
-        ],
-        socialMedia: {
-            facebook: "facebook.com/trainermike",
-            instagram: "instagram.com/trainermike"
-        }
-    });
-
-}
-// writeUserProfile();   
 
 // creates a document in schedule collection for the booked appointment
 export function writeAppointmentSchedule() {
@@ -187,7 +126,7 @@ function allowedLocation(position) {
 // Support: callback function for getLocation()
 function blockedLocation(error) {
     if(error.code == 1) {
-        alert("Allow locations helps us show you people near your");
+        alert("Allowing locations helps us show you people near you");
     } else if(error.code == 2) {
         alert("The network is down or the positioning service can't be reached.");
     } else if(error.code == 3) {
@@ -280,7 +219,7 @@ export function updateUserRole(userRole) {
 }
 
 // Displays trainer profile information. Parameters are references to a tag.
-export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay) {
+export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
         trainerOnlyRef.doc(user.uid).get()
@@ -302,7 +241,7 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
             cheatMeal.value = doc.data().favCheatMeal;
             randFact.value = doc.data().randomFact;
             radiusDisplay.innerText= doc.data().radius;
-            userCity.value = doc.date().city;
+            userCity.value = doc.data().city;
         });
     });
 }
@@ -321,7 +260,14 @@ export function updateProfileInfo(websiteUrl, phoneNum, bio, workout, cheatMeal,
             randomFact: randFact.value,
             radius: radiusTravel.value,
         }).then(() => {
-            updateTrainerInfo(websiteUrl);
+            userRef.doc(user.uid).get()
+            .then(doc => {
+                let role = doc.data().role;
+                if (role == "trainer") {
+                    updateTrainerInfo(websiteUrl);
+                }
+                window.location.href = "schedule.html";
+            })
             console.log("updateTrainerInfo called");
         })
     });
@@ -331,12 +277,12 @@ function updateTrainerInfo(websiteUrl = "") {
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
         trainerOnlyRef.doc(user.uid).update({
-            website: websiteUrl.value,
+            website: websiteUrl.value
         }).then(() => {
-            console.log("successfully update user website url");
             window.location.href = "sign-up-profile-setup.html";
+            console.log("successfully update user website url");
         }).catch(err => {
-            console.log("error: ", error);
+            console.log("Error: ", err);
         });
     });
 }
@@ -543,44 +489,6 @@ export function trainerProfilePosts() {
         })
     }
 
-export const getCollection = async ({
-        collectionName,
-        sort,
-        limit,
-        filters = null,
-        startAfter = null
-    }) => {
-        let query = db.collection(collectionName);
-
-        query = sort ? query.orderBy(sort.by, sort.order) : query;
-        query = startAfter ? query.orderBy(sort.by, sort.order) : query;
-        query = limit ? query.limit(limit) : query; 
-     
-        filters && filters.forEach((filter) => {
-            if (filter) {
-                query = query.where(filter.field, filter.operator,
-                        filter.value);
-            }
-        });
-     
-        let collection = await query.get();
-        return collection.docs.map(doc => {
-            return doc.data();
-        });
-    }
-
-// retrieves trainer availablity data
-// export function checkAvailability() {
-//     db.collection("trainerAvailability").where("trainerUserId", "==", user.uid).get()
-//     .then(function (q) {
-//         q.forEach(function (doc) {
-//             // unavailability is an array of dates: dd MM yyyy
-//             var unavailability = doc.data();
-//             console.log(unavailability);
-//         })
-//     })
-// }
-
 export function displayBookInfo() {
     db.collection("schedule").get()
     .then(function (q) {
@@ -606,4 +514,55 @@ export function getTrainerAvailability() {
         console.log(availability);
         return availability;
     });
+}
+
+export const getCollection = async ({
+    collectionName,
+    sort = null,
+    limit = null,
+    filters = null,
+    startAfter = null
+}) => {
+    let query = db.collection(collectionName);
+
+    query = sort ? query.orderBy(sort.by, sort.order) : query;
+    query = startAfter ? query.orderBy(sort.by, sort.order) : query;
+    query = limit ? query.limit(limit) : query; 
+ 
+    filters && filters.forEach((filter) => {
+        if (filter) {
+            query = query.where(filter.field, filter.operator,
+                    filter.value);
+        }
+    });
+ 
+    let collection = await query.get();
+    return collection.docs.map(doc => {
+        return doc.data();
+    });
+}
+
+export const massWriteTrainers = (trainerArr) => {
+    trainerArr.forEach(trainer => {
+        trainerOnlyRef.doc(trainer.userId).set(trainer)
+        .then(() => {
+            console.log("Successfully added trainers.");
+        })
+        .catch((e) => {
+            console.log(e);
+        })
+    })
+}
+
+export const getUser = async (uid) => {
+    const userDetails = await userRef.doc(uid).get();
+    return userDetails.data();
+}
+
+export const logOutUser = async () => {
+    return await firebase.auth().signOut();
+}
+
+export const getImgFromStorage = async (url) => {
+    return await storage.refFromURL(url).getDownloadURL();
 }

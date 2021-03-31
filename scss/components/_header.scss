@@ -11,6 +11,9 @@ header {
     @include box-shadow;
             
     @include desktop {
+        padding-top: 0;
+        padding-bottom: 0;
+        height: 2.5em;
         display: grid;
         align-items: center;
         grid-template-columns: 2fr 5fr 1fr;
@@ -145,6 +148,18 @@ header {
                         display: none;
                     }
                 }
+            }
+
+            &.user-greeting,
+            &.messages {
+                align-self: center;
+            }
+        }
+
+        .current-page {
+
+            @include desktop {
+                border-bottom: 0.3rem solid $info;
             }
         }
     }
@@ -363,8 +378,10 @@ header {
             display: none;
         }
 
-        i {
+        .user-avatar {
             margin: 0;
+            width: 30px;
+            height: 30px;
 
             body.active-nav & {
                 margin-right: 0.5em;
@@ -381,6 +398,10 @@ header {
                     display: block;                     
                 }
             }
+        }
+
+        .initials {
+            font-size: 0.6em;
         }
 
         .text {

@@ -3,6 +3,7 @@
 
     header {
         margin: 0;
+        z-index: 99999;
     }
 
     footer {
@@ -10,15 +11,6 @@
             display: none;
         }
     }
-
-    // .landing {
-    //     background-repeat: repeat-x;
-    //     height: 300px;
-    //     text-align: center;
-    //     width: 100%;
-    //     font-weight: bolder;
-    //     font-family: apex;
-    // }
     
     .title-font {
         font-weight: bolder;

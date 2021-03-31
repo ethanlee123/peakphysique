@@ -1,109 +1,13 @@
-import { debounce } from "../util/debounce.js";
+import { getCollection } from "../api/firebase-queries.js";
+
 import { fitnessOptions, wellnessOptions, availabilityDays } from "../schema.js";
+
+import { debounce } from "../util/debounce.js";
 import { getTemplate } from "../util/getTemplate.js";
 import { insertText, getExpertiseText, getAvailabilityText } from "../util/getTrainerText.js";
 import { getUserAvatar } from "../util/getUserAvatar.js";
 import { getGeoPointDistance } from "../util/getGeoPointDistance.js";
-
-// ### Test Data ###
-const trainer1 = {
-    userId: "fabio.lous",
-    firstName: "Fabio",
-    lastName: "Lous",
-    name: "Fabio Lous",
-    location: new firebase.firestore.GeoPoint(37.422, 122.084),
-    profilePic: "",
-    website: "fabiolous.com",
-    hourlyRate: 23,
-    deposit: null,
-    firstSessionFree: true,
-    yearsOfExperience: 78,
-    gender: "male",
-    rating: 4.3,
-    fitness: ["Bodybuilding"],
-    wellness: ["Custom Workout Regimen"],
-    certifications: [],
-    availability: {
-        monday: ["morning"],
-        tuesday: [],
-        wednesday: [],
-        thursday: [],
-        friday: ["evening"],
-        saturday: ["afternoon"],
-        sunday: []
-    }
-};
-
-const trainer2 = {
-    userId: "fabio.tiful",
-    firstName: "Fabio",
-    lastName: "Tiful",
-    name: "Fabio Tiful",
-    gender: "female",
-    location: new firebase.firestore.GeoPoint(49.18597990000001, -122.53902439999999),
-    profilePic: "https://vz.cnwimg.com/thumb-1200x/wp-content/uploads/2010/03/Fabio-e1603764807834.jpg",
-    website: "fabiotiful.com",
-    hourlyRate: 89,
-    deposit: null,
-    firstSessionFree: true,
-    yearsOfExperience: 12,
-    rating: 5,
-    fitness: ["Bodybuilding", "Yoga", "Dance"],
-    wellness: ["Weight Loss", "Custom Workout Regimen"],
-    certifications: [],
-    availability: {
-        monday: ["morning"],
-        tuesday: ["morning"],
-        wednesday: ["morning"],
-        thursday: ["morning"],
-        friday: ["evening"],
-        saturday: ["afternoon"],
-        sunday: []
-    }
-};
-
-const trainer3 = {
-    userId: "fabio.logy",
-    firstName: "Fabio",
-    lastName: "Logy",
-    name: "Fabio Logy",
-    gender: "female",
-    location: new firebase.firestore.GeoPoint(-78, 54),
-    profilePic: "https://vz.cnwimg.com/thumb-1200x/wp-content/uploads/2010/03/Fabio-e1603764807834.jpg",
-    website: "fabiology.com",
-    hourlyRate: 76,
-    deposit: null,
-    firstSessionFree: false,
-    yearsOfExperience: 12,
-    rating: 2,
-    fitness: ["Bodybuilding", "Yoga", "Dance"],
-    wellness: ["Weight Loss", "Custom Workout Regimen"],
-    certifications: [],
-    availability: {
-        monday: [],
-        tuesday: [],
-        wednesday: [],
-        thursday: [],
-        friday: [],
-        saturday: [],
-        sunday: []
-    }
-};
-const totalTrainers = 13;
-const generateFabios = (max, obj1, obj2, obj3) => {
-    let randomNum;
-    let fabios = [];
-    for(let i = 0; i < max; i++) {
-        randomNum = Math.floor(Math.random() * Math.floor(3));
-        randomNum === 0 ? fabios.push({...obj1}) :
-            randomNum === 1 ? fabios.push({...obj2}) :
-            fabios.push({...obj3});
-        fabios[i].userId = `${fabios[i].userId}-0${i}`;
-    }
-    return fabios;
-}
-const trainersData = generateFabios(totalTrainers, trainer1, trainer2, trainer3);
-// #################
+import { capitalizeWords } from "../util/capitalizeWords.js";
 
 // ### Variables ###
 // ###### Constants ######
@@ -114,6 +18,7 @@ const pageSize = 6;
 // ###### DOM Variables ######
 const bannerImg = document.getElementById("bannerImg");
 const banner = document.getElementById("banner");
+const toggleBar = document.getElementById("toggleBar");
 const filterToggles = document.querySelectorAll("button.toggle-filter");
 const filterDrawerToggles = document.querySelectorAll(".toggle-filter-drawer");
 const exitDrawerToggle = document.getElementById("exitDrawer");
@@ -128,6 +33,7 @@ const trainerCardTemplate = await getTemplate(pathToTrainerCard);
 const pagination = document.getElementById("pagination");
 const paginationBtns = document.querySelectorAll("button.paginate");
 const pageNums = document.getElementById("pageNums");
+const resultsMeta = document.getElementById("resultsMeta");
 const resultsFound = document.getElementById("resultsFound");
 const applyFilters = document.getElementById("applyFilters");
 const ratePerSession = document.getElementById("ratePerSession");
@@ -136,8 +42,25 @@ const distanceFromUser = document.getElementById("distanceFromUser");
 const geolocationErrorText = document.getElementById("geolocationErrorText");
 const firstSessionFree = document.getElementById("firstSessionFree");
 const genderFilter = document.getElementsByName("gender");
+const noResults = document.getElementById("noResults");
+const loader = document.getElementById("loader");
 
 var userLocation;
+
+var trainerListLoader = {
+    set isLoading(loading) {
+        if (loading) {
+            loader.style.display = "block";
+            resultsMeta.style.display = "none";
+            trainerList.style.display = "none";
+        } else {
+            loader.style.display = "none";
+            resultsMeta.style.display = "flex";
+            trainerList.style.display = "grid";
+        }
+    }
+};
+
 var trainers = {
     _all: [],
     _toDisplay: [],
@@ -151,7 +74,12 @@ var trainers = {
     },
 
     set display(trainers) {
-        this._toDisplay = sort.sortList(trainers, sort.order);
+        if (trainers.length === 0) {
+            this.showNoResults();
+        } else {
+            this.hideNoResults();
+            this._toDisplay = sort.sortList(trainers, sort.order);
+        }
         this.renderTrainerCards(this.getPage(trainers, 0, pageSize));
         page.total = Math.ceil(trainers.length / pageSize);
     },
@@ -208,7 +136,7 @@ var trainers = {
             insertText(trainerCard, ".rate .text", `${trainer.hourlyRate} / hr`);
             insertText(trainerCard, ".expertise .text", getExpertiseText(expertiseArr));
             insertText(trainerCard, ".availability .text", getAvailabilityText(trainer.availability));
-            getUserAvatar({user: trainer, parentNode: trainerCard});
+            getUserAvatar({url: trainer.profilePic, parentNode: trainerCard});
     
             if (trainer.firstSessionFree) {
                 const badge = document.createElement("span");
@@ -352,6 +280,14 @@ var trainers = {
         });
         
     },
+
+    hideNoResults() {
+        noResults.style.display = "none";
+    },
+
+    showNoResults() {
+        noResults.style.display = "block";
+    }
 };
 
 var sort = {
@@ -398,6 +334,7 @@ var filters = {
     },
 
     set values(filters) {
+        console.log("set values", filters);
         this._value = filters;
         const noFilters = Object.keys(this._value).length === 0 && true;
         this.updateFilterButtons(noFilters);
@@ -440,7 +377,7 @@ var filters = {
             }
 
             if (filter === "wellness" || filter === "fitness") {
-                filteredList = filteredList.filter(trainer => 
+                filteredList = filteredList.filter(trainer =>
                     trainer[filter].some(option => this._value[filter].includes(option.toLowerCase()))
                 );
             }
@@ -460,14 +397,13 @@ var filters = {
                     return getGeoPointDistance(trainerCoords, userLocation) < this._value[filter];
                 });
             }
-
-            console.log("filteredList", filteredList);
         }
 
         return filteredList;
     },
 
     resetFilters() {
+        searchBar.value = "";
         fitnessOptionsFilter.selectAll();
         wellnessOptionsFilter.selectAll();
         availabilityFilter.selectAll();
@@ -492,6 +428,7 @@ var page = {
     },
 
     set current(current) {
+        console.log("currentPage", current);
         this._currentPage = current;
         this.renderPaginationBtns();
         this.styleCurrentPageNum();
@@ -510,6 +447,7 @@ var page = {
     renderPageNum(num) {
         const pageNum = document.createElement("span");
         pageNum.appendChild(document.createTextNode(num));
+        pageNum.classList.add("page-num");
         pageNum.setAttribute("data-page", `${num - 1}`);
         return pageNum;
     },
@@ -545,17 +483,17 @@ var page = {
         const prevBtn = pagination.querySelector("#previous");
         const nextBtn = pagination.querySelector("#next");
 
-        prevBtn.style.display = this._currentPage === 0 ? "none" : "block";
-        nextBtn.style.display = this._currentPage === (this._totalPages - 1) ? "none" : "block";
+        prevBtn.style.display = Number(this._currentPage) === 0 ? "none" : "block";
+        nextBtn.style.display = Number(this._currentPage) === (this._totalPages - 1) ? "none" : "block";
     },
 
     renderResultsFound() {
         if (trainers.display.length === 0) {
             resultsFound.innerHTML = "";
         } else {
-            const isFirstPage = this._currentPage === 0;
-            const isLastPage = this._currentPage === this._totalPages - 1;
-            const trainersShown = !isFirstPage && isLastPage ? (trainers.display.length % pageSize) :
+            const isFirstPage = Number(this._currentPage) === 0;
+            const isLastPage = Number(this._currentPage) === this._totalPages - 1;
+            const trainersShown = !isFirstPage && isLastPage ? (trainers.display.length % pageSize !== 0 ? trainers.display.length % pageSize : pageSize ) :
                                     isFirstPage && isLastPage ? trainers.display.length :
                                     pageSize;
             resultsFound.innerHTML = `Showing ${trainersShown} out of <b>${trainers.display.length} trainers</b> found.`;            
@@ -564,19 +502,13 @@ var page = {
     
     styleCurrentPageNum() {
         const previousPageNum = pagination.querySelector(".current-page");
-        previousPageNum?.classList?.remove("current-page");
+        previousPageNum?.classList.remove("current-page");
         
         const currentPageNum = pagination.querySelector(`[data-page="${this._currentPage}"]`);
-        currentPageNum.classList.add("current-page");
+        currentPageNum?.classList.add("current-page");
     },
 };
 // ##################
-
-const capitalizeWords = (str) => {
-    return str.replace(/\w\S*/g, text => {
-        return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
-    });
-}
 
 const createOptions = (stringArr) => {
     return stringArr.map(string => {
@@ -594,29 +526,74 @@ const resizeBannerImgHeight = () => {
     bannerImg.style.height = `${(banner.offsetHeight * 1.15)}px`;
 }
 
-const setFilterToggles = () => {
-    let newFilters = filters.values;
-    newFilters["wellnessExclude"] = [];
-    newFilters["fitnessExclude"] = [];
-    
+const setFilterToggles = () => {    
     const excludedFilters = document.querySelectorAll(".toggle-filter:not(.active)");
     if (excludedFilters) {
         excludedFilters.forEach((filter) => {
-            const type = `${filter.dataset.field}Exclude`;
-            const value = filter.dataset.filter;
-            newFilters[type].push(value);
+            filter.dataset.field === "fitness" ?
+                fitnessOptionsFilter.deselectOption(filter.dataset.filter) :
+                wellnessOptionsFilter.deselectOption(filter.dataset.filter);
         });            
     }
 
-    newFilters["fitnessExclude"].length === 0 && delete newFilters["fitnessExclude"];
-    newFilters["wellnessExclude"].length === 0 && delete newFilters["wellnessExclude"];
-    filters.values = newFilters;
+    const includedFilters = document.querySelectorAll(".toggle-filter.active");
+    if (includedFilters) {
+        includedFilters.forEach((filter) => {
+            filter.dataset.field === "fitness" ?
+                fitnessOptionsFilter.selectOption(filter.dataset.filter) :
+                wellnessOptionsFilter.selectOption(filter.dataset.filter);
+        });
+    }
+
+    let filtersToApply = filters.values;
+
+    const selectedFitnessOptions = fitnessOptions.flatMap((option) =>
+        fitnessOptionsFilter.isOptionSelected(option) ? option : []);
+    if (selectedFitnessOptions.length !== fitnessOptions.length) {
+        filtersToApply.fitness = selectedFitnessOptions;
+    } else {
+        delete filtersToApply.fitness;
+    }
+
+    const selectedWellnessOptions = wellnessOptions.flatMap((option) =>
+        wellnessOptionsFilter.isOptionSelected(option) ? option : []);
+    if (selectedWellnessOptions.length !== wellnessOptions.length) {
+        filtersToApply.wellness = selectedWellnessOptions;
+    } else {
+        delete filtersToApply.wellness;
+    }
+
+    filters.values = filtersToApply;
+}
+
+const deactivateFilterToggles = () => {
+    filterToggles.forEach((toggle) => {
+        toggle.classList.contains("active") && toggle.classList.remove("active");
+    })
 }
 
 const resetFilterToggles = () => {
     filterToggles.forEach((toggle) => {
         !toggle.classList.contains("active") && toggle.classList.add("active");
     })
+}
+
+const syncFilterToggles = ({fitnessArr, wellnessArr}) => {
+    deactivateFilterToggles();
+
+    let activeFilters = [];
+
+    fitnessArr && fitnessArr.forEach(option => {
+        const matchingToggle = toggleBar.querySelector(`[data-filter="${option}"]`);
+        matchingToggle && activeFilters.push(matchingToggle);
+    });
+
+    wellnessArr && wellnessArr.forEach(option => {
+        const matchingToggle = toggleBar.querySelector(`[data-filter="${option}"]`);
+        matchingToggle && activeFilters.push(matchingToggle);
+    });
+
+    activeFilters.forEach(node => node.classList.add("active"));
 }
 
 // ### jQuery - Dropdown Checkbox ###
@@ -647,9 +624,11 @@ filterToggles.forEach((toggle) => {
 
 searchBar.addEventListener("keyup", debounce(() => {
     const query = searchBar.value.trim();
-    if (query !== filters?.values?.name) {
+    if (query !== filters?.values?.name &&
+            (filters?.values?.name || query)) {
         let newFilters = filters.values;
         newFilters["name"] = query;
+        !query && delete newFilters.name;
         filters.values = newFilters;
     }
 }, debounceTime));
@@ -750,7 +729,11 @@ applyFilters.addEventListener("click", debounce(() => {
     }
 
     filters.values = filtersToApply;
-    console.log("filtersToApply", filtersToApply);
+
+    syncFilterToggles({
+        fitnessArr: selectedFitnessOptions,
+        wellnessArr: selectedWellnessOptions
+    });
 }, debounceTime));
 
 resetFilters.forEach((btn) => {
@@ -773,9 +756,9 @@ exitDrawerToggle.addEventListener("click", () => {
 });
 
 paginationBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-        btn.classList.contains("next") ? page.current++ : page.current--;
-    });
+    btn.addEventListener("click", debounce(
+        () => btn.classList.contains("next") ? page.current++ : page.current--,
+        debounceTime));
 });
 
 window.addEventListener("resize", () => {
@@ -785,9 +768,17 @@ window.addEventListener("resize", () => {
 });
 // #######################
 
-const initialRender = () => {
+const initialRender = async () => {
     positionBannerImgHorizontally();
-    resizeBannerImgHeight();    
-    trainers.all = trainersData;
+    resizeBannerImgHeight();
+    trainerListLoader.isLoading = true;    
+    trainers.all = await getCollection({
+        collectionName: "trainerOnly",
+        sort: {
+            by: sort.field,
+            order: sort.order === "descending" ? "desc" : "asc"
+        }
+    });
+    trainerListLoader.isLoading = false;
 }
 initialRender();

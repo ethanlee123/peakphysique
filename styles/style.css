@@ -177,6 +177,9 @@ header {
   box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8); }
   @media (min-width: 1200px) {
     header {
+      padding-top: 0;
+      padding-bottom: 0;
+      height: 2.5em;
       display: grid;
       align-items: center;
       grid-template-columns: 2fr 5fr 1fr;
@@ -274,6 +277,11 @@ header {
         @media (min-width: 1200px) {
           header nav li i::before {
             display: none; } }
+      header nav li.user-greeting, header nav li.messages {
+        align-self: center; }
+    @media (min-width: 1200px) {
+      header nav .current-page {
+        border-bottom: 0.3rem solid #0444AC; } }
   header .burger-menu {
     position: relative;
     grid-column: 1;
@@ -404,18 +412,22 @@ header {
     display: flex; }
     body.logged-out header .user-profile {
       display: none; }
-    header .user-profile i {
-      margin: 0; }
-      body.active-nav header .user-profile i {
+    header .user-profile .user-avatar {
+      margin: 0;
+      width: 30px;
+      height: 30px; }
+      body.active-nav header .user-profile .user-avatar {
         margin-right: 0.5em; }
       @media (min-width: 800px) {
-        header .user-profile i {
+        header .user-profile .user-avatar {
           margin-right: 1em; } }
-      header .user-profile i::before {
+      header .user-profile .user-avatar::before {
         font-size: 1.5em; }
         @media (min-width: 1200px) {
-          header .user-profile i::before {
+          header .user-profile .user-avatar::before {
             display: block; } }
+    header .user-profile .initials {
+      font-size: 0.6em; }
     header .user-profile .text {
       display: none; }
       body.active-nav header .user-profile .text {
@@ -555,7 +567,8 @@ footer .coming-soon {
 .index-body {
   position: relative; }
   .index-body header {
-    margin: 0; }
+    margin: 0;
+    z-index: 99999; }
   .index-body footer .scroll-to-top {
     display: none; }
   .index-body .title-font {
@@ -728,7 +741,7 @@ footer .coming-soon {
         -moz-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
         box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8); }
   .find-a-trainer .results-meta {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: flex-start; }
     @media (min-width: 800px) {
@@ -754,7 +767,8 @@ footer .coming-soon {
         border: none;
         cursor: pointer; }
   .find-a-trainer .spinner-border {
-    display: none; }
+    display: none;
+    margin: 0 auto; }
   .find-a-trainer .trainer-list {
     margin: 0 auto;
     display: grid;
@@ -904,6 +918,16 @@ footer .coming-soon {
     .find-a-trainer .filter-drawer .distance-from-user .error-text {
       font-size: 0.75rem;
       color: #C84146; }
+  .find-a-trainer .no-results {
+    display: none;
+    max-width: 500px;
+    margin: 0 auto; }
+    .find-a-trainer .no-results img {
+      display: block;
+      margin: 0 auto;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain; }
 
 .initial-trainer-setup .top-buffer {
   margin-top: 50px; }
@@ -1081,6 +1105,8 @@ footer .coming-soon {
     color: #D4DDD6; }
   .login-sign-up .text-mint {
     color: #83C3A3; }
+  .login-sign-up .firebaseui-info-bar.firebaseui-id-info-bar {
+    display: none; }
 
 .messages-notifications .top-buffer {
   margin-top: 50px; }

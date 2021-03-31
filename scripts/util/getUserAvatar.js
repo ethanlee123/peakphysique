@@ -1,15 +1,16 @@
 export const getUserAvatar = ({
     user,
     parentNode,
+    imgURL = "",
     profilePicSelector = ".user-avatar img",
     userInitialsSelector = ".initials"
 }) => {
     const profilePic = parentNode.querySelector(profilePicSelector);
     const userInitials = parentNode.querySelector(userInitialsSelector);
 
-    if (user.profilePic) {
+    if (user.profilePic || imgURL) {
         userInitials.remove();
-        profilePic.setAttribute("src", user.profilePic);
+        profilePic.setAttribute("src", imgURL ? imgURL : user.profilePic);
         profilePic.setAttribute("alt", `${user.name} avatar`);
     } else {
         profilePic.remove();

@@ -1,3 +1,9 @@
+const capitalizeWords = (str) => {
+    return str.replace(/\w\S*/g, text => {
+        return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
+    });
+}
+
 const insertText = (parentNode, selector, text) => {
     const element = parentNode.querySelector(selector);
     element.appendChild(document.createTextNode(text));
@@ -24,14 +30,13 @@ const getAvailabilityText = (availability) => {
     }
 
     let text =  availableDays.length === 0 ? "Currently not available" :
-                availableDays.length === 7 ?
-                    "Everyday" && availableDays.splice(0, availableDays.length) :
+                availableDays.length === 7 ? "Everyday" :
                 days.weekdays.every(day => availableDays.includes(day)) ? "Weekdays" :
                 days.weekends.every(day => availableDays.includes(day)) ? "Weekends" :
                 "";
 
     if (text) {
-        if (availableDays.length === 0) {
+        if (availableDays.length === 0 || availableDays.length === 7) {
             return text;
         }
         availableDays = availableDays.filter(day => !days[text.toLowerCase()].includes(day));
@@ -51,7 +56,7 @@ const getExpertiseText = (expertiseArr) => {
         text = "No expertise listed.";
     } else {
         for (let i = 0; i <= 1 && i < expertiseArr.length; i++) {
-            text += i === 0 ? expertiseArr[i] : `, ${expertiseArr[i]}`;
+            text += i === 0 ? capitalizeWords(expertiseArr[i]) : `, ${capitalizeWords(expertiseArr[i])}`;
         }
 
         text += expertiseArr.length > 3 ? ` and ${expertiseArr.length} more.` : "";
