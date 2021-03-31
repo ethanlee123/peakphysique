@@ -219,7 +219,7 @@ export function updateUserRole(userRole) {
 }
 
 // Displays trainer profile information. Parameters are references to a tag.
-export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay) {
+export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
         trainerOnlyRef.doc(user.uid).get()
@@ -241,7 +241,7 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
             cheatMeal.value = doc.data().favCheatMeal;
             randFact.value = doc.data().randomFact;
             radiusDisplay.innerText= doc.data().radius;
-            userCity.value = doc.date().city;
+            userCity.value = doc.data().city;
         });
     });
 }
