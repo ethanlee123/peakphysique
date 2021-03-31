@@ -136,7 +136,7 @@ var trainers = {
             insertText(trainerCard, ".rate .text", `${trainer.hourlyRate} / hr`);
             insertText(trainerCard, ".expertise .text", getExpertiseText(expertiseArr));
             insertText(trainerCard, ".availability .text", getAvailabilityText(trainer.availability));
-            getUserAvatar({url: trainer.profilePic, parentNode: trainerCard});
+            getUserAvatar({user: trainer, parentNode: trainerCard});
     
             if (trainer.firstSessionFree) {
                 const badge = document.createElement("span");
