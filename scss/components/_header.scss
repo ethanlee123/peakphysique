@@ -156,6 +156,12 @@ header {
             }
         }
 
+        .schedule {
+            .logged-out & {
+                display: none;
+            }
+        }
+
         .current-page {
 
             @include desktop {

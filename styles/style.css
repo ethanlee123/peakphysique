@@ -279,6 +279,8 @@ header {
             display: none; } }
       header nav li.user-greeting, header nav li.messages {
         align-self: center; }
+    .logged-out header nav .schedule {
+      display: none; }
     @media (min-width: 1200px) {
       header nav .current-page {
         border-bottom: 0.3rem solid #0444AC; } }
