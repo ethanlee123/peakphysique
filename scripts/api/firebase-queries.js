@@ -1,4 +1,3 @@
-// Sprint 2: reading/writing to firebase
 import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
 // import { reverseGeo } from "/scripts/api/here_api.js"
 
@@ -53,66 +52,6 @@ export function displayTrainerInfo(){
 
   })
 }
-// displayTrainerInfo();
-
-function writeUserProfile() {
-    var trainerRef = db.collection("trainer");
-
-    trainerRef.add({
-        firstName: "firstName1",
-        lastName: "lastName1",
-        location: new firebase.firestore.GeoPoint(37.422, 122.084), // GeoPoint(double latitude, double longitude)
-        gender: "Male",
-        age: "28",
-        profilePic: "./profile-pic.jpg",
-        website: "trainermike.com",
-        services: [
-            "test1",
-            "test2",
-            "test3"
-        ],
-        expertise: [
-            "bodybuilding",
-            "endurance training",
-            "weight loss"
-        ],
-        hourlyRate: 40,
-        firstSessionFree: true,
-        appointments: 
-        [
-            {
-                date: new firebase.firestore.Timestamp.now(),
-                time: "Morning",
-                available: true
-            },
-            {
-                date: "9999-12-31T23:59:59Z",
-                time: "Afternoon",
-                available: false
-            }
-        ],
-        yearsOfExperience: 3,
-        totalClients: 5,
-        totalSessions: 10,
-        posts: [
-            {
-                date: "9999-12-31T23:59:59Z",
-                message: "Hello world!"
-            }
-        ],
-        certifications: [
-            "blah",
-            "yadda",
-            "toodles"
-        ],
-        socialMedia: {
-            facebook: "facebook.com/trainermike",
-            instagram: "instagram.com/trainermike"
-        }
-    });
-
-}
-// writeUserProfile();   
 
 // creates a document in schedule collection for the booked appointment
 export function writeAppointmentSchedule() {
@@ -543,44 +482,6 @@ export function trainerProfilePosts() {
         })
     }
 
-export const getCollection = async ({
-        collectionName,
-        sort = null,
-        limit = null,
-        filters = null,
-        startAfter = null
-    }) => {
-        let query = db.collection(collectionName);
-
-        query = sort ? query.orderBy(sort.by, sort.order) : query;
-        query = startAfter ? query.orderBy(sort.by, sort.order) : query;
-        query = limit ? query.limit(limit) : query; 
-     
-        filters && filters.forEach((filter) => {
-            if (filter) {
-                query = query.where(filter.field, filter.operator,
-                        filter.value);
-            }
-        });
-     
-        let collection = await query.get();
-        return collection.docs.map(doc => {
-            return doc.data();
-        });
-    }
-
-export const massWriteTrainers = (trainerArr) => {
-    trainerArr.forEach(trainer => {
-        db.collection("trainerOnly").doc(trainer.userId).set(trainer)
-        .then(() => {
-            console.log("Successfully added trainers.");
-        })
-        .catch((e) => {
-            console.log(e);
-        })
-    })
-}
-
 export function displayBookInfo() {
     db.collection("schedule").get()
     .then(function (q) {
@@ -608,18 +509,47 @@ export function getTrainerAvailability() {
     });
 }
 
-export const watchUser = () => {
-    firebase.auth().onAuthStateChanged(async (user) => {
+export const getCollection = async ({
+    collectionName,
+    sort = null,
+    limit = null,
+    filters = null,
+    startAfter = null
+}) => {
+    let query = db.collection(collectionName);
 
-        if (user) {
-            console.log("in watchUser", user);
-            localStorage.setItem("user", "");
-            const userDetails = await userRef.doc(user.uid).get();
-            localStorage.setItem("user", JSON.stringify(userDetails.data()));
-        } else {
-            localStorage.setItem("user", "");
+    query = sort ? query.orderBy(sort.by, sort.order) : query;
+    query = startAfter ? query.orderBy(sort.by, sort.order) : query;
+    query = limit ? query.limit(limit) : query; 
+ 
+    filters && filters.forEach((filter) => {
+        if (filter) {
+            query = query.where(filter.field, filter.operator,
+                    filter.value);
         }
+    });
+ 
+    let collection = await query.get();
+    return collection.docs.map(doc => {
+        return doc.data();
+    });
+}
+
+export const massWriteTrainers = (trainerArr) => {
+    trainerArr.forEach(trainer => {
+        trainerOnlyRef.doc(trainer.userId).set(trainer)
+        .then(() => {
+            console.log("Successfully added trainers.");
+        })
+        .catch((e) => {
+            console.log(e);
+        })
     })
+}
+
+export const getUser = async (uid) => {
+    const userDetails = await userRef.doc(uid).get();
+    return userDetails.data();
 }
 
 export const logOutUser = async () => {

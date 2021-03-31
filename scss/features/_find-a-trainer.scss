@@ -192,7 +192,7 @@
     }
 
     .results-meta {
-        display: flex;
+        display: none;
         flex-direction: column;
         align-items: flex-start;
 
@@ -232,6 +232,7 @@
     
     .spinner-border {
         display: none;
+        margin: 0 auto;
     }
     
     .trainer-list {
@@ -464,6 +465,20 @@
                 font-size: 0.75rem;
                 color: $warning;
             }
+        }
+    }
+
+    .no-results {
+        display: none;
+        max-width: 500px;
+        margin: 0 auto;
+
+        img {
+            display: block;
+            margin: 0 auto;
+            max-width: 300px;
+            height: auto;
+            object-fit: contain;
         }
     }
 

@@ -737,7 +737,7 @@ footer .coming-soon {
         -moz-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
         box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8); }
   .find-a-trainer .results-meta {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: flex-start; }
     @media (min-width: 800px) {
@@ -763,7 +763,8 @@ footer .coming-soon {
         border: none;
         cursor: pointer; }
   .find-a-trainer .spinner-border {
-    display: none; }
+    display: none;
+    margin: 0 auto; }
   .find-a-trainer .trainer-list {
     margin: 0 auto;
     display: grid;
@@ -913,6 +914,16 @@ footer .coming-soon {
     .find-a-trainer .filter-drawer .distance-from-user .error-text {
       font-size: 0.75rem;
       color: #C84146; }
+  .find-a-trainer .no-results {
+    display: none;
+    max-width: 500px;
+    margin: 0 auto; }
+    .find-a-trainer .no-results img {
+      display: block;
+      margin: 0 auto;
+      max-width: 300px;
+      height: auto;
+      object-fit: contain; }
 
 .initial-trainer-setup .top-buffer {
   margin-top: 50px; }
@@ -1090,6 +1101,8 @@ footer .coming-soon {
     color: #D4DDD6; }
   .login-sign-up .text-mint {
     color: #83C3A3; }
+  .login-sign-up .firebaseui-info-bar.firebaseui-id-info-bar {
+    display: none; }
 
 .messages-notifications .top-buffer {
   margin-top: 50px; }

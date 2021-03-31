@@ -1,15 +1,32 @@
-import { watchUser, logOutUser } from "../api/firebase-queries.js";
+import { logOutUser } from "../api/firebase-queries.js";
 
 import { getTemplate } from "../util/getTemplate.js";
 
 const path = "../../common/header.html";
-var isLoggedIn = false;
-const routes = [
-    "index",
-    "schedule",
-    "find-a-trainer",
-    "group-class"
-];
+var isLoggedIn = {
+    _value: false,
+
+    set value(loggedIn) {
+        this._value = loggedIn;
+        this.setBodyClass();
+    },
+
+    get value() {
+        return this._value;
+    },
+
+    setBodyClass() {
+        console.log("isLoggedIn", this._value);
+        if (this._value) {
+            console.log(document.body.classList.contains("logged-out"));
+            document.body.classList.contains("logged-out")
+                && document.body.classList.remove("logged-out");
+        } else {
+            !document.body.classList.contains("logged-out")
+                && document.body.classList.add("logged-out");
+        }
+    }
+};
 
 class Header extends HTMLElement {
     constructor() {
@@ -22,18 +39,17 @@ class Header extends HTMLElement {
                 const node = document.importNode(response.content, true);
                 document.body.prepend(node);
                 handleBurgerMenu();
-                handleLogOut();
                 showCurrentPage();
 
                 let user = localStorage.getItem("user");
-                console.log(user);
                 if (user) {
                     user = JSON.parse(user);
+                    console.log(user);
                     editGreeting(user.firstName);
-                    if (document.body.classList.contains("logged-out")) {
-                        document.body.classList.remove("logged-out");
-                    }
+                    isLoggedIn.value = true;
                 }
+
+                handleLogOut();
             });
 
     }
@@ -49,15 +65,24 @@ const editGreeting = (name) => {
 const handleBurgerMenu = () => {
     const burgerMenu = document.body.querySelector(".burger-menu");
     burgerMenu.addEventListener("click", () => {
-        document.body.classList.contains("active-nav") ? document.body.classList.remove("active-nav") : document.body.classList.add("active-nav");
+        document.body.classList.contains("active-nav")
+            ? document.body.classList.remove("active-nav")
+            : document.body.classList.add("active-nav");
     });
 }
 
-const handleLogOut = async () => {
-    await logOutUser();
-    if (!document.body.classList.contains("logged-out")) {
-        document.body.classList.add("logged-out");
-    }
+const handleLogOut = () => {
+    const logOutBtn = document.getElementById("logOutBtn");
+    logOutBtn.addEventListener("click", () => {
+        logOutUser().then(() => {
+            console.log("Successfully logged out user...");
+            if (!document.body.classList.contains("logged-out")) {
+                document.body.classList.add("logged-out");
+            }
+            localStorage.removeItem("user");
+            isLoggedIn.value = false;
+        });
+    });
 }
 
 const showCurrentPage = () => {
@@ -72,5 +97,3 @@ const showCurrentPage = () => {
 window.addEventListener("resize", () => {
     document.body.classList.remove("active-nav");
 });
-
-watchUser();
