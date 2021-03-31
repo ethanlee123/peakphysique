@@ -187,7 +187,7 @@ function allowedLocation(position) {
 // Support: callback function for getLocation()
 function blockedLocation(error) {
     if(error.code == 1) {
-        alert("Allow locations helps us show you people near your");
+        alert("Allowing locations helps us show you people near you");
     } else if(error.code == 2) {
         alert("The network is down or the positioning service can't be reached.");
     } else if(error.code == 3) {
