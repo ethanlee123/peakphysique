@@ -1,4 +1,4 @@
-import { displayProfileInfo, updateProfileInfo, getLocation, uploadProfileImg } from "/scripts/api/firebase-queries.js";
+import { displayProfileInfo, updateProfileInfo, getLocation, uploadProfileImg, displayUserProfileImg } from "/scripts/api/firebase-queries.js";
 
 // Reference to Phone Number input field, use .value to modify/set
 const phoneNum = document.getElementById("phone");
@@ -25,11 +25,29 @@ const profileIcon = document.getElementById("profileImagePlaceHolder");
 
 const saveReturnBtn = document.getElementById("next-btn");
 
+var trainerListLoader = {
+    set isLoading(loading) {
+        if (loading) {
+            loader.style.display = "block";
+            resultsMeta.style.display = "none";
+            trainerList.style.display = "none";
+        } else {
+            loader.style.display = "none";
+            resultsMeta.style.display = "flex";
+            trainerList.style.display = "grid";
+        }
+    }
+};
+
+
 // Asks user to allow/block locations
-getLocation();
+// getLocation();
 
 // Displays user profile information on edit profile
 displayProfileInfo(fullName, phoneNum, bio, favWorkout, favCheatMeal, randFact, websiteUrl, radius, radiusDisplay, userCity);
+
+displayUserProfileImg(userProfileImg);
+
 
 // Updates firebase
 saveReturnBtn.addEventListener("click", function(event) {
@@ -38,7 +56,8 @@ saveReturnBtn.addEventListener("click", function(event) {
 })
     
 imageInput.addEventListener("change", function(e) {
-    var imgPath = URL.createObjectURL(e.target.files[0]);
-    userProfileImg.setAttribute("src", imgPath);
-    uploadProfileImg(imgPath);
+    let file = e.target.files[0];
+    let blob = URL.createObjectURL(file);
+    userProfileImg.setAttribute("src", blob);
+    uploadProfileImg(file);
 })

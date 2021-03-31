@@ -2,7 +2,6 @@ import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
 // import { reverseGeo } from "/scripts/api/here_api.js"
 
 const db = firebase.firestore();
-const storage = firebase.storage();
 
 // Reference to user collection, no document specified
 const userRef = db.collection("user");
@@ -219,7 +218,7 @@ export function updateUserRole(userRole) {
 }
 
 // Displays trainer profile information. Parameters are references to a tag.
-export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
+export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity, userProfileImg) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
         trainerOnlyRef.doc(user.uid).get()
@@ -290,7 +289,7 @@ function updateTrainerInfo(websiteUrl = "") {
 export function uploadProfileImg(imgPath) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Reference to logged in user specific storage
-        let storageRef = storage.ref("images/" + user.uid + ".jpg");
+        let storageRef = firebase.storage().ref("images/" + user.uid + ".jpg");
         // Upload user selected file to cloud storage
         storageRef.put(imgPath);
         // Gets firebase storage url and updates respective field in document of user.uid
@@ -299,7 +298,25 @@ export function uploadProfileImg(imgPath) {
             userRef.doc(user.uid).update({
                 profilePic: url,
             })
-        })
+        });
+    })
+}
+
+export function displayUserProfileImg(selector) {
+    console.log("Called displayUserProfileImg()");
+    firebase.auth().onAuthStateChanged(function (user) {      
+        userRef.doc(user.uid)                                
+            .get()                                           
+            .then(doc => {
+                let picUrl = doc.data().profilePic;  
+                selector.setAttribute("src", picUrl);
+            }).catch(err => {
+                // Server error 503: implement timeout and try re-calling the method
+                setTimeout(function(){ 
+                    displayUserProfileImg(selector); 
+                }, 1000);
+                console.log("Error: " + err)
+            });
     })
 }
 
