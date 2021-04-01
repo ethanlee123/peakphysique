@@ -156,6 +156,12 @@ header {
             }
         }
 
+        .schedule {
+            .logged-out & {
+                display: none;
+            }
+        }
+
         .current-page {
 
             @include desktop {
@@ -378,8 +384,10 @@ header {
             display: none;
         }
 
-        i {
+        .user-avatar {
             margin: 0;
+            width: 30px;
+            height: 30px;
 
             body.active-nav & {
                 margin-right: 0.5em;
@@ -396,6 +404,10 @@ header {
                     display: block;                     
                 }
             }
+        }
+
+        .initials {
+            font-size: 0.6em;
         }
 
         .text {

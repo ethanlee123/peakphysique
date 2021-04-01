@@ -1,5 +1,9 @@
 import { generateUnavailableSlots } from "../util/generateUnavailableSlots.js";
 
+let trainerID = localStorage.getItem("trainerID");
+trainerID = JSON.parse(trainerID);
+console.log(trainerID);
+
 $(function() {
     $( "#datepicker" ).datepicker({
       showAnim: "fold",
@@ -9,41 +13,48 @@ $(function() {
       showOtherMonths: true,
       minDate: 0,
       maxDate: "+1m",
-      dateFormat: 'dd MM yy',
-      beforeShowDay: checkBadDates()
-    });
+      beforeShowDay: function(date) {
+        const year = date.getFullYear();
+        const month = ("" + (date.getMonth() + 1)).slice(-2);
+        const day = ("" + (date.getDate())).slice(-2);
+        const formatted = month + '/' + day + '/' + year;
+
+        if ($.inArray(formatted, filteredBadDates) === -1) {
+          return [true, "","Available"]; 
+        } else{
+          return [false,"","unAvailable"]; 
+        }
+    }
   });
+});
+
+const availabilityTest2 = {
+  sunday: ["morning"],
+  monday: ["afternoon"],
+  tuesday: [],
+  wednesday: ["morning", "afternoon"],
+  thursday: [],
+  friday: ["afternoon", "evening"],
+  saturday: ["morning", "afternoon", "evening"]
+};
 
 
-let trainerID = localStorage.getItem("trainerID");
-trainerID = JSON.parse(trainerID);
 // get array of unavailable dates
-// var $myBadDates = new Array("10 October 2010","21 November 2010","12 December 2010","13 January 2011","14 February 2011","15 March 2011");
+let unavailableDates = generateUnavailableSlots({availability: availabilityTest2});
+// let unavailableDates = generateUnavailableSlots({availability: trainerID.availability});
 
-var unavailableSlots = generateUnavailableSlots({availability: trainerID.availability});
-var badDates = [];
-for(var i = 0; i < unavailableSlots.length; i++) {
-  var hasDate = false;
-  for(var j = 0; j < badDates.length; j++) {
-    if (badDates[j] === unavailableSlots[i][0]) {
-      hasDate = true;
-    }
-  }
-  if (!hasDate) {
-    badDates[i] = unavailableSlots[i][0];
+let badDates = [];
+
+for (let i = 0; i < unavailableDates.length - 2; i++) {
+  console.log(unavailableDates[i].date);
+  if (unavailableDates[i].date === unavailableDates[i + 2].date) {
+    badDates[i] = unavailableDates[i].date;
   }
 }
-var $myBadDates = badDates;
 
-function checkBadDates(mydate){
-  var $return=true;
-  var $returnclass ="available";
-  $checkdate = $.datepicker.formatDate('dd MM yy', mydate);
-  for(var i = 0; i < $myBadDates.length; i++){    
-    if($myBadDates[i] == $checkdate){
-      $return = false;
-      $returnclass= "unavailable";
-    }
-  }
-  return [$return,$returnclass];
-}
+let filteredBadDates = badDates.filter(function (el) {
+  return el != null;
+});
+
+// console.log(badDates);
+// console.log(filteredBadDates);

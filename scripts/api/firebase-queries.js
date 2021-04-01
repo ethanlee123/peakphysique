@@ -557,3 +557,7 @@ export const getUser = async (uid) => {
 export const logOutUser = async () => {
     return await firebase.auth().signOut();
 }
+
+export const getImgFromStorage = async (url) => {
+    return await storage.refFromURL(url).getDownloadURL();
+}
