@@ -132,8 +132,8 @@ var trainers = {
             const expertiseArr = trainer.fitness.concat(trainer.wellness);
     
             insertText(trainerCard, ".trainer-name", trainer.name);
-            insertText(trainerCard, ".rating", trainer.rating.toFixed(1));
-            insertText(trainerCard, ".rate .text", `${trainer.hourlyRate} / hr`);
+            insertText(trainerCard, ".rating", trainer.rating ? trainer.rating?.toFixed(1) : "Not Yet Rated");
+            insertText(trainerCard, ".rate .text", trainer.hourlyRate ? `${trainer.hourlyRate} / hr` : "Not Listed");
             insertText(trainerCard, ".expertise .text", getExpertiseText(expertiseArr));
             insertText(trainerCard, ".availability .text", getAvailabilityText(trainer.availability));
             getUserAvatar({user: trainer, parentNode: trainerCard});
@@ -158,7 +158,7 @@ var trainers = {
     },
 
     getSliderRange(prop) {
-        const sortedList = sort.sortList(this._all, prop);
+        const sortedList = sort.sortList(this._all, prop).filter(trainer => trainer[prop]);
         if (sortedList) {
             return {min: sortedList[0][prop], max: sortedList[sortedList.length - 1][prop]};
         }
@@ -334,7 +334,6 @@ var filters = {
     },
 
     set values(filters) {
-        console.log("set values", filters);
         this._value = filters;
         const noFilters = Object.keys(this._value).length === 0 && true;
         this.updateFilterButtons(noFilters);
@@ -428,7 +427,6 @@ var page = {
     },
 
     set current(current) {
-        console.log("currentPage", current);
         this._currentPage = current;
         this.renderPaginationBtns();
         this.styleCurrentPageNum();
