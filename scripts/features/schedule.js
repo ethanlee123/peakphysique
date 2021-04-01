@@ -33,7 +33,9 @@ const insertText = (parentNode, selector, text) => {
 const renderScheduleCards = () => {
     scheduleList.innerHTML = "";
 
-    db.collection("schedule").where("completed", "==", false)
+    var query = db.collection("schedule").where("completed", "==", false)
+
+    query.where("clientUserId", "==", "CNFitnSvSBREvgylpqdAPeydDk12")
     .get()
     .then(function(s) {
         s.forEach(schedule => {
@@ -44,12 +46,19 @@ const renderScheduleCards = () => {
         insertText(scheduleCard, ".trainerLastName", schedule.data().trainerLastName);
         insertText(scheduleCard, "#appt-date", schedule.data().date.toDate().toDateString());
         insertText(scheduleCard, "#appt-time", schedule.data().time);
+        insertText(scheduleCard, "#bookingMsg", schedule.data().bookingMsg);
 
         // cancel button sets appointment to completed
         const cancelAppt = scheduleCard.querySelector(".cancelBtn");
         cancelAppt.addEventListener("click", () => {
             schedule.ref.update({completed: true})
         });
+
+        const viewProfile = scheduleCard.querySelector(".trainerProfile");
+            viewProfile.addEventListener("click", () => {
+                localStorage.setItem("trainerProfileToDisplay", JSON.stringify(trainer));
+                window.location.href = "../../user-profile.html";
+            });
 
         scheduleList.appendChild(scheduleCard);
         })
@@ -73,6 +82,7 @@ const completeAppt = () => {
 completeAppt();
 
 // moves completed schedule cards to completed based on firestore "schedule" collection
+// orders by date
 const renderCompletedScheduleCards = () => {
     scheduleCompletedList.innerHTML = "";
 
@@ -89,6 +99,7 @@ const renderCompletedScheduleCards = () => {
         insertText(scheduleCard, ".trainerLastName", schedule.data().trainerLastName);
         insertText(scheduleCard, "#appt-date", schedule.data().date.toDate().toDateString());
         insertText(scheduleCard, "#appt-time", schedule.data().time);
+        insertText(scheduleCard, "#bookingMsg", schedule.data().bookingMsg);
 
         scheduleCompletedList.appendChild(scheduleCard);
 
