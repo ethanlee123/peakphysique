@@ -1,4 +1,5 @@
-import { displayProfileInfo, updateProfileInfo, getLocation, uploadProfileImg, displayUserProfileImg } from "/scripts/api/firebase-queries.js";
+import { displayProfileInfo, updateProfileInfo, uploadProfileImg, displayUserProfileImg } from "/scripts/api/firebase-queries.js";
+import { getLocation } from "/scripts/api/here-api.js"
 
 // Reference to Phone Number input field, use .value to modify/set
 const phoneNum = document.getElementById("phone");
@@ -41,13 +42,12 @@ var trainerListLoader = {
 
 
 // Asks user to allow/block locations
-// getLocation();
+console.log("location: " + getLocation());
 
 // Displays user profile information on edit profile
 displayProfileInfo(fullName, phoneNum, bio, favWorkout, favCheatMeal, randFact, websiteUrl, radius, radiusDisplay, userCity);
 
 displayUserProfileImg(userProfileImg);
-
 
 // Updates firebase
 saveReturnBtn.addEventListener("click", function(event) {
