@@ -17,14 +17,7 @@ function firebaseUI() {
   var uiConfig = {
     callbacks: {
       signInSuccessWithAuthResult: async (authResult, redirectUrl) => {
-        localStorage.getItem("user") && localStorage.removeItem("user");
-        const { user } = authResult;
-        const res = await getUser(user.uid);
-        if (res) {
-          localStorage.setItem("user", JSON.stringify(res));
-          window.location.href = "../../sign-up-success.html";
-        }
-
+        return true;
       },
       uiShown: function () {
         document.getElementById('loader').style.display = 'none';
