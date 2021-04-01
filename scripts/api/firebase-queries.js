@@ -2,7 +2,7 @@ import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
 // import { reverseGeo } from "/scripts/api/here_api.js"
 
 const db = firebase.firestore();
-const storage = firebase.storage;
+const storage = firebase.storage();
 
 // Reference to user collection, no document specified
 const userRef = db.collection("user");
@@ -126,7 +126,7 @@ function allowedLocation(position) {
 // Support: callback function for getLocation()
 function blockedLocation(error) {
     if(error.code == 1) {
-        alert("Allow locations helps us show you people near your");
+        alert("Allowing locations helps us show you people near you");
     } else if(error.code == 2) {
         alert("The network is down or the positioning service can't be reached.");
     } else if(error.code == 3) {
@@ -219,7 +219,7 @@ export function updateUserRole(userRole) {
 }
 
 // Displays trainer profile information. Parameters are references to a tag.
-export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay) {
+export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
         trainerOnlyRef.doc(user.uid).get()
@@ -241,7 +241,7 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
             cheatMeal.value = doc.data().favCheatMeal;
             randFact.value = doc.data().randomFact;
             radiusDisplay.innerText= doc.data().radius;
-            userCity.value = doc.date().city;
+            userCity.value = doc.data().city;
         });
     });
 }
@@ -260,7 +260,14 @@ export function updateProfileInfo(websiteUrl, phoneNum, bio, workout, cheatMeal,
             randomFact: randFact.value,
             radius: radiusTravel.value,
         }).then(() => {
-            updateTrainerInfo(websiteUrl);
+            userRef.doc(user.uid).get()
+            .then(doc => {
+                let role = doc.data().role;
+                if (role == "trainer") {
+                    updateTrainerInfo(websiteUrl);
+                }
+                window.location.href = "schedule.html";
+            })
             console.log("updateTrainerInfo called");
         })
     });
@@ -270,12 +277,12 @@ function updateTrainerInfo(websiteUrl = "") {
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
         trainerOnlyRef.doc(user.uid).update({
-            website: websiteUrl.value,
+            website: websiteUrl.value
         }).then(() => {
-            console.log("successfully update user website url");
             window.location.href = "sign-up-profile-setup.html";
+            console.log("successfully update user website url");
         }).catch(err => {
-            console.log("error: ", error);
+            console.log("Error: ", err);
         });
     });
 }
@@ -554,4 +561,8 @@ export const getUser = async (uid) => {
 
 export const logOutUser = async () => {
     return await firebase.auth().signOut();
+}
+
+export const getImgFromStorage = async (url) => {
+    return await storage.refFromURL(url).getDownloadURL();
 }

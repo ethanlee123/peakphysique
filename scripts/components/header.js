@@ -1,6 +1,7 @@
-import { logOutUser } from "../api/firebase-queries.js";
+import { logOutUser, getImgFromStorage } from "../api/firebase-queries.js";
 
 import { getTemplate } from "../util/getTemplate.js";
+import { getUserAvatar } from "../util/getUserAvatar.js";
 
 const path = "../../common/header.html";
 var isLoggedIn = {
@@ -16,9 +17,7 @@ var isLoggedIn = {
     },
 
     setBodyClass() {
-        console.log("isLoggedIn", this._value);
         if (this._value) {
-            console.log(document.body.classList.contains("logged-out"));
             document.body.classList.contains("logged-out")
                 && document.body.classList.remove("logged-out");
         } else {
@@ -35,7 +34,7 @@ class Header extends HTMLElement {
 
     connectedCallback() {
         getTemplate(path)
-            .then((response) => {
+            .then(async (response) => {
                 const node = document.importNode(response.content, true);
                 document.body.prepend(node);
                 handleBurgerMenu();
@@ -44,11 +43,21 @@ class Header extends HTMLElement {
                 let user = localStorage.getItem("user");
                 if (user) {
                     user = JSON.parse(user);
-                    console.log(user);
+                    let profilePic;
+                    if (user.profilePic) {
+                        const profilePic = await getImgFromStorage(user.profilePic);
+                    }
+
                     editGreeting(user.firstName);
+                    const userAvatar = document.querySelectorAll(".user-avatar");
+                    userAvatar.forEach(node => getUserAvatar({
+                        user: user,
+                        parentNode: node,
+                        imgURL: profilePic && profilePic
+                    }));
+                    
                     isLoggedIn.value = true;
                 }
-
                 handleLogOut();
             });
 
@@ -75,7 +84,6 @@ const handleLogOut = () => {
     const logOutBtn = document.getElementById("logOutBtn");
     logOutBtn.addEventListener("click", () => {
         logOutUser().then(() => {
-            console.log("Successfully logged out user...");
             if (!document.body.classList.contains("logged-out")) {
                 document.body.classList.add("logged-out");
             }
