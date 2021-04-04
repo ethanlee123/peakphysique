@@ -189,6 +189,8 @@ export function updateUserRole(userRole) {
     });
 }
 
+
+
 // Displays trainer profile information. Parameters are references to a tag.
 export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
     firebase.auth().onAuthStateChanged(function(user) {

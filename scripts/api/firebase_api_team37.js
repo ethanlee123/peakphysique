@@ -23,6 +23,7 @@ function firebaseUI() {
         document.getElementById('loader').style.display = 'none';
       }
     },
+    signInSuccessUrl: '../../sign-up-success.html',
     signInFlow: 'popup',
     signInOptions: [
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
