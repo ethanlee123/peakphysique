@@ -1,5 +1,5 @@
 import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
-import { getUserAvatar2 } from "/scripts/util/getUserAvatar.js";
+import { getEditProfAvatar } from "/scripts/util/getUserAvatar.js";
 
 const db = firebase.firestore();
 
@@ -267,7 +267,7 @@ function updateTrainerInfo(websiteUrl = "") {
     });
 }
 
-export function uploadProfileImg(imgPath) {
+export function uploadProfileImg(imgPath, imgSelector) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Reference to logged in user specific storage
         let storageRef = firebase.storage().ref("images/" + user.uid + ".jpg");
@@ -279,35 +279,25 @@ export function uploadProfileImg(imgPath) {
             userRef.doc(user.uid).update({
                 profilePic: url,
             })
+        }).then(() => {
+            displayUserProfileImg(imgSelector);
+
         });
     })
 }
 
-export function displayUserProfileImg(selector) {
+export function displayUserProfileImg(selector, url) {
     console.log("Called displayUserProfileImg()");
-    firebase.auth().onAuthStateChanged(function (user) {      
-        // userRef.doc(user.uid)                                
-        //     .get()                                           
-        //     .then(doc => {
-        //         let picUrl = doc.data().profilePic;  
-        //         selector.setAttribute("src", picUrl);
-        //     }).catch(err => {
-        //         // Server error 503: implement timeout and try re-calling the method
-        //         setTimeout(function(){ 
-        //             displayUserProfileImg(selector); 
-        //         }, 1000);
-        //         console.log("Error: " + err)
-        //     });
-        
-        userRef.doc(user.uid).get()
-            .then(doc => {
-                let firstN = doc.data().firstName;
-                let lastN = doc.data().lastName;
-                let profileP = doc.data().profilePic;
-                getUserAvatar2({user: user.uid, parentNode: selector, firstName: firstN, lastName: lastN, profilePicPath: profileP});
-            })
+    firebase.auth().onAuthStateChanged(async (user) => {      
+        let ref = await userRef.doc(user.uid).get()
+        let firstN = ref.data().firstName;
+        let lastN = ref.data().lastName;
+        let profileP = ref.data().profilePic; 
+
+        await getEditProfAvatar({user: user.uid, parentNode: selector, firstName: firstN, lastName: lastN, profilePicPath: profileP});
     })
 }
+
 
 // export function displayScheduleInfo(trainerFirstName, trainerLastName, apptTime, apptDate) {
 export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) {

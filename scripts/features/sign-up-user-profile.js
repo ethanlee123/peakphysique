@@ -25,17 +25,11 @@ const imageInput = document.getElementById("profileImgInp");
 const saveReturnBtn = document.getElementById("next-btn");
 
 const loader = document.getElementById("loader");
-const container = document.getElementById("container");
 const name = document.getElementById("name");
 const labelImg = document.querySelector(".user-avatar");
 
 // Asks user to allow/block locations
-console.log("location: " + getLocation());
-
-// Displays user profile information on edit profile
-// displayProfileInfo(fullName, phoneNum, bio, favWorkout, favCheatMeal, randFact, websiteUrl, radius, radiusDisplay, userCity);
-
-// displayUserProfileImg(userProfileImg);
+getLocation();
 
 // Updates firebase
 saveReturnBtn.addEventListener("click", function(event) {
@@ -47,7 +41,7 @@ imageInput.addEventListener("change", function(e) {
     let file = e.target.files[0];
     let blob = URL.createObjectURL(file);
     userProfileImg.setAttribute("src", blob);
-    uploadProfileImg(file);
+    uploadProfileImg(file, labelImg);
 })
 
 // Loader
@@ -69,15 +63,12 @@ var trainerListLoader = {
 
 const initialRender = () => {
     trainerListLoader.isLoading = true;    
-
     
     displayProfileInfo(fullName, phoneNum, bio, favWorkout, favCheatMeal, randFact, websiteUrl, radius, radiusDisplay, userCity);
     displayUserProfileImg(labelImg);
-    console.log(labelImg);
     
     setTimeout(function() {
         trainerListLoader.isLoading = false;
-        
     }, 1000)
 }
 

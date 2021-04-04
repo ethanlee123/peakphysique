@@ -17,7 +17,7 @@ export const getUserAvatar = ({
     }
 }
 
-export const getUserAvatar2 = ({
+export const getEditProfAvatar = ({
     user,
     parentNode,
     profilePicSelector = ".user-avatar img",
@@ -32,8 +32,8 @@ export const getUserAvatar2 = ({
         userInitials.remove();
         profilePic.setAttribute("src", profilePicPath);
         profilePic.setAttribute("alt", `${user?.name} avatar`);
+        console.log("getEditProfAvatar");
     } else {
-        profilePic.remove();
         const initials = `${firstName.substring(0, 1)} ${lastName.substring(0, 1)}`;
         userInitials.appendChild(document.createTextNode(initials));
     }
