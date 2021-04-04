@@ -7,6 +7,7 @@ displayBookInfo();
 let trainerID = localStorage.getItem("trainerID");
 trainerID = JSON.parse(trainerID);
 console.log(trainerID.availability);
+console.log(trainerID);
 
 const availabilityTest2 = {
   sunday: ["morning"],
@@ -115,5 +116,5 @@ const confirmBtn = document.getElementById("confirm-btn");
 
 confirmBtn.addEventListener("click", function(event) {
   event.preventDefault();
-  writeAppointmentSchedule(comments, dropdown, date);
+  writeAppointmentSchedule(comments, dropdown, date, trainerID);
 });
