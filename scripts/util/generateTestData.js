@@ -194,7 +194,7 @@ const generateTrainers = (numToGenerate) => {
         trainer.yearsOfExperience = getRandomRange(1, 30);
         trainer.hourlyRate = getRandomRange(11, 300);
         trainer.firstSessionFree = getRandomRange(2) === 0 ? true : false;
-        trainer.rating = getRandomRange(5, 1, false);
+        trainer.rating = getRandomRange(4, 1, false);
         
         const lat = getRandomRange(-90, 90, false);
         const lon = getRandomRange(-180, 180, false);

@@ -1,14 +1,21 @@
 import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
-// import { reverseGeo } from "/scripts/api/here_api.js"
 
 const db = firebase.firestore();
-const storage = firebase.storage();
 
 // Reference to user collection, no document specified
 const userRef = db.collection("user");
 
 // Reference to trainerOnly collection, , no document specified
 const trainerOnlyRef = db.collection("trainerOnly");
+ 
+export function updateLocation(latitude, longitude, cityFromGeo) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        userRef.doc(user.uid).update({ 
+            location: new firebase.firestore.GeoPoint(latitude, longitude),
+            city: cityFromGeo,
+        });
+    });
+}
 
 export function displayTrainerInfo(){
   console.log("hello from displayTrainerInfo! :)");
@@ -100,42 +107,6 @@ export function personalizedWelcome(selector) {
     });
 }
 
-// Asks user to allow/block locations
-export function getLocation() {
-    if (navigator.geolocation) {
-        // First param is "successCallback", second is "blockedCallback"
-        navigator.geolocation.getCurrentPosition(allowedLocation, blockedLocation);
-        
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-
-// Support: callback function for getLocation()
-function allowedLocation(position) {
-    firebase.auth().onAuthStateChanged(function(user) {
-        userRef.doc(user.uid).update({ 
-            location: new firebase.firestore.GeoPoint(position.coords.latitude, position.coords.longitude),
-        });
-    });
-    console.log(position.coords.longitude);
-    console.log(position.coords.latitude);
-
-    // reverseGeo(position.coords.latitude, position.coords.longitude);
-}
-// Support: callback function for getLocation()
-function blockedLocation(error) {
-    if(error.code == 1) {
-        alert("Allowing locations helps us show you people near you");
-    } else if(error.code == 2) {
-        alert("The network is down or the positioning service can't be reached.");
-    } else if(error.code == 3) {
-        alert("The attempt timed out before it could get the location data.");
-    } else {
-        alert("Geolocation failed due to unknown error.");
-    }
-}
-
 // creates document id with user uid in both user and trainerOnly collectinos
 export function createUser() {
     // Only authenticated users, can be set in firebase console storage "rules" tab
@@ -218,10 +189,13 @@ export function updateUserRole(userRole) {
     });
 }
 
+
+
 // Displays trainer profile information. Parameters are references to a tag.
 export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
+
         trainerOnlyRef.doc(user.uid).get()
         .then(trainerDoc => {
             websiteUrl.value = trainerDoc.data().website;
@@ -241,8 +215,13 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
             cheatMeal.value = doc.data().favCheatMeal;
             randFact.value = doc.data().randomFact;
             radiusDisplay.innerText= doc.data().radius;
-            userCity.value = doc.data().city;
+
         });
+        // Update city field in real time 
+        userRef.doc(user.uid)
+        .onSnapshot(doc => {
+            userCity.value = doc.data().city;
+        })
     });
 }
 
@@ -290,7 +269,7 @@ function updateTrainerInfo(websiteUrl = "") {
 export function uploadProfileImg(imgPath) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Reference to logged in user specific storage
-        let storageRef = storage.ref("images/" + user.uid + ".jpg");
+        let storageRef = firebase.storage().ref("images/" + user.uid + ".jpg");
         // Upload user selected file to cloud storage
         storageRef.put(imgPath);
         // Gets firebase storage url and updates respective field in document of user.uid
@@ -299,7 +278,25 @@ export function uploadProfileImg(imgPath) {
             userRef.doc(user.uid).update({
                 profilePic: url,
             })
-        })
+        });
+    })
+}
+
+export function displayUserProfileImg(selector) {
+    console.log("Called displayUserProfileImg()");
+    firebase.auth().onAuthStateChanged(function (user) {      
+        userRef.doc(user.uid)                                
+            .get()                                           
+            .then(doc => {
+                let picUrl = doc.data().profilePic;  
+                selector.setAttribute("src", picUrl);
+            }).catch(err => {
+                // Server error 503: implement timeout and try re-calling the method
+                setTimeout(function(){ 
+                    displayUserProfileImg(selector); 
+                }, 1000);
+                console.log("Error: " + err)
+            });
     })
 }
 
