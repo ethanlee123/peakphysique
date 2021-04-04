@@ -1186,10 +1186,13 @@ footer .coming-soon {
 .sign-up-user-info input[type=file] {
   display: none; }
 
-.sign-up-user-info #userProfileImg {
+.sign-up-user-info .avatar-img, .sign-up-user-info .user-avatar {
   width: 170px;
   height: 170px;
   border-radius: 50%; }
+
+.sign-up-user-info .initials {
+  font-size: 24pt; }
 
 .user-profile .msg-profile {
   margin: 0 auto 50px auto; }

@@ -1,4 +1,5 @@
 import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
+import { getUserAvatar2 } from "/scripts/util/getUserAvatar.js";
 
 const db = firebase.firestore();
 
@@ -285,18 +286,26 @@ export function uploadProfileImg(imgPath) {
 export function displayUserProfileImg(selector) {
     console.log("Called displayUserProfileImg()");
     firebase.auth().onAuthStateChanged(function (user) {      
-        userRef.doc(user.uid)                                
-            .get()                                           
+        // userRef.doc(user.uid)                                
+        //     .get()                                           
+        //     .then(doc => {
+        //         let picUrl = doc.data().profilePic;  
+        //         selector.setAttribute("src", picUrl);
+        //     }).catch(err => {
+        //         // Server error 503: implement timeout and try re-calling the method
+        //         setTimeout(function(){ 
+        //             displayUserProfileImg(selector); 
+        //         }, 1000);
+        //         console.log("Error: " + err)
+        //     });
+        
+        userRef.doc(user.uid).get()
             .then(doc => {
-                let picUrl = doc.data().profilePic;  
-                selector.setAttribute("src", picUrl);
-            }).catch(err => {
-                // Server error 503: implement timeout and try re-calling the method
-                setTimeout(function(){ 
-                    displayUserProfileImg(selector); 
-                }, 1000);
-                console.log("Error: " + err)
-            });
+                let firstN = doc.data().firstName;
+                let lastN = doc.data().lastName;
+                let profileP = doc.data().profilePic;
+                getUserAvatar2({user: user.uid, parentNode: selector, firstName: firstN, lastName: lastN, profilePicPath: profileP});
+            })
     })
 }
 
