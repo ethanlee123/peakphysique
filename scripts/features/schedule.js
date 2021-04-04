@@ -36,8 +36,7 @@ const renderScheduleCards = () => {
     var query = db.collection("schedule").where("completed", "==", false)
 
     query.where("clientUserId", "==", "CNFitnSvSBREvgylpqdAPeydDk12")
-    .get()
-    .then(function(s) {
+    .onSnapshot(function(s) {
         s.forEach(schedule => {
 
         const scheduleCard = document.importNode(scheduleCardTemplate.content, true);
