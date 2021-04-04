@@ -9,37 +9,59 @@ const trainerID = trainerToDisplay.userId
 
 // ### Constants ###
 const db = firebase.firestore();
-const fullName = document.getElementbyId("fullName");
-const
+const fullName = document.getElementById("fullName");
+const location = document.getElementById("location");
+const profilePic = document.getElementsByClassName("profile-pic");
+const favWorkout = document.getElementById("fav-workout-answer");
+const favCheatMeal = document.getElementById("fav-cheatMeal-answer");
+const fitnessGoals = document.getElementById("fav-fitnessGoals-answer");
+const fitnessLevel = document.getElementById("fav-fitnessLevel-answer");
+const website = document.getElementById("fav-website-answer");
+const hourly = document.getElementById("hourlyRate");
+// const availability;
+const fitnessServices = document.getElementById("services");
+const wellness = document.getElementById("expertise");
+const certifications = document.getElementById("certifications");
 
 
 
-displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay) {
-    firebase.auth().onAuthStateChanged(function(user) {
+
+function displayProfileInfo(fullName, location, profilePic, favWorkout, favCheatMeal, fitnessGoals, fitnessLevel, website, hourly, availability, fitnessServices, wellness, certifications) {
+    // firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
-        trainerOnlyRef.doc(user.uid).get()
+        db.collection("trainerOnly").doc("alice-burke-4-35").get()
         .then(trainerDoc => {
-            websiteUrl.value = trainerDoc.data().website;
+            website.innerText = trainerDoc.data().website;
+            hourly.innerText = trainerDoc.data().hourlyRate;
+            certifications.innerText = trainerDoc.data().certifications;
+            fitnessServices.innerText = trainerDoc.data().fitness;
+            wellness.innerText = trainerDoc.data().wellness;
+            const imageUrl = trainerDoc.data().profilePic;
+            profilePic[0].setAttribute("src", imageUrl);
+            // availability.innerText = trainerDoc.data().availability
         }).catch(err => {
             // If doc is undefined, user is not a trainer
             console.log("error: ", err);
         });
 
         // Get doc from user collection
-        userRef.doc(user.uid).get()
+        db.collection("user").doc("1u05U9gAO4YW4E5PivlANqQ69QU2").get()
         .then(doc => {
             fullName.innerText = doc.data().name;
-            phoneNum.value = doc.data().phoneNumber;
+            location.innerText = doc.data().city;
+            favWorkout.innerText = doc.data().favWorkout;
+            favCheatMeal.innerText = doc.data().favCheatMeal;           
+            // fitnessGoals.innerText = doc.data().fitnessGoals;
+            // fitnessLevel.innerText = doc.data().fitnessLevel;
             // city.value = doc.data().city;
-            bio.value = doc.data().about;
-            workout.value = doc.data().favWorkout;
-            cheatMeal.value = doc.data().favCheatMeal;
-            randFact.value = doc.data().randomFact;
-            radiusDisplay.innerText= doc.data().radius;
-            userCity.value = doc.date().city;
+            // bio.value = doc.data().about;
+            // randFact.value = doc.data().randomFact;
+            // radiusDisplay.innerText= doc.data().radius;
+            // userCity.value = doc.date().city;
         });
-    });
-}
+    }
+// }
+displayProfileInfo(fullName, location, profilePic, favWorkout, favCheatMeal, fitnessGoals, fitnessLevel, website, hourly, availability, fitnessServices, wellness, certifications);
 // displayTrainerInfo();
 // hideUserSections();
 

@@ -60,28 +60,35 @@ export function displayTrainerInfo(){
   })
 }
 
+
 // creates a document in schedule collection for the booked appointment
-export function writeAppointmentSchedule() {
-    var scheduleRef = db.collection("schedule");
+export function writeAppointmentSchedule(comments, dropdown, date, trainerID) {
+    const scheduleRef = db.collection("schedule");
 
-    var user = firebase.auth().currentUser;
-
-    scheduleRef.add({
-        // Get this from jquery date picker
-        date: date.value, // Timestamp
-        time: timeSlot.value, // String morning, afternoon, or evening
-        // location: "",
-        completed: false, // boolean default false
-        clientProfilePic: user.profilePic,
-        clientFirstName: user.firstName,
-        clientLastName: user.lastName,
-        clientUserId: user.uid, //user_id
-        trainerProfilePic: trainerId.profilePic,
-        trainerFirstName: trainerId.firstName,
-        trainerLastName: trainerId.lastName,
-        trainerUserId: trainerId, //user_id
-        initialMsgFromClient: comments.value, //user input from comments form
-        bookingMsg: trainerId.bookingMsg //pull from trainer collection
+    firebase.auth().onAuthStateChanged(function(user) {
+        userRef.doc(user.uid).get()
+        .then(function (doc) {
+            const firstName = doc.data().firstName;
+            const lastName = doc.data().lastName;
+            const profilePic = doc.data().profilePic;
+            scheduleRef.add({
+                // Get this from jquery date picker
+                date: date.value, // Timestamp
+                time: dropdown.options[dropdown.selectedIndex].text, // String morning, afternoon, or evening
+                // location: "",
+                completed: false, // boolean default false
+                clientProfilePic: profilePic,
+                clientFirstName: firstName,
+                clientLastName: lastName,
+                clientUserId: user.uid, //user_id
+                trainerProfilePic: trainerID.profilePic,
+                trainerFirstName: trainerID.firstName,
+                trainerLastName: trainerID.lastName,
+                trainerUserId: trainerID.userId, //user_id
+                initialMsgFromClient: comments.value, //user input from comments form
+                // bookingMsg: trainerID.bookingMessage //pull from trainer collection
+            });
+        })
     });
 }
 
@@ -486,31 +493,10 @@ export function trainerProfilePosts() {
         })
     }
 
-export function displayBookInfo() {
-    db.collection("schedule").get()
-    .then(function (q) {
-        q.forEach(function (doc) {
-          var trainerFirstName = doc.data().trainerFirstName;
-          console.log(trainerFirstName);
-          var bookingMsg = doc.data().bookingMsg;
-          console.log(bookingMsg);
-          // var clientID = doc.data().client_user_id;
-          // console.log(clientID);
-          // var trainerID = doc.data().trainer_user_id;
-          // console.log(trainerID);
-          document.getElementById("trainerFirstName").innerText = trainerFirstName;
-          document.getElementById("bookingMsg").innerText = bookingMsg;
-        })
-    })
-}
-
-export function getTrainerAvailability() {
-    trainerOnlyRef.doc("trainerID").get()
-    .then((doc) => {
-        var availability = doc.data().availability;
-        console.log(availability);
-        return availability;
-    });
+// displays the selected trainer's name and their initial booking message
+export function displayBookInfo(trainerID) {
+    document.getElementById("trainerFirstName").innerText = trainerID.firstName;
+    document.getElementById("bookingMsg").innerText = trainerID.bookingMessage;
 }
 
 export const getCollection = async ({
