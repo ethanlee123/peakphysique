@@ -1194,6 +1194,10 @@ footer .coming-soon {
 .sign-up-user-info .initials {
   font-size: 24pt; }
 
+.sign-up-user-info #name {
+  font-family: "apex";
+  font-size: 18pt; }
+
 .user-profile .msg-profile {
   margin: 0 auto 50px auto; }
 
