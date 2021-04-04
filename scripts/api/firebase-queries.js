@@ -361,7 +361,7 @@ export function updatePlatformSpecifics(rate, depositMin, freeSession, preBookin
     firebase.auth().onAuthStateChanged(function(user) {
         trainerOnlyRef.doc(user.uid).update({
             hourlyRate: rate.value,
-            deposit: depositMin.value,
+            deposit: Number(depositMin.value),
             firstSessionFree: freeSession.checked,
             bookingMessage: preBookingMsg.value,
         }).then(() => {
