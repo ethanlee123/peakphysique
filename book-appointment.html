@@ -29,7 +29,6 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/book-appointment.css">
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet" /> -->
     
 
 </head>
@@ -56,11 +55,11 @@
               <p>Date: <input type="text" id="datepicker"></p>
             </div>
             <div class="mb-3 ms-3">
-              <select class="form-select form-select-sm" aria-label="Default select example">
-                <option selected id="time-slot">Time Slot</option>
-                <!-- <option value="1" id="morning">Morning</option>
-                <option value="2" id="afternoon">Afternoon</option>
-                <option value="3" id="evening">Evening</option> -->
+              <select class="form-select form-select-sm" aria-label="Default select example" id="dropdown">
+                <!-- <option selected="selected">Time Slot</option>
+                <option value="1">Morning</option>
+                <option value="2">Afternoon</option>
+                <option value="3">Evening</option> -->
               </select>
             </div>
           <!-- </div> -->
@@ -113,16 +112,17 @@
     <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
-    <script type="module" src="./scripts/api/firebase_api_team37.js"></script>
-    <script type="module" src="./scripts/api/firebase-queries.js"></script>
-
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
+
     <script type="module" src="./scripts/components/header.js"></script>
     <script type="module" src="./scripts/components/footer.js"></script>
     <script type="module" src="./scripts/features/book-appointment.js"></script>
     <script type="module" src="./scripts/components/date-picker.js"></script>
+
+    <script type="module" src="./scripts/api/firebase_api_team37.js"></script>
+    <script type="module" src="./scripts/api/firebase-queries.js"></script>
 
 </body>
 

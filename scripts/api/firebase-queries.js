@@ -61,7 +61,7 @@ export function displayTrainerInfo(){
 }
 
 // creates a document in schedule collection for the booked appointment
-export function writeAppointmentSchedule() {
+export function writeAppointmentSchedule(comments, dropdown, date, trainerID) {
     var scheduleRef = db.collection("schedule");
 
     var user = firebase.auth().currentUser;
@@ -69,7 +69,7 @@ export function writeAppointmentSchedule() {
     scheduleRef.add({
         // Get this from jquery date picker
         date: date.value, // Timestamp
-        time: timeSlot.value, // String morning, afternoon, or evening
+        time: dropdown.options[dropdown.selectedIndex].text, // String morning, afternoon, or evening
         // location: "",
         completed: false, // boolean default false
         clientProfilePic: user.profilePic,
@@ -188,6 +188,8 @@ export function updateUserRole(userRole) {
         }
     });
 }
+
+
 
 // Displays trainer profile information. Parameters are references to a tag.
 export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
@@ -484,6 +486,7 @@ export function trainerProfilePosts() {
         })
     }
 
+// displays the selected trainer's name and their initial booking message
 export function displayBookInfo() {
     db.collection("schedule").get()
     .then(function (q) {
@@ -500,15 +503,6 @@ export function displayBookInfo() {
           document.getElementById("bookingMsg").innerText = bookingMsg;
         })
     })
-}
-
-export function getTrainerAvailability() {
-    trainerOnlyRef.doc("trainerID").get()
-    .then((doc) => {
-        var availability = doc.data().availability;
-        console.log(availability);
-        return availability;
-    });
 }
 
 export const getCollection = async ({
