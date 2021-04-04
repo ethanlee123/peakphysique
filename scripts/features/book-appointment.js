@@ -1,27 +1,27 @@
 import { displayBookInfo, writeAppointmentSchedule } from "/scripts/api/firebase-queries.js";
 import { generateUnavailableSlots } from "/scripts/util/generateUnavailableSlots.js";
 
-displayBookInfo();
-
 // get trainerID from Book Appointment button on profile page
 let trainerID = localStorage.getItem("trainerID");
 trainerID = JSON.parse(trainerID);
 console.log(trainerID.availability);
 console.log(trainerID);
 
-const availabilityTest2 = {
-  sunday: ["morning"],
-  monday: ["afternoon"],
-  tuesday: [],
-  wednesday: ["morning", "afternoon"],
-  thursday: [],
-  friday: ["afternoon", "evening"],
-  saturday: ["morning", "afternoon", "evening"]
-};
+displayBookInfo(trainerID);
+
+// const availabilityTest2 = {
+//   sunday: ["morning"],
+//   monday: ["afternoon"],
+//   tuesday: [],
+//   wednesday: ["morning", "afternoon"],
+//   thursday: [],
+//   friday: ["afternoon", "evening"],
+//   saturday: ["morning", "afternoon", "evening"]
+// };
 
 // get array of unavailable dates
-let unavailableSlots = generateUnavailableSlots({availability: availabilityTest2});
-// let unavailableDates = generateUnavailableSlots({availability: trainerID.availability});
+// let unavailableSlots = generateUnavailableSlots({availability: availabilityTest2});
+let unavailableSlots = generateUnavailableSlots({availability: trainerID.availability});
 
 let badDates = [];
   for (let i = 0; i < unavailableSlots.length - 2; i++) {
