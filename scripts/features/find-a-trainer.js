@@ -158,7 +158,7 @@ var trainers = {
     },
 
     getSliderRange(prop) {
-        const sortedList = sort.sortList(this._all, prop).filter(trainer => trainer[prop]);
+        const sortedList = sort.sortList(this._all, prop).filter(trainer => trainer[prop] && typeof trainer[prop] === "number");
         if (sortedList) {
             return {min: sortedList[0][prop], max: sortedList[sortedList.length - 1][prop]};
         }
