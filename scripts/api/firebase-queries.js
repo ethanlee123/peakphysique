@@ -115,7 +115,7 @@ export function personalizedWelcome(selector) {
     });
 }
 
-// creates document id with user uid in both user and trainerOnly collectinos
+// creates document id with user uid in both user and trainerOnly collections
 export function createUser() {
     // Only authenticated users, can be set in firebase console storage "rules" tab
     firebase.auth().onAuthStateChanged(function(user) { 
@@ -244,6 +244,18 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
             userCity.value = doc.data().city;
         })
     });
+}
+
+// Removes selector from html page
+export function displayWebsiteField(selector) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        userRef.doc(user.uid).get()
+            .then(doc => {
+                if (doc.data().role == "trainer") {
+                    selector.style.display = "list-item";
+                }
+            })
+    })
 }
 
 // Updates db when trainer clicks save and return. Parameters are references to a tag.
