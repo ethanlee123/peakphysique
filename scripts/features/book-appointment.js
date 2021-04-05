@@ -52,7 +52,7 @@ $(function() {
 
       const timeSlots = document.createElement('option');
       timeSlots.setAttribute("selected", "selected");
-      timeSlots.text = "Time Slot";
+      timeSlots.text = "---------";
 
       const morning = document.createElement('option');
       morning.setAttribute("value", "1");

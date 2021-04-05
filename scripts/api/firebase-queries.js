@@ -73,8 +73,7 @@ export function writeAppointmentSchedule(comments, dropdown, date, trainerID) {
             const lastName = doc.data().lastName;
             const profilePic = doc.data().profilePic;
             scheduleRef.add({
-                // Get this from jquery date picker
-                date: date.value, // Timestamp
+                date: date.value, // from jquery date picker
                 time: dropdown.options[dropdown.selectedIndex].text, // String morning, afternoon, or evening
                 // location: "",
                 completed: false, // boolean default false
