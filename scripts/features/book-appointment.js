@@ -4,6 +4,7 @@ import { generateUnavailableSlots } from "/scripts/util/generateUnavailableSlots
 // get trainerID from Book Appointment button on profile page
 let trainerID = localStorage.getItem("trainerID");
 trainerID = JSON.parse(trainerID);
+console.log(trainerID);
 
 displayBookInfo(trainerID);
 
@@ -97,5 +98,6 @@ const date = document.getElementById("datepicker");
 const confirmBtn = document.getElementById("confirm-btn");
 
 confirmBtn.addEventListener("click", function(event) {
+  event.preventDefault();
   writeAppointmentSchedule(comments, dropdown, date, trainerID);
 });
