@@ -190,7 +190,19 @@ export function updateUserRole(userRole) {
     });
 }
 
-
+export const isFirstTime = () => {
+    firebase.auth().onAuthStateChanged(user => {
+        userRef.doc(user.uid).get()
+            .then(doc => {
+                let userRole = doc.data().role;
+                if(userRole == undefined) {
+                    return;
+                } else {
+                    window.location.href = "schedule.html";
+                }
+            })
+    })
+}   
 
 // Displays trainer profile information. Parameters are references to a tag.
 export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
