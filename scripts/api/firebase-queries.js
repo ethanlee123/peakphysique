@@ -214,15 +214,6 @@ export const isFirstTime = () => {
 // Displays trainer profile information. Parameters are references to a tag.
 export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
     firebase.auth().onAuthStateChanged(function(user) {
-        // Get doc from trainerOnly collection
-
-        trainerOnlyRef.doc(user.uid).get()
-        .then(trainerDoc => {
-            websiteUrl.value = trainerDoc.data().website;
-        }).catch(err => {
-            // If doc is undefined, user is not a trainer
-            console.log("error: ", err);
-        });
 
         // Get doc from user collection
         userRef.doc(user.uid).get()
@@ -235,6 +226,16 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
             cheatMeal.value = doc.data().favCheatMeal;
             randFact.value = doc.data().randomFact;
             radiusDisplay.innerText= doc.data().radius;
+
+            if (doc.data().role == "trainer") {
+                trainerOnlyRef.doc(user.uid).get()
+                .then(trainerDoc => {
+                    websiteUrl.value = trainerDoc.data().website;
+                }).catch(err => {
+                    // If doc is undefined, user is not a trainer
+                    console.log("error: ", err);
+                });
+            }
 
         });
         // Update city field in real time 
@@ -264,8 +265,9 @@ export function updateProfileInfo(websiteUrl, phoneNum, bio, workout, cheatMeal,
                 let role = doc.data().role;
                 if (role == "trainer") {
                     updateTrainerInfo(websiteUrl);
+                } else {
+                    window.location.href = "schedule.html";
                 }
-                window.location.href = "schedule.html";
             })
             console.log("updateTrainerInfo called");
         })
