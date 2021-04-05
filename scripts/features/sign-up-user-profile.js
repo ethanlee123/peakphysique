@@ -1,4 +1,4 @@
-import { displayProfileInfo, updateProfileInfo, uploadProfileImg, displayUserProfileImg } from "/scripts/api/firebase-queries.js";
+import { displayProfileInfo, updateProfileInfo, uploadProfileImg, displayUserProfileImg, displayWebsiteField } from "/scripts/api/firebase-queries.js";
 import { getLocation } from "/scripts/api/here-api.js";
 
 // Reference to Phone Number input field, use .value to modify/set
@@ -16,6 +16,7 @@ const favCheatMeal = document.getElementById("meal");
 const randFact = document.getElementById("fact");
 const websiteUrl = document.getElementById("website");
 const userCity = document.getElementById("city");
+const websiteListItem = document.getElementById("websiteListItem");
 
 // Reference to image tag
 const userProfileImg = document.querySelector(".avatar-img");
@@ -49,9 +50,8 @@ var trainerListLoader = {
     set isLoading(loading) {
         if (loading) {
             loader.style.display = "block";
-            // container.style.display = "none";
             name.style.display = "none";
-            // userProfileImg.style.display = "none";
+            websiteListItem.style.display = "none";
         } else {
             loader.style.display = "none";
             // container.style.display = "flex";
@@ -64,9 +64,10 @@ var trainerListLoader = {
 const initialRender = () => {
     trainerListLoader.isLoading = true;    
     
+    displayWebsiteField(websiteListItem);
     displayProfileInfo(fullName, phoneNum, bio, favWorkout, favCheatMeal, randFact, websiteUrl, radius, radiusDisplay, userCity);
     displayUserProfileImg(labelImg);
-    
+
     setTimeout(function() {
         trainerListLoader.isLoading = false;
     }, 1000)

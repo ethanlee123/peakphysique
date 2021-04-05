@@ -116,7 +116,7 @@ export function personalizedWelcome(selector) {
     });
 }
 
-// creates document id with user uid in both user and trainerOnly collectinos
+// creates document id with user uid in both user and trainerOnly collections
 export function createUser() {
     // Only authenticated users, can be set in firebase console storage "rules" tab
     firebase.auth().onAuthStateChanged(function(user) { 
@@ -189,10 +189,15 @@ export function updateUserRole(userRole) {
         if (userRole == "trainer") {
             userDocRef.update({
                 role: "trainer"
-            })
+            }).then(() => {
+                window.location.href = "sign-up-profile-setup.html";
+            });
+
         } else if (userRole == "client") {
             userDocRef.update({
                 role:"client"
+            }).then(() => {
+                window.location.href = "sign-up-user-profile.html";
             });
         }
     });
@@ -215,15 +220,6 @@ export const isFirstTime = () => {
 // Displays trainer profile information. Parameters are references to a tag.
 export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
     firebase.auth().onAuthStateChanged(function(user) {
-        // Get doc from trainerOnly collection
-
-        trainerOnlyRef.doc(user.uid).get()
-        .then(trainerDoc => {
-            websiteUrl.value = trainerDoc.data().website;
-        }).catch(err => {
-            // If doc is undefined, user is not a trainer
-            console.log("error: ", err);
-        });
 
         // Get doc from user collection
         userRef.doc(user.uid).get()
@@ -237,6 +233,15 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
             randFact.value = doc.data().randomFact;
             radiusDisplay.innerText= doc.data().radius;
 
+            if (doc.data().role == "trainer") {
+                trainerOnlyRef.doc(user.uid).get()
+                .then(trainerDoc => {
+                    websiteUrl.value = trainerDoc.data().website;
+                }).catch(err => {
+                    // If doc is undefined, user is not a trainer
+                    console.log("error: ", err);
+                });
+            }
         });
         // Update city field in real time 
         userRef.doc(user.uid)
@@ -244,6 +249,18 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
             userCity.value = doc.data().city;
         })
     });
+}
+
+// Removes selector from html page
+export function displayWebsiteField(selector) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        userRef.doc(user.uid).get()
+            .then(doc => {
+                if (doc.data().role == "trainer") {
+                    selector.style.display = "list-item";
+                }
+            })
+    })
 }
 
 // Updates db when trainer clicks save and return. Parameters are references to a tag.
@@ -265,8 +282,9 @@ export function updateProfileInfo(websiteUrl, phoneNum, bio, workout, cheatMeal,
                 let role = doc.data().role;
                 if (role == "trainer") {
                     updateTrainerInfo(websiteUrl);
+                } else {
+                    window.location.href = "schedule.html";
                 }
-                window.location.href = "schedule.html";
             })
             console.log("updateTrainerInfo called");
         })
