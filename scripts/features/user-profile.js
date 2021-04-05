@@ -26,7 +26,7 @@ const certifications = document.getElementById("certifications");
 
 
 
-function displayProfileInfo(fullName, location, profilePic, favWorkout, favCheatMeal, fitnessGoals, fitnessLevel, website, hourly, availability, fitnessServices, wellness, certifications) {
+function displayProfileInfo(fullName, location, profilePic, favWorkout, favCheatMeal, website, hourly, fitnessServices, wellness, certifications) {
     // firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
         db.collection("trainerOnly").doc("alice-burke-4-35").get()
@@ -61,7 +61,7 @@ function displayProfileInfo(fullName, location, profilePic, favWorkout, favCheat
         });
     }
 // }
-displayProfileInfo(fullName, location, profilePic, favWorkout, favCheatMeal, fitnessGoals, fitnessLevel, website, hourly, availability, fitnessServices, wellness, certifications);
+displayProfileInfo(fullName, location, profilePic, favWorkout, favCheatMeal, website, hourly, fitnessServices, wellness, certifications);
 // displayTrainerInfo();
 // hideUserSections();
 

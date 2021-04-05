@@ -22,6 +22,7 @@ const scheduleList = document.getElementById("scheduleList");
 const scheduleCompletedList = document.getElementById("scheduleCompletedList");
 const db = firebase.firestore();
 const scheduleCollection = await db.collection("schedule").get();
+var user = firebase.auth().currentUser;
 
 // inserts text inside cards
 const insertText = (parentNode, selector, text) => {
@@ -29,13 +30,70 @@ const insertText = (parentNode, selector, text) => {
     element.appendChild(document.createTextNode(text));
 }
 
-// creates upcoming schedule cards based on firestore "schedule" collection
+// creates upcoming schedule cards depending on if user is trainer or client
+// based on firestore "schedule" collection
 const renderScheduleCards = () => {
+    // scheduleList.innerHTML = "";
+
+    // var query = db.collection("schedule").where("completed", "==", false)
+
+    db.collection("user").doc(user.uid).get()
+        .then((docSnapshot) => {
+            if(docSnapshot.data().role == "trainer") {
+                renderScheduleCardsTrainer();
+                console.log("hello");
+            } else {
+                renderScheduleCardsClient();
+                console.log("getting client cards");
+            }
+        });
+}
+renderScheduleCards();
+
+
+// creates upcoming schedule cards for a trainer
+const renderScheduleCardsTrainer = () => {
     scheduleList.innerHTML = "";
 
     var query = db.collection("schedule").where("completed", "==", false)
 
-    query.where("clientUserId", "==", "CNFitnSvSBREvgylpqdAPeydDk12")
+    query.where("trainerUserId", "==", user.uid)
+    .onSnapshot(function(s) {
+        s.forEach(schedule => {
+
+        const scheduleCard = document.importNode(scheduleCardTemplate.content, true);
+        
+        insertText(scheduleCard, ".trainerFirstName", schedule.data().clientFirstName);
+        insertText(scheduleCard, ".trainerLastName", schedule.data().clientLastName);
+        insertText(scheduleCard, "#appt-date", schedule.data().date.toDate().toDateString());
+        insertText(scheduleCard, "#appt-time", schedule.data().time);
+        insertText(scheduleCard, "#bookingMsg", schedule.data().bookingMsg);
+
+        // cancel button sets appointment to completed
+        const cancelAppt = scheduleCard.querySelector(".cancelBtn");
+        cancelAppt.addEventListener("click", () => {
+            schedule.ref.update({completed: true})
+        });
+
+        const viewProfile = scheduleCard.querySelector(".trainerProfile");
+            viewProfile.addEventListener("click", () => {
+                localStorage.setItem("trainerProfileToDisplay", JSON.stringify(trainer));
+                window.location.href = "../../user-profile.html";
+            });
+
+        scheduleList.appendChild(scheduleCard);
+        })
+    });
+}
+// renderScheduleCards();
+
+// creates upcoming schedule cards for a client
+const renderScheduleCardsClient = () => {
+    scheduleList.innerHTML = "";
+
+    var query = db.collection("schedule").where("completed", "==", false)
+
+    query.where("clientUserId", "==", user.uid)
     .onSnapshot(function(s) {
         s.forEach(schedule => {
 
@@ -63,7 +121,9 @@ const renderScheduleCards = () => {
         })
     });
 }
-renderScheduleCards();
+
+
+
 
 // sets appointment to completed in firestore if date is passed
 const completeAppt = () => {
@@ -78,7 +138,7 @@ const completeAppt = () => {
         })
     });
 }
-completeAppt();
+// completeAppt();
 
 // moves completed schedule cards to completed based on firestore "schedule" collection
 // orders by date
@@ -108,7 +168,7 @@ const renderCompletedScheduleCards = () => {
     .then(() => {
         let cancelBtn = scheduleCompletedList.getElementsByClassName("hideScheduleBtn");
         
-        console.log(cancelBtn.length);
+        // console.log(cancelBtn.length);
         for (let i = 0; i < cancelBtn.length; i++) {
             cancelBtn[i].style.display = "none";
             }
