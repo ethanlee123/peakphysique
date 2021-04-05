@@ -1,4 +1,5 @@
 import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
+import { getEditProfAvatar } from "/scripts/util/getUserAvatar.js";
 
 const db = firebase.firestore();
 
@@ -87,6 +88,8 @@ export function writeAppointmentSchedule(comments, dropdown, date, trainerID) {
                 trainerUserId: trainerID.userId, //user_id
                 initialMsgFromClient: comments.value, //user input from comments form
                 bookingMsg: trainerID.bookingMessage //pull from trainer collection
+            }).then(() => {
+                window.location.href = "schedule.html";
             });
         })
     });
@@ -196,7 +199,19 @@ export function updateUserRole(userRole) {
     });
 }
 
-
+export const isFirstTime = () => {
+    firebase.auth().onAuthStateChanged(user => {
+        userRef.doc(user.uid).get()
+            .then(doc => {
+                let userRole = doc.data().role;
+                if(userRole == undefined) {
+                    return;
+                } else {
+                    window.location.href = "schedule.html";
+                }
+            })
+    })
+}   
 
 // Displays trainer profile information. Parameters are references to a tag.
 export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
@@ -273,7 +288,7 @@ function updateTrainerInfo(websiteUrl = "") {
     });
 }
 
-export function uploadProfileImg(imgPath) {
+export function uploadProfileImg(imgPath, imgSelector) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Reference to logged in user specific storage
         let storageRef = firebase.storage().ref("images/" + user.uid + ".jpg");
@@ -285,27 +300,25 @@ export function uploadProfileImg(imgPath) {
             userRef.doc(user.uid).update({
                 profilePic: url,
             })
+        }).then(() => {
+            displayUserProfileImg(imgSelector);
+
         });
     })
 }
 
-export function displayUserProfileImg(selector) {
+export function displayUserProfileImg(selector, url) {
     console.log("Called displayUserProfileImg()");
-    firebase.auth().onAuthStateChanged(function (user) {      
-        userRef.doc(user.uid)                                
-            .get()                                           
-            .then(doc => {
-                let picUrl = doc.data().profilePic;  
-                selector.setAttribute("src", picUrl);
-            }).catch(err => {
-                // Server error 503: implement timeout and try re-calling the method
-                setTimeout(function(){ 
-                    displayUserProfileImg(selector); 
-                }, 1000);
-                console.log("Error: " + err)
-            });
+    firebase.auth().onAuthStateChanged(async (user) => {      
+        let ref = await userRef.doc(user.uid).get()
+        let firstN = ref.data().firstName;
+        let lastN = ref.data().lastName;
+        let profileP = ref.data().profilePic; 
+
+        await getEditProfAvatar({user: user.uid, parentNode: selector, firstName: firstN, lastName: lastN, profilePicPath: profileP});
     })
 }
+
 
 // export function displayScheduleInfo(trainerFirstName, trainerLastName, apptTime, apptDate) {
 export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) {
@@ -369,7 +382,7 @@ export function updatePlatformSpecifics(rate, depositMin, freeSession, preBookin
     firebase.auth().onAuthStateChanged(function(user) {
         trainerOnlyRef.doc(user.uid).update({
             hourlyRate: rate.value,
-            deposit: depositMin.value,
+            deposit: Number(depositMin.value),
             firstSessionFree: freeSession.checked,
             bookingMessage: preBookingMsg.value,
         }).then(() => {

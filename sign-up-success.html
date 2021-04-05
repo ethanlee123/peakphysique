@@ -35,12 +35,17 @@
     <!-- Header Navigation Bar -->
     <header-component></header-component>
 
+    <div class="spinner-border text-primary" role="status" id="loader">
+      <span class="sr-only"></span>
+    </div><!--.spinner-border-->
+
     <div class="container main-content d-flex justify-content-center flex-column">
         <h1 class="display-4">Welcome <span id="name" class="text-primary"></span></h1>
-        <h1 class="display-4 ">Are you a client or a trainer?</h1>
-        <div class="d-flex justify-content-around mt-5">
-          <a id="client" class="btn btn-primary btn-lg text-uppercase" role="button" href="sign-up-user-profile.html">client</a>
-          <a id="trainer" class="btn btn-secondary btn-lg text-uppercase" role="button" href="sign-up-profile-setup.html">trainer</a>
+        <h1 class="display-4" id="question">Are you a client or a trainer?</h1>    
+        
+        <div class="d-flex justify-content-around mt-5" id="options">
+            <a id="client" class="btn btn-primary btn-lg text-uppercase" role="button" href="sign-up-user-profile.html">client</a>
+            <a id="trainer" class="btn btn-secondary btn-lg text-uppercase" role="button" href="sign-up-profile-setup.html">trainer</a>
         </div>
     </div>
 
