@@ -88,6 +88,8 @@ export function writeAppointmentSchedule(comments, dropdown, date, trainerID) {
                 trainerUserId: trainerID.userId, //user_id
                 initialMsgFromClient: comments.value, //user input from comments form
                 bookingMsg: trainerID.bookingMessage //pull from trainer collection
+            }).then(() => {
+                window.location.href = "schedule.html";
             });
         })
     });
