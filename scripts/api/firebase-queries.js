@@ -321,7 +321,8 @@ export function uploadProfileImg(imgPath, imgSelector) {
             })
         }).then(() => {
             displayUserProfileImg(imgSelector);
-
+        }).catch(err => {
+            console.log("Error: " + err);
         });
     })
 }
