@@ -188,10 +188,15 @@ export function updateUserRole(userRole) {
         if (userRole == "trainer") {
             userDocRef.update({
                 role: "trainer"
-            })
+            }).then(() => {
+                window.location.href = "sign-up-profile-setup.html";
+            });
+
         } else if (userRole == "client") {
             userDocRef.update({
                 role:"client"
+            }).then(() => {
+                window.location.href = "sign-up-user-profile.html";
             });
         }
     });
@@ -236,7 +241,6 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
                     console.log("error: ", err);
                 });
             }
-
         });
         // Update city field in real time 
         userRef.doc(user.uid)
