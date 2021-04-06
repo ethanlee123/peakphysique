@@ -14,8 +14,8 @@ const location = document.getElementById("location");
 const profilePic = document.getElementsByClassName("profile-pic");
 const favWorkout = document.getElementById("fav-workout-answer");
 const favCheatMeal = document.getElementById("fav-cheatMeal-answer");
-const fitnessGoals = document.getElementById("fav-fitnessGoals-answer");
-const fitnessLevel = document.getElementById("fav-fitnessLevel-answer");
+// const fitnessGoals = document.getElementById("fav-fitnessGoals-answer");
+// const fitnessLevel = document.getElementById("fav-fitnessLevel-answer");
 const website = document.getElementById("fav-website-answer");
 const hourly = document.getElementById("hourlyRate");
 // const availability;
@@ -24,18 +24,25 @@ const wellness = document.getElementById("expertise");
 const certifications = document.getElementById("certifications");
 
 
-
-
-function displayProfileInfo(fullName, location, profilePic, favWorkout, favCheatMeal, fitnessGoals, fitnessLevel, website, hourly, availability, fitnessServices, wellness, certifications) {
+function displayProfileInfo(fullName, location, profilePic, favWorkout, favCheatMeal, website, hourly, fitnessServices, wellness, certifications) {
     // firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
-        db.collection("trainerOnly").doc("alice-burke-4-35").get()
+        db.collection("trainerOnly").doc(trainerID).get()
         .then(trainerDoc => {
             website.innerText = trainerDoc.data().website;
             hourly.innerText = trainerDoc.data().hourlyRate;
             certifications.innerText = trainerDoc.data().certifications;
-            fitnessServices.innerText = trainerDoc.data().fitness;
-            wellness.innerText = trainerDoc.data().wellness;
+            var fitnessArray = trainerDoc.data().fitness;
+            for (let i in fitnessArray) {
+                fitnessArray[i] = " " + fitnessArray[i];
+            }
+            fitnessServices.innerText = fitnessArray;
+            var wellnessArray = trainerDoc.data().wellness;
+            for (let i in wellnessArray) {
+                wellnessArray[i] = " " + wellnessArray[i];
+            }
+            wellness.innerText = wellnessArray;
+            console.log(wellnessArray);
             const imageUrl = trainerDoc.data().profilePic;
             profilePic[0].setAttribute("src", imageUrl);
             // availability.innerText = trainerDoc.data().availability
@@ -45,7 +52,7 @@ function displayProfileInfo(fullName, location, profilePic, favWorkout, favCheat
         });
 
         // Get doc from user collection
-        db.collection("user").doc("1u05U9gAO4YW4E5PivlANqQ69QU2").get()
+        db.collection("user").doc(trainerID).get()
         .then(doc => {
             fullName.innerText = doc.data().name;
             location.innerText = doc.data().city;
@@ -61,7 +68,7 @@ function displayProfileInfo(fullName, location, profilePic, favWorkout, favCheat
         });
     }
 // }
-displayProfileInfo(fullName, location, profilePic, favWorkout, favCheatMeal, fitnessGoals, fitnessLevel, website, hourly, availability, fitnessServices, wellness, certifications);
+displayProfileInfo(fullName, location, profilePic, favWorkout, favCheatMeal, website, hourly, fitnessServices, wellness, certifications);
 // displayTrainerInfo();
 // hideUserSections();
 

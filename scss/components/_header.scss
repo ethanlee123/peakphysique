@@ -330,29 +330,32 @@ header {
             }
         }
         
-        i {
-            cursor: pointer;
-
-            &.fa-user-plus {
-                display: none;
-
-                body.logged-out & {
-                    display: block;
-
-                    @include desktop {
-                        display: none;
-                    }
-                }
-            }
-
-            body.active-nav &::before {
-                display: none;
-            }
-
+        .icon {
             @include desktop {
                 display: none;
             }
+            
+            i {
+                cursor: pointer;
+
+                &.fa-user-plus {
+                    display: none;
+
+                    body.logged-out & {
+                        display: block;
+
+                        @include desktop {
+                            display: none;
+                        }
+                    }
+                }
+
+                body.active-nav &::before {
+                    display: none;
+                }
+            }            
         }
+
 
         .user {
             display: flex;
