@@ -1049,6 +1049,12 @@ footer .coming-soon {
 .initial-trainer-expertise .progress-bar {
   background-color: #1E242E; }
 
+.initial-trainer-expertise #certImg {
+  justify-self: end !important; }
+
+.initial-trainer-expertise #certImgInp {
+  display: none; }
+
 .initial-platform-specific .main-content {
   width: 90%;
   margin: 0 auto;
@@ -1186,10 +1192,17 @@ footer .coming-soon {
 .sign-up-user-info input[type=file] {
   display: none; }
 
-.sign-up-user-info #userProfileImg {
+.sign-up-user-info .avatar-img, .sign-up-user-info .user-avatar {
   width: 170px;
   height: 170px;
   border-radius: 50%; }
+
+.sign-up-user-info .initials {
+  font-size: 24pt; }
+
+.sign-up-user-info #name {
+  font-family: "apex";
+  font-size: 18pt; }
 
 .user-profile .msg-profile {
   margin: 0 auto 50px auto; }

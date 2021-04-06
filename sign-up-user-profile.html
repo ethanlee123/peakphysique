@@ -33,8 +33,13 @@
     <!-- Header Navigation Bar -->
     <header-component></header-component>
 
-    <!-- Main Content of this page -->
-    <div class="container d-flex flex-column justify-content-center top-buffer">
+    <!-- Main Content of this page -->   
+    
+    <div class="spinner-border text-primary" role="status" id="loader">
+        <span class="sr-only"></span>
+    </div><!--.spinner-border-->
+
+    <div id="container" class="container d-flex flex-column justify-content-center top-buffer">
         <div class="row progress h-100 top-buffer" id="progress">
             <h1 class="d-flex justify-content-start progress-bar fs-6  bg-dark" id="title" role="progressbar">
                 Tell us a bit about yourself?
@@ -42,14 +47,18 @@
         </div>
 
         <div class="d-flex justify-content-center align-items-center flex-column bg transparent top-buffer">
-            <label for="profileImgInp">
-                <img id="userProfileImg" src="images\trainer-profile-pic.jpg"></img>
+            <label for="profileImgInp" class="user-avatar">
+                <img class="avatar-img" src="" alt="">
+                <span class="initials"></span>
                 <input type="file" id="profileImgInp" accept="image/*"/>
             </label>
-            <p><span id="name">James John</span></p>
+
+            <p><span id="name">name</span></p>
+            
             <label class="form-label">Radius of Travel <span for="customRange" id="radius"></span> km</label>
             <input type="range" class="form-range" step="1" id="customRange" min="5" max="50" value="25" oninput="radius.innerText = this.value"/>
         </div>
+
 
         <div class="row top-buffer d-flex justify-content-center">
             <ul class="list-group no-padding mb-5" id="list-items">
@@ -83,13 +92,13 @@
                     <label for="floatingTextarea">Favourite Cheat Meal</label>
                 </li>
 
-                <li class="form-floating mb-3">
+                <li class="form-floating mb-5">
                     <input id="fact" class="form-control bg-transparent" placeholder="Leave a comment here"
                         maxlength="30"></input>
                     <label for="floatingTextarea">Random fact about you</label>
                 </li>
 
-                <li class="form-floating">
+                <li class="form-floating" id="websiteListItem">
                     <input id="website" class="form-control bg-transparent" placeholder="Leave a comment here"
                         maxlength="30"></input>
                     <label for="floatingTextarea">Your website URL</label>

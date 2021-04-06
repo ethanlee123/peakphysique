@@ -4,39 +4,24 @@ import { generateUnavailableSlots } from "/scripts/util/generateUnavailableSlots
 // get trainerID from Book Appointment button on profile page
 let trainerID = localStorage.getItem("trainerID");
 trainerID = JSON.parse(trainerID);
-console.log(trainerID.availability);
 console.log(trainerID);
 
 displayBookInfo(trainerID);
 
-// const availabilityTest2 = {
-//   sunday: ["morning"],
-//   monday: ["afternoon"],
-//   tuesday: [],
-//   wednesday: ["morning", "afternoon"],
-//   thursday: [],
-//   friday: ["afternoon", "evening"],
-//   saturday: ["morning", "afternoon", "evening"]
-// };
-
 // get array of unavailable dates
-// let unavailableSlots = generateUnavailableSlots({availability: availabilityTest2});
 let unavailableSlots = generateUnavailableSlots({availability: trainerID.availability});
 
 let badDates = [];
-  for (let i = 0; i < unavailableSlots.length - 2; i++) {
-  // console.log(unavailableDates[i].date);
+
+for (let i = 0; i < unavailableSlots.length - 2; i++) {
   if (unavailableSlots[i].date === unavailableSlots[i + 2].date) {
     badDates[i] = unavailableSlots[i].date;
   }
 }
-let filteredBadDates = badDates.filter(function (el) {
-  return el != null;
+
+let filteredBadDates = badDates.filter(function (element) {
+  return element != null;
 });
-
-// console.log(badDates);
-// console.log(filteredBadDates);
-
 
 $(function() {
   $("#datepicker").datepicker({
@@ -67,8 +52,7 @@ $(function() {
 
       const timeSlots = document.createElement('option');
       timeSlots.setAttribute("selected", "selected");
-      timeSlots.setAttribute("id","time-slot");
-      timeSlots.text = "Time Slot";
+      timeSlots.text = "---------";
 
       const morning = document.createElement('option');
       morning.setAttribute("value", "1");
@@ -90,7 +74,7 @@ $(function() {
         const month = ("0" + (theDate.getMonth() + 1)).slice(-2);
         const day = ("0" + (theDate.getDate())).slice(-2);
         const formatted = month + '/' + day + '/' + year;
-        // console.log(formatted);
+        
         if (formatted == selectedDate){
           if (unavailableSlots[i].time == "morning"){
             morning.parentNode.removeChild(morning);
@@ -106,7 +90,6 @@ $(function() {
     }
   });
 });
-
 
 // initial message from client
 const comments = document.getElementById("comments");
