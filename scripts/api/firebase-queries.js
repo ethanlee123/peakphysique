@@ -525,11 +525,13 @@ export const getCollection = async ({
     });
 }
 
-export const massWriteTrainers = (trainerArr) => {
-    trainerArr.forEach(trainer => {
-        trainerOnlyRef.doc(trainer.userId).set(trainer)
+export const massWriteDocuments = (arr, collectionName) => {
+    const ref = db.collection(collectionName);
+
+    arr.forEach(el => {
+        ref.doc(el.userId).set(el)
         .then(() => {
-            console.log("Successfully added trainers.");
+            console.log("Successfully added documents");
         })
         .catch((e) => {
             console.log(e);

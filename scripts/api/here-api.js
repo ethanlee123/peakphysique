@@ -61,3 +61,19 @@ function blockedLocation(error) {
     }
 }
 
+export const getCity = (latitude, longitude) => {
+    var platform = new H.service.Platform({
+        'apikey': 'apiKey'
+      });
+    var service = platform.getGeocodingService();
+    service.reverseGeocode({
+    mode: "retrieveAddress",
+    maxResults: 1,
+    prox: latitude + "," + longitude,
+    }, success => {
+        console.log(success);
+        return success.Response.View[0]?.Result[0]?.Location?.Address?.City;
+    }, error => {
+        console.log("error: ", error);
+    });
+};
