@@ -1049,6 +1049,12 @@ footer .coming-soon {
 .initial-trainer-expertise .progress-bar {
   background-color: #1E242E; }
 
+.initial-trainer-expertise #certImg {
+  justify-self: end !important; }
+
+.initial-trainer-expertise #certImgInp {
+  display: none; }
+
 .initial-platform-specific .main-content {
   width: 90%;
   margin: 0 auto;

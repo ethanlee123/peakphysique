@@ -30,4 +30,11 @@
     .progress-bar {
         background-color: $dark;
     }
+    #certImg {
+        // display: flex;
+        justify-self: end !important;
+    }
+    #certImgInp {
+        display: none;
+    }
 }

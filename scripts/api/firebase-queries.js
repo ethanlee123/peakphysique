@@ -166,6 +166,7 @@ export function createUser() {
                     fitness: [],
                     wellness: [],
                     certifications: [], // strArr
+                    certificateImages: [],
                     availability: {
                         monday: [], // strArr; morning, afternoon or evening
                         tuesday: [],
@@ -319,7 +320,26 @@ export function uploadProfileImg(imgPath, imgSelector) {
             })
         }).then(() => {
             displayUserProfileImg(imgSelector);
+        }).catch(err => {
+            console.log("Error: " + err);
+        });
+    })
+}
 
+export function uploadCertImg(imgPath) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        // Reference to logged in user specific storage
+        let storageRef = firebase.storage().ref("certificates/" + user.uid + ".jpg");
+        // Upload user selected file to cloud storage
+        storageRef.put(imgPath);
+        // Gets firebase storage url and updates respective field in document of user.uid
+        storageRef.getDownloadURL()
+        .then((url) => {
+            trainerOnlyRef.doc(user.uid).update({
+                certificateImages: firebase.firestore.FieldValue.arrayUnion(url),
+            })
+        }).catch(err => {
+            console.log("Error: " + err);
         });
     })
 }

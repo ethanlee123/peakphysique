@@ -1,24 +1,17 @@
-import { updateExpertise, displayExpertise } from '../../scripts/api/firebase-queries.js';
+import { updateExpertise, displayExpertise, uploadCertImg } from '../../scripts/api/firebase-queries.js';
 
 const certTitle =  document.getElementById("certTitle");
-const certFile = document.getElementById("upload");
-
+const uploadIcon = document.getElementById("upload");
 const years = document.getElementById("years");
-
 // Get NodeList of input tag under fitness specialization
 const fitnessInp = document.querySelectorAll(".fit-btn");
-
 const fitnessLabels = document.querySelectorAll(".fit-labels");
-
 // Get NodeList of input tag under wellness specialization
 const wellnessInp = document.querySelectorAll(".well-btn");
-
 // Get reference to a tag not button
 const saveReturn = document.getElementById("next-btn");
-
 // Trainer selected fitness specializations
 var fitnessList = [];
-
 //Trainer selected wellness specializations
 var wellnessList = [];
 
@@ -64,4 +57,13 @@ wellnessInp.forEach((input) => {
 saveReturn.addEventListener("click", function(e) {
     e.preventDefault();
     updateExpertise(certTitle, years, fitnessList, wellnessList);
+})
+
+uploadIcon.addEventListener("change", function(e) {
+    let file = e.target.files[0];
+    let blob = URL.createObjectURL(file);
+    uploadCertImg(file);
+    console.log("uploading image");
+    console.log("blob " + blob);
+    console.log("file " + file);
 })
