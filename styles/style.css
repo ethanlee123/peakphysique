@@ -81,6 +81,18 @@ select.form-select {
   #firebaseui-auth-container .firebaseui-container .firebaseui-title {
     color: #D4DDD6; }
 
+#firebaseui-auth-container:hover, #firebaseui-auth-container:active, #firebaseui-auth-container:focus {
+  color: #D4DDD6; }
+
+#firebaseui-auth-container input[type=text]:hover {
+  color: #D4DDD6; }
+
+#firebaseui-auth-container input[type=text]:active {
+  color: #D4DDD6; }
+
+#firebaseui-auth-container input[type=text]:focus {
+  color: #D4DDD6; }
+
 .modal {
   color: #1E242E;
   z-index: 9999; }
