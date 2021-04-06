@@ -38,18 +38,20 @@
   <header-component></header-component>
 
   <!-- Main Content of this page -->
-  <div class="container d-grid justify-content-center gx-5 main-content">
+  <div class="container-fluid ">
+    <div class="container d-grid justify-content-center gx-5 main-content">
+      <div class="row">
+        <h1 class="display-4 top-buffer">
+          <span class="text-mint">Train</span> With Peak<span class="text-mint">Physique</span>
+        </h1>
+      </div>
 
-    <div class="row">
-      <h1 class="display-4 top-buffer">
-        <span class="text-mint">Train</span> With Peak<span class="text-mint">Physique</span>
-      </h1>
+      <!-- The surrounding HTML is left untouched by FirebaseUI.
+      Your app may use that space for branding, controls and other customizations.-->
+      <div id="firebaseui-auth-container"></div>
+      <div id="loader">Loading...</div>
     </div>
-
-    <!-- The surrounding HTML is left untouched by FirebaseUI.
-     Your app may use that space for branding, controls and other customizations.-->
-    <div id="firebaseui-auth-container"></div>
-    <div id="loader">Loading...</div>
+  </div>
 
     <footer-component></footer-component>
     <!----------------------------------------------->
