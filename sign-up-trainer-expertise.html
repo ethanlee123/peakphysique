@@ -46,7 +46,10 @@
                 <label class="" for="years">Upload Certification</label>
                 <input id="certTitle" class="form-control bg-transparent w-50 h-75 me-3" placeholder="Title"
                 maxlength="15"/>
-                <i id="upload" class="fas fa-upload"></i>
+                <label for="certImgInp" class="" id="upload">
+                    <i class="fas fa-upload"></i>
+                    <input type="file" id="certImgInp" accept="image/*"/>
+                </label>
             </div>
             <div class="d-flex flex-row justify-content-between mb-3">
                 <label class="" for="years">Years of Experiences</label>
@@ -152,6 +155,9 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+    <!-- Enabled to allow user to upload certificate image to cloud firestore storage -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
+
     <!-- Components -->
     <script type="module" src="scripts/components/header.js"></script>
     <script type="module" src="scripts/components/footer.js"></script>

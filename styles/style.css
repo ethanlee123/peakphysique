@@ -81,6 +81,18 @@ select.form-select {
   #firebaseui-auth-container .firebaseui-container .firebaseui-title {
     color: #D4DDD6; }
 
+#firebaseui-auth-container:hover, #firebaseui-auth-container:active, #firebaseui-auth-container:focus {
+  color: #D4DDD6; }
+
+#firebaseui-auth-container input[type=text]:hover {
+  color: #D4DDD6; }
+
+#firebaseui-auth-container input[type=text]:active {
+  color: #D4DDD6; }
+
+#firebaseui-auth-container input[type=text]:focus {
+  color: #D4DDD6; }
+
 .modal {
   color: #1E242E;
   z-index: 9999; }
@@ -383,20 +395,20 @@ header {
         display: none; }
       body.active-nav header .account .logout {
         display: block; }
-    header .account i {
+    @media (min-width: 1200px) {
+      header .account .icon {
+        display: none; } }
+    header .account .icon i {
       cursor: pointer; }
-      header .account i.fa-user-plus {
+      header .account .icon i.fa-user-plus {
         display: none; }
-        body.logged-out header .account i.fa-user-plus {
+        body.logged-out header .account .icon i.fa-user-plus {
           display: block; }
           @media (min-width: 1200px) {
-            body.logged-out header .account i.fa-user-plus {
+            body.logged-out header .account .icon i.fa-user-plus {
               display: none; } }
-      body.active-nav header .account i::before {
+      body.active-nav header .account .icon i::before {
         display: none; }
-      @media (min-width: 1200px) {
-        header .account i {
-          display: none; } }
     header .account .user {
       display: flex;
       align-items: center;
@@ -1048,6 +1060,12 @@ footer .coming-soon {
 
 .initial-trainer-expertise .progress-bar {
   background-color: #1E242E; }
+
+.initial-trainer-expertise #certImg {
+  justify-self: end !important; }
+
+.initial-trainer-expertise #certImgInp {
+  display: none; }
 
 .initial-platform-specific .main-content {
   width: 90%;

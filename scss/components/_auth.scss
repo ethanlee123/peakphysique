@@ -6,4 +6,20 @@
             color: $light;
         }
     }
+
+    @include hover-state {
+        color: $light;
+    }
+
+    input[type=text]:hover {
+        color: $light;
+    }
+
+    input[type=text]:active {
+        color: $light;
+    }
+
+    input[type=text]:focus {
+        color: $light;
+    }
 }

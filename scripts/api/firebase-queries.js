@@ -73,8 +73,7 @@ export function writeAppointmentSchedule(comments, dropdown, date, trainerID) {
             const lastName = doc.data().lastName;
             const profilePic = doc.data().profilePic;
             scheduleRef.add({
-                // Get this from jquery date picker
-                date: date.value, // Timestamp
+                date: date.value, // from jquery date picker
                 time: dropdown.options[dropdown.selectedIndex].text, // String morning, afternoon, or evening
                 // location: "",
                 completed: false, // boolean default false
@@ -117,7 +116,7 @@ export function personalizedWelcome(selector) {
     });
 }
 
-// creates document id with user uid in both user and trainerOnly collectinos
+// creates document id with user uid in both user and trainerOnly collections
 export function createUser() {
     // Only authenticated users, can be set in firebase console storage "rules" tab
     firebase.auth().onAuthStateChanged(function(user) { 
@@ -167,6 +166,7 @@ export function createUser() {
                     fitness: [],
                     wellness: [],
                     certifications: [], // strArr
+                    certificateImages: [],
                     availability: {
                         monday: [], // strArr; morning, afternoon or evening
                         tuesday: [],
@@ -190,10 +190,15 @@ export function updateUserRole(userRole) {
         if (userRole == "trainer") {
             userDocRef.update({
                 role: "trainer"
-            })
+            }).then(() => {
+                window.location.href = "sign-up-profile-setup.html";
+            });
+
         } else if (userRole == "client") {
             userDocRef.update({
                 role:"client"
+            }).then(() => {
+                window.location.href = "sign-up-user-profile.html";
             });
         }
     });
@@ -216,15 +221,6 @@ export const isFirstTime = () => {
 // Displays trainer profile information. Parameters are references to a tag.
 export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
     firebase.auth().onAuthStateChanged(function(user) {
-        // Get doc from trainerOnly collection
-
-        trainerOnlyRef.doc(user.uid).get()
-        .then(trainerDoc => {
-            websiteUrl.value = trainerDoc.data().website;
-        }).catch(err => {
-            // If doc is undefined, user is not a trainer
-            console.log("error: ", err);
-        });
 
         // Get doc from user collection
         userRef.doc(user.uid).get()
@@ -238,6 +234,15 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
             randFact.value = doc.data().randomFact;
             radiusDisplay.innerText= doc.data().radius;
 
+            if (doc.data().role == "trainer") {
+                trainerOnlyRef.doc(user.uid).get()
+                .then(trainerDoc => {
+                    websiteUrl.value = trainerDoc.data().website;
+                }).catch(err => {
+                    // If doc is undefined, user is not a trainer
+                    console.log("error: ", err);
+                });
+            }
         });
         // Update city field in real time 
         userRef.doc(user.uid)
@@ -245,6 +250,18 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
             userCity.value = doc.data().city;
         })
     });
+}
+
+// Removes selector from html page
+export function displayWebsiteField(selector) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        userRef.doc(user.uid).get()
+            .then(doc => {
+                if (doc.data().role == "trainer") {
+                    selector.style.display = "list-item";
+                }
+            })
+    })
 }
 
 // Updates db when trainer clicks save and return. Parameters are references to a tag.
@@ -266,8 +283,9 @@ export function updateProfileInfo(websiteUrl, phoneNum, bio, workout, cheatMeal,
                 let role = doc.data().role;
                 if (role == "trainer") {
                     updateTrainerInfo(websiteUrl);
+                } else {
+                    window.location.href = "schedule.html";
                 }
-                window.location.href = "schedule.html";
             })
             console.log("updateTrainerInfo called");
         })
@@ -302,7 +320,26 @@ export function uploadProfileImg(imgPath, imgSelector) {
             })
         }).then(() => {
             displayUserProfileImg(imgSelector);
+        }).catch(err => {
+            console.log("Error: " + err);
+        });
+    })
+}
 
+export function uploadCertImg(imgPath) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        // Reference to logged in user specific storage
+        let storageRef = firebase.storage().ref("certificates/" + user.uid + ".jpg");
+        // Upload user selected file to cloud storage
+        storageRef.put(imgPath);
+        // Gets firebase storage url and updates respective field in document of user.uid
+        storageRef.getDownloadURL()
+        .then((url) => {
+            trainerOnlyRef.doc(user.uid).update({
+                certificateImages: firebase.firestore.FieldValue.arrayUnion(url),
+            })
+        }).catch(err => {
+            console.log("Error: " + err);
         });
     })
 }
@@ -538,11 +575,13 @@ export const getCollection = async ({
     });
 }
 
-export const massWriteTrainers = (trainerArr) => {
-    trainerArr.forEach(trainer => {
-        trainerOnlyRef.doc(trainer.userId).set(trainer)
+export const massWriteDocuments = (arr, collectionName) => {
+    const ref = db.collection(collectionName);
+
+    arr.forEach(el => {
+        ref.doc(el.userId).set(el)
         .then(() => {
-            console.log("Successfully added trainers.");
+            console.log("Successfully added documents");
         })
         .catch((e) => {
             console.log(e);
