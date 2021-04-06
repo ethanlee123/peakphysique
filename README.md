@@ -12,7 +12,8 @@ Technologies used for this project:
 * HTML, CSS
 * JavaScript
 * Bootstrap 
-* ...
+* Firebase
+* HERE API
 	
 ## Content
 Content of the project folder:
@@ -37,6 +38,8 @@ Firebase hosting files:
 
 
 ```
+
+## Citations: pictures, libraries, API's etc.
 
 Tips for file naming files and folders:
 * use lowercase with no spaces

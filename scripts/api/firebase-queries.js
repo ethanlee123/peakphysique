@@ -2,11 +2,7 @@ import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
 import { getEditProfAvatar } from "/scripts/util/getUserAvatar.js";
 
 const db = firebase.firestore();
-
-// Reference to user collection, no document specified
 const userRef = db.collection("user");
-
-// Reference to trainerOnly collection, , no document specified
 const trainerOnlyRef = db.collection("trainerOnly");
  
 export function updateLocation(latitude, longitude, cityFromGeo) {
@@ -62,7 +58,7 @@ export function displayTrainerInfo(){
 }
 
 
-// creates a document in schedule collection for the booked appointment
+// Creates a document in schedule collection for the booked appointment
 export function writeAppointmentSchedule(comments, dropdown, date, trainerID) {
     const scheduleRef = db.collection("schedule");
 
@@ -94,8 +90,8 @@ export function writeAppointmentSchedule(comments, dropdown, date, trainerID) {
     });
 }
 
+// Read the first name from db
 export function personalizedWelcome(selector) {
-    // Only authenticated users, can be set in firebase console storage "rules" tab
     firebase.auth().onAuthStateChanged(function(user) {
         const userRefDoc = userRef.doc(user.uid);
         userRefDoc.get()
@@ -116,7 +112,7 @@ export function personalizedWelcome(selector) {
     });
 }
 
-// creates document id with user uid in both user and trainerOnly collections
+// Creates document id with user uid in both user and trainerOnly collections
 export function createUser() {
     // Only authenticated users, can be set in firebase console storage "rules" tab
     firebase.auth().onAuthStateChanged(function(user) { 
@@ -204,6 +200,7 @@ export function updateUserRole(userRole) {
     });
 }
 
+// Checks if user has logged in before based on their role, if so redirect to schedule page
 export const isFirstTime = () => {
     firebase.auth().onAuthStateChanged(user => {
         userRef.doc(user.uid).get()
@@ -221,13 +218,10 @@ export const isFirstTime = () => {
 // Displays trainer profile information. Parameters are references to a tag.
 export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
     firebase.auth().onAuthStateChanged(function(user) {
-
-        // Get doc from user collection
         userRef.doc(user.uid).get()
         .then(doc => {
             fullName.innerText = doc.data().name;
             phoneNum.value = doc.data().phoneNumber;
-            // city.value = doc.data().city;
             bio.value = doc.data().about;
             workout.value = doc.data().favWorkout;
             cheatMeal.value = doc.data().favCheatMeal;
@@ -252,7 +246,7 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
     });
 }
 
-// Removes selector from html page
+// Shows the selector if role is trainer
 export function displayWebsiteField(selector) {
     firebase.auth().onAuthStateChanged(function(user) {
         userRef.doc(user.uid).get()
@@ -267,11 +261,9 @@ export function displayWebsiteField(selector) {
 // Updates db when trainer clicks save and return. Parameters are references to a tag.
 export function updateProfileInfo(websiteUrl, phoneNum, bio, workout, cheatMeal, randFact, radiusTravel) {
     firebase.auth().onAuthStateChanged(function(user) {
-        // Get doc from user collection
         userRef.doc(user.uid).update({
             // No option to update name
             phoneNumber: phoneNum.value,
-            // city: userCity.value,
             about: bio.value,
             favWorkout: workout.value,
             favCheatMeal: cheatMeal.value,
@@ -294,7 +286,6 @@ export function updateProfileInfo(websiteUrl, phoneNum, bio, workout, cheatMeal,
 
 function updateTrainerInfo(websiteUrl = "") {
     firebase.auth().onAuthStateChanged(function(user) {
-        // Get doc from trainerOnly collection
         trainerOnlyRef.doc(user.uid).update({
             website: websiteUrl.value
         }).then(() => {
@@ -360,9 +351,7 @@ export function displayUserProfileImg(selector, url) {
 // export function displayScheduleInfo(trainerFirstName, trainerLastName, apptTime, apptDate) {
 export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) {
     firebase.auth().onAuthStateChanged(function(user) {
-        // Get doc from trainerOnly collection
         trainerOnlyRef.doc(user.uid).update({
-            // For now you can only add one certificate
             certifications: firebase.firestore.FieldValue.arrayUnion(certTitle.value),
             // Convert String to int before updating
             yearsOfExperience: parseInt(yearsExp.value, 10),
@@ -382,7 +371,7 @@ export function displayExpertise(yearsExp, fitnessInp, wellnessInp) {
     firebase.auth().onAuthStateChanged(function(user) {
         var fitnessSpcList = [];
         var wellnessServList = [];
-        // Get doc from trainerOnly collection
+        
         trainerOnlyRef.doc(user.uid).get()
         .then((doc) => {
             // Convert String to int before updating
