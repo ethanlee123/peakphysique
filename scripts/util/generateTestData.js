@@ -5,7 +5,8 @@ import {
     availabilityDays,
     availabilityTimes
 } from "../schema.js";
-import { massWriteTrainers } from "../api/firebase-queries.js";
+import { massWriteDocuments, getCollection } from "../api/firebase-queries.js";
+import { getCity } from "../api/here-api.js";
 
 const genders = [
     "male",
@@ -122,6 +123,64 @@ const lastNames = [
     "Park"
 ];
 
+const about = [
+    "I like helping people!",
+    "",
+    "What does the fox say?",
+    "You're my own personal brand of heroin"
+];
+
+const phoneNumber = [
+    "604 254 8415",
+    "778 9841 5413",
+    ""
+];
+
+const website = [
+    "example.com",
+    ""
+];
+
+const favWorkout = [
+    "Squats",
+    "Push-ups",
+    "Bench Press",
+    "Curls",
+    ""
+];
+
+const favCheatMeal = [
+    "Pizza",
+    "Apple pie",
+    "",
+    "Popeye's",
+    "Fried chicken",
+    "Oreos",
+    "Iced Coffee"
+];
+
+const randomFact = [
+    "My favourite colour is green",
+    "I'm friends with Joe Exotic",
+    "",
+    "I'm taller than 99% of the population"
+];
+
+const fitnessLevel = [
+    "beginner",
+    "intermediate",
+    "expert",
+    "master",
+    "god-like",
+    "fabio"
+];
+
+const fitnessGoals = [
+    "lose weight",
+    "get a six pack",
+    ""
+];
+
 const getRandomRange = (max, min = 0, int = true) => {
     const value = Math.random() * (max - min + 1) + min;
     if (int) {
@@ -208,4 +267,41 @@ const generateTrainers = (numToGenerate) => {
     }
     return trainers;
 }
-// massWriteTrainers(generateTrainers(5));
+
+const getGeneratedTrainers = async () => {
+    let trainers = await getCollection({collectionName: "trainerOnly"});
+    trainers = trainers.filter(trainer =>
+        trainer.userId.includes(trainer.firstName.toLowerCase()) &&
+        trainer.userId.includes(trainer.lastName.toLowerCase()));
+    return trainers;
+}
+
+const generateUsersFromTrainers = (trainers) => {
+    return trainers.map(trainer => {
+        return {
+            userId: trainer.userId,
+            firstName: trainer.firstName,
+            lastName: trainer.lastName,
+            name: trainer.name,
+            fitnessGoals: getRandomValue(fitnessGoals),
+            age: getRandomRange(65, 18),
+            email: `${trainer.firstName}${trainer.lastName}@gmail.com`,
+            phoneNumber: getRandomValue(phoneNumber),
+            gender: trainer.gender,
+            location: trainer.location,
+            city: "Smallville",
+            favCheatMeal: getRandomValue(favCheatMeal),
+            favWorkout: getRandomValue(favWorkout),
+            fitnessLevel: getRandomValue(fitnessLevel),
+            gender: trainer.gender,
+            profilePic: trainer.profilePic,
+            rating: trainer.rating,
+            facebook: getRandomValue(website),
+            instagram: getRandomValue(website),
+            role: "trainer",
+            about: getRandomValue(about),
+            randomFact: getRandomValue(randomFact),
+            radius: null,      
+        }
+    });
+}
