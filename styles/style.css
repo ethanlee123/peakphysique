@@ -395,20 +395,20 @@ header {
         display: none; }
       body.active-nav header .account .logout {
         display: block; }
-    header .account i {
+    @media (min-width: 1200px) {
+      header .account .icon {
+        display: none; } }
+    header .account .icon i {
       cursor: pointer; }
-      header .account i.fa-user-plus {
+      header .account .icon i.fa-user-plus {
         display: none; }
-        body.logged-out header .account i.fa-user-plus {
+        body.logged-out header .account .icon i.fa-user-plus {
           display: block; }
           @media (min-width: 1200px) {
-            body.logged-out header .account i.fa-user-plus {
+            body.logged-out header .account .icon i.fa-user-plus {
               display: none; } }
-      body.active-nav header .account i::before {
+      body.active-nav header .account .icon i::before {
         display: none; }
-      @media (min-width: 1200px) {
-        header .account i {
-          display: none; } }
     header .account .user {
       display: flex;
       align-items: center;
