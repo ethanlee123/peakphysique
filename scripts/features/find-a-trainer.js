@@ -45,8 +45,6 @@ const genderFilter = document.getElementsByName("gender");
 const noResults = document.getElementById("noResults");
 const loader = document.getElementById("loader");
 
-var userLocation;
-
 var trainerListLoader = {
     set isLoading(loading) {
         if (loading) {
@@ -195,7 +193,7 @@ var trainers = {
                 errorText.innerHTML = error;
             });
         if (result) {
-            userLocation = result;
+            localStorage.setItem("userLocation", JSON.stringify(result));
             errorText.innerHTML = "";
             return result;
         }
@@ -268,15 +266,14 @@ var trainers = {
         });
 
         distanceFromUser.noUiSlider.on("start", () => {
-            if (userLocation) {
-                return;
+            if (!getUserLocation()) {
+                distanceFromUser.setAttribute("disabled", true);
+                this.getGeolocation(geolocationErrorText).then(() => {
+                    if (getUserLocation()) {
+                        distanceFromUser.removeAttribute("disabled"); 
+                    }              
+                });
             }
-            distanceFromUser.setAttribute("disabled", true);
-            this.getGeolocation(geolocationErrorText).then(() => {
-                if (userLocation) {
-                    distanceFromUser.removeAttribute("disabled"); 
-                }              
-            });
         });
         
     },
@@ -357,7 +354,6 @@ var filters = {
 
     applyFilters(cardList) {
         let filteredList = cardList;
-
         for (const filter in this._value) {
             if (filter === "name") {
                 filteredList = filteredList.filter(trainer =>  
@@ -387,13 +383,17 @@ var filters = {
                 );
             }
 
-            if (filter === "location" && userLocation) {
+            if (filter === "location" && getUserLocation()) {
                 filteredList = filteredList.filter(trainer => {
+                    if (!trainer[filter] || !trainer[filter].latitude || !trainer[filter].longitude) {
+                        return false;
+                    }
+
                     const trainerCoords = {
                         latitude: trainer[filter].latitude,
                         longitude: trainer[filter].longitude
                     };
-                    return getGeoPointDistance(trainerCoords, userLocation) < this._value[filter];
+                    return getGeoPointDistance(trainerCoords, getUserLocation()) < this._value[filter];
                 });
             }
         }
@@ -592,6 +592,13 @@ const syncFilterToggles = ({fitnessArr, wellnessArr}) => {
     });
 
     activeFilters.forEach(node => node.classList.add("active"));
+}
+
+const getUserLocation = () => {
+    if (localStorage.getItem("userLocation")) {
+        return JSON.parse(localStorage.getItem("userLocation"));
+    }
+    return false;
 }
 
 // ### jQuery - Dropdown Checkbox ###
