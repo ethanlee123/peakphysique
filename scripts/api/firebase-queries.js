@@ -583,6 +583,19 @@ export const massWriteDocuments = (arr, collectionName) => {
     })
 }
 
+export const massUpdateDocuments = (arr, collectionName) => {
+    const ref = db.collection(collectionName);
+
+    arr.forEach(el => {
+        let updatedField = {};
+        updatedField[el.field] = el.value;
+
+        ref.doc(el.id).update(updatedField)
+        .then(() => console.log("Successfully updated document!"))
+        .catch((e) => console.log(e));
+    })
+}
+
 export const getUser = async (uid) => {
     const userDetails = await userRef.doc(uid).get();
     return userDetails.data();

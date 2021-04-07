@@ -5,8 +5,8 @@ import {
     availabilityDays,
     availabilityTimes
 } from "../schema.js";
-import { massWriteDocuments, getCollection } from "../api/firebase-queries.js";
-import { getCity } from "../api/here-api.js";
+import { getCollection, massWriteDocuments, massUpdateDocuments } from "../api/firebase-queries.js";
+import { getLocationFromCoord } from "../api/here-api.js";
 
 const genders = [
     "male",
@@ -181,6 +181,19 @@ const fitnessGoals = [
     ""
 ];
 
+const gpsRange = [
+    {
+        latitude: {
+            min: 31 ,
+            max: 53 
+        },
+        longitude: {
+            min: -124,
+            max: -76 
+        }
+    }
+]
+
 const getRandomRange = (max, min = 0, int = true) => {
     const value = Math.random() * (max - min + 1) + min;
     if (int) {
@@ -240,10 +253,18 @@ const getRandomAvailability = (num) => {
     return availability;
 }
 
+const generateRandomLocation = (gpsRange) => {
+    const locRange = getRandomValue(gpsRange);
+    const lat = getRandomRange(locRange.latitude.min, locRange.latitude.max, false);
+    const lon = getRandomRange(locRange.longitude.min, locRange.latitude.max, false);
+    return {lat, lon};
+}
+
 const generateTrainers = (numToGenerate) => {
     let trainers = [];
     for (let i = 0; i < numToGenerate; i++) {
         const trainer = {...trainerOnly};
+
         trainer.gender = getRandomValue(genders);
         trainer.firstName = getRandomValue(firstNames[trainer.gender]);
         trainer.lastName = getRandomValue(lastNames);
@@ -255,9 +276,8 @@ const generateTrainers = (numToGenerate) => {
         trainer.firstSessionFree = getRandomRange(2) === 0 ? true : false;
         trainer.rating = getRandomRange(4, 1, false);
         
-        const lat = getRandomRange(-90, 90, false);
-        const lon = getRandomRange(-180, 180, false);
-        trainer.location = new firebase.firestore.GeoPoint(lat, lon);
+        const randomLocation = generateRandomLocation(gpsRange);
+        trainer.location = new firebase.firestore.GeoPoint(randomLocation.lat, randomLocation.lon);
 
         trainer.fitness = getRandomExpertise(fitnessOptions, getRandomRange(3));
         trainer.wellness = getRandomExpertise(wellnessOptions, getRandomRange(3));

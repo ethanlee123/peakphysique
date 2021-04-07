@@ -48,18 +48,29 @@ function blockedLocation(error) {
     }
 }
 
-export const getCity = (latitude, longitude) => {
-    var platform = new H.service.Platform({
-        'apikey': 'apiKey'
+const parseAddress = (address) => {
+    let generalLocation = address.city ? address.city : address.county;
+    if (address.countryCode === "CAN" || address.countryCode === "USA") {
+        generalLocation += `, ${address.stateCode}`;
+    } else {
+        generalLocation += `, ${address.countryName}`;
+    }
+    return generalLocation;
+}
+
+export const getLocationFromCoord = (latitude, longitude) => {
+    const platform = new H.service.Platform({
+        'apikey': 'g8D47PVidh-FkjRhJKk1i0EObhMgD9Wvnx1ensLVA7Y'
       });
-    var service = platform.getGeocodingService();
+    const service = platform.getSearchService();
+
     service.reverseGeocode({
-    mode: "retrieveAddress",
-    maxResults: 1,
-    prox: latitude + "," + longitude,
-    }, success => {
-        return success.Response.View[0]?.Result[0]?.Location?.Address?.City;
-    }, error => {
-        console.log("error: ", error);
-    });
+        at: `${latitude},${longitude}`
+    }, result => {
+        if (result.items[0]) {
+            const { address } = result.items[0];
+            return parseAddress(address);
+        }
+        return "";
+    })
 };
