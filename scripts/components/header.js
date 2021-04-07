@@ -2,6 +2,7 @@ import { logOutUser, getLoggedUser } from "../api/firebase-queries.js";
 
 import { getTemplate } from "../util/getTemplate.js";
 import { getUserAvatar } from "../util/getUserAvatar.js";
+import { securityGuard } from "../util/securityGuard.js";
 
 const path = "../../common/header.html";
 var isLoggedIn = {
@@ -10,6 +11,7 @@ var isLoggedIn = {
     set value(loggedIn) {
         this._value = loggedIn;
         this.setBodyClass();
+        
     },
 
     get value() {
@@ -25,10 +27,6 @@ var isLoggedIn = {
                 && document.body.classList.add("logged-out");
         }
     },
-
-    showGreeting() {
-
-    }
 };
 
 class Header extends HTMLElement {
@@ -47,6 +45,7 @@ class Header extends HTMLElement {
                 
                 getLoggedUser();
                 isLoggedIn.value = localStorage.getItem("user") ? true : false;
+                // securityGuard("../../404.html", isLoggedIn.value);
                 if (isLoggedIn.value) {
                     const user = JSON.parse(localStorage.getItem("user"));
                     const avatar = document.querySelectorAll(".user-avatar");
@@ -82,6 +81,7 @@ const handleLogOut = () => {
                 document.body.classList.add("logged-out");
             }
             isLoggedIn.value = false;
+            securityGuard("../../index.html", isLoggedIn.value);
         });
     });
 }
