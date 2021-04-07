@@ -10,6 +10,7 @@ displayBookInfo(trainerID);
 
 // get array of unavailable dates
 let unavailableSlots = generateUnavailableSlots({availability: trainerID.availability});
+console.log(unavailableSlots);
 
 let badDates = [];
 
@@ -18,10 +19,13 @@ for (let i = 0; i < unavailableSlots.length - 2; i++) {
     badDates[i] = unavailableSlots[i].date;
   }
 }
+console.log(badDates);
 
 let filteredBadDates = badDates.filter(function (element) {
   return element != null;
 });
+
+console.log(filteredBadDates);
 
 $(function() {
   $("#datepicker").datepicker({
@@ -50,10 +54,6 @@ $(function() {
         dropdown.removeChild(dropdown.firstChild);
       }
 
-      const timeSlots = document.createElement('option');
-      timeSlots.setAttribute("selected", "selected");
-      timeSlots.text = "---------";
-
       const morning = document.createElement('option');
       morning.setAttribute("value", "1");
       morning.text = "morning";
@@ -66,7 +66,7 @@ $(function() {
       evening.setAttribute("value", "3");
       evening.text = "evening";
 
-      $("#dropdown").append(timeSlots, morning, afternoon, evening);
+      $("#dropdown").append(morning, afternoon, evening);
 
       for (let i = 0; i < unavailableSlots.length; i++) {
         const theDate = new Date(unavailableSlots[i].date);
@@ -86,6 +86,9 @@ $(function() {
             evening.parentNode.removeChild(evening);
           }
         }
+
+        dropdown.firstChild.setAttribute("selected", "");
+        
       }
     }
   });
