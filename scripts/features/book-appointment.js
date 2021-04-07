@@ -1,16 +1,19 @@
 import { displayBookInfo, writeAppointmentSchedule } from "/scripts/api/firebase-queries.js";
 import { generateUnavailableSlots } from "/scripts/util/generateUnavailableSlots.js";
+import { debounce } from "/scripts/util/debounce.js";
 
 // get trainerID from Book Appointment button on profile page
 let trainerID = localStorage.getItem("trainerID");
 trainerID = JSON.parse(trainerID);
-console.log(trainerID);
+
+// console.log(trainerID);
 
 displayBookInfo(trainerID);
 
 // get array of unavailable dates
 let unavailableSlots = generateUnavailableSlots({availability: trainerID.availability});
-console.log(unavailableSlots);
+
+// console.log(unavailableSlots);
 
 let badDates = [];
 
@@ -19,13 +22,14 @@ for (let i = 0; i < unavailableSlots.length - 2; i++) {
     badDates[i] = unavailableSlots[i].date;
   }
 }
-console.log(badDates);
+
+// console.log(badDates);
 
 let filteredBadDates = badDates.filter(function (element) {
   return element != null;
 });
 
-console.log(filteredBadDates);
+// console.log(filteredBadDates);
 
 $(function() {
   $("#datepicker").datepicker({
@@ -101,6 +105,7 @@ const date = document.getElementById("datepicker");
 const confirmBtn = document.getElementById("confirm-btn");
 
 confirmBtn.addEventListener("click", function(event) {
+  confirmBtn.disabled = true;
   event.preventDefault();
   writeAppointmentSchedule(comments, dropdown, date, trainerID);
 });
