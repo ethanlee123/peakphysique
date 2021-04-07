@@ -1,13 +1,4 @@
 import { updateLocation } from "/scripts/api/firebase-queries.js"
-// For reverse geocoding
-
-// Instantiate a map and platform object:
-// var platform = new H.service.Platform({
-//     'apikey': 'lJDUiznQOwtD1zen7iUiTyeARTc79OTuhDsP_DkiECE'
-//   });
-  
-// Get an instance of the search service:
-// var service = platform.getGeocodingService();
 
 // Call the reverse geocode method with the geocoding parameters,
 // the callback and an error callback function (called if a
@@ -32,7 +23,7 @@ export function reverseGeo(latitude, longitude) {
 // Asks user to allow/block locations
 export function getLocation() {
     if (navigator.geolocation) {
-        // First param is "successCallback", second is "blockedCallback"
+        // First param if user allows, second, if user blocks request.
         navigator.geolocation.getCurrentPosition(allowedLocation, blockedLocation);
     } else {
         console.log("Geolocation is not supported by this browser.");
@@ -42,10 +33,6 @@ export function getLocation() {
 // Support: callback function for getLocation()
 function allowedLocation(position) {
     reverseGeo(position.coords.latitude, position.coords.longitude);
-    console.log("latitude: " + position.coords.latitude);
-    console.log("longitude: " + position.coords.longitude);
-
-    // console.log("called reverseGeo(): ", reverseGeo(position.coords.latitude, position.coords.longitude));
 }
 
 // Support: callback function for getLocation()
@@ -71,7 +58,6 @@ export const getCity = (latitude, longitude) => {
     maxResults: 1,
     prox: latitude + "," + longitude,
     }, success => {
-        console.log(success);
         return success.Response.View[0]?.Result[0]?.Location?.Address?.City;
     }, error => {
         console.log("error: ", error);
