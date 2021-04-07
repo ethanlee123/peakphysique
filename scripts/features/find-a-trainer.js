@@ -74,6 +74,7 @@ var trainers = {
     set display(trainers) {
         if (trainers.length === 0) {
             this.showNoResults();
+            this._toDisplay = trainers;
         } else {
             this.hideNoResults();
             this._toDisplay = sort.sortList(trainers, sort.order);
@@ -487,8 +488,9 @@ var page = {
 
     renderResultsFound() {
         if (trainers.display.length === 0) {
-            resultsFound.innerHTML = "";
+            resultsMeta.style.display = "none";
         } else {
+            resultsMeta.style.display = "flex";
             const isFirstPage = Number(this._currentPage) === 0;
             const isLastPage = Number(this._currentPage) === this._totalPages - 1;
             const trainersShown = !isFirstPage && isLastPage ? (trainers.display.length % pageSize !== 0 ? trainers.display.length % pageSize : pageSize ) :
