@@ -1132,6 +1132,21 @@ footer .coming-soon {
     color: #83C3A3; }
   .login-sign-up .firebaseui-info-bar.firebaseui-id-info-bar {
     display: none; }
+  .login-sign-up .main-content h1.main-heading, .login-sign-up .main-content .main-heading.h1 {
+    text-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.85); }
+  .login-sign-up .main-content .background-img {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; }
+  .login-sign-up header .signup {
+    color: #1E242E; }
+  .login-sign-up footer .scroll-to-top {
+    display: none; }
 
 .messages-notifications .top-buffer {
   margin-top: 50px; }
