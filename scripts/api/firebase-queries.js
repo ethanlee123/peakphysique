@@ -1,5 +1,6 @@
 import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
 import { getEditProfAvatar } from "/scripts/util/getUserAvatar.js";
+import { capitalizeWords } from "/scripts/util/capitalizeWords.js";
 
 const db = firebase.firestore();
 const userRef = db.collection("user");
@@ -126,8 +127,8 @@ export function createUser() {
                 userRef.doc(user.uid).set({
                     userId: user.uid,
                     email: user.email,
-                    firstName: names[0],
-                    lastName: names[1],
+                    firstName: capitalizeWords(names[0]),
+                    lastName: capitalizeWords(names[1]),
                     name: user.displayName,
                     fitnessGoals: "",
                     age: null,
@@ -150,8 +151,8 @@ export function createUser() {
                 });
                 trainerOnlyRef.doc(user.uid).set({
                     userId: user.uid,
-                    firstName: names[0],
-                    lastName: names[1],
+                    firstName: capitalizeWords(names[0]),
+                    lastName: capitalizeWords(names[1]),
                     name: user.displayName,
                     website: "",
                     hourlyRate: null,
