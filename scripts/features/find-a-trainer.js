@@ -240,25 +240,26 @@ var trainers = {
         });
 
         noUiSlider.create(distanceFromUser, {
-            start: [60],
-            step: 10,
+            start: 5600,
             range: {
-                "min": 10,
-                "max": 60
+                "min": [10, 10],
+                "30%": [100, 100],
+                "50%": [1000, 1000],
+                "max": 5600
             },
             connect: true,
             tooltips: true,
             format: {
                 to: (value) => {
-                    if (value === 60) {
+                    if (value === 5600) {
                         return "Any";
                     } else {
-                        return `< ${value}km`;
+                        return `< ${Math.round(value)}km`;
                     }
                 },
                 from: (value) => {
                     if (value === "Any") {
-                        return 60;
+                        return 5600;
                     } else {
                         return Number(value.replace("< |km", ""));
                     }

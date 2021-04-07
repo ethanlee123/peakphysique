@@ -569,6 +569,16 @@ export const getCollection = async ({
     });
 }
 
+export const addSingleField = (doc, collectionName) => {
+    const ref = db.collection(collectionName);
+    let fieldToUpdate = {};
+    fieldToUpdate[doc.field] = doc.value;
+
+    ref.doc(doc.id).set(fieldToUpdate, { merge: true })
+    .then(() => console.log("Successfully updated document!"))
+    .catch((e) => console.log(e));
+}
+
 export const massWriteDocuments = (arr, collectionName) => {
     const ref = db.collection(collectionName);
 
@@ -590,10 +600,10 @@ export const massUpdateDocuments = (arr, collectionName) => {
         let updatedField = {};
         updatedField[el.field] = el.value;
 
-        ref.doc(el.id).update(updatedField)
+        ref.doc(el.id).set(updatedField, {merge: true})
         .then(() => console.log("Successfully updated document!"))
         .catch((e) => console.log(e));
-    })
+    });
 }
 
 export const getUser = async (uid) => {

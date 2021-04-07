@@ -5,7 +5,12 @@ import {
     availabilityDays,
     availabilityTimes
 } from "../schema.js";
-import { getCollection, massWriteDocuments, massUpdateDocuments } from "../api/firebase-queries.js";
+import {
+    getCollection,
+    massWriteDocuments,
+    massUpdateDocuments,
+    addSingleField
+} from "../api/firebase-queries.js";
 import { getLocationFromCoord } from "../api/here-api.js";
 
 const genders = [
@@ -256,8 +261,8 @@ const getRandomAvailability = (num) => {
 const generateRandomLocation = (gpsRange) => {
     const locRange = getRandomValue(gpsRange);
     const lat = getRandomRange(locRange.latitude.min, locRange.latitude.max, false);
-    const lon = getRandomRange(locRange.longitude.min, locRange.latitude.max, false);
-    return {lat, lon};
+    const lng = getRandomRange(locRange.longitude.min, locRange.longitude.max, false);
+    return {lat, lng};
 }
 
 const generateTrainers = (numToGenerate) => {
@@ -277,7 +282,7 @@ const generateTrainers = (numToGenerate) => {
         trainer.rating = getRandomRange(4, 1, false);
         
         const randomLocation = generateRandomLocation(gpsRange);
-        trainer.location = new firebase.firestore.GeoPoint(randomLocation.lat, randomLocation.lon);
+        trainer.location = new firebase.firestore.GeoPoint(randomLocation.lat, randomLocation.lng);
 
         trainer.fitness = getRandomExpertise(fitnessOptions, getRandomRange(3));
         trainer.wellness = getRandomExpertise(wellnessOptions, getRandomRange(3));
@@ -323,5 +328,64 @@ const generateUsersFromTrainers = (trainers) => {
             randomFact: getRandomValue(randomFact),
             radius: null,      
         }
+    });
+}
+
+const parseAddress = (addressArr) => {
+    let locality;
+    let province;
+    let country;
+
+    addressArr.forEach(component => {
+        if (component.types.includes("locality")) {
+            locality = component.long_name;
+        }
+        
+        if (component.types.includes("administrative_area_level_2") && !locality) {
+            locality = component.long_name;
+        }
+
+        if (component.types.includes("administrative_area_level_1")) {
+            province = component.short_name;
+        }
+
+        if (component.types.includes("country")) {
+            country = component.long_name;
+        }
+    })
+
+    if (country === "Canada" || country === "United States") {
+        return `${locality}, ${province}`;
+    }
+
+    return `${locality}, ${country}`;
+}
+
+const storeTrainerAddress = (trainerArr, collectionName) => {
+    trainerArr.forEach(trainer => {
+        const randomLocation = generateRandomLocation(gpsRange);
+
+        const updatedLocation = {
+            id: trainer.userId,
+            field: "location",
+            value: new firebase.firestore.GeoPoint(randomLocation.lat, randomLocation.lng)
+        };
+
+        addSingleField(updatedLocation, collectionName);
+
+        const updatedAddress = {
+            id: trainer.userId,
+            field: "address",
+            value: ""
+        }
+
+        geocoder.geocode({location: randomLocation},
+            (res, status) => {
+                if (status === "OK") {
+                    const { address_components } = res[0];
+                    updatedAddress.value = parseAddress(address_components);
+                    addSingleField(updatedAddress, collectionName);
+                }
+            })    
     });
 }
