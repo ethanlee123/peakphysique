@@ -83,7 +83,7 @@ export function writeAppointmentSchedule(comments, dropdown, date, trainerID) {
                 trainerLastName: trainerID.lastName,
                 trainerUserId: trainerID.userId, //user_id
                 initialMsgFromClient: comments.value, //user input from comments form
-                bookingMsg: trainerID.bookingMessage //pull from trainer collection
+                // bookingMsg: trainerID.bookingMessage //pull from trainer collection
             }).then(() => {
                 window.location.href = "schedule.html";
             });
@@ -592,6 +592,13 @@ export const logOutUser = async () => {
     return await firebase.auth().signOut();
 }
 
-export const getImgFromStorage = async (url) => {
-    return await storage.refFromURL(url).getDownloadURL();
+export const getLoggedUser = () => {
+    firebase.auth().onAuthStateChanged(async (user) => {
+        if (user) {
+            const loggedUser = await getUser(user.uid);
+            localStorage.setItem("user", JSON.stringify(loggedUser));
+        } else {
+            localStorage.getItem("user") && localStorage.removeItem("user");
+        }
+    })
 }

@@ -1,15 +1,19 @@
 import { displayBookInfo, writeAppointmentSchedule } from "/scripts/api/firebase-queries.js";
 import { generateUnavailableSlots } from "/scripts/util/generateUnavailableSlots.js";
+import { debounce } from "/scripts/util/debounce.js";
 
 // get trainerID from Book Appointment button on profile page
 let trainerID = localStorage.getItem("trainerID");
 trainerID = JSON.parse(trainerID);
-console.log(trainerID);
+
+// console.log(trainerID);
 
 displayBookInfo(trainerID);
 
 // get array of unavailable dates
 let unavailableSlots = generateUnavailableSlots({availability: trainerID.availability});
+
+// console.log(unavailableSlots);
 
 let badDates = [];
 
@@ -19,9 +23,13 @@ for (let i = 0; i < unavailableSlots.length - 2; i++) {
   }
 }
 
+// console.log(badDates);
+
 let filteredBadDates = badDates.filter(function (element) {
   return element != null;
 });
+
+// console.log(filteredBadDates);
 
 $(function() {
   $("#datepicker").datepicker({
@@ -50,10 +58,6 @@ $(function() {
         dropdown.removeChild(dropdown.firstChild);
       }
 
-      const timeSlots = document.createElement('option');
-      timeSlots.setAttribute("selected", "selected");
-      timeSlots.text = "---------";
-
       const morning = document.createElement('option');
       morning.setAttribute("value", "1");
       morning.text = "morning";
@@ -66,7 +70,7 @@ $(function() {
       evening.setAttribute("value", "3");
       evening.text = "evening";
 
-      $("#dropdown").append(timeSlots, morning, afternoon, evening);
+      $("#dropdown").append(morning, afternoon, evening);
 
       for (let i = 0; i < unavailableSlots.length; i++) {
         const theDate = new Date(unavailableSlots[i].date);
@@ -86,6 +90,9 @@ $(function() {
             evening.parentNode.removeChild(evening);
           }
         }
+
+        dropdown.firstChild.setAttribute("selected", "");
+        
       }
     }
   });
@@ -98,6 +105,7 @@ const date = document.getElementById("datepicker");
 const confirmBtn = document.getElementById("confirm-btn");
 
 confirmBtn.addEventListener("click", function(event) {
+  confirmBtn.disabled = true;
   event.preventDefault();
   writeAppointmentSchedule(comments, dropdown, date, trainerID);
 });

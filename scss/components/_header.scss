@@ -334,7 +334,7 @@ header {
             @include desktop {
                 display: none;
             }
-            
+
             i {
                 cursor: pointer;
 
@@ -389,8 +389,10 @@ header {
 
         .user-avatar {
             margin: 0;
+            padding: 0;
             width: 30px;
             height: 30px;
+            line-height: 1;
 
             body.active-nav & {
                 margin-right: 0.5em;
@@ -406,6 +408,9 @@ header {
                 @include desktop {
                     display: block;                     
                 }
+            }
+
+            img {
             }
         }
 
