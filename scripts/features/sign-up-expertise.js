@@ -1,5 +1,7 @@
 import { updateExpertise, displayExpertise, uploadCertImg } from '../../scripts/api/firebase-queries.js';
 
+// Reference to modal
+const confirmUpload = document.getElementById("staticBackdrop");
 const certTitle =  document.getElementById("certTitle");
 const uploadIcon = document.getElementById("upload");
 const years = document.getElementById("years");
@@ -62,8 +64,5 @@ saveReturn.addEventListener("click", function(e) {
 uploadIcon.addEventListener("change", function(e) {
     let file = e.target.files[0];
     let blob = URL.createObjectURL(file);
-    uploadCertImg(file);
-    console.log("uploading image");
-    console.log("blob " + blob);
-    console.log("file " + file);
+    uploadCertImg(file, confirmUpload);
 })

@@ -318,7 +318,7 @@ export function uploadProfileImg(imgPath, imgSelector) {
     })
 }
 
-export function uploadCertImg(imgPath) {
+export function uploadCertImg(imgPath, selector) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Reference to logged in user specific storage
         let storageRef = firebase.storage().ref("certificates/" + user.uid + ".jpg");
@@ -330,6 +330,10 @@ export function uploadCertImg(imgPath) {
             trainerOnlyRef.doc(user.uid).update({
                 certificateImages: firebase.firestore.FieldValue.arrayUnion(url),
             })
+        }).then(() => {
+            // Shows modal after user uploads certificate
+            var myModal = new bootstrap.Modal(selector);
+            myModal.show();
         }).catch(err => {
             console.log("Error: " + err);
         });
