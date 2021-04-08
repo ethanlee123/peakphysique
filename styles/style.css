@@ -805,7 +805,7 @@ footer .coming-soon {
         color: #83C3A3; }
       .find-a-trainer .trainer-list .card .card-header {
         display: grid;
-        grid-template-columns: 50px 1fr;
+        grid-template-columns: 50px 1fr 100px;
         gap: 0 1em;
         font-family: "Roboto", sans-serif;
         background-color: #0a0c0f; }
@@ -816,8 +816,20 @@ footer .coming-soon {
         .find-a-trainer .trainer-list .card .card-header .trainer-name {
           margin: 0;
           line-height: 1; }
-        .find-a-trainer .trainer-list .card .card-header .rating {
+        .find-a-trainer .trainer-list .card .card-header .location {
+          grid-column: 2;
+          grid-row: 2;
           font-size: 0.75em; }
+          .find-a-trainer .trainer-list .card .card-header .location i {
+            margin-right: 0.25em; }
+        .find-a-trainer .trainer-list .card .card-header .rating {
+          display: flex;
+          grid-column: 3;
+          grid-row: span 2;
+          align-self: center;
+          justify-self: end; }
+          .find-a-trainer .trainer-list .card .card-header .rating i {
+            margin-right: 0.5em; }
       .find-a-trainer .trainer-list .card .card-body {
         padding: 1em 2em; }
         .find-a-trainer .trainer-list .card .card-body a {

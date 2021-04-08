@@ -259,7 +259,7 @@
 
             .card-header {
                 display: grid;
-                grid-template-columns: $avatar-size 1fr;
+                grid-template-columns: $avatar-size 1fr #{$avatar-size * 2};
                 gap: 0 1em;
                 font-family: $type-body;
                 background-color: $darkest;
@@ -277,8 +277,26 @@
                     line-height: 1;
                 }
 
-                .rating {
+                .location {
+                    grid-column: 2;
+                    grid-row: 2;
                     font-size: 0.75em;
+
+                    i {
+                        margin-right: 0.25em;
+                    }
+                }
+
+                .rating {
+                    display: flex;
+                    grid-column: 3;
+                    grid-row: span 2;
+                    align-self: center;
+                    justify-self: end;
+
+                    i {
+                        margin-right: 0.5em;
+                    }
                 }
             }
 
