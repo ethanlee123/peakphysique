@@ -29,7 +29,7 @@ export const getEditProfAvatar = ({
     const profilePic = parentNode.querySelector(profilePicSelector);
     const userInitials = parentNode.querySelector(userInitialsSelector);
     if (profilePicPath) {
-        userInitials.remove();
+        userInitials.style.display = "none";
         profilePic.setAttribute("src", profilePicPath);
         profilePic.setAttribute("alt", `${user?.name} avatar`);
         console.log("getEditProfAvatar");
