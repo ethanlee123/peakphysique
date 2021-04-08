@@ -186,6 +186,17 @@ select.form-select {
     color: #83C3A3;
     text-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.85); }
 
+.text-toggle {
+  background: none;
+  margin: 0;
+  padding: 0;
+  color: rgba(212, 221, 214, 0.5);
+  box-shadow: none;
+  border: none; }
+  .text-toggle:hover, .text-toggle:active, .text-toggle:focus {
+    background: none;
+    color: #D4DDD6; }
+
 body {
   display: flex;
   flex-direction: column;

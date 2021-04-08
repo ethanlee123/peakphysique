@@ -1,0 +1,13 @@
+.text-toggle {
+    background: none;
+    margin: 0;
+    padding: 0;
+    color: rgba($light, 0.5);
+    box-shadow: none;
+    border: none;
+
+    @include hover-state {
+        background: none;
+        color: $light;
+    }
+}

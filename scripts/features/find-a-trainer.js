@@ -4,7 +4,7 @@ import { fitnessOptions, wellnessOptions, availabilityDays } from "../schema.js"
 
 import { debounce } from "../util/debounce.js";
 import { getTemplate } from "../util/getTemplate.js";
-import { insertText, getExpertiseText, getAvailabilityText } from "../util/getTrainerText.js";
+import { insertText, getExpertiseHTML, getAvailabilityText } from "../util/getTrainerText.js";
 import { getUserAvatar } from "../util/getUserAvatar.js";
 import { getGeoPointDistance } from "../util/getGeoPointDistance.js";
 import { capitalizeWords } from "../util/capitalizeWords.js";
@@ -122,22 +122,46 @@ var trainers = {
         return arr.slice(startIndex, endIndex);
     },
 
+    renderExpertise(arr, parentNode) {
+        const selector = ".expertise .text";
+        const expertise = parentNode.querySelector(selector);
+        expertise.innerHTML = getExpertiseHTML(arr);
+        if (arr.length > 2) {
+            expertise.addEventListener("click", () => {
+                expertise.classList.toggle("collapsed");
+
+                if (expertise.classList.contains("collapsed")) {
+                    expertise.innerHTML = getExpertiseHTML(arr);
+                } else {
+                    let toDisplay = capitalizeWords(arr.join(", "));
+                    toDisplay += "<button class='text-toggle'>Show Less</button>"
+                    expertise.innerHTML = toDisplay;
+                }
+            })            
+        }
+    },
+
     renderTrainerCards (trainers) {
         trainerList.innerHTML = "";
     
         trainers.forEach(trainer => {
     
             const trainerCard = document.importNode(trainerCardTemplate.content, true);
-            const expertiseArr = trainer.fitness.concat(trainer.wellness);
+            
     
             insertText(trainerCard, ".trainer-name", capitalizeWords(trainer.name));
             insertText(trainerCard, ".location", trainer.address ? trainer.address : "Not Listed")
-            insertText(trainerCard, ".rating", trainer.rating ? trainer.rating?.toFixed(1) : "N/A");
+            insertText(trainerCard, ".rating", trainer.rating ? trainer.rating.toFixed(1) : "N/A");
             insertText(trainerCard, ".rate .text", trainer.hourlyRate ? `${trainer.hourlyRate} / hr` : "Not Listed");
-            insertText(trainerCard, ".expertise .text", getExpertiseText(expertiseArr));
+            // insertText(trainerCard, ".expertise .text", getExpertiseText(expertiseArr));
             insertText(trainerCard, ".availability .text", getAvailabilityText(trainer.availability));
             getUserAvatar({user: trainer, parentNode: trainerCard});
-    
+
+            const expertiseArr = trainer.fitness.concat(trainer.wellness);
+            this.renderExpertise(expertiseArr, trainerCard);
+
+            
+
             if (trainer.firstSessionFree) {
                 const badge = document.createElement("span");
                 badge.classList.add("badge", "free-trial");

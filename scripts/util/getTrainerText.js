@@ -53,20 +53,20 @@ const getAvailabilityText = (availability) => {
     return `Available ${text}`;
 }
 
-const getExpertiseText = (expertiseArr) => {
+const getExpertiseHTML = (expertiseArr) => {
     let text = "";
 
     if (expertiseArr.length === 0) {
         text = "No expertise listed.";
     } else {
-        for (let i = 0; i <= 1 && i < expertiseArr.length; i++) {
+        for (let i = 0; i < 2 && i < expertiseArr.length; i++) {
             text += i === 0 ? capitalizeWords(expertiseArr[i]) : `, ${capitalizeWords(expertiseArr[i])}`;
         }
 
-        text += expertiseArr.length > 3 ? ` and ${expertiseArr.length} more.` : "";
+        text += expertiseArr.length > 2 ? ` <button class="text-toggle">and ${expertiseArr.length - 2} more.</button>` : "";
     }
 
     return text;
 }
 
-export { insertText, getAvailabilityText, getExpertiseText };
+export { insertText, getAvailabilityText, getExpertiseHTML };
