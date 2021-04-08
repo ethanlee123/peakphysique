@@ -29,12 +29,14 @@ const loader = document.getElementById("loader");
 const trainerList = document.getElementById("trainerList");
 const profilePage = document.querySelector(".main-content");
 
+// used to capitalize reads from Firestore
 const capitalizeWords = (str) => {
     return str.replace(/\w\S*/g, text => {
         return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
     });
 }
 
+// generates user profile pic, if no profile pic is found, sets to initials.
 const getUserAvatar = ({
     user,
     parentNode,
@@ -59,7 +61,6 @@ const getUserAvatar = ({
 
 
 function displayProfileInfo(fullName, profileImg, location, availability, favWorkout, favCheatMeal, website, hourly, fitnessServices, wellness, certifications) {
-    // firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
         db.collection("trainerOnly").doc(trainerID).get()
         .then(async trainerDoc => {
@@ -112,11 +113,8 @@ function displayProfileInfo(fullName, profileImg, location, availability, favWor
             // userCity.value = doc.date().city;
         });
     }
-// }
-// displayProfileInfo(fullName, profileImg, location, availability, favWorkout, favCheatMeal, website, hourly, fitnessServices, wellness, certifications);
+// function is called under initialRender()
 
-
-// displayTrainerInfo();
 // hideUserSections();
 
 // gets user post and posts to "Updates" section
@@ -157,6 +155,7 @@ var profileLoader = {
     }
 };
 
+// waits for firestore response before loading page
 const initialRender = () => {
     profileLoader.isLoading = true;    
     

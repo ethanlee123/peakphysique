@@ -27,56 +27,59 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="./styles/style.css">
-  <!-- <link rel="stylesheet" href="./styles/trainer-profile.css"> -->
+
 </head>
 
 <body class="schedule" id="#body">
 
-    <!-------------------------------------->
-    <!-- The following is HTML for layout -->
-    <!-------------------------------------->
-    <template id="schedule-card">
+  <!-------------------------------------->
+  <!-- The following is HTML for layout -->
+  <!-------------------------------------->
+  <template id="schedule-card">
     <div class="card mb-3">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <a href="./user-profile.html"> <!-- Trainer Profile Link -->
-              <img class="schedule-profile-pic trainerProfile" src="/images/trainer-profile-pic.jpg" alt="trainer profile pic">
-            </a> <!-- Trainer Profile Pic -->
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <a href="./user-profile.html"> <!-- Trainer Profile Link -->
-                <h5 class="card-title trainerProfile">
-                  <span id="trainerFirstName" class="trainerFirstName"></span> <!-- Trainer Name -->
-                  <span id="trainerLastName" class="trainerLastName"></span>
-                </h5>
+      <div class="row g-0">
+        <div class="col-md-4">
+          <!-- <a href="./user-profile.html"> -->
+            <!-- Trainer Profile Link -->
+            <img class="schedule-profile-pic trainerProfile" src="/images/trainer-profile-pic.jpg"
+              alt="trainer profile pic">
+          <!-- </a> Trainer Profile Pic                                                             take out profile pic link -->                                                       
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <a href="./user-profile.html">
+              <!-- Trainer Profile Link -->
+              <h5 class="card-title trainerProfile">
+                <span id="trainerFirstName" class="trainerFirstName"></span> <!-- Trainer Name -->
+                <span id="trainerLastName" class="trainerLastName"></span>
+              </h5>
+            </a>
+            <h5 class="card-title" id="appt-date"></h5> <!-- Date -->
+            <h6 class id="appt-time"></h6> <!-- Time -->
+            <p class="card-text" id="bookingMsg"></p> <!-- Booking Msg -->
+            <div class="d-flex justify-content-between align-items-center">
+              <a href="../404.html" class="btn btn-primary hideScheduleBtn">Add to Calendar</a> <!-- Calendar Button -->
+              <a href="#" class="card-text cancel">
+                <small class="text-muted hideScheduleBtn cancelBtn">Cancel</small> <!-- Cancel Button -->
               </a>
-              <h5 class="card-title" id="appt-date"></h5> <!-- Date -->
-              <h6 class id="appt-time"></h6>  <!-- Time -->
-              <p class="card-text" id="bookingMsg"></p> <!-- Booking Msg -->
-              <div class="d-flex justify-content-between align-items-center">
-                <a href="../404.html" class="btn btn-primary hideScheduleBtn">Add to Calendar</a> <!-- Calendar Button -->
-                <a href="#" class="card-text cancel">
-                  <small class="text-muted hideScheduleBtn cancelBtn">Cancel</small>   <!-- Cancel Button -->
-                </a>
-              </div>
             </div>
           </div>
         </div>
-        <!--.row.g-0-->
       </div>
-      <!--.card.mb-3-->
-    </template>
-      <!----------------------------------------------->
+      <!--.row.g-0-->
+    </div>
+    <!--.card.mb-3-->
+  </template>
+  <!----------------------------------------------->
   <!-- JS: Boostrap, Firebase, API related    -->
   <!----------------------------------------------->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-</script>
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+  </script>
 
-<!--------------------------------------------------------------------->
-<!-- JS files: Your own JavaScript functions included here    --------->
-<!--------------------------------------------------------------------->
+  <!--------------------------------------------------------------------->
+  <!-- JS files: Your own JavaScript functions included here    --------->
+  <!--------------------------------------------------------------------->
 </body>
 
 </html>
