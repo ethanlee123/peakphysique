@@ -46,6 +46,7 @@ export const trainerOnly = {
     lastName: "",
     name: "",
     location: null,
+    address: "",
     profilePic: "",
     gender: null,
     website: "",
