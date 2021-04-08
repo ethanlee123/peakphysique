@@ -1219,51 +1219,51 @@ footer .coming-soon {
     display: none; }
 
 /* style sheet for initial setup of trainer unique profile */
-.sign-up-user-info .top-buffer {
+.sign-up-user-info .main-content .top-buffer {
   margin-top: 50px; }
 
-.sign-up-user-info .container {
+.sign-up-user-info .main-content .container {
   width: 90%;
   margin: 0 auto;
   margin-top: 50px; }
 
-.sign-up-user-info #progress {
+.sign-up-user-info .main-content #progress {
   background-color: black;
   border-radius: 0px; }
 
-.sign-up-user-info .no-padding {
+.sign-up-user-info .main-content .no-padding {
   padding: 0; }
 
-.sign-up-user-info textarea {
+.sign-up-user-info .main-content textarea {
   word-break: normal !important; }
 
-.sign-up-user-info h1, .sign-up-user-info .h1 {
+.sign-up-user-info .main-content h1, .sign-up-user-info .main-content .h1 {
   padding-top: 5px;
   padding-bottom: 5px;
   margin: 0; }
 
-.sign-up-user-info ul {
+.sign-up-user-info .main-content ul {
   list-style: none; }
 
-.sign-up-user-info path {
+.sign-up-user-info .main-content path {
   fill: #83C3A3; }
 
-.sign-up-user-info #profileImagePlaceHolder {
+.sign-up-user-info .main-content #profileImagePlaceHolder {
   font-size: 84pt;
   margin: 0; }
 
-.sign-up-user-info input[type=file] {
+.sign-up-user-info .main-content input[type=file] {
   display: none; }
 
-.sign-up-user-info .avatar-img, .sign-up-user-info .user-avatar {
+.sign-up-user-info .main-content .avatar-img, .sign-up-user-info .main-content .user-avatar {
   width: 170px;
   height: 170px;
   border-radius: 50%; }
 
-.sign-up-user-info .initials {
+.sign-up-user-info .main-content .initials {
   font-size: 24pt; }
 
-.sign-up-user-info #name {
+.sign-up-user-info .main-content #name {
   font-family: "apex";
   font-size: 18pt; }
 
