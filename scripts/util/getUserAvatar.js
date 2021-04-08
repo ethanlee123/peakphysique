@@ -35,6 +35,6 @@ export const getEditProfAvatar = ({
         console.log("getEditProfAvatar");
     } else {
         const initials = `${firstName.substring(0, 1)} ${lastName.substring(0, 1)}`;
-        userInitials.appendChild(document.createTextNode(initials));
+        userInitials.innerText = initials;
     }
 }
