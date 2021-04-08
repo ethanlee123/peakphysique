@@ -45,8 +45,6 @@ const genderFilter = document.getElementsByName("gender");
 const noResults = document.getElementById("noResults");
 const loader = document.getElementById("loader");
 
-var userLocation;
-
 var trainerListLoader = {
     set isLoading(loading) {
         if (loading) {
@@ -76,6 +74,7 @@ var trainers = {
     set display(trainers) {
         if (trainers.length === 0) {
             this.showNoResults();
+            this._toDisplay = trainers;
         } else {
             this.hideNoResults();
             this._toDisplay = sort.sortList(trainers, sort.order);
@@ -195,7 +194,7 @@ var trainers = {
                 errorText.innerHTML = error;
             });
         if (result) {
-            userLocation = result;
+            localStorage.setItem("userLocation", JSON.stringify(result));
             errorText.innerHTML = "";
             return result;
         }
@@ -241,25 +240,26 @@ var trainers = {
         });
 
         noUiSlider.create(distanceFromUser, {
-            start: [60],
-            step: 10,
+            start: 5600,
             range: {
-                "min": 10,
-                "max": 60
+                "min": [10, 10],
+                "30%": [100, 100],
+                "50%": [1000, 1000],
+                "max": 5600
             },
             connect: true,
             tooltips: true,
             format: {
                 to: (value) => {
-                    if (value === 60) {
+                    if (value === 5600) {
                         return "Any";
                     } else {
-                        return `< ${value}km`;
+                        return `< ${Math.round(value)}km`;
                     }
                 },
                 from: (value) => {
                     if (value === "Any") {
-                        return 60;
+                        return 5600;
                     } else {
                         return Number(value.replace("< |km", ""));
                     }
@@ -268,15 +268,14 @@ var trainers = {
         });
 
         distanceFromUser.noUiSlider.on("start", () => {
-            if (userLocation) {
-                return;
+            if (!getUserLocation()) {
+                distanceFromUser.setAttribute("disabled", true);
+                this.getGeolocation(geolocationErrorText).then(() => {
+                    if (getUserLocation()) {
+                        distanceFromUser.removeAttribute("disabled"); 
+                    }              
+                });
             }
-            distanceFromUser.setAttribute("disabled", true);
-            this.getGeolocation(geolocationErrorText).then(() => {
-                if (userLocation) {
-                    distanceFromUser.removeAttribute("disabled"); 
-                }              
-            });
         });
         
     },
@@ -357,7 +356,6 @@ var filters = {
 
     applyFilters(cardList) {
         let filteredList = cardList;
-
         for (const filter in this._value) {
             if (filter === "name") {
                 filteredList = filteredList.filter(trainer =>  
@@ -387,13 +385,17 @@ var filters = {
                 );
             }
 
-            if (filter === "location" && userLocation) {
+            if (filter === "location" && getUserLocation()) {
                 filteredList = filteredList.filter(trainer => {
+                    if (!trainer[filter] || !trainer[filter].latitude || !trainer[filter].longitude) {
+                        return false;
+                    }
+
                     const trainerCoords = {
                         latitude: trainer[filter].latitude,
                         longitude: trainer[filter].longitude
                     };
-                    return getGeoPointDistance(trainerCoords, userLocation) < this._value[filter];
+                    return getGeoPointDistance(trainerCoords, getUserLocation()) < this._value[filter];
                 });
             }
         }
@@ -487,8 +489,9 @@ var page = {
 
     renderResultsFound() {
         if (trainers.display.length === 0) {
-            resultsFound.innerHTML = "";
+            resultsMeta.style.display = "none";
         } else {
+            resultsMeta.style.display = "flex";
             const isFirstPage = Number(this._currentPage) === 0;
             const isLastPage = Number(this._currentPage) === this._totalPages - 1;
             const trainersShown = !isFirstPage && isLastPage ? (trainers.display.length % pageSize !== 0 ? trainers.display.length % pageSize : pageSize ) :
@@ -592,6 +595,13 @@ const syncFilterToggles = ({fitnessArr, wellnessArr}) => {
     });
 
     activeFilters.forEach(node => node.classList.add("active"));
+}
+
+const getUserLocation = () => {
+    if (localStorage.getItem("userLocation")) {
+        return JSON.parse(localStorage.getItem("userLocation"));
+    }
+    return false;
 }
 
 // ### jQuery - Dropdown Checkbox ###

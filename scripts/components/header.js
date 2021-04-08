@@ -1,7 +1,8 @@
-import { logOutUser, getImgFromStorage } from "../api/firebase-queries.js";
+import { logOutUser, getLoggedUser } from "../api/firebase-queries.js";
 
 import { getTemplate } from "../util/getTemplate.js";
 import { getUserAvatar } from "../util/getUserAvatar.js";
+import { securityGuard } from "../util/securityGuard.js";
 
 const path = "../../common/header.html";
 var isLoggedIn = {
@@ -10,6 +11,7 @@ var isLoggedIn = {
     set value(loggedIn) {
         this._value = loggedIn;
         this.setBodyClass();
+        
     },
 
     get value() {
@@ -24,7 +26,7 @@ var isLoggedIn = {
             !document.body.classList.contains("logged-out")
                 && document.body.classList.add("logged-out");
         }
-    }
+    },
 };
 
 class Header extends HTMLElement {
@@ -38,27 +40,18 @@ class Header extends HTMLElement {
                 const node = document.importNode(response.content, true);
                 document.body.prepend(node);
                 handleBurgerMenu();
-                showCurrentPage();
-
-                let user = localStorage.getItem("user");
-                if (user) {
-                    user = JSON.parse(user);
-                    let profilePic;
-                    if (user.profilePic) {
-                        const profilePic = await getImgFromStorage(user.profilePic);
-                    }
-
-                    editGreeting(user.firstName);
-                    const userAvatar = document.querySelectorAll(".user-avatar");
-                    userAvatar.forEach(node => getUserAvatar({
-                        user: user,
-                        parentNode: node,
-                        imgURL: profilePic && profilePic
-                    }));
-                    
-                    isLoggedIn.value = true;
-                }
                 handleLogOut();
+                showCurrentPage();
+                
+                getLoggedUser();
+                isLoggedIn.value = localStorage.getItem("user") ? true : false;
+                // securityGuard("../../404.html", isLoggedIn.value);
+                if (isLoggedIn.value) {
+                    const user = JSON.parse(localStorage.getItem("user"));
+                    const avatar = document.querySelectorAll(".user-avatar");
+                    avatar.forEach(avatar => getUserAvatar({user: user, parentNode: avatar}));
+                    editGreeting(user.firstName);
+                }
             });
 
     }
@@ -87,8 +80,8 @@ const handleLogOut = () => {
             if (!document.body.classList.contains("logged-out")) {
                 document.body.classList.add("logged-out");
             }
-            localStorage.removeItem("user");
             isLoggedIn.value = false;
+            securityGuard("../../index.html", isLoggedIn.value);
         });
     });
 }

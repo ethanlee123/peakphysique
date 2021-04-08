@@ -42,6 +42,10 @@ const getAvailabilityText = (availability) => {
         availableDays = availableDays.filter(day => !days[text.toLowerCase()].includes(day));
     }
 
+    let sortOrder = ["Weekdays", "Weekends"];
+    sortOrder = sortOrder.concat(days.weekdays, days.weekends);
+    availableDays = availableDays.sort((a, b) => sortOrder.indexOf(a) - sortOrder.indexOf(b));
+
     for (let i = 0; i < availableDays.length; i++) {
         text += i === 0 && !text ? availableDays[i] : `, ${availableDays[i]}`;
     }

@@ -40,4 +40,33 @@
     .firebaseui-info-bar.firebaseui-id-info-bar {
         display: none;
     }
+
+    .main-content {
+        h1.main-heading {
+            @include text-shadow;
+        }
+
+        .background-img {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+    }
+
+    header {
+        .signup {
+            color: $dark;
+        }
+    }
+
+    footer {
+        .scroll-to-top {
+            display: none;
+        }
+    }
 }

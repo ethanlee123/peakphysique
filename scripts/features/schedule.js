@@ -20,6 +20,7 @@ const scheduleCardPath = "../../common/schedule-card.html";
 const scheduleCardTemplate = await getTemplate(scheduleCardPath);
 const scheduleList = document.getElementById("scheduleList");
 const scheduleCompletedList = document.getElementById("scheduleCompletedList");
+const scheduleTabBtns = document.querySelectorAll(".schedule-tabs button");
 const db = firebase.firestore();
 const scheduleCollection = await db.collection("schedule").get();
 var user = firebase.auth().currentUser;
@@ -47,8 +48,113 @@ const renderScheduleCards = () => {
             }
         });
 }
-renderScheduleCards();
+// renderScheduleCards();
 
+
+// ###########################################
+// ## NEW
+// ###########################################
+var schedule = {
+    _value: [],
+    _tab: "upcoming",
+
+    get value() {
+        return this._value;
+    },
+
+    get tab() {
+        return this._tab;
+    },
+
+    set value(schedule) {
+        this._value = schedule;
+        this.renderScheduleCards(this._tab === "upcoming" ? scheduleList : scheduleCompletedList);
+    },
+
+    set tab(tab) {
+        this._tab = tab;
+        getSchedule(getUserRole(), tab === "upcoming" ? false : true);
+    },
+
+    renderScheduleCards(parentNode) {
+        const oppositeRole = getUserRole() === "client" ? "trainer" : "client";
+
+        parentNode.innerHTML = "";
+        this._value.forEach(schedule => {
+            const { data } = schedule;
+            const scheduleCard = document.importNode(scheduleCardTemplate.content, true);
+        
+            insertText(scheduleCard, ".trainerFirstName", data[`${oppositeRole}FirstName`]);
+            insertText(scheduleCard, ".trainerLastName", data[`${oppositeRole}LastName`]);
+            insertText(scheduleCard, "#appt-date", data.date);
+            insertText(scheduleCard, "#appt-time", data.time);
+            insertText(scheduleCard, "#bookingMsg", data.bookingMsg);
+    
+            // cancel button sets appointment to completed
+            const cancelAppt = scheduleCard.querySelector(".cancelBtn");
+            cancelAppt.addEventListener("click", () => {
+                cancelAppointment(schedule.id);
+            });
+            this._tab === "completed" && cancelAppt.remove();
+    
+            const viewProfile = scheduleCard.querySelector(".trainerProfile");
+            viewProfile.addEventListener("click", () => {
+                localStorage.setItem("trainerProfileToDisplay", JSON.stringify(trainer));
+                window.location.href = "../../user-profile.html";
+            });
+    
+            parentNode.appendChild(scheduleCard);
+        })
+    }
+};
+
+const getUserRole = () => {
+    const user = localStorage.getItem("user") && JSON.parse(localStorage.getItem("user"));
+
+    if (user) {
+        return user.role;
+    }
+}
+
+const getSchedule = (role, completed = false) => {
+    const userFilter = role === "trainer" ? "trainerUserId" : "clientUserId";
+
+    let query = 
+        db.collection("schedule")
+        .where("completed", "==", completed)
+        .where(userFilter, "==", user.uid)
+        .orderBy("date", "asc");
+    
+    query.onSnapshot(res => {
+        let updatedSchedule = [];
+        res.forEach(doc => {
+            updatedSchedule.push({
+                id: doc.id,
+                data: doc.data()
+            });
+        });
+        schedule.value = updatedSchedule;
+    });
+}
+
+const cancelAppointment = (id) => {
+    db.collection("schedule").doc(id).delete()
+    .then(() => {
+        console.log("Successfully cancelled appointment!");
+    })
+    .catch((e) => {
+        console.log(e);
+    });
+}
+
+scheduleTabBtns.forEach(btn =>
+    btn.addEventListener("click", () => {
+        schedule.tab = btn.dataset.tab;
+    })
+)
+
+getSchedule(getUserRole, schedule.tab === "upcoming" ? false : true);
+// ###########################################
 
 // creates upcoming schedule cards for a trainer
 const renderScheduleCardsTrainer = () => {
@@ -214,13 +320,3 @@ const renderCompletedScheduleCardsClient = () => {
             }
         })    
 }  
-
-const cancelBtn = document.getElementsByClassName("cancelBtn");
-const trainerName = document.getELements
-
-// cancelBtn.addEventListener("click", function(e) {
-    
-
-// }
-// displayScheduleInfo();
-

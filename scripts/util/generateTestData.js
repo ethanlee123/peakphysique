@@ -5,8 +5,13 @@ import {
     availabilityDays,
     availabilityTimes
 } from "../schema.js";
-import { massWriteDocuments, getCollection } from "../api/firebase-queries.js";
-import { getCity } from "../api/here-api.js";
+import {
+    getCollection,
+    massWriteDocuments,
+    massUpdateDocuments,
+    addSingleField
+} from "../api/firebase-queries.js";
+import { getLocationFromCoord } from "../api/here-api.js";
 
 const genders = [
     "male",
@@ -181,6 +186,19 @@ const fitnessGoals = [
     ""
 ];
 
+const gpsRange = [
+    {
+        latitude: {
+            min: 31 ,
+            max: 53 
+        },
+        longitude: {
+            min: -124,
+            max: -76 
+        }
+    }
+]
+
 const getRandomRange = (max, min = 0, int = true) => {
     const value = Math.random() * (max - min + 1) + min;
     if (int) {
@@ -240,10 +258,18 @@ const getRandomAvailability = (num) => {
     return availability;
 }
 
+const generateRandomLocation = (gpsRange) => {
+    const locRange = getRandomValue(gpsRange);
+    const lat = getRandomRange(locRange.latitude.min, locRange.latitude.max, false);
+    const lng = getRandomRange(locRange.longitude.min, locRange.longitude.max, false);
+    return {lat, lng};
+}
+
 const generateTrainers = (numToGenerate) => {
     let trainers = [];
     for (let i = 0; i < numToGenerate; i++) {
         const trainer = {...trainerOnly};
+
         trainer.gender = getRandomValue(genders);
         trainer.firstName = getRandomValue(firstNames[trainer.gender]);
         trainer.lastName = getRandomValue(lastNames);
@@ -255,9 +281,8 @@ const generateTrainers = (numToGenerate) => {
         trainer.firstSessionFree = getRandomRange(2) === 0 ? true : false;
         trainer.rating = getRandomRange(4, 1, false);
         
-        const lat = getRandomRange(-90, 90, false);
-        const lon = getRandomRange(-180, 180, false);
-        trainer.location = new firebase.firestore.GeoPoint(lat, lon);
+        const randomLocation = generateRandomLocation(gpsRange);
+        trainer.location = new firebase.firestore.GeoPoint(randomLocation.lat, randomLocation.lng);
 
         trainer.fitness = getRandomExpertise(fitnessOptions, getRandomRange(3));
         trainer.wellness = getRandomExpertise(wellnessOptions, getRandomRange(3));
@@ -303,5 +328,64 @@ const generateUsersFromTrainers = (trainers) => {
             randomFact: getRandomValue(randomFact),
             radius: null,      
         }
+    });
+}
+
+const parseAddress = (addressArr) => {
+    let locality;
+    let province;
+    let country;
+
+    addressArr.forEach(component => {
+        if (component.types.includes("locality")) {
+            locality = component.long_name;
+        }
+        
+        if (component.types.includes("administrative_area_level_2") && !locality) {
+            locality = component.long_name;
+        }
+
+        if (component.types.includes("administrative_area_level_1")) {
+            province = component.short_name;
+        }
+
+        if (component.types.includes("country")) {
+            country = component.long_name;
+        }
+    })
+
+    if (country === "Canada" || country === "United States") {
+        return `${locality}, ${province}`;
+    }
+
+    return `${locality}, ${country}`;
+}
+
+const storeTrainerAddress = (trainerArr, collectionName) => {
+    trainerArr.forEach(trainer => {
+        const randomLocation = generateRandomLocation(gpsRange);
+
+        const updatedLocation = {
+            id: trainer.userId,
+            field: "location",
+            value: new firebase.firestore.GeoPoint(randomLocation.lat, randomLocation.lng)
+        };
+
+        addSingleField(updatedLocation, collectionName);
+
+        const updatedAddress = {
+            id: trainer.userId,
+            field: "address",
+            value: ""
+        }
+
+        geocoder.geocode({location: randomLocation},
+            (res, status) => {
+                if (status === "OK") {
+                    const { address_components } = res[0];
+                    updatedAddress.value = parseAddress(address_components);
+                    addSingleField(updatedAddress, collectionName);
+                }
+            })    
     });
 }

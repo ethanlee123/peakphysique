@@ -45,12 +45,28 @@
             <div class="d-flex flex-row justify-content-between mb-3">
                 <label class="" for="years">Upload Certification</label>
                 <input id="certTitle" class="form-control bg-transparent w-50 h-75 me-3" placeholder="Title"
-                maxlength="15"/>
+                    maxlength="15" />
                 <label for="certImgInp" class="" id="upload">
                     <i class="fas fa-upload"></i>
-                    <input type="file" id="certImgInp" accept="image/*"/>
+                    <input type="file" id="certImgInp" accept="image/*" />
                 </label>
             </div>
+
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Certificate Uploaded</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Your certificate has been uploaded! Give 2 business days for the reflection to show on your account.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="d-flex flex-row justify-content-between mb-3">
                 <label class="" for="years">Years of Experiences</label>
                 <input type="number" id="years" name="quantity" min="0" max="30" value="0">
@@ -64,37 +80,37 @@
                 </a>
 
                 <div class="collapse" id="collapseFitness">
-                    <input type="checkbox" class="btn-check fit-btn" id="btncheck1" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check fit-btn" id="btncheck1" autocomplete="off" />
                     <label class="btn btn-outline-primary" for="btncheck1">Body Building</label>
 
-                    <input type="checkbox" class="btn-check fit-btn" id="btncheck2" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check fit-btn" id="btncheck2" autocomplete="off" />
                     <label class="btn btn-outline-primary fit-label" for="btncheck2">Power Lifting</label>
 
-                    <input type="checkbox" class="btn-check fit-btn" id="btncheck3" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check fit-btn" id="btncheck3" autocomplete="off" />
                     <label class="btn btn-outline-primary fit-label" for="btncheck3">Cross Fit</label>
 
-                    <input type="checkbox" class="btn-check fit-btn" id="btncheck4" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check fit-btn" id="btncheck4" autocomplete="off" />
                     <label class="btn btn-outline-primary fit-label" for="btncheck4">Yoga</label>
 
-                    <input type="checkbox" class="btn-check fit-btn" id="btncheck5" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check fit-btn" id="btncheck5" autocomplete="off" />
                     <label class="btn btn-outline-primary fit-label" for="btncheck5">Pilates</label>
 
-                    <input type="checkbox" class="btn-check fit-btn" id="btncheck6" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check fit-btn" id="btncheck6" autocomplete="off" />
                     <label class="btn btn-outline-primary fit-label" for="btncheck6">Cycling</label>
 
-                    <input type="checkbox" class="btn-check fit-btn" id="btncheck7" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check fit-btn" id="btncheck7" autocomplete="off" />
                     <label class="btn btn-outline-primary fit-label" for="btncheck7">Boxing / Kickboxing</label>
 
-                    <input type="checkbox" class="btn-check fit-btn" id="btncheck8" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check fit-btn" id="btncheck8" autocomplete="off" />
                     <label class="btn btn-outline-primary fit-label" for="btncheck8">Climbing</label>
 
-                    <input type="checkbox" class="btn-check fit-btn" id="btncheck9" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check fit-btn" id="btncheck9" autocomplete="off" />
                     <label class="btn btn-outline-primary fit-label" for="btncheck9">Tai Chi</label>
 
                     <input type="checkbox" class="btn-check fit-btn" id="btncheck10" autocomplete="off">
                     <label class="btn btn-outline-primary fit-label" for="btncheck10">Outdoor</label>
 
-                    <input type="checkbox" class="btn-check fit-btn" id="btncheck11" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check fit-btn" id="btncheck11" autocomplete="off" />
                     <label class="btn btn-outline-primary fit-label" for="btncheck11">Dance</label>
 
                     <input type="checkbox" class="btn-check fit-btn" id="btncheck12" autocomplete="off">
@@ -111,25 +127,25 @@
                     <i class="fas fa-chevron-down"></i>
                 </a>
                 <div class="collapse" id="collapseWellness">
-                    <input type="checkbox" class="btn-check well-btn" id="btncheck13" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check well-btn" id="btncheck13" autocomplete="off" />
                     <label class="btn btn-outline-primary well-label" for="btncheck13">Nutrition</label>
 
-                    <input type="checkbox" class="btn-check" id="btncheck14" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check" id="btncheck14" autocomplete="off" />
                     <label class="btn btn-outline-primary well-label" for="btncheck14">Macro Coaching</label>
 
-                    <input type="checkbox" class="btn-check well-btn" id="btncheck15" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check well-btn" id="btncheck15" autocomplete="off" />
                     <label class="btn btn-outline-primary well-label" for="btncheck15">Physical Therapy</label>
 
-                    <input type="checkbox" class="btn-check well-btn" id="btncheck16" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check well-btn" id="btncheck16" autocomplete="off" />
                     <label class="btn btn-outline-primary well-label" for="btncheck16">Chiropractor</label>
 
-                    <input type="checkbox" class="btn-check well-btn" id="btncheck17" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check well-btn" id="btncheck17" autocomplete="off" />
                     <label class="btn btn-outline-primary well-label" for="btncheck17">Body Treatments</label>
 
-                    <input type="checkbox" class="btn-check well-btn" id="btncheck18" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check well-btn" id="btncheck18" autocomplete="off" />
                     <label class="btn btn-outline-primary well-label" for="btncheck18">Weight Loss</label>
 
-                    <input type="checkbox" class="btn-check well-btn" id="btncheck19" autocomplete="off"/>
+                    <input type="checkbox" class="btn-check well-btn" id="btncheck19" autocomplete="off" />
                     <label class="btn btn-outline-primary well-label" for="btncheck19">Custom Workout Regimen</label>
                 </div>
             </div>

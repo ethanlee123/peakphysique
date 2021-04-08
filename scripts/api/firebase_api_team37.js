@@ -1,5 +1,3 @@
-import { getUser } from "./firebase-queries.js";
-
 const firebaseConfig = {
   apiKey: "AIzaSyAjZGN7j00ud_vfpIlt-enOlSAqpjNhWBI",
   authDomain: "peak-physique-a0c48.firebaseapp.com",
