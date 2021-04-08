@@ -1,5 +1,6 @@
 import { displayAboutMe } from "../api/firebase-queries.js";
 import { displayTrainerInfo, hideUserSections } from "/scripts/api/firebase-queries.js";
+import { getAvailabilityText } from "/scripts/util/getTrainerText.js";
 
 // localStorage to grab trainerId
 let trainerToDisplay = localStorage.getItem("trainerProfileToDisplay");
@@ -18,35 +19,79 @@ const favCheatMeal = document.getElementById("fav-cheatMeal-answer");
 // const fitnessLevel = document.getElementById("fav-fitnessLevel-answer");
 const website = document.getElementById("fav-website-answer");
 const hourly = document.getElementById("hourlyRate");
-// const availability;
+const availability = document.getElementById("availability");
 const fitnessServices = document.getElementById("services");
 const wellness = document.getElementById("expertise");
 const certifications = document.getElementById("certifications");
+const profileImg = document.querySelector(".trainer-profile-pic");
+
+const loader = document.getElementById("loader");
+const trainerList = document.getElementById("trainerList");
+const profilePage = document.querySelector(".main-content");
+
+const capitalizeWords = (str) => {
+    return str.replace(/\w\S*/g, text => {
+        return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
+    });
+}
+
+const getUserAvatar = ({
+    user,
+    parentNode,
+    profilePicSelector = ".trainer-profile-pic img",
+    userInitialsSelector = ".initials",
+    firstName,
+    lastName,
+    profilePicPath,
+}) => {
+    const profilePic = parentNode.querySelector(profilePicSelector);
+    const userInitials = parentNode.querySelector(userInitialsSelector);
+    if (profilePicPath) {
+        userInitials.remove();
+        profilePic.setAttribute("src", profilePicPath);
+        profilePic.setAttribute("alt", `${user?.name} avatar`);
+    } else {
+        profilePic.remove();
+        const initials = `${firstName.substring(0, 1)} ${lastName.substring(0, 1)}`;
+        userInitials.appendChild(document.createTextNode(initials));
+    }
+}
 
 
-function displayProfileInfo(fullName, location, profilePic, favWorkout, favCheatMeal, website, hourly, fitnessServices, wellness, certifications) {
+function displayProfileInfo(fullName, profileImg, location, availability, favWorkout, favCheatMeal, website, hourly, fitnessServices, wellness, certifications) {
     // firebase.auth().onAuthStateChanged(function(user) {
         // Get doc from trainerOnly collection
         db.collection("trainerOnly").doc(trainerID).get()
-        .then(trainerDoc => {
+        .then(async trainerDoc => {
             website.innerText = trainerDoc.data().website;
             hourly.innerText = trainerDoc.data().hourlyRate;
-            certifications.innerText = trainerDoc.data().certifications;
+            availability.innerHTML = getAvailabilityText(trainerDoc.data().availability);
+            var certificationsArray = trainerDoc.data().certifications;
+            for (let i in certificationsArray) {
+                certificationsArray[i] = " " + capitalizeWords(certificationsArray[i]);
+            }
+            certifications.innerText = certificationsArray;
+
             var fitnessArray = trainerDoc.data().fitness;
             for (let i in fitnessArray) {
-                fitnessArray[i] = " " + fitnessArray[i];
+                fitnessArray[i] = " " + capitalizeWords(fitnessArray[i]);
             }
             fitnessServices.innerText = fitnessArray;
+
             var wellnessArray = trainerDoc.data().wellness;
             for (let i in wellnessArray) {
-                wellnessArray[i] = " " + wellnessArray[i];
+                wellnessArray[i] = " " + capitalizeWords(wellnessArray[i]);
             }
             wellness.innerText = wellnessArray;
-            console.log(wellnessArray);
-            const imageUrl = trainerDoc.data().profilePic;
-            profilePic[0].setAttribute("src", imageUrl);
-            // availability.innerText = trainerDoc.data().availability
-        }).catch(err => {
+
+            let lastN = trainerDoc.data().lastName;
+            let firstN = trainerDoc.data().firstName;
+            let profileP = trainerDoc.data().profilePic;
+
+            await getUserAvatar({user: trainerID, parentNode: profileImg, profilePicSelector: ".trainer-profile-pic img", firstName: firstN,
+            lastName: lastN, profilePicPath: profileP});
+        })
+        .catch(err => {
             // If doc is undefined, user is not a trainer
             console.log("error: ", err);
         });
@@ -68,7 +113,9 @@ function displayProfileInfo(fullName, location, profilePic, favWorkout, favCheat
         });
     }
 // }
-displayProfileInfo(fullName, location, profilePic, favWorkout, favCheatMeal, website, hourly, fitnessServices, wellness, certifications);
+// displayProfileInfo(fullName, profileImg, location, availability, favWorkout, favCheatMeal, website, hourly, fitnessServices, wellness, certifications);
+
+
 // displayTrainerInfo();
 // hideUserSections();
 
@@ -97,6 +144,29 @@ function trainerProfilePosts() {
     }
 trainerProfilePosts();
 
+
+var profileLoader = {
+    set isLoading(loading) {
+        if (loading) {
+            loader.style.display = "block";
+            profilePage.style.display = "none";
+        } else {
+            loader.style.display = "none";
+            profilePage.style.display = "block";
+        }
+    }
+};
+
+const initialRender = () => {
+    profileLoader.isLoading = true;    
+    
+    displayProfileInfo(fullName, profileImg, location, availability, favWorkout, favCheatMeal, website, hourly, fitnessServices, wellness, certifications);
+    
+    setTimeout(function() {
+        profileLoader.isLoading = false;
+    }, 1000)
+}
+initialRender();
 
 // displayAboutMe();
 

@@ -43,6 +43,10 @@
   <!-------------------------------------->
   <!-- Header Navigation Bar -->
   <header-component></header-component>
+  
+  <div class="spinner-border text-primary" role="status" id="loader">
+    <span class="sr-only">Loading...</span>
+  </div><!--.spinner-border-->
 
   <div class="main-content">
 
@@ -57,6 +61,8 @@
 
     <div class="trainer-profile-pic d-flex justify-content-center gy-4">
       <img src="images/trainer-profile-pic.jpg" alt="profile-pic" class="profile-pic" width="200px" height="auto" />
+      <span class="initials" style="border-radius: 50%; color: #83C3A3;
+      font-family: apex; font-size: 48pt"></span>
     </div>
 
     <div class="trainer-name d-flex justify-content-center gy-4">
@@ -65,7 +71,7 @@
       </a>
       <!--.msg-icon-->
       <!--link to messages-notifications.html???-->
-      <h2><span id="fullName">First Last</span></h2>
+      <h2><span id="fullName"></span></h2>
     </div>
     <!--.trainer-name-->
 
@@ -101,23 +107,23 @@
               <div class="row justify-content-between about-me">
                 <ul class="about-me-row" id="fav-workout">
                   <li class="about-me-title" id="fav-workout-title">Favourite Workout</li>
-                  <li class="about-me-answer" id="fav-workout-answer">Deadlifts</li>
+                  <li class="about-me-answer" id="fav-workout-answer"></li>
                 </ul>
                 <ul class="about-me-row" id="fav-cheatMeal">
                   <li class="about-me-title" id="fav-cheatMeal-title">Favourite Cheat Meal</li>
-                  <li class="about-me-answer" id="fav-cheatMeal-answer">French Fries</li>
+                  <li class="about-me-answer" id="fav-cheatMeal-answer"></li>
                 </ul>
                 <ul class="about-me-row" id="fav-fitnessGoals">
                   <li class="about-me-title" id="fav-fitnessGoals-title">Top Fitness Goal</li>
-                  <li class="about-me-answer" id="fav-fitnessGoals-answer">Run a 5-min mile</li>
+                  <li class="about-me-answer" id="fav-fitnessGoals-answer"></li>
                 </ul>
                 <ul class="about-me-row" id="fav-fitnessLevel">
                   <li class="about-me-title" id="fav-fitnessLevel-title">Fitness Level</li>
-                  <li class="about-me-answer" id="fav-fitnessLevel-answer">Beginner</li>
+                  <li class="about-me-answer" id="fav-fitnessLevel-answer"></li>
                 </ul>
                 <ul class="about-me-row" id="fav-website">
                   <li class="about-me-title" id="fav-website-title">Website</li>
-                  <li class="about-me-answer" id="fav-website-answer">trainermike.com</li>
+                  <li class="about-me-answer" id="fav-website-answer"></li>
                 </ul>
               </div>
             </div>
@@ -162,7 +168,7 @@
       <div class="card-body">
 
         <p class="card-text"><i class="fas fa-dollar-sign"></i><span id="hourlyRate"></span> / hr</p>
-        <p class="card-text" id="availability"><i class="fas fa-clock"></i>Available within the next 7 days.</p>
+        <p class="card-text"><i class="fas fa-clock"></i>Availability: <span id="availability"></span></p>
       </div>
     </div>
 
@@ -171,9 +177,9 @@
         <h5>my qualifications</h5>
       </div>
       <div class="card-body">
-        <p class="card-text"><i class="fas fa-dumbbell"></i><span id="services">Group Coaching, All-in-one Coaching</span></p>
+        <p class="card-text"><i class="fas fa-dumbbell"></i><span id="services"></span></p>
         <p class="card-text"><i class="fas fa-running"></i><span id="expertise"></span></p>
-        <p class="card-text"><i class="fas fa-user-check"></i><span id="certifications">First Aid, ACE</span></p>
+        <p class="card-text"><i class="fas fa-user-check"></i><span id="certifications"></span></p>
       </div>
     </div>
   </div>
