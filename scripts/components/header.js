@@ -60,8 +60,9 @@ class Header extends HTMLElement {
 customElements.define("header-component", Header);
 
 const editGreeting = (name) => {
-    const greeting = document.getElementById("headerGreeting");
-    greeting.appendChild(document.createTextNode(`Hello, ${name}!`));
+    const greetings = document.querySelectorAll(".greeting");
+    console.log(greetings);
+    greetings.forEach(greet => greet.appendChild(document.createTextNode(`Hello, ${name}!`)));
 }
 
 const handleBurgerMenu = () => {
