@@ -28,7 +28,6 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="./styles/style.css">
-    <link rel="stylesheet" href="./styles/book-appointment.css">
     
 
 </head>
@@ -41,7 +40,11 @@
   <!-- Header Navigation Bar -->
   <header-component></header-component>
 
-  <div class="main-content">
+  <div class="spinner-border text-primary" role="status" id="loader">
+    <span class="sr-only">Loading...</span>
+  </div><!--.spinner-border-->
+
+  <div class="book-appointment-body main-content" id="main">
       <div class="container">
         <h1 class="display-4"><span class="title-font">Book an <span class="title-font-color">appointment</span></span>
         </h1>

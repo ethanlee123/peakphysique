@@ -968,6 +968,14 @@ footer .coming-soon {
       height: auto;
       object-fit: contain; }
 
+.book-appointment-body .title-font {
+  font-weight: bolder;
+  font-family: apex;
+  font-size: 3rem; }
+
+.book-appointment-body .title-font-color {
+  color: #83C3A3; }
+
 .initial-trainer-setup .top-buffer {
   margin-top: 50px; }
 

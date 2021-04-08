@@ -8,7 +8,7 @@ trainerID = JSON.parse(trainerID);
 
 // console.log(trainerID);
 
-displayBookInfo(trainerID);
+
 
 // get array of unavailable dates
 let unavailableSlots = generateUnavailableSlots({availability: trainerID.availability});
@@ -109,3 +109,30 @@ confirmBtn.addEventListener("click", function(event) {
   event.preventDefault();
   writeAppointmentSchedule(comments, dropdown, date, trainerID);
 });
+
+const main = document.getElementById("main");
+const loader = document.getElementById("loader");
+
+var bookLoader = {
+  set isLoading(loading) {
+      if (loading) {
+          loader.style.display = "block";
+          main.style.display = "none";
+      } else {
+          loader.style.display = "none";
+          main.style.display = "block";
+      }
+  }
+};
+
+const initialRender = async () => {
+  bookLoader.isLoading = true;
+
+  displayBookInfo(trainerID);
+
+  setTimeout(function() {
+    bookLoader.isLoading = false;
+  }, 1000)
+}
+
+initialRender();
