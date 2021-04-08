@@ -48,7 +48,7 @@ class Header extends HTMLElement {
                 // securityGuard("../../404.html", isLoggedIn.value);
                 if (isLoggedIn.value) {
                     const user = JSON.parse(localStorage.getItem("user"));
-                    const avatar = document.querySelectorAll(".user-avatar");
+                    const avatar = document.querySelectorAll("header .user-avatar");
                     avatar.forEach(avatar => getUserAvatar({user: user, parentNode: avatar}));
                     editGreeting(user.firstName);
                 }
@@ -60,8 +60,9 @@ class Header extends HTMLElement {
 customElements.define("header-component", Header);
 
 const editGreeting = (name) => {
-    const greeting = document.getElementById("headerGreeting");
-    greeting.appendChild(document.createTextNode(`Hello, ${name}!`));
+    const greetings = document.querySelectorAll(".greeting");
+    console.log(greetings);
+    greetings.forEach(greet => greet.appendChild(document.createTextNode(`Hello, ${name}!`)));
 }
 
 const handleBurgerMenu = () => {

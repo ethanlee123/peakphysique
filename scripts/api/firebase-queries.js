@@ -310,6 +310,7 @@ export function uploadProfileImg(imgPath, imgSelector) {
             userRef.doc(user.uid).update({
                 profilePic: url,
             })
+            console.log("successfully update profilePic field");
         }).then(() => {
             displayUserProfileImg(imgSelector);
         }).catch(err => {
@@ -343,15 +344,14 @@ export function uploadCertImg(imgPath, selector) {
 export function displayUserProfileImg(selector, url) {
     console.log("Called displayUserProfileImg()");
     firebase.auth().onAuthStateChanged(async (user) => {      
-        let ref = await userRef.doc(user.uid).get()
-        let firstN = ref.data().firstName;
-        let lastN = ref.data().lastName;
+        let ref = await userRef.doc(user.uid).get();
+        let first = await ref.data().firstName;
+        let last = await ref.data().lastName;
         let profileP = ref.data().profilePic; 
 
-        await getEditProfAvatar({user: user.uid, parentNode: selector, firstName: firstN, lastName: lastN, profilePicPath: profileP});
+        getEditProfAvatar({firstName: first, lastName: last, parentNode: selector, profilePicPath: profileP});
     })
 }
-
 
 // export function displayScheduleInfo(trainerFirstName, trainerLastName, apptTime, apptDate) {
 export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) {

@@ -186,6 +186,17 @@ select.form-select {
     color: #83C3A3;
     text-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.85); }
 
+.text-toggle {
+  background: none;
+  margin: 0;
+  padding: 0;
+  color: rgba(212, 221, 214, 0.5);
+  box-shadow: none;
+  border: none; }
+  .text-toggle:hover, .text-toggle:active, .text-toggle:focus {
+    background: none;
+    color: #D4DDD6; }
+
 body {
   display: flex;
   flex-direction: column;
@@ -805,7 +816,7 @@ footer .coming-soon {
         color: #83C3A3; }
       .find-a-trainer .trainer-list .card .card-header {
         display: grid;
-        grid-template-columns: 50px 1fr;
+        grid-template-columns: 50px 1fr 100px;
         gap: 0 1em;
         font-family: "Roboto", sans-serif;
         background-color: #0a0c0f; }
@@ -816,8 +827,20 @@ footer .coming-soon {
         .find-a-trainer .trainer-list .card .card-header .trainer-name {
           margin: 0;
           line-height: 1; }
-        .find-a-trainer .trainer-list .card .card-header .rating {
+        .find-a-trainer .trainer-list .card .card-header .location {
+          grid-column: 2;
+          grid-row: 2;
           font-size: 0.75em; }
+          .find-a-trainer .trainer-list .card .card-header .location i {
+            margin-right: 0.25em; }
+        .find-a-trainer .trainer-list .card .card-header .rating {
+          display: flex;
+          grid-column: 3;
+          grid-row: span 2;
+          align-self: center;
+          justify-self: end; }
+          .find-a-trainer .trainer-list .card .card-header .rating i {
+            margin-right: 0.5em; }
       .find-a-trainer .trainer-list .card .card-body {
         padding: 1em 2em; }
         .find-a-trainer .trainer-list .card .card-body a {
@@ -944,6 +967,14 @@ footer .coming-soon {
       max-width: 300px;
       height: auto;
       object-fit: contain; }
+
+.book-appointment-body .title-font {
+  font-weight: bolder;
+  font-family: apex;
+  font-size: 3rem; }
+
+.book-appointment-body .title-font-color {
+  color: #83C3A3; }
 
 .initial-trainer-setup .top-buffer {
   margin-top: 50px; }
@@ -1188,51 +1219,51 @@ footer .coming-soon {
     display: none; }
 
 /* style sheet for initial setup of trainer unique profile */
-.sign-up-user-info .top-buffer {
+.sign-up-user-info .main-content .top-buffer {
   margin-top: 50px; }
 
-.sign-up-user-info .container {
+.sign-up-user-info .main-content .container {
   width: 90%;
   margin: 0 auto;
   margin-top: 50px; }
 
-.sign-up-user-info #progress {
+.sign-up-user-info .main-content #progress {
   background-color: black;
   border-radius: 0px; }
 
-.sign-up-user-info .no-padding {
+.sign-up-user-info .main-content .no-padding {
   padding: 0; }
 
-.sign-up-user-info textarea {
+.sign-up-user-info .main-content textarea {
   word-break: normal !important; }
 
-.sign-up-user-info h1, .sign-up-user-info .h1 {
+.sign-up-user-info .main-content h1, .sign-up-user-info .main-content .h1 {
   padding-top: 5px;
   padding-bottom: 5px;
   margin: 0; }
 
-.sign-up-user-info ul {
+.sign-up-user-info .main-content ul {
   list-style: none; }
 
-.sign-up-user-info path {
+.sign-up-user-info .main-content path {
   fill: #83C3A3; }
 
-.sign-up-user-info #profileImagePlaceHolder {
+.sign-up-user-info .main-content #profileImagePlaceHolder {
   font-size: 84pt;
   margin: 0; }
 
-.sign-up-user-info input[type=file] {
+.sign-up-user-info .main-content input[type=file] {
   display: none; }
 
-.sign-up-user-info .avatar-img, .sign-up-user-info .user-avatar {
+.sign-up-user-info .main-content .avatar-img, .sign-up-user-info .main-content .user-avatar {
   width: 170px;
   height: 170px;
   border-radius: 50%; }
 
-.sign-up-user-info .initials {
+.sign-up-user-info .main-content .initials {
   font-size: 24pt; }
 
-.sign-up-user-info #name {
+.sign-up-user-info .main-content #name {
   font-family: "apex";
   font-size: 18pt; }
 
@@ -1304,6 +1335,12 @@ footer .coming-soon {
 
 .user-profile .card-background-color {
   background-color: #232629; }
+
+.user-profile .initials {
+  border-radius: 50%;
+  color: #83C3A3;
+  font-family: apex;
+  font-size: 48pt; }
 
 .schedule .schedule-profile-pic {
   width: 100%; }
