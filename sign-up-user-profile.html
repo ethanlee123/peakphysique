@@ -33,11 +33,12 @@
     <!-- Header Navigation Bar -->
     <header-component></header-component>
 
-    <!-- Main Content of this page -->   
-    
+    <!-- Main Content of this page -->
+
     <div class="spinner-border text-primary" role="status" id="loader">
         <span class="sr-only"></span>
-    </div><!--.spinner-border-->
+    </div>
+    <!--.spinner-border-->
 
     <div id="container" class="container d-flex flex-column justify-content-center top-buffer main-content">
         <div class="row progress h-100 top-buffer" id="progress">
@@ -50,21 +51,22 @@
             <label for="profileImgInp" class="user-avatar">
                 <img class="avatar-img" src="" alt="">
                 <span class="initials"></span>
-                <input type="file" id="profileImgInp" accept="image/*"/>
+                <input type="file" id="profileImgInp" accept="image/*" />
             </label>
 
             <p><span id="name">name</span></p>
-            
+
             <label class="form-label">Radius of Travel <span for="customRange" id="radius"></span> km</label>
-            <input type="range" class="form-range" step="1" id="customRange" min="5" max="50" value="25" oninput="radius.innerText = this.value"/>
+            <input type="range" class="form-range" step="1" id="customRange" min="5" max="50" value="25"
+                oninput="radius.innerText = this.value" />
         </div>
 
 
         <div class="row top-buffer d-flex justify-content-center">
             <ul class="list-group no-padding mb-5" id="list-items">
                 <li class="form-floating">
-                    <input id="phone" type="tel" class="form-control bg-transparent" placeholder="Tell us a bit about yourself"
-                        maxlength="80">
+                    <input id="phone" type="tel" class="form-control bg-transparent"
+                        placeholder="Tell us a bit about yourself" maxlength="80">
                     <label for="phone">Phone Number</label>
                 </li>
 
@@ -104,7 +106,7 @@
                     <label for="floatingTextarea">Your website URL</label>
                 </li>
             </ul>
-            
+
             <a class="row btn btn-primary btn-sm top-buffer" id="next-btn" href="sign-up-profile-setup.html">
                 <button type="submit" class="btn">
                     Save & Return
@@ -125,19 +127,17 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
     <!-- Enabled to allow user to upload profile image to cloud firestore storage -->
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
+    <!-- Here API for location services -->
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
 
-    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
-    type="text/javascript" charset="utf-8"></script>
-    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
-    type="text/javascript" charset="utf-8"></script>
-    
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
     <script type="module" src="scripts/components/header.js"></script>
     <script type="module" src="scripts/components/footer.js"></script>
     <script type="module" src="/scripts/features/sign-up-user-profile.js"></script>
-    
+
 </body>
 
 </html>

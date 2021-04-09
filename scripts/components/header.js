@@ -45,7 +45,6 @@ class Header extends HTMLElement {
                 
                 getLoggedUser();
                 isLoggedIn.value = localStorage.getItem("user") ? true : false;
-                // securityGuard("../../404.html", isLoggedIn.value);
                 if (isLoggedIn.value) {
                     const user = JSON.parse(localStorage.getItem("user"));
                     const avatar = document.querySelectorAll("header .user-avatar");
@@ -61,7 +60,6 @@ customElements.define("header-component", Header);
 
 const editGreeting = (name) => {
     const greetings = document.querySelectorAll(".greeting");
-    console.log(greetings);
     greetings.forEach(greet => greet.appendChild(document.createTextNode(`Hello, ${name}!`)));
 }
 
