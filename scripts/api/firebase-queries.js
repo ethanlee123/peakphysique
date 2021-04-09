@@ -12,6 +12,11 @@ export function updateLocation(latitude, longitude, cityFromGeo) {
             location: new firebase.firestore.GeoPoint(latitude, longitude),
             city: cityFromGeo,
         });
+        trainerOnlyRef.doc(user.uid).update({
+            location: new firebase.firestore.GeoPoint(latitude, longitude),
+            // Address stores the city not the full address
+            address: cityFromGeo,
+        });
     });
 }
 
@@ -134,7 +139,7 @@ export function createUser() {
                     age: null,
                     phoneNumber: "",
                     gender: "",
-                    location: new firebase.firestore.GeoPoint(37.422, 122.084),
+                    location: null,
                     favCheatMeal: "",
                     favWorkout: "",
                     fitnessLevel: "",
@@ -154,6 +159,10 @@ export function createUser() {
                     firstName: capitalizeWords(names[0]),
                     lastName: capitalizeWords(names[1]),
                     name: user.displayName,
+                    location: null,
+                    address: "",
+                    profilePic: "",
+                    gender: null,
                     website: "",
                     hourlyRate: null,
                     deposit: null,
@@ -162,10 +171,10 @@ export function createUser() {
                     rating: null,
                     fitness: [],
                     wellness: [],
-                    certifications: [], // strArr
+                    certifications: [], 
                     certificateImages: [],
                     availability: {
-                        monday: [], // strArr; morning, afternoon or evening
+                        monday: [], 
                         tuesday: [],
                         wednesday: [],
                         thursday: [],
@@ -309,7 +318,10 @@ export function uploadProfileImg(imgPath, imgSelector) {
         .then((url) => {
             userRef.doc(user.uid).update({
                 profilePic: url,
-            })
+            });
+            trainerOnlyRef.doc(user.uid).update({
+                profilePic: url,
+            });
             console.log("successfully update profilePic field");
         }).then(() => {
             displayUserProfileImg(imgSelector);
