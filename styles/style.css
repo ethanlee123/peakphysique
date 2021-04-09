@@ -1292,6 +1292,13 @@ footer .coming-soon {
   font-family: "apex";
   font-size: 18pt; }
 
+.sign-up-user-info .main-content .fa-plus {
+  margin: 0;
+  font-size: 32pt;
+  transform: translate(120px, -80px);
+  z-index: 1;
+  color: #83C3A3; }
+
 .user-profile .msg-profile {
   margin: 0 auto 50px auto; }
 

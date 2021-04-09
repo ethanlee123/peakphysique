@@ -51,6 +51,13 @@
         #name {
             font-family: "apex";
             font-size: 18pt;
-        }        
+        }  
+        .fa-plus {
+            margin: 0;
+            font-size: 32pt;
+            transform: translate(120px, -80px);
+            z-index: 1;
+            color: $primary;
+        }      
     }
 }
