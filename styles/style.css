@@ -1301,6 +1301,22 @@ footer .coming-soon {
 .user-profile .profile-pic {
   border-radius: 50%; }
 
+.user-profile .trainer-profile-pic {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto; }
+  .user-profile .trainer-profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; }
+  .user-profile .trainer-profile-pic .initials {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 150px;
+    background: #1E242E;
+    text-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.85); }
+
 .user-profile .card {
   margin: 0 auto;
   width: 80%;
@@ -1348,12 +1364,6 @@ footer .coming-soon {
 .user-profile .about-me-answer {
   display: table-cell;
   text-align: right; }
-
-.user-profile .book-button {
-  /* can change font, font colour, font-weight */ }
-
-.user-profile .bold-primary {
-  /* color: #83C3A3; */ }
 
 .user-profile .text-align-right {
   text-align: left; }
