@@ -389,3 +389,15 @@ const storeTrainerAddress = (trainerArr, collectionName) => {
             })    
     });
 }
+
+// const trainerArr = await getCollection({collectionName: "trainerOnly"});
+// const someArr = trainerArr.map(trainer => {
+//   return {
+//     id: trainer.userId,
+//     field: "bookingMsg",
+//     value: faker.lorem.sentence(getRandomRange(3,12))
+//   }
+// });
+// console.log(trainerArr);
+// console.log(someArr);
+// massUpdateDocuments(someArr, "trainerOnly");
