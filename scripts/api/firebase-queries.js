@@ -322,13 +322,25 @@ export function uploadProfileImg(imgPath, imgSelector) {
             }).then(() => {
                 displayUserProfileImg(imgSelector);
             }).then(() => {
-                document.location.reload();
+                setTimeout(() => {
+                    document.location.reload();
+                }, 250)
             }).catch(err => {
                 console.log("Error: " + err);
             });
     })
 }
 
+export async function displayUserProfileImg(selector) {
+    firebase.auth().onAuthStateChanged(async (user) => {      
+        let ref = await userRef.doc(user.uid).get();
+        let first = ref.data().firstName;
+        let last = ref.data().lastName;
+        let profileP = ref.data().profilePic; 
+
+        getEditProfAvatar({firstName: first, lastName: last, parentNode: selector, profilePicPath: profileP});
+    })
+}
 
 export function uploadCertImg(imgPath, selector) {
     firebase.auth().onAuthStateChanged(function(user) {
@@ -352,16 +364,6 @@ export function uploadCertImg(imgPath, selector) {
     })
 }
 
-export async function displayUserProfileImg(selector) {
-    firebase.auth().onAuthStateChanged(async (user) => {      
-        let ref = await userRef.doc(user.uid).get();
-        let first = ref.data().firstName;
-        let last = ref.data().lastName;
-        let profileP = ref.data().profilePic; 
-
-        getEditProfAvatar({firstName: first, lastName: last, parentNode: selector, profilePicPath: profileP});
-    })
-}
 
 export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) {
     firebase.auth().onAuthStateChanged(function(user) {

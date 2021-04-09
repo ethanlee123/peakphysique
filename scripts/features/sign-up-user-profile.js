@@ -42,6 +42,7 @@ imageInput.addEventListener("change", function(e) {
     let file = e.target.files[0];
     let blob = URL.createObjectURL(file);
     uploadProfileImg(file, labelImg);
+    userProfileImg.setAttribute("src", blob);
 })
 
 // Loader
