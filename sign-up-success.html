@@ -21,7 +21,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-
     <!-- Optional styles and scripts of your own -->
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/fontello.css">
@@ -38,16 +37,19 @@
     <header-component></header-component>
 
     <div class="spinner-border text-primary" role="status" id="loader">
-      <span class="sr-only"></span>
-    </div><!--.spinner-border-->
+        <span class="sr-only"></span>
+    </div>
+    <!--.spinner-border-->
 
     <div class="container main-content d-flex justify-content-center flex-column">
         <h1 class="display-4">Welcome <span id="name" class="text-primary"></span></h1>
-        <h1 class="display-4" id="question">Are you a client or a trainer?</h1>    
-        
+        <h1 class="display-4" id="question">Are you a client or a trainer?</h1>
+
         <div class="d-flex justify-content-around mt-5" id="options">
-            <a id="client" class="btn btn-primary btn-lg text-uppercase" role="button" href="sign-up-user-profile.html">client</a>
-            <a id="trainer" class="btn btn-secondary btn-lg text-uppercase" role="button" href="sign-up-profile-setup.html">trainer</a>
+            <a id="client" class="btn btn-primary btn-lg text-uppercase" role="button"
+                href="sign-up-user-profile.html">client</a>
+            <a id="trainer" class="btn btn-secondary btn-lg text-uppercase" role="button"
+                href="sign-up-profile-setup.html">trainer</a>
         </div>
     </div>
 
@@ -58,7 +60,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
     </script>
@@ -68,7 +70,6 @@
     <!--------------------------------------------------------------------->
     <script type="module" src="./scripts/components/header.js"></script>
     <script type="module" src="./scripts/components/footer.js"></script>
-    <!-- <script src="/scripts/api/firebase-queries.js"></script> -->
     <script type="module" src="./scripts/features/sign-up-success.js"></script>
 
 </body>
