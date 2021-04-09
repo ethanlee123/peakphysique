@@ -14,7 +14,7 @@ export function updateLocation(latitude, longitude, cityFromGeo) {
         });
         trainerOnlyRef.doc(user.uid).update({
             location: new firebase.firestore.GeoPoint(latitude, longitude),
-            // Address stores the city not the full address
+            // Address stores only the city not the full address
             address: cityFromGeo,
         });
     });
@@ -106,9 +106,8 @@ export function personalizedWelcome(selector) {
                 // Set personalize welcome message
                 return selector.innerText = doc.data().firstName;
             } else {
-                // No user is signed in.
+                // No user is signed in, give a place holder name.
                 selector.innerText = "John Doe";
-                console.log("user is not signed in");
             }
         }).catch((err) => {
             // If doc is not yet created, get name from displayName rather than db
@@ -289,7 +288,6 @@ export function updateProfileInfo(websiteUrl, phoneNum, bio, workout, cheatMeal,
                     window.location.href = "schedule.html";
                 }
             })
-            console.log("updateTrainerInfo called");
         })
     });
 }
@@ -300,7 +298,6 @@ function updateTrainerInfo(websiteUrl = "") {
             website: websiteUrl.value
         }).then(() => {
             window.location.href = "sign-up-profile-setup.html";
-            console.log("successfully update user website url");
         }).catch(err => {
             console.log("Error: ", err);
         });
@@ -315,21 +312,23 @@ export function uploadProfileImg(imgPath, imgSelector) {
         storageRef.put(imgPath);
         // Gets firebase storage url and updates respective field in document of user.uid
         storageRef.getDownloadURL()
-        .then((url) => {
-            userRef.doc(user.uid).update({
-                profilePic: url,
+            .then((url) => {
+                userRef.doc(user.uid).update({
+                    profilePic: url,
+                });
+                trainerOnlyRef.doc(user.uid).update({
+                    profilePic: url,
+                });
+            }).then(() => {
+                displayUserProfileImg(imgSelector);
+            }).then(() => {
+                document.location.reload();
+            }).catch(err => {
+                console.log("Error: " + err);
             });
-            trainerOnlyRef.doc(user.uid).update({
-                profilePic: url,
-            });
-            console.log("successfully update profilePic field");
-        }).then(() => {
-            displayUserProfileImg(imgSelector);
-        }).catch(err => {
-            console.log("Error: " + err);
-        });
     })
 }
+
 
 export function uploadCertImg(imgPath, selector) {
     firebase.auth().onAuthStateChanged(function(user) {
@@ -353,19 +352,17 @@ export function uploadCertImg(imgPath, selector) {
     })
 }
 
-export function displayUserProfileImg(selector, url) {
-    console.log("Called displayUserProfileImg()");
+export async function displayUserProfileImg(selector) {
     firebase.auth().onAuthStateChanged(async (user) => {      
         let ref = await userRef.doc(user.uid).get();
-        let first = await ref.data().firstName;
-        let last = await ref.data().lastName;
+        let first = ref.data().firstName;
+        let last = ref.data().lastName;
         let profileP = ref.data().profilePic; 
 
         getEditProfAvatar({firstName: first, lastName: last, parentNode: selector, profilePicPath: profileP});
     })
 }
 
-// export function displayScheduleInfo(trainerFirstName, trainerLastName, apptTime, apptDate) {
 export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) {
     firebase.auth().onAuthStateChanged(function(user) {
         trainerOnlyRef.doc(user.uid).update({
@@ -375,7 +372,6 @@ export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) 
             fitness: fitnessList,
             wellness: wellnessList,
         }).then(() => {
-            console.log("successfully update trainerOnly collection");
             window.location.href = "sign-up-profile-setup.html";
         }).catch(err => {
             console.log("error: ", error);

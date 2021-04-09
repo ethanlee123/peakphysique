@@ -41,7 +41,6 @@ saveReturnBtn.addEventListener("click", function(event) {
 imageInput.addEventListener("change", function(e) {
     let file = e.target.files[0];
     let blob = URL.createObjectURL(file);
-    userProfileImg.setAttribute("src", blob);
     uploadProfileImg(file, labelImg);
 })
 
@@ -54,9 +53,7 @@ var trainerListLoader = {
             websiteListItem.style.display = "none";
         } else {
             loader.style.display = "none";
-            // container.style.display = "flex";
             name.style.display = "block";
-            // userProfileImg.style.display = "inline";
         }
     }
 };
