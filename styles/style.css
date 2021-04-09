@@ -29,30 +29,33 @@ b {
     .accordion .copyright i {
       color: #1E242E; }
 
-button {
+button, #next-btn {
   -webkit-box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.8);
   -moz-box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.8);
   box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.8); }
-  button:hover, button:active, button:focus {
+  button:hover, button:active, button:focus, #next-btn:hover, #next-btn:active, #next-btn:focus {
     background-color: #0e1115;
     color: #83C3A3;
     font-weight: bold; }
-  button.btn-outline-light {
+  button.btn-outline-light, #next-btn.btn-outline-light {
     -webkit-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.35), 0 4px 8px 1px rgba(0, 0, 0, 0.35) inset;
     -moz-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.35), 0 4px 8px 1px rgba(0, 0, 0, 0.35) inset;
     box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.35), 0 4px 8px 1px rgba(0, 0, 0, 0.35) inset;
     text-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.85); }
-    button.btn-outline-light:hover, button.btn-outline-light:active, button.btn-outline-light:focus {
+    button.btn-outline-light:hover, button.btn-outline-light:active, button.btn-outline-light:focus, #next-btn.btn-outline-light:hover, #next-btn.btn-outline-light:active, #next-btn.btn-outline-light:focus {
       background-color: #D4DDD6;
       color: #1E242E;
       -webkit-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
       -moz-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
       box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
       text-shadow: none; }
-  button.btn-outline-none {
+  button.btn-outline-none, #next-btn.btn-outline-none {
     text-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.85); }
-    button.btn-outline-none:hover, button.btn-outline-none:active, button.btn-outline-none:focus {
+    button.btn-outline-none:hover, button.btn-outline-none:active, button.btn-outline-none:focus, #next-btn.btn-outline-none:hover, #next-btn.btn-outline-none:active, #next-btn.btn-outline-none:focus {
       text-shadow: none; }
+
+#next-btn button {
+  box-shadow: none; }
 
 input[type=text] {
   color: #0a0c0f; }
@@ -1110,9 +1113,6 @@ footer .coming-soon {
 .initial-trainer-expertise a {
   padding: 0; }
 
-.initial-trainer-expertise .btn:hover {
-  background-color: #D4DDD6; }
-
 .initial-trainer-expertise .btn-outline-dark {
   border-color: #0e1115; }
 
@@ -1300,6 +1300,9 @@ footer .coming-soon {
   color: #83C3A3; }
 
 .sign-up-user-info .main-content .list-group {
+  width: 90%; }
+
+.sign-up-user-info .main-content #next-btn {
   width: 90%; }
 
 .user-profile .msg-profile {
