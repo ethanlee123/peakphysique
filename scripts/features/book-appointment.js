@@ -8,8 +8,6 @@ trainerID = JSON.parse(trainerID);
 
 // console.log(trainerID);
 
-
-
 // get array of unavailable dates
 let unavailableSlots = generateUnavailableSlots({availability: trainerID.availability});
 

@@ -83,7 +83,7 @@ export function writeAppointmentSchedule(comments, dropdown, date, trainerID) {
                 trainerLastName: trainerID.lastName,
                 trainerUserId: trainerID.userId, //user_id
                 initialMsgFromClient: comments.value, //user input from comments form
-                // bookingMsg: trainerID.bookingMessage //pull from trainer collection
+                bookingMsg: trainerID.bookingMsg //pull from trainer collection
             }).then(() => {
                 window.location.href = "schedule.html";
             });
@@ -173,7 +173,7 @@ export function createUser() {
                         saturday: [],
                         sunday: []
                     },
-                    bookingMessage: null,
+                    bookingMsg: null,
                 });
             };
         });
@@ -415,7 +415,7 @@ export function updatePlatformSpecifics(rate, depositMin, freeSession, preBookin
             hourlyRate: rate.value,
             deposit: Number(depositMin.value),
             firstSessionFree: freeSession.checked,
-            bookingMessage: preBookingMsg.value,
+            bookingMsg: preBookingMsg.value,
         }).then(() => {
             console.log("successfully update trainerOnly collection");
             window.location.href = "sign-up-profile-setup.html";
@@ -430,7 +430,7 @@ export function displayPlatformSpecifics(rate, depositMin, freeSession, preBooki
         .then(doc => {
             rate.value = doc.data().hourlyRate;
             depositMin.value = doc.data().deposit;
-            preBookingMsg.value = doc.data().bookingMessage;
+            preBookingMsg.value = doc.data().bookingMsg;
             // Returns a boolean value
             freeSession.value = doc.data().firstSessionFree;
         }).then(() => {
@@ -540,7 +540,7 @@ export function trainerProfilePosts() {
 // displays the selected trainer's name and their initial booking message
 export function displayBookInfo(trainerID) {
     document.getElementById("trainerFirstName").innerText = trainerID.firstName;
-    document.getElementById("bookingMsg").innerText = trainerID.bookingMessage;
+    document.getElementById("bookingMsg").innerText = trainerID.bookingMsg;
 }
 
 export const getCollection = async ({
