@@ -552,7 +552,11 @@ export function trainerProfilePosts() {
 // displays the selected trainer's name and their initial booking message
 export function displayBookInfo(trainerID) {
     document.getElementById("trainerFirstName").innerText = trainerID.firstName;
-    document.getElementById("bookingMsg").innerText = trainerID.bookingMsg;
+    if (trainerID.bookingMsg === null) {
+        document.getElementById("bookingMsg").display = "none";
+    } else {
+        document.getElementById("bookingMsg").innerText = trainerID.bookingMsg;
+    }
 }
 
 export const getCollection = async ({
