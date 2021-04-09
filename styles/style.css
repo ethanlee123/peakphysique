@@ -1299,6 +1299,9 @@ footer .coming-soon {
   z-index: 1;
   color: #83C3A3; }
 
+.sign-up-user-info .main-content .list-group {
+  width: 90%; }
+
 .user-profile .msg-profile {
   margin: 0 auto 50px auto; }
 

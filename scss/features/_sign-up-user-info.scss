@@ -14,25 +14,20 @@
         .no-padding {
             padding: 0;
         }
-
         textarea {
             word-break: normal !important;
         }
-
         h1 {
             padding-top: 5px;
             padding-bottom: 5px;
             margin: 0;
         }
-
         ul {
             list-style: none;
         }
-
         path {
             fill: #83C3A3;
         }
-
         #profileImagePlaceHolder {
             font-size: 84pt;
             margin: 0;
@@ -58,6 +53,9 @@
             transform: translate(120px, -80px);
             z-index: 1;
             color: $primary;
-        }      
+        }   
+        .list-group {
+            width: 90%;
+        }   
     }
 }
