@@ -1,3 +1,5 @@
+// Displays the user avatar if the user has a profilePic field
+// And creates an HTML element with their initials if they don't
 export const getUserAvatar = ({
     user,
     parentNode,

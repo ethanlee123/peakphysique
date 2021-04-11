@@ -10,6 +10,8 @@ const restrictedPaths = [
     "trainer-profile-self",
 ];
 
+// Redirects the user to a given path ...
+// if they are on an auth-restricted path, and are not logged in
 export const securityGuard = (redirectPath, isLoggedIn) => {
     const pageName = window.location.pathname.split("/").pop().split(".")[0];
     if (restrictedPaths.includes(pageName) && !isLoggedIn) {

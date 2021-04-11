@@ -1,3 +1,5 @@
+// Keeps the func param from firing again ...
+// until the wait param has passed
 export const debounce = (func, wait) => {
     let timeout;
   

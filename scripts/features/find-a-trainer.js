@@ -153,14 +153,11 @@ var trainers = {
             insertText(trainerCard, ".location", trainer.address ? trainer.address : "Not Listed")
             insertText(trainerCard, ".rating", trainer.rating ? trainer.rating.toFixed(1) : "N/A");
             insertText(trainerCard, ".rate .text", trainer.hourlyRate ? `${trainer.hourlyRate} / hr` : "Not Listed");
-            // insertText(trainerCard, ".expertise .text", getExpertiseText(expertiseArr));
             insertText(trainerCard, ".availability .text", getAvailabilityText(trainer.availability));
             getUserAvatar({user: trainer, parentNode: trainerCard});
 
             const expertiseArr = trainer.fitness.concat(trainer.wellness);
             this.renderExpertise(expertiseArr, trainerCard);
-
-            
 
             if (trainer.firstSessionFree) {
                 const badge = document.createElement("span");
