@@ -1,3 +1,5 @@
+// Generates an array of unavailable timeslots ...
+// given an availability object
 export const generateUnavailableSlots = ({availability, numDays = 28, startDate = new Date(Date.now())}) => {
     const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
     const offset = startDate.getDay();
@@ -12,22 +14,40 @@ export const generateUnavailableSlots = ({availability, numDays = 28, startDate 
     };
     let unavailableSlots = [];
 
+    // Update the unavailability object ...
+    // so that it is the "inverse" of the availability param
     days.forEach(day => {
+        // Start with the list of possible values
         const unavailableTimes = ["morning", "afternoon", "evening"];
+
+        // Iterate through the the available times for a given day
         availability[day].forEach(time => {
             const index = unavailableTimes.indexOf(time);
+            // And remove each available time from the list of possible values
             unavailableTimes.splice(index, 1);
         });
         
+        // Push the remaining times onto the corresponding day ...
+        // in the unavailability object
         unavailability[`${day}`] = unavailableTimes;
     });
 
     for (let i = offset; i < (numDays + offset); i++) {
-        const index = i < 7 ? i : i % 7;
+        // If in start of the loop, then store the startDate in the date variable
+        // Otherwise, set the currentDate to a day after ...
+        // and then store the new currentDate in the date variable
         const date = i === offset ? startDate : currentDate.setDate(currentDate.getDate() + 1);
         const formattedDate = new Intl.DateTimeFormat("en-us").format(date);
 
+        // Index of the day of the week based on ...
+        // the current date within the loop
+        const index = i < 7 ? i : i % 7;
+
+        // Use the index variable to find the current day of the week (days[index]) ...
+        // then loop through the corresponding day property within the unavailability prop...
         unavailability[days[index]].forEach((time) => {
+            // Store each unavailable time with the formatted date...
+            // as a new element in the unavailableSlots array
             unavailableSlots.push({
                 date: formattedDate,
                 time: time
@@ -37,57 +57,3 @@ export const generateUnavailableSlots = ({availability, numDays = 28, startDate 
     
     return unavailableSlots;
 };
-
-const availabilityTest = {
-    sunday: [],
-    monday: [],
-    tuesday: [],
-    wednesday: [],
-    thursday: [],
-    friday: [],
-    saturday: []
-};
-
-const availabilityTest2 = {
-    sunday: ["morning"],
-    monday: ["afternoon"],
-    tuesday: ["evening"],
-    wednesday: ["morning", "afternoon"],
-    thursday: ["morning", "evening"],
-    friday: ["afternoon", "evening"],
-    saturday: ["morning", "afternoon", "evening"]
-};
-
-const availabilityTest3 = {
-    monday: ["afternoon"],
-    sunday: ["morning"],
-    wednesday: ["morning", "afternoon"],
-    tuesday: ["evening"],
-    friday: ["afternoon", "evening"],
-    saturday: ["morning", "afternoon", "evening"],
-    thursday: ["morning", "evening"],
-};
-
-const availabilityTest4 = {
-    sunday: [],
-    monday: ["morning", "evening"],
-    tuesday: [],
-    wednesday: ["afternoon"],
-    thursday: [],
-    friday: ["morning", "evening"],
-    saturday: []
-};
-
-// const test1 = generateUnavailableSlots({availability: availabilityTest});
-// const test2 = generateUnavailableSlots({availability: availabilityTest2});
-// const test3 = generateUnavailableSlots({availability: availabilityTest3});
-// const test4 = generateUnavailableSlots({availability: availabilityTest4});
-// const test5 = generateUnavailableSlots({availability: availabilityTest2, numDays: 7});
-// const test6 = generateUnavailableSlots({availability: availabilityTest2, numDays: 7, startDate: new Date("Mar 26 2021")});
-
-// console.log("test1", test1);
-// console.log("test2", test2);
-// console.log("test3", test3);
-// console.log("test4", test4);
-// console.log("test5", test5);
-// console.log("test6", test6);

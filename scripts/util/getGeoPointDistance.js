@@ -1,7 +1,10 @@
+// Converts degrees to radians
 const degreesToRadians = (degrees) => {
     return degrees * Math.PI / 180;
 }
 
+// Gets the location between two objects ...
+// with latitude and longitude properties
 export const getGeoPointDistance = (point1, point2) => {
     const earthRadius = 6371;
 

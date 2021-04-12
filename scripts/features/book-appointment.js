@@ -2,35 +2,30 @@ import { displayBookInfo, writeAppointmentSchedule } from "/scripts/api/firebase
 import { generateUnavailableSlots } from "/scripts/util/generateUnavailableSlots.js";
 import { debounce } from "/scripts/util/debounce.js";
 
-// get trainerID from Book Appointment button on profile page
+// get trainerID from local storage
 let trainerID = localStorage.getItem("trainerID");
 trainerID = JSON.parse(trainerID);
-
-// console.log(trainerID);
-
-
 
 // get array of unavailable dates
 let unavailableSlots = generateUnavailableSlots({availability: trainerID.availability});
 
-// console.log(unavailableSlots);
 
 let badDates = [];
 
+// populate badDates array with unavailable dates
 for (let i = 0; i < unavailableSlots.length - 2; i++) {
   if (unavailableSlots[i].date === unavailableSlots[i + 2].date) {
     badDates[i] = unavailableSlots[i].date;
   }
 }
 
-// console.log(badDates);
-
+// filter badDates array to remove empty indexes
 let filteredBadDates = badDates.filter(function (element) {
   return element != null;
 });
 
-// console.log(filteredBadDates);
 
+// initialize datepicker widget from jquery
 $(function() {
   $("#datepicker").datepicker({
     showAnim: "fold",
@@ -40,6 +35,7 @@ $(function() {
     showOtherMonths: true,
     minDate: 0,
     maxDate: "+1m",
+    // block out unavailable dates using the filteredBadDates array
     beforeShowDay: function(date) {
       const year = date.getFullYear();
       const month = ("" + (date.getMonth() + 1)).slice(-2);
@@ -52,8 +48,10 @@ $(function() {
         return [false,"","unAvailable"]; 
       }
     },
+    // dynamically generate the time-slots dropdown selection based on unavailable slots array
     onSelect: function (selectedDate) {
       const dropdown = document.getElementById("dropdown");
+      // clear the previous dropdown selections when a new date is selected
       while (dropdown.firstChild) {
         dropdown.removeChild(dropdown.firstChild);
       }
@@ -92,13 +90,11 @@ $(function() {
         }
 
         dropdown.firstChild.setAttribute("selected", "");
-        
       }
     }
   });
 });
 
-// initial message from client
 const comments = document.getElementById("comments");
 const dropdown = document.getElementById("dropdown");
 const date = document.getElementById("datepicker");

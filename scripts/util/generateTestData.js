@@ -13,6 +13,8 @@ import {
 } from "../api/firebase-queries.js";
 import { getLocationFromCoord } from "../api/here-api.js";
 
+// ### CONSTANTS ###
+// Possible choices for randomly generated data
 const genders = [
     "male",
     "female"
@@ -198,7 +200,9 @@ const gpsRange = [
         }
     }
 ]
+// #################
 
+// Retrurns a random number given a range
 const getRandomRange = (max, min = 0, int = true) => {
     const value = Math.random() * (max - min + 1) + min;
     if (int) {
@@ -207,10 +211,13 @@ const getRandomRange = (max, min = 0, int = true) => {
     return value;
 }
 
+// Gets a random value from a given array
 const getRandomValue = (arr) => {
     return arr[getRandomRange(arr.length - 1)];
 }
 
+// Gets a set number of values
+// from the expertise array
 const getRandomExpertise = (arr, num) => {
     let expertise = [];
     for (let i = 0; i < num; i++) {
@@ -225,6 +232,8 @@ const getRandomExpertise = (arr, num) => {
     return expertise;
 }
 
+// Gets an availability object with random times available
+// Given a num param of days available
 const getRandomAvailability = (num) => {
     let availability = {
         monday: [],
@@ -258,6 +267,8 @@ const getRandomAvailability = (num) => {
     return availability;
 }
 
+// Gets a random location based on ...
+// a range of possible coordinates
 const generateRandomLocation = (gpsRange) => {
     const locRange = getRandomValue(gpsRange);
     const lat = getRandomRange(locRange.latitude.min, locRange.latitude.max, false);
@@ -265,6 +276,7 @@ const generateRandomLocation = (gpsRange) => {
     return {lat, lng};
 }
 
+// Generates a given number of trainers
 const generateTrainers = (numToGenerate) => {
     let trainers = [];
     for (let i = 0; i < numToGenerate; i++) {
@@ -293,6 +305,7 @@ const generateTrainers = (numToGenerate) => {
     return trainers;
 }
 
+// Gets the randomly generated trainers from the db
 const getGeneratedTrainers = async () => {
     let trainers = await getCollection({collectionName: "trainerOnly"});
     trainers = trainers.filter(trainer =>
@@ -301,6 +314,8 @@ const getGeneratedTrainers = async () => {
     return trainers;
 }
 
+// Takes an array of trainers
+// And writes corresponding documents into the user collection
 const generateUsersFromTrainers = (trainers) => {
     return trainers.map(trainer => {
         return {
@@ -331,6 +346,9 @@ const generateUsersFromTrainers = (trainers) => {
     });
 }
 
+// Takes a geolocation result from Google Map's geolocation
+// And parses it into the format:
+// [CITY / COUNTY], [PROVINCE, STATE]s
 const parseAddress = (addressArr) => {
     let locality;
     let province;
@@ -361,6 +379,9 @@ const parseAddress = (addressArr) => {
     return `${locality}, ${country}`;
 }
 
+// Gets an array of trainers,
+// gives them a random location and its corresponding address,
+// and writes the updated fields into the database
 const storeTrainerAddress = (trainerArr, collectionName) => {
     trainerArr.forEach(trainer => {
         const randomLocation = generateRandomLocation(gpsRange);
@@ -379,6 +400,8 @@ const storeTrainerAddress = (trainerArr, collectionName) => {
             value: ""
         }
 
+        // Reverse geocode the randomly generated coordinates
+        // Using Google Maps API
         geocoder.geocode({location: randomLocation},
             (res, status) => {
                 if (status === "OK") {

@@ -29,6 +29,8 @@ var isLoggedIn = {
     },
 };
 
+// Creates the <header-component> HTML tag ...
+// based on the header template
 class Header extends HTMLElement {
     constructor() {
         super();
@@ -80,11 +82,14 @@ const handleLogOut = () => {
                 document.body.classList.add("logged-out");
             }
             isLoggedIn.value = false;
+            // If the user is in an auth-restricted page ...
+            // Redirect them to the landing page
             securityGuard("../../index.html", isLoggedIn.value);
         });
     });
 }
 
+// Adds styling to the navlink where the user is currently located
 const showCurrentPage = () => {
     const navLinks = document.querySelectorAll("#navLinks a.nav-link");
     navLinks.forEach(link => {

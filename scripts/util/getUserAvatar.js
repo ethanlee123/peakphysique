@@ -1,3 +1,5 @@
+// Displays the user avatar if the user has a profilePic field
+// And creates an HTML element with their initials if they don't
 export const getUserAvatar = ({
     user,
     parentNode,
@@ -32,7 +34,6 @@ export const getEditProfAvatar = ({
         userInitials.style.display = "none";
         profilePic.setAttribute("src", profilePicPath);
         profilePic.setAttribute("alt", `${user?.name} avatar`);
-        console.log("getEditProfAvatar");
     } else {
         const initials = `${firstName.substring(0, 1)} ${lastName.substring(0, 1)}`;
         userInitials.innerText = initials;

@@ -45,6 +45,8 @@ const genderFilter = document.getElementsByName("gender");
 const noResults = document.getElementById("noResults");
 const loader = document.getElementById("loader");
 
+// Determines whether to display the spinner element
+// or the trainerList/resultsMeta elements
 var trainerListLoader = {
     set isLoading(loading) {
         if (loading) {
@@ -110,7 +112,8 @@ var trainers = {
     paginate(page) {
         this.renderTrainerCards(this.getPage(this._toDisplay, page, pageSize));
     },
-
+    
+    // Gets the subset of trainers to display
     getPage (arr, pageNum, pageSize) {
         const startIndex = pageNum * pageSize;
         const endIndex = startIndex + pageSize;
@@ -122,6 +125,8 @@ var trainers = {
         return arr.slice(startIndex, endIndex);
     },
 
+    // Determines which text to render in the expertise section...
+    // based on whether or not the element has the "collapsed" class
     renderExpertise(arr, parentNode) {
         const selector = ".expertise .text";
         const expertise = parentNode.querySelector(selector);
@@ -143,25 +148,26 @@ var trainers = {
 
     renderTrainerCards (trainers) {
         trainerList.innerHTML = "";
-    
+        
+        // Iterate through list of trainers
         trainers.forEach(trainer => {
-    
+            // Deep clone the template for the trainerCard
             const trainerCard = document.importNode(trainerCardTemplate.content, true);
             
-    
+            // Change the information contained in the card...
+            // to reflect the properties of the current trainer
             insertText(trainerCard, ".trainer-name", capitalizeWords(trainer.name));
             insertText(trainerCard, ".location", trainer.address ? trainer.address : "Not Listed")
             insertText(trainerCard, ".rating", trainer.rating ? trainer.rating.toFixed(1) : "N/A");
             insertText(trainerCard, ".rate .text", trainer.hourlyRate ? `${trainer.hourlyRate} / hr` : "Not Listed");
-            // insertText(trainerCard, ".expertise .text", getExpertiseText(expertiseArr));
             insertText(trainerCard, ".availability .text", getAvailabilityText(trainer.availability));
             getUserAvatar({user: trainer, parentNode: trainerCard});
 
             const expertiseArr = trainer.fitness.concat(trainer.wellness);
             this.renderExpertise(expertiseArr, trainerCard);
 
-            
-
+            // If the trainer has enabled free trial...
+            // Add an HTML badge next to the rate per session
             if (trainer.firstSessionFree) {
                 const badge = document.createElement("span");
                 badge.classList.add("badge", "free-trial");
@@ -173,6 +179,8 @@ var trainers = {
     
             const viewProfile = trainerCard.querySelector(".view-profile");
             viewProfile.addEventListener("click", () => {
+                // Set a localStorage item so that ...
+                // the redirect page knows which profile to load
                 localStorage.setItem("trainerProfileToDisplay", JSON.stringify(trainer));
                 window.location.href = "../../user-profile.html";
             });
@@ -181,6 +189,7 @@ var trainers = {
         });
     },
 
+    // Gets the min and max ranges of a given property in the list of trainers
     getSliderRange(prop) {
         const sortedList = sort.sortList(this._all, prop).filter(trainer => trainer[prop] && typeof trainer[prop] === "number");
         if (sortedList) {
@@ -194,6 +203,7 @@ var trainers = {
         })
     },
 
+    // Uses the HTML Geolocation API to retrieve the user's current GPS coordinates
     async getGeolocation(errorText) {
         const result = await this.getGeolocationPosition()
             .then(response => {
@@ -216,6 +226,7 @@ var trainers = {
                         error = ""
                         break;
                 }
+                // Display an error message if unable to get user coordinates
                 errorText.innerHTML = error;
             });
         if (result) {
@@ -225,6 +236,7 @@ var trainers = {
         }
     },
     
+    // Instantiates the NoUI Slider plugin
     renderFilterSliders () {
         noUiSlider.create(ratePerSession, {
             start: [this._rate.min, this._rate.max],
@@ -293,10 +305,15 @@ var trainers = {
         });
 
         distanceFromUser.noUiSlider.on("start", () => {
+            // If there is no userLocation in localStorage...
             if (!getUserLocation()) {
+                // Disable the slider
                 distanceFromUser.setAttribute("disabled", true);
+                // Attempt to get user's location
                 this.getGeolocation(geolocationErrorText).then(() => {
+                    // If userLocation exists after the attempt...
                     if (getUserLocation()) {
+                        // Enable the slider
                         distanceFromUser.removeAttribute("disabled"); 
                     }              
                 });
@@ -341,9 +358,11 @@ var sort = {
 
     sortList(arr, sortBy, sortOrder = "ascending") {
         let sortedList = arr.map(obj => ({...obj}));
+        
         sortedList = sortedList.sort((a, b) =>
             a[sortBy] > b[sortBy] ? 1 :
             a[sortBy] < b[sortBy] ? -1 : 0);
+
         if (sortOrder == "descending") {
             sortedList = sortedList.reverse();
         }
@@ -369,6 +388,8 @@ var filters = {
         }
     },
 
+    // Update the "Set Filter" button based on...
+    // whether or not filters have been applied
     updateFilterButtons(noFilters) {
         if (!noFilters) {
             setFilterBtn.classList.remove("no-filters", "btn-outline-light");
@@ -384,6 +405,7 @@ var filters = {
         for (const filter in this._value) {
             if (filter === "name") {
                 filteredList = filteredList.filter(trainer =>  
+                    // Allow case-sensitive partial matches on search queries
                     trainer[filter].toLowerCase().includes(this._value[filter].toLowerCase()));
             }
 
@@ -400,18 +422,23 @@ var filters = {
 
             if (filter === "wellness" || filter === "fitness") {
                 filteredList = filteredList.filter(trainer =>
+                    // Filter out trainers who have none of the selected expertise filters
                     trainer[filter].some(option => this._value[filter].includes(option.toLowerCase()))
                 );
             }
 
             if (filter === "availability") {
                 filteredList = filteredList.filter(trainer => 
+                    // Filter out trainers who are not available on ...
+                    // at least one of the selected availability days
                     this._value[filter].some(option => trainer[filter][option].length !== 0)
                 );
             }
 
             if (filter === "location" && getUserLocation()) {
                 filteredList = filteredList.filter(trainer => {
+                    // If the location filter or if it does not have the correct properties...
+                    // then this trainer is automatically filtered out
                     if (!trainer[filter] || !trainer[filter].latitude || !trainer[filter].longitude) {
                         return false;
                     }
@@ -484,20 +511,28 @@ var page = {
             pagination.style.display = "flex";
             pageNums.innerHTML = "";
             
+            // If there are less than 3 pages, then render all page numbers ...
+            // If the number is between 3 & 5, then render 2 ...
+            // Else render 3
             const numsToRender = this._totalPages < 3 ? this._totalPages :
                                     this._totalPages > 3 && this._totalPages <= 5 ? 2 : 3;
             for (let i = 1; i <= numsToRender; i++) {
                 pageNums.appendChild(this.renderPageNum(i));
             }
-    
+            
+            // If there are page numbers we are not rendering
             if (numsToRender < this._totalPages) {
+                // Add "..." to denote that they exist
                 pageNums.appendChild(document.createTextNode("... "));
+                // Render the last page number as well
                 pageNums.appendChild(this.renderPageNum(this._totalPages));
             }
 
             const nums = pageNums.querySelectorAll("span");
             nums.forEach(num => {
                 num.addEventListener("click", () => {
+                    // Clicking on a page number will
+                    // Render the list of trainers in that given page
                     this.current = num.dataset.page;
                 });
             });
@@ -508,7 +543,9 @@ var page = {
         const prevBtn = pagination.querySelector("#previous");
         const nextBtn = pagination.querySelector("#next");
 
+        // Do not show a previous button if on the first page
         prevBtn.style.display = Number(this._currentPage) === 0 ? "none" : "block";
+        // Do not show a next button if on the last page
         nextBtn.style.display = Number(this._currentPage) === (this._totalPages - 1) ? "none" : "block";
     },
 
@@ -525,17 +562,22 @@ var page = {
             resultsFound.innerHTML = `Showing ${trainersShown} out of <b>${trainers.display.length} trainers</b> found.`;            
         }
     },
-    
+
     styleCurrentPageNum() {
+        // Remove styling from the previous current page
         const previousPageNum = pagination.querySelector(".current-page");
         previousPageNum?.classList.remove("current-page");
         
+        // Apply styling to the new current page
         const currentPageNum = pagination.querySelector(`[data-page="${this._currentPage}"]`);
         currentPageNum?.classList.add("current-page");
     },
 };
 // ##################
 
+// Returns an array of arrays
+// where each sub-array contains the label at index 0,
+// and the value at index 1
 const createOptions = (stringArr) => {
     return stringArr.map(string => {
         return [capitalizeWords(string), string];
@@ -552,10 +594,14 @@ const resizeBannerImgHeight = () => {
     bannerImg.style.height = `${(banner.offsetHeight * 1.15)}px`;
 }
 
+// Syncs the expertise options in the filter drawer...
+// whenever the filter toggle states change
 const setFilterToggles = () => {    
     const excludedFilters = document.querySelectorAll(".toggle-filter:not(.active)");
+    // If there are deselected filter toggles...
     if (excludedFilters) {
         excludedFilters.forEach((filter) => {
+            // Deselect the corresponding options in the filter drawer
             filter.dataset.field === "fitness" ?
                 fitnessOptionsFilter.deselectOption(filter.dataset.filter) :
                 wellnessOptionsFilter.deselectOption(filter.dataset.filter);
@@ -563,62 +609,87 @@ const setFilterToggles = () => {
     }
 
     const includedFilters = document.querySelectorAll(".toggle-filter.active");
+    // If there are selected filter toggles...
     if (includedFilters) {
         includedFilters.forEach((filter) => {
+            // Select the corresponding options in the filter drawer
             filter.dataset.field === "fitness" ?
                 fitnessOptionsFilter.selectOption(filter.dataset.filter) :
                 wellnessOptionsFilter.selectOption(filter.dataset.filter);
         });
     }
 
+    // Store the value of the filters variable into a new variable
     let filtersToApply = filters.values;
 
+    // Get the array of selected fitness options
     const selectedFitnessOptions = fitnessOptions.flatMap((option) =>
         fitnessOptionsFilter.isOptionSelected(option) ? option : []);
+    // If not everything is selected (i.e., filters have been applied)...
     if (selectedFitnessOptions.length !== fitnessOptions.length) {
+        // Store those filters
         filtersToApply.fitness = selectedFitnessOptions;
     } else {
+        // Else delete them
         delete filtersToApply.fitness;
     }
 
+    // Get the array of selected fitness options
     const selectedWellnessOptions = wellnessOptions.flatMap((option) =>
         wellnessOptionsFilter.isOptionSelected(option) ? option : []);
+    // If not everything is selected (i.e., filters have been applied)...
     if (selectedWellnessOptions.length !== wellnessOptions.length) {
+        // Store those filters
         filtersToApply.wellness = selectedWellnessOptions;
     } else {
+        // Else delete them
         delete filtersToApply.wellness;
     }
 
+    // Store the new filter values in the filter variable
     filters.values = filtersToApply;
 }
 
+// Removes the active class from all filter toggles
 const deactivateFilterToggles = () => {
     filterToggles.forEach((toggle) => {
         toggle.classList.contains("active") && toggle.classList.remove("active");
     })
 }
 
+// Sets all the filter toggles back into active state
 const resetFilterToggles = () => {
     filterToggles.forEach((toggle) => {
         !toggle.classList.contains("active") && toggle.classList.add("active");
     })
 }
 
+// Make sure that the filter toggles and...
+// the wellness/fitness option filters in the drawer...
+// are consistent
 const syncFilterToggles = ({fitnessArr, wellnessArr}) => {
     deactivateFilterToggles();
 
     let activeFilters = [];
 
+    // For each selected option in the fitness options
     fitnessArr && fitnessArr.forEach(option => {
+        // Get the matching corresponding toggle for the option
         const matchingToggle = toggleBar.querySelector(`[data-filter="${option}"]`);
+        // If the toggle exists, then push into activeFilters
         matchingToggle && activeFilters.push(matchingToggle);
     });
 
+    // For each selected option in the wellness options
     wellnessArr && wellnessArr.forEach(option => {
+        // Get the matching corresponding toggle for the option
         const matchingToggle = toggleBar.querySelector(`[data-filter="${option}"]`);
+        // If the toggle exists, then push into activeFilters
         matchingToggle && activeFilters.push(matchingToggle);
     });
 
+    // For each matching toggle in activeFilters ...
+    // Add the active class
     activeFilters.forEach(node => node.classList.add("active"));
 }
 
@@ -630,6 +701,7 @@ const getUserLocation = () => {
 }
 
 // ### jQuery - Dropdown Checkbox ###
+// Instantiates the filter multi-select plugins
 const fitnessOptionsFilter = $("#fitnessOptionsFilter").filterMultiSelect({
     items: createOptions(fitnessOptions),
     selectAllText: "Select All"
@@ -657,11 +729,18 @@ filterToggles.forEach((toggle) => {
 
 searchBar.addEventListener("keyup", debounce(() => {
     const query = searchBar.value.trim();
+
+    // Ensure new query is not the same as stored query
     if (query !== filters?.values?.name &&
             (filters?.values?.name || query)) {
+        // Store the current filter values in a new variable
         let newFilters = filters.values;
+        // Change the name property of the new variable
         newFilters["name"] = query;
+        // If query is empty then remove the filter
         !query && delete newFilters.name;
+        // Change the value of the filter variable to trigger...
+        // the set function
         filters.values = newFilters;
     }
 }, debounceTime));
@@ -670,7 +749,9 @@ sortBy.addEventListener("change", (event) => {
     const sortByValue = event.target.value;
     const ascending = sortOrder.querySelector(".asc");
     const descending = sortOrder.querySelector(".desc");
-
+    
+    // Change the labels of the sortOrder options...
+    // depending on the sortBy value
     switch (sortByValue) {
         case "name":
             ascending.innerHTML = "A - Z";
@@ -699,64 +780,89 @@ sortOrder.addEventListener("change", () => {
     };
 });
 
+// Fires when the user clicks on...
+// the "Set Filters" button in the drawer
 applyFilters.addEventListener("click", debounce(() => {
     const filtersToApply = {};
 
+    // If user has excluded any options from ...
+    // the default fitness options ...
+    // store the values
     const selectedFitnessOptions = fitnessOptions.flatMap((option) =>
         fitnessOptionsFilter.isOptionSelected(option) ? option : []);
     if (selectedFitnessOptions.length !== fitnessOptions.length) {
         filtersToApply.fitness = selectedFitnessOptions;
     }
 
+    // If user has excluded any options from ...
+    // the default wellness options ...
+    // store the values
     const selectedWellnessOptions = wellnessOptions.flatMap((option) =>
         wellnessOptionsFilter.isOptionSelected(option) ? option : []);
     if (selectedWellnessOptions.length !== wellnessOptions.length) {
         filtersToApply.wellness = selectedWellnessOptions;
     }
 
+    // If user has excluded any options from ...
+    // the default availability options ...
+    // store the values
     const selectedAvailabilityOptions = availabilityDays.flatMap((option) =>
         availabilityFilter.isOptionSelected(option) ? option : []);
     if (selectedAvailabilityOptions.length !== availabilityDays.length) {
         filtersToApply.availability = selectedAvailabilityOptions;
     }
 
+    // Stores the value if the user has checked the ...
+    // first trial free checkbox
     if (firstSessionFree.checked) {
         filtersToApply.firstSessionFree = firstSessionFree.checked;
     }
 
+    // If the value of the gender filter is not "any" ...
+    // store the value
     genderFilter.forEach(filter => {
         if (filter.checked && filter.value !== "any") {
             filtersToApply.gender = filter.value;
         }
     })
 
+    // If the value of the rate per session is not [min, max]...
+    // store the value
     const rateValues = ratePerSession.noUiSlider.get().map(value => {
-        return Number(value.replace("$", ""));
+        return Number(value.replace("$", "")); // Convert the slider value to number
     });
     if (rateValues[0] !== trainers.rate.min || rateValues[1] !== trainers.rate.max) {
         filtersToApply.hourlyRate = {min: rateValues[0], max: rateValues[1]};     
     }
 
+    // If the value of the years of experience is not [min, max]...
+    // store the value
     const experienceValues = yearsOfExperience.noUiSlider.get().map(value => {
-        return Number(value.replace(" years", ""));
+        return Number(value.replace(" years", "")); // Convert the slider value to number
     });
     if (experienceValues[0] !== trainers.experience.min || experienceValues[1] !== trainers.experience.max) {
         filtersToApply.yearsOfExperience = {min: experienceValues[0], max: experienceValues[1]};        
     }
 
+    // If the value of the years of experience is a number (default is NaN) ...
+    // store the value
     const distanceFromUserValue = Number(distanceFromUser.noUiSlider.get().replace("< ", "").replace("km", ""));
     if (distanceFromUserValue) {
         filtersToApply.location = distanceFromUserValue;
     }
 
+    // If the search bar has an input...
+    // store the value
     if (filters.name) {
         filtersToApply.name = filters.name;
     }
 
+    // Store the state of the filter toggles
     if (filters.wellnessExclude) {
         filtersToApply.wellnessExclude = filters.wellnessExclude;
     }
 
+    // Store the state of the filter toggles
     if (filters.fitnessExclude) {
         filtersToApply.fitnessExclude = filters.fitnessExclude;
     }
@@ -797,13 +903,13 @@ paginationBtns.forEach(btn => {
 window.addEventListener("resize", () => {
     positionBannerImgHorizontally();
     resizeBannerImgHeight();
-
 });
 // #######################
 
 const initialRender = async () => {
     positionBannerImgHorizontally();
     resizeBannerImgHeight();
+    // Enable the spinner while we retrieve the trainer list
     trainerListLoader.isLoading = true;    
     trainers.all = await getCollection({
         collectionName: "trainerOnly",
@@ -812,6 +918,7 @@ const initialRender = async () => {
             order: sort.order === "descending" ? "desc" : "asc"
         }
     });
+    // Disable the spinner once we have retrieved everything
     trainerListLoader.isLoading = false;
 }
 initialRender();

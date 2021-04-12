@@ -1,3 +1,4 @@
+// Returns a template object given a path param
 export const getTemplate = (path) => {
     return fetch(path)
         .then(response => {
