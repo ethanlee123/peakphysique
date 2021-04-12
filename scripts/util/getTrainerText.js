@@ -1,14 +1,12 @@
-const capitalizeWords = (str) => {
-    return str.replace(/\w\S*/g, text => {
-        return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
-    });
-}
+import { capitalizeWords } from "./capitalizeWords.js";
 
+// Inserts HTML-escaped text into a given selector with a given parentNode
 const insertText = (parentNode, selector, text) => {
     const element = parentNode.querySelector(selector);
     element.appendChild(document.createTextNode(text));
 }
 
+// Parses a trainer's availability into a string
 const getAvailabilityText = (availability) => {
     const dayShorthand = {
         monday: "Mon",
@@ -25,27 +23,38 @@ const getAvailabilityText = (availability) => {
     };
 
     let availableDays = [];
+    // Loop through the non-empty days in availability...
+    // and push its corresponding shorthand form (e.g. "Mon" for "Monday")
+    // Into the availableDays array
     for (const day in availability) {
         availability[day].length > 0 && availableDays.push(dayShorthand[day]);
     }
 
-    let text =  availableDays.length === 0 ? "Currently not available" :
-                availableDays.length === 7 ? "Everyday" :
-                days.weekdays.every(day => availableDays.includes(day)) ? "Weekdays" :
-                days.weekends.every(day => availableDays.includes(day)) ? "Weekends" :
-                "";
+    // Custom text if the available days can be grouped into a certain category
+    let text =  availableDays.length === 0 ? "Currently not available" : // If there are no available days
+                availableDays.length === 7 ? "Everyday" : // If all days are available
+                days.weekdays.every(day => availableDays.includes(day)) ? "Weekdays" : // If available on all weekdays
+                days.weekends.every(day => availableDays.includes(day)) ? "Weekends" : // If available on all weekend days
+                ""; // Return empty string if none of the above applies
 
+    // If the text variable is not an empty string...
     if (text) {
+        // If the trainer is available everyday or not at all...
         if (availableDays.length === 0 || availableDays.length === 7) {
-            return text;
+            return text; // There is no more need to further parse availability
         }
+        // Else, remove all the days that were included in the text variable
+        // E.g. if the text contains "weekends", remove "Sat" and "Sun" from availableDays
         availableDays = availableDays.filter(day => !days[text.toLowerCase()].includes(day));
     }
 
+    // Sort the remaining days in availableDays according to the format:
+    // "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"
     let sortOrder = ["Weekdays", "Weekends"];
     sortOrder = sortOrder.concat(days.weekdays, days.weekends);
     availableDays = availableDays.sort((a, b) => sortOrder.indexOf(a) - sortOrder.indexOf(b));
 
+    // Add the remaining days in availableDays into the text variable
     for (let i = 0; i < availableDays.length; i++) {
         text += i === 0 && !text ? availableDays[i] : `, ${availableDays[i]}`;
     }
@@ -53,6 +62,9 @@ const getAvailabilityText = (availability) => {
     return `Available ${text}`;
 }
 
+// Condenses a trainer's expertise and returns a string with ...
+// the first two expertise items and if applicable ...
+// the total number of additional expertise items associated with the trainer
 const getExpertiseHTML = (expertiseArr) => {
     let text = "";
 

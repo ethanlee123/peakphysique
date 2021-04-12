@@ -1,4 +1,4 @@
-button {
+button, #next-btn {
     @include box-shadow($blur: 20px);
     // @include drop-shadow;
 
@@ -27,5 +27,11 @@ button {
         @include hover-state {
             text-shadow: none;
         }
+    }
+}
+
+#next-btn {
+    button {
+        box-shadow: none;
     }
 }
