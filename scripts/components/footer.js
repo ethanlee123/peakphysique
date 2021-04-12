@@ -2,6 +2,8 @@ import { getTemplate } from "../util/getTemplate.js";
 
 const path = "../../common/footer.html";
 
+// Creates the <footer-component> HTML tag ...
+// based on the footer template
 class Footer extends HTMLElement {
     connectedCallback() {
         getTemplate(path)

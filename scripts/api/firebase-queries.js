@@ -557,6 +557,7 @@ export function displayBookInfo(trainerID) {
     }
 }
 
+// Returns an array of documents given certain params
 export const getCollection = async ({
     collectionName,
     sort = null,
@@ -583,6 +584,7 @@ export const getCollection = async ({
     });
 }
 
+// Adds or updates a single field in a document
 export const addSingleField = (doc, collectionName) => {
     const ref = db.collection(collectionName);
     let fieldToUpdate = {};
@@ -593,6 +595,8 @@ export const addSingleField = (doc, collectionName) => {
     .catch((e) => console.log(e));
 }
 
+// Used in generation of fake data:
+// Creates many documents at once
 export const massWriteDocuments = (arr, collectionName) => {
     const ref = db.collection(collectionName);
 
@@ -607,6 +611,8 @@ export const massWriteDocuments = (arr, collectionName) => {
     })
 }
 
+// Used in generation of fake data:
+// Updates a single field in a group of documents
 export const massUpdateDocuments = (arr, collectionName) => {
     const ref = db.collection(collectionName);
 
@@ -620,6 +626,8 @@ export const massUpdateDocuments = (arr, collectionName) => {
     });
 }
 
+// Given a uid param...
+// Return its corresponding user doc in the db
 export const getUser = async (uid) => {
     const userDetails = await userRef.doc(uid).get();
     return userDetails.data();
@@ -629,6 +637,11 @@ export const logOutUser = async () => {
     return await firebase.auth().signOut();
 }
 
+// If the user is logged in ...
+// retrieve their corresponding user document in the db...
+// and put in localStorage
+// If the user is not logged in and there is a user in localStorage...
+// remove user
 export const getLoggedUser = () => {
     firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
