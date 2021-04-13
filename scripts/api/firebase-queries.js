@@ -224,37 +224,6 @@ export const isFirstTime = () => {
     })
 }   
 
-// Displays trainer profile information. Parameters are references to a tag.
-export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
-    firebase.auth().onAuthStateChanged(function(user) {
-        userRef.doc(user.uid).get()
-        .then(doc => {
-            fullName.innerText = doc.data().name;
-            phoneNum.value = doc.data().phoneNumber;
-            bio.value = doc.data().about;
-            workout.value = doc.data().favWorkout;
-            cheatMeal.value = doc.data().favCheatMeal;
-            randFact.value = doc.data().randomFact;
-            radiusDisplay.innerText= doc.data().radius;
-
-            if (doc.data().role == "trainer") {
-                trainerOnlyRef.doc(user.uid).get()
-                .then(trainerDoc => {
-                    websiteUrl.value = trainerDoc.data().website;
-                }).catch(err => {
-                    // If doc is undefined, user is not a trainer
-                    console.log("error: ", err);
-                });
-            }
-        });
-        // Update city field in real time 
-        userRef.doc(user.uid)
-        .onSnapshot(doc => {
-            userCity.value = doc.data().city;
-        })
-    });
-}
-
 // Shows the selector if role is trainer
 export function displayWebsiteField(selector) {
     firebase.auth().onAuthStateChanged(function(user) {
@@ -456,44 +425,6 @@ export function displayPlatformSpecifics(rate, depositMin, freeSession, preBooki
     })
 }
 
-export function displayScheduleInfo(){
-    console.log("Schedule Info! :)");
-    db.collection("schedule").get()
-    .then(function(s){
-        s.forEach(function(doc){
-            trainerFirstName.innerText = doc.data().trainerFirstName;            
-            console.log(trainerFirstName);
-            trainerLastName.innerText  = doc.data().trainerLastName;            
-            console.log(trainerLastName);
-            apptTime.innerText = doc.data().time;            
-            console.log(time);
-            apptDate.innerText = doc.data().date;            
-            console.log(date);
-            // let bookingMsg = doc.data().bookingMsg;            
-            // console.log(bookingMsg);                             // trainer booking msg or client msg???
-
-            let completed = doc.data().completed;
-            console.log(completed);                                 // completed appointment
-
-            // document.getElementById('trainerFirstName').innerText = trainerFirstName;
-            // document.getElementById('trainerLastName').innerText = trainerLastName;
-            // document.getElementById('appt-time').innerText = time;
-            // document.getElementById('appt-date').innerText = date;
-
-
-            // sets "add to Calendar" and "cancel" buttons as hidden if appointment completed
-            if (completed == true) {
-                let completedBtn = document.getElementsByClassName('hideScheduleBtn');
-                for (let i = 0; i < completedBtn.length; i++) {
-                    completedBtn[i].style.display = "none";
-                }             
-            }
-            // document.getElementById('bookingMsg').innerText = bookingMsg;
-        }) 
-    })
-}
-
-
   // hides sections of profile depending on if user or trainer
 export function hideUserSections(){
     let userSection = document.getElementsByClassName('hideUserSection');
@@ -502,50 +433,6 @@ export function hideUserSections(){
         userSection[i].style.display = "none";
     }
 }
-
-// gets user post and posts to "Updates" section
-export function trainerProfilePosts() {
-    console.log("Profile Posts :)");
-    db.collection("trainer").doc("x4FAASQ2nGzvN4UL7rjB").get()         // pulls from "Chuck Norris" doc
-    .then(function(doc){
-            let postDate = doc.data().posts[0].date.toDate();
-            console.log(postDate);
-            let postMsg = doc.data().posts[0].message;
-            console.log(postMsg);
-            let postTitle= doc.data().posts[0].title;
-            console.log(postTitle);
-
-            document.getElementById('postDate').innerText = postDate;
-            document.getElementById('postMessage').innerText = postMsg;
-            document.getElementById('postTitle').innerText = postTitle;
-        })
-    }
-
-    // about me section for user
-    export function displayAboutMe(){
-        console.log("About Me Section :)");
-        db.collection("user").get() // gets the entire collection??
-        .then(function(c){
-            c.forEach(function(doc){
-                let cheatMeal = doc.data().about.favCheatMeal;            
-                console.log(cheatMeal);   
-                let workout = doc.data().about.favWorkout;             
-                console.log(workout);      
-                let fitnessLevel = doc.data().about.fitnessLevel;             
-                console.log(fitnessLevel);      
-                let fitnessGoal = doc.data().about.fitnessGoal;             
-                console.log(fitnessGoal);      
-                let website = doc.data().about.website;             
-                console.log(website);      
-      
-                document.getElementById('fav-cheatMeal-answer').innerText = cheatMeal;
-                document.getElementById('fav-workout-answer').innerText = workout;
-                document.getElementById('fav-fitnessGoals-answer').innerText = fitnessGoal;
-                document.getElementById('fav-website-answer').innerText = website;
-                document.getElementById('fav-fitnessLevel-answer').innerText = fitnessLevel;
-            })
-        })
-    }
 
 // displays the selected trainer's name and their initial booking message
 export function displayBookInfo(trainerID) {
