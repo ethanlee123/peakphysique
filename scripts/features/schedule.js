@@ -76,6 +76,21 @@ var schedule = {
         getSchedule(getUserRole(), tab === "upcoming" ? false : true);
     },
 
+    renderSchedulePic(parentNode, data, role) {
+        const schedulePic = parentNode.querySelector(".schedule-profile-pic");
+        const placeholder = parentNode.querySelector(".no-pic");
+        const picURL = data[`${role}ProfilePic`];
+
+        if (picURL) {
+            schedulePic.setAttribute("src", picURL);
+        } else {
+            schedulePic.style.display = "none";
+            placeholder.style.display = "block";
+            const initials = `${data[`${role}FirstName`].substring(0, 1)} ${data[`${role}LastName`].substring(0, 1)}`;
+            insertText(placeholder, ".initials", initials);
+        }
+    },
+
     renderScheduleCards(parentNode) {
         const oppositeRole = getUserRole() === "client" ? "trainer" : "client";
 
@@ -88,7 +103,11 @@ var schedule = {
             insertText(scheduleCard, ".trainerLastName", data[`${oppositeRole}LastName`]);
             insertText(scheduleCard, "#appt-date", data.date);
             insertText(scheduleCard, "#appt-time", data.time);
-            insertText(scheduleCard, "#bookingMsg", data.bookingMsg);
+
+            const messageToRender = oppositeRole === "client" ? data.initialMsgFromClient : data.bookingMsg;
+            messageToRender && insertText(scheduleCard, "#bookingMsg", messageToRender);
+
+            this.renderSchedulePic(scheduleCard, data, oppositeRole);
     
             // cancel button sets appointment to completed
             const cancelAppt = scheduleCard.querySelector(".cancelBtn");
