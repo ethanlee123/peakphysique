@@ -77,18 +77,17 @@ export function writeAppointmentSchedule(comments, dropdown, date, trainerID) {
             scheduleRef.add({
                 date: date.value, // from jquery date picker
                 time: dropdown.options[dropdown.selectedIndex].text, // String morning, afternoon, or evening
-                // location: "",
                 completed: false, // boolean default false
                 clientProfilePic: profilePic,
                 clientFirstName: firstName,
                 clientLastName: lastName,
-                clientUserId: user.uid, //user_id
+                clientUserId: user.uid,
                 trainerProfilePic: trainerID.profilePic,
                 trainerFirstName: trainerID.firstName,
                 trainerLastName: trainerID.lastName,
-                trainerUserId: trainerID.userId, //user_id
-                initialMsgFromClient: comments.value, //user input from comments form
-                bookingMsg: trainerID.bookingMsg //pull from trainer collection
+                trainerUserId: trainerID.userId,
+                initialMsgFromClient: comments.value, // user input from comments form
+                bookingMsg: trainerID.bookingMsg
             }).then(() => {
                 window.location.href = "schedule.html";
             });
@@ -434,7 +433,55 @@ export function hideUserSections(){
     }
 }
 
+<<<<<<< HEAD
 // displays the selected trainer's name and their initial booking message
+=======
+// gets user post and posts to "Updates" section
+export function trainerProfilePosts() {
+    console.log("Profile Posts :)");
+    db.collection("trainer").doc("x4FAASQ2nGzvN4UL7rjB").get()         // pulls from "Chuck Norris" doc
+    .then(function(doc){
+            let postDate = doc.data().posts[0].date.toDate();
+            console.log(postDate);
+            let postMsg = doc.data().posts[0].message;
+            console.log(postMsg);
+            let postTitle= doc.data().posts[0].title;
+            console.log(postTitle);
+
+            document.getElementById('postDate').innerText = postDate;
+            document.getElementById('postMessage').innerText = postMsg;
+            document.getElementById('postTitle').innerText = postTitle;
+        })
+    }
+
+    // about me section for user
+    export function displayAboutMe(){
+        console.log("About Me Section :)");
+        db.collection("user").get() // gets the entire collection??
+        .then(function(c){
+            c.forEach(function(doc){
+                let cheatMeal = doc.data().about.favCheatMeal;            
+                console.log(cheatMeal);   
+                let workout = doc.data().about.favWorkout;             
+                console.log(workout);      
+                let fitnessLevel = doc.data().about.fitnessLevel;             
+                console.log(fitnessLevel);      
+                let fitnessGoal = doc.data().about.fitnessGoal;             
+                console.log(fitnessGoal);      
+                let website = doc.data().about.website;             
+                console.log(website);      
+      
+                document.getElementById('fav-cheatMeal-answer').innerText = cheatMeal;
+                document.getElementById('fav-workout-answer').innerText = workout;
+                document.getElementById('fav-fitnessGoals-answer').innerText = fitnessGoal;
+                document.getElementById('fav-website-answer').innerText = website;
+                document.getElementById('fav-fitnessLevel-answer').innerText = fitnessLevel;
+            })
+        })
+    }
+
+// Display the selected trainer's name and their initial booking message
+>>>>>>> 447997043073732875fa55108ce5f70577ee45c5
 export function displayBookInfo(trainerID) {
     document.getElementById("trainerFirstName").innerText = trainerID.firstName;
     if (trainerID.bookingMsg === null) {
@@ -538,4 +585,31 @@ export const getLoggedUser = () => {
             localStorage.getItem("user") && localStorage.removeItem("user");
         }
     })
+}
+
+// Query through the schedules collection to generate an array...
+// of booked time slots for the selected trainer
+export const getScheduleInfo = (trainerId) => {
+    // Find all appointments scheduled with the given trainer
+    let query = db.collection("schedule").where("trainerUserId", "==", trainerId.userId);
+
+    let bookedSlots = [];
+    
+    // Write date and time of respective appointments into an array
+    query.onSnapshot(function(c){
+        c.forEach(function(doc){
+            // Format date to appropriate format
+            let date = new Date(doc.data().date);
+            const year = date.getFullYear();
+            const month = ("" + (date.getMonth() + 1)).slice(-2);
+            const day = ("" + (date.getDate())).slice(-2);
+            const formatted = month + '/' + day + '/' + year;
+
+            let bookedDate = formatted;
+            let bookedTime = doc.data().time;
+            bookedSlots.push({date : bookedDate, time : bookedTime});
+        })
+    })
+
+    return bookedSlots;
 }
