@@ -77,18 +77,17 @@ export function writeAppointmentSchedule(comments, dropdown, date, trainerID) {
             scheduleRef.add({
                 date: date.value, // from jquery date picker
                 time: dropdown.options[dropdown.selectedIndex].text, // String morning, afternoon, or evening
-                // location: "",
                 completed: false, // boolean default false
                 clientProfilePic: profilePic,
                 clientFirstName: firstName,
                 clientLastName: lastName,
-                clientUserId: user.uid, //user_id
+                clientUserId: user.uid,
                 trainerProfilePic: trainerID.profilePic,
                 trainerFirstName: trainerID.firstName,
                 trainerLastName: trainerID.lastName,
-                trainerUserId: trainerID.userId, //user_id
-                initialMsgFromClient: comments.value, //user input from comments form
-                bookingMsg: trainerID.bookingMsg //pull from trainer collection
+                trainerUserId: trainerID.userId,
+                initialMsgFromClient: comments.value, // user input from comments form
+                bookingMsg: trainerID.bookingMsg
             }).then(() => {
                 window.location.href = "schedule.html";
             });
@@ -547,7 +546,7 @@ export function trainerProfilePosts() {
         })
     }
 
-// displays the selected trainer's name and their initial booking message
+// Display the selected trainer's name and their initial booking message
 export function displayBookInfo(trainerID) {
     document.getElementById("trainerFirstName").innerText = trainerID.firstName;
     if (trainerID.bookingMsg === null) {
@@ -651,4 +650,31 @@ export const getLoggedUser = () => {
             localStorage.getItem("user") && localStorage.removeItem("user");
         }
     })
+}
+
+// Query through the schedules collection to generate an array...
+// of booked time slots for the selected trainer
+export const getScheduleInfo = (trainerId) => {
+    // Find all appointments scheduled with the given trainer
+    let query = db.collection("schedule").where("trainerUserId", "==", trainerId.userId);
+
+    let bookedSlots = [];
+    
+    // Write date and time of respective appointments into an array
+    query.onSnapshot(function(c){
+        c.forEach(function(doc){
+            // Format date to appropriate format
+            let date = new Date(doc.data().date);
+            const year = date.getFullYear();
+            const month = ("" + (date.getMonth() + 1)).slice(-2);
+            const day = ("" + (date.getDate())).slice(-2);
+            const formatted = month + '/' + day + '/' + year;
+
+            let bookedDate = formatted;
+            let bookedTime = doc.data().time;
+            bookedSlots.push({date : bookedDate, time : bookedTime});
+        })
+    })
+
+    return bookedSlots;
 }
