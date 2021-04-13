@@ -1,4 +1,3 @@
-import { displayAboutMe } from "../api/firebase-queries.js";
 import { displayTrainerInfo, hideUserSections } from "/scripts/api/firebase-queries.js";
 import { getAvailabilityText } from "/scripts/util/getTrainerText.js";
 
@@ -6,7 +5,6 @@ import { getAvailabilityText } from "/scripts/util/getTrainerText.js";
 let trainerToDisplay = localStorage.getItem("trainerProfileToDisplay");
 trainerToDisplay = trainerToDisplay ? JSON.parse(trainerToDisplay) : window.location.href="./404.html";
 const trainerID = trainerToDisplay.userId
-// localStorage.setItem("trainerProfileToDisplay", "")
 
 // ### Constants ###
 const db = firebase.firestore();
@@ -15,8 +13,8 @@ const location = document.getElementById("location");
 const profilePic = document.getElementsByClassName("profile-pic");
 const favWorkout = document.getElementById("fav-workout-answer");
 const favCheatMeal = document.getElementById("fav-cheatMeal-answer");
-// const fitnessGoals = document.getElementById("fav-fitnessGoals-answer");
-// const fitnessLevel = document.getElementById("fav-fitnessLevel-answer");
+const fitnessGoals = document.getElementById("fav-fitnessGoals-answer");
+const fitnessLevel = document.getElementById("fav-fitnessLevel-answer");
 const website = document.getElementById("fav-website-answer");
 const hourly = document.getElementById("hourlyRate");
 const availability = document.getElementById("availability");
@@ -60,7 +58,7 @@ const getUserAvatar = ({
 }
 
 
-function displayProfileInfo(fullName, profileImg, location, availability, favWorkout, favCheatMeal, website, hourly, fitnessServices, wellness, certifications) {
+function displayProfileInfo(fullName, profileImg, location, availability, favWorkout, favCheatMeal, fitnessGoals, fitnessLevel, website, hourly, fitnessServices, wellness, certifications) {
         // Get doc from trainerOnly collection
         db.collection("trainerOnly").doc(trainerID).get()
         .then(async trainerDoc => {
@@ -103,14 +101,10 @@ function displayProfileInfo(fullName, profileImg, location, availability, favWor
             fullName.innerText = doc.data().name;
             location.innerText = doc.data().city;
             favWorkout.innerText = doc.data().favWorkout;
-            favCheatMeal.innerText = doc.data().favCheatMeal;           
-            // fitnessGoals.innerText = doc.data().fitnessGoals;
-            // fitnessLevel.innerText = doc.data().fitnessLevel;
-            // city.value = doc.data().city;
-            // bio.value = doc.data().about;
-            // randFact.value = doc.data().randomFact;
-            // radiusDisplay.innerText= doc.data().radius;
-            // userCity.value = doc.date().city;
+            favCheatMeal.innerText = doc.data().favCheatMeal;  
+            fitnessGoals.innerText = capitalizeWords(doc.data().fitnessGoals); 
+            fitnessLevel.innerText = capitalizeWords(doc.data().fitnessLevel); 
+
         });
     }
 // function is called under initialRender()
@@ -159,7 +153,7 @@ var profileLoader = {
 const initialRender = () => {
     profileLoader.isLoading = true;    
     
-    displayProfileInfo(fullName, profileImg, location, availability, favWorkout, favCheatMeal, website, hourly, fitnessServices, wellness, certifications);
+    displayProfileInfo(fullName, profileImg, location, availability, favWorkout, favCheatMeal, fitnessGoals, fitnessLevel, website, hourly, fitnessServices, wellness, certifications);
     
     setTimeout(function() {
         profileLoader.isLoading = false;

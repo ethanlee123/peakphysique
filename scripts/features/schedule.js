@@ -3,16 +3,7 @@ import { getTemplate } from "../util/getTemplate.js";
 // get trainerID from Book Appointment button on profile page
 let trainerID = localStorage.getItem("trainerID");
 trainerID = JSON.parse(trainerID);
-console.log(trainerID);
-
-// #### displayScheduleInfo variables
-const trainerFirstName = document.getElementById('trainerFirstName');
-const trainerLastName = document.getElementById('trainerLastName');
-const apptTime = document.getElementById('appt-time');
-const apptDate = document.getElementById('appt-date');
-
-// displayScheduleInfo(trainerFirstName, trainerLastName, apptTime, apptDate);
-// using renderScheduleCards instead
+// console.log(trainerID);
 
 
 // ##########   renderScheduleCards Variables
