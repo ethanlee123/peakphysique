@@ -1411,6 +1411,10 @@ footer .coming-soon {
     display: flex;
     flex-direction: column;
     justify-content: space-between; }
+    .schedule .card .card-body .btn.btn-primary.hideScheduleBtn {
+      -webkit-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
+      -moz-box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.8); }
   .schedule .card .schedule-pic {
     aspect-ratio: 1 / 1; }
     .schedule .card .schedule-pic .no-pic {
@@ -1453,9 +1457,11 @@ footer .coming-soon {
 .schedule .nav-tabs button {
   color: #D4DDD6; }
 
-.schedule .nav-tabs .nav-link.active {
-  color: #83C3A3;
-  font-weight: bolder; }
+.schedule .nav-tabs .nav-link {
+  box-shadow: none; }
+  .schedule .nav-tabs .nav-link.active {
+    color: #83C3A3;
+    font-weight: bolder; }
 
 .sign-up-success .text-uppercase {
   text-transform: uppercase; }

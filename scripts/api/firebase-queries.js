@@ -433,9 +433,6 @@ export function hideUserSections(){
     }
 }
 
-<<<<<<< HEAD
-// displays the selected trainer's name and their initial booking message
-=======
 // gets user post and posts to "Updates" section
 export function trainerProfilePosts() {
     console.log("Profile Posts :)");
@@ -481,7 +478,6 @@ export function trainerProfilePosts() {
     }
 
 // Display the selected trainer's name and their initial booking message
->>>>>>> 447997043073732875fa55108ce5f70577ee45c5
 export function displayBookInfo(trainerID) {
     document.getElementById("trainerFirstName").innerText = trainerID.firstName;
     if (trainerID.bookingMsg === null) {
