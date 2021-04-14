@@ -9,7 +9,8 @@ Peak Physique is a web-based application that provides a platform for connecting
 	
 ## Technologies
 Technologies used for this project:
-* HTML, CSS
+* HTML
+* SASS / CSS
 * JavaScript
 * Bootstrap 
 * Firebase
@@ -17,6 +18,8 @@ Technologies used for this project:
 * GeoLocation API
 * GoogleMaps Geocoding API
 * Datepicker jQuery API
+* Filter Multi-select jQuery Plugin
+* NoUISlider Plugin
 	
 ## Content
 Content of the project folder:
