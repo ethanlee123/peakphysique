@@ -310,6 +310,38 @@ export async function displayUserProfileImg(selector) {
     })
 }
 
+
+// Displays trainer profile information. Parameters are references to a tag.
+export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        userRef.doc(user.uid).get()
+        .then(doc => {
+            fullName.innerText = doc.data().name;
+            phoneNum.value = doc.data().phoneNumber;
+            bio.value = doc.data().about;
+            workout.value = doc.data().favWorkout;
+            cheatMeal.value = doc.data().favCheatMeal;
+            randFact.value = doc.data().randomFact;
+            radiusDisplay.innerText= doc.data().radius;
+
+            if (doc.data().role == "trainer") {
+                trainerOnlyRef.doc(user.uid).get()
+                .then(trainerDoc => {
+                    websiteUrl.value = trainerDoc.data().website;
+                }).catch(err => {
+                    // If doc is undefined, user is not a trainer
+                    console.log("error: ", err);
+                });
+            }
+        });
+        // Update city field in real time 
+        userRef.doc(user.uid)
+        .onSnapshot(doc => {
+            userCity.value = doc.data().city;
+        })
+    });
+}
+
 export function uploadCertImg(imgPath, selector) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Reference to logged in user specific storage
@@ -433,9 +465,6 @@ export function hideUserSections(){
     }
 }
 
-<<<<<<< HEAD
-// displays the selected trainer's name and their initial booking message
-=======
 // gets user post and posts to "Updates" section
 export function trainerProfilePosts() {
     console.log("Profile Posts :)");
@@ -481,7 +510,6 @@ export function trainerProfilePosts() {
     }
 
 // Display the selected trainer's name and their initial booking message
->>>>>>> 447997043073732875fa55108ce5f70577ee45c5
 export function displayBookInfo(trainerID) {
     document.getElementById("trainerFirstName").innerText = trainerID.firstName;
     if (trainerID.bookingMsg === null) {
