@@ -1,6 +1,7 @@
 import { firebaseConfig } from "/scripts/api/firebase_api_team37.js";
 import { getEditProfAvatar } from "/scripts/util/getUserAvatar.js";
 import { capitalizeWords } from "/scripts/util/capitalizeWords.js";
+import { securityGuard } from "/scripts/util/securityGuard.js";
 
 const db = firebase.firestore();
 const userRef = db.collection("user");
@@ -603,7 +604,7 @@ export const logOutUser = async () => {
 // retrieve their corresponding user document in the db...
 // and put in localStorage
 // If the user is not logged in and there is a user in localStorage...
-// remove user
+// remove user, and redirect them if necessary
 export const getLoggedUser = () => {
     firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
@@ -611,6 +612,7 @@ export const getLoggedUser = () => {
             localStorage.setItem("user", JSON.stringify(loggedUser));
         } else {
             localStorage.getItem("user") && localStorage.removeItem("user");
+            securityGuard("../../index.html", false);
         }
     })
 }

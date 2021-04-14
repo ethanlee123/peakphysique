@@ -82,9 +82,6 @@ const handleLogOut = () => {
                 document.body.classList.add("logged-out");
             }
             isLoggedIn.value = false;
-            // If the user is in an auth-restricted page ...
-            // Redirect them to the landing page
-            securityGuard("../../index.html", isLoggedIn.value);
         });
     });
 }
