@@ -41,10 +41,6 @@ const renderScheduleCards = () => {
 }
 // renderScheduleCards();
 
-
-// ###########################################
-// ## NEW
-// ###########################################
 var schedule = {
     _value: [],
     _tab: "upcoming",
@@ -164,7 +160,6 @@ scheduleTabBtns.forEach(btn =>
 )
 
 getSchedule(getUserRole, schedule.tab === "upcoming" ? false : true);
-// ###########################################
 
 // creates upcoming schedule cards for a trainer
 const renderScheduleCardsTrainer = () => {
