@@ -7,7 +7,6 @@ const uploadIcon = document.getElementById("upload");
 const years = document.getElementById("years");
 // Get NodeList of input tag under fitness specialization
 const fitnessInp = document.querySelectorAll(".fit-btn");
-const fitnessLabels = document.querySelectorAll(".fit-labels");
 // Get NodeList of input tag under wellness specialization
 const wellnessInp = document.querySelectorAll(".well-btn");
 // Get reference to a tag not button
@@ -63,6 +62,5 @@ saveReturn.addEventListener("click", function(e) {
 
 uploadIcon.addEventListener("change", function(e) {
     let file = e.target.files[0];
-    let blob = URL.createObjectURL(file);
     uploadCertImg(file, confirmUpload);
 })

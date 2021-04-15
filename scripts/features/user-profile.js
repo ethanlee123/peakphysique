@@ -1,4 +1,3 @@
-import { displayTrainerInfo, hideUserSections } from "/scripts/api/firebase-queries.js";
 import { getAvailabilityText } from "/scripts/util/getTrainerText.js";
 
 // localStorage to grab trainerId
@@ -10,7 +9,6 @@ const trainerID = trainerToDisplay.userId
 const db = firebase.firestore();
 const fullName = document.getElementById("fullName");
 const location = document.getElementById("location");
-const profilePic = document.getElementsByClassName("profile-pic");
 const favWorkout = document.getElementById("fav-workout-answer");
 const favCheatMeal = document.getElementById("fav-cheatMeal-answer");
 const fitnessGoals = document.getElementById("fav-fitnessGoals-answer");
@@ -24,7 +22,6 @@ const certifications = document.getElementById("certifications");
 const profileImg = document.querySelector(".trainer-profile-pic");
 
 const loader = document.getElementById("loader");
-const trainerList = document.getElementById("trainerList");
 const profilePage = document.querySelector(".main-content");
 
 // used to capitalize reads from Firestore
