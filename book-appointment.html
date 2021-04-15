@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Book An Appointment - Peak Physique</title>
     <meta name="comp1800 boilerplate code" content="my bcit project">
@@ -29,9 +29,9 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="./styles/style.css">
 
-  </head>
+</head>
 
-  <body id="#body" class="logged-out">
+<body id="#body" class="logged-out">
 
     <!-------------------------------------->
     <!-- The following is HTML for layout -->
@@ -40,62 +40,67 @@
     <header-component></header-component>
 
     <div class="spinner-border text-primary" role="status" id="loader">
-      <span class="sr-only">Loading...</span>
-    </div><!--.spinner-border-->
+        <span class="sr-only">Loading...</span>
+    </div>
+    <!--.spinner-border-->
 
     <div class="book-appointment-body main-content" id="main">
-      <div class="container">
-        <h1 class="display-4"><span class="title-font">Book An <span class="title-font-color">Appointment</span></span>
-        </h1>
-        <hr>
-        <!-- Display trainer name -->
-        <h3 class="display-7">A Message From <span id="trainerFirstName"></span></h3>
-        <!-- Display trainer's booking message -->
-        <p id="bookingMsg"></p>
-        <hr>
-        <div class="d-flex">
+        <div class="container">
+            <h1 class="display-4"><span class="title-font">Book An <span
+                        class="title-font-color">Appointment</span></span>
+            </h1>
+            <hr>
+            <!-- Display trainer name -->
+            <h3 class="display-7">A Message From <span id="trainerFirstName"></span></h3>
+            <!-- Display trainer's booking message -->
+            <p id="bookingMsg"></p>
+            <hr>
+            <div class="d-flex">
+                <div class="mb-3">
+                    <p>Date: </p>
+                    <!-- Datepicker widget -->
+                    <input type="text" id="datepicker">
+                </div>
+                <div class="mb-3 ms-3">
+                    <p>Time: </p>
+                    <!-- Time slot dropdown selections -->
+                    <select class="form-select form-select-sm" aria-label="Default select example"
+                        id="dropdown"></select>
+                </div>
+            </div>
             <div class="mb-3">
-              <p>Date: </p>
-              <!-- Datepicker widget -->
-              <input type="text" id="datepicker">
+                <label for="comments" class="form-label">Comments</label>
+                <input type="text" class="form-control font-black" id="comments" rows="3"></input>
             </div>
-            <div class="mb-3 ms-3">
-              <p>Time: </p>
-              <!-- Time slot dropdown selections -->
-              <select class="form-select form-select-sm" aria-label="Default select example" id="dropdown"></select>
-            </div>
-        </div>
-        <div class="mb-3">
-          <label for="comments" class="form-label">Comments</label>
-          <input type="text" class="form-control font-black" id="comments" rows="3"></input>
-        </div>
 
-        <!-- Button trigger modal -->
-        <div class="card">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            BOOK
-          </button>
-        </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-          aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Confirm Booking</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                Thank you for choosing Peak Physique! We know you could just go to the gym, but this is way cooler anyway.
-              </div>
-              <div class="modal-footer">
-                <a class="btn btn-primary book-button" id="confirm-btn" role="button" href="schedule.html">CONFIRM</a> 
-              </div>
+            <!-- Button trigger modal -->
+            <div class="card">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    BOOK
+                </button>
             </div>
-          </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Confirm Booking</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Thank you for choosing Peak Physique! We know you could just go to the gym, but this is way
+                            cooler anyway.
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-primary book-button" id="confirm-btn" role="button"
+                                href="schedule.html">CONFIRM</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
     <footer-component></footer-component>
@@ -123,6 +128,6 @@
     <script type="module" src="./scripts/api/firebase_api_team37.js"></script>
     <script type="module" src="./scripts/api/firebase-queries.js"></script>
 
-  </body>
+</body>
 
 </html>
