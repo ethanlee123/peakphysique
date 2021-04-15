@@ -7,7 +7,7 @@ const db = firebase.firestore();
 const userRef = db.collection("user");
 const trainerOnlyRef = db.collection("trainerOnly");
  
-// Updates firestore location, city, address fields.
+// Updates firestore location, city, address fields.git 
 export function updateLocation(latitude, longitude, cityFromGeo) {
     firebase.auth().onAuthStateChanged(function(user) {
         userRef.doc(user.uid).update({ 
