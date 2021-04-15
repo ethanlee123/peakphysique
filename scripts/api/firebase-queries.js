@@ -7,6 +7,7 @@ const db = firebase.firestore();
 const userRef = db.collection("user");
 const trainerOnlyRef = db.collection("trainerOnly");
  
+// Updates firestore location, city, address fields.git 
 export function updateLocation(latitude, longitude, cityFromGeo) {
     firebase.auth().onAuthStateChanged(function(user) {
         userRef.doc(user.uid).update({ 
@@ -21,54 +22,9 @@ export function updateLocation(latitude, longitude, cityFromGeo) {
     });
 }
 
-export function displayTrainerInfo(){
-  console.log("hello from displayTrainerInfo! :)");
-  db.collection("trainer").get() 
-  .then(function(c){
-      c.forEach(function(doc){
-          let trainerFirstName = doc.data().name.first;             //gets the first name field
-          console.log(trainerFirstName);
-          let trainerLastName = doc.data().name.last;             //gets the last name field
-          console.log(trainerLastName);
-          let totalClients = doc.data().totalClients;        //gets the totalClients ID field
-          console.log(totalClients);
-          let totalSessions = doc.data().totalSessions;        //gets the totalSessions ID field
-          console.log(totalSessions);
-          let hourlyRate = doc.data().platformSpecific.hourlyRate;  // WILL CHANGE TO MATCH NESTED COLLECTIONS AS 
-          console.log(hourlyRate);                                  // DONE IN userProfile SCHEMA.JS
-          let services = doc.data().platformSpecific.services;      // change to wellness options?
-          console.log(services);
-          let expertise = doc.data().platformSpecific.expertise;    // change to fitness options?
-          console.log(expertise);
-          let certifications = doc.data().platformSpecific.certifications;
-          console.log(certifications);
-          let location = doc.data().location;
-          console.log(location);
-          let availability = doc.data().availability;
-          console.log(availability);
-          
-
-          document.getElementById('trainerFirstName').innerText = trainerFirstName;
-          document.getElementById('trainerLastName').innerText = trainerLastName;
-          document.getElementById('totalClients').innerText = totalClients;
-          document.getElementById('totalSessions').innerText = totalSessions;
-          document.getElementById('hourlyRate').innerText = hourlyRate;
-          document.getElementById('services').innerText = services;
-          document.getElementById('expertise').innerText = expertise;
-          document.getElementById('certifications').innerText = certifications;
-          document.getElementById('location').innerText = location;
-          document.getElementById('availability').innerText = availability;
-
-      })
-
-  })
-}
-
-
-// Creates a document in schedule collection for the booked appointment
+// Creates a document in schedule collection for the booked appointment.
 export function writeAppointmentSchedule(comments, dropdown, date, trainerID) {
     const scheduleRef = db.collection("schedule");
-
     firebase.auth().onAuthStateChanged(function(user) {
         userRef.doc(user.uid).get()
         .then(function (doc) {
@@ -96,7 +52,7 @@ export function writeAppointmentSchedule(comments, dropdown, date, trainerID) {
     });
 }
 
-// Read the first name from db
+// Read the first name from db.
 export function personalizedWelcome(selector) {
     firebase.auth().onAuthStateChanged(function(user) {
         const userRefDoc = userRef.doc(user.uid);
@@ -117,9 +73,8 @@ export function personalizedWelcome(selector) {
     });
 }
 
-// Creates document id with user uid in both user and trainerOnly collections
+// Creates document id with user uid in both user and trainerOnly collections.
 export function createUser() {
-    // Only authenticated users, can be set in firebase console storage "rules" tab
     firebase.auth().onAuthStateChanged(function(user) { 
         // Get ref to user collection with doc id = user UID, will return doc id, if it exists
         userRef.doc(user.uid).get()
@@ -188,7 +143,7 @@ export function createUser() {
     });
 }
 
-// Set role field in user collection
+// Set role field in user collection.
 export function updateUserRole(userRole) {
     firebase.auth().onAuthStateChanged(function(user) {
         const userDocRef = userRef.doc(user.uid);
@@ -209,7 +164,7 @@ export function updateUserRole(userRole) {
     });
 }
 
-// Checks if user has logged in before based on their role, if so redirect to schedule page
+// Checks if user has logged in before based on their role, if so redirect to schedule page.
 export const isFirstTime = () => {
     firebase.auth().onAuthStateChanged(user => {
         userRef.doc(user.uid).get()
@@ -224,7 +179,7 @@ export const isFirstTime = () => {
     })
 }   
 
-// Shows the selector if role is trainer
+// Shows the selector if role is trainer.
 export function displayWebsiteField(selector) {
     firebase.auth().onAuthStateChanged(function(user) {
         userRef.doc(user.uid).get()
@@ -261,6 +216,7 @@ export function updateProfileInfo(websiteUrl, phoneNum, bio, workout, cheatMeal,
     });
 }
 
+// Updates to firestore trainerOnly collection, website field.
 function updateTrainerInfo(websiteUrl = "") {
     firebase.auth().onAuthStateChanged(function(user) {
         trainerOnlyRef.doc(user.uid).update({
@@ -273,6 +229,7 @@ function updateTrainerInfo(websiteUrl = "") {
     });
 }
 
+// Writes URL to storage and updates profilePic field with fire storage URL.
 export function uploadProfileImg(imgPath, imgSelector) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Reference to logged in user specific storage
@@ -300,19 +257,19 @@ export function uploadProfileImg(imgPath, imgSelector) {
     })
 }
 
+// Reads profilePic field. If undefined, displays user's initials.
 export async function displayUserProfileImg(selector) {
     firebase.auth().onAuthStateChanged(async (user) => {      
         let ref = await userRef.doc(user.uid).get();
         let first = ref.data().firstName;
         let last = ref.data().lastName;
         let profileP = ref.data().profilePic; 
-
+        // Handles displaying initials or profile picture.
         getEditProfAvatar({firstName: first, lastName: last, parentNode: selector, profilePicPath: profileP});
     })
 }
 
-
-// Displays trainer profile information. Parameters are references to a tag.
+// Displays trainer profile information. (radiusTravel param for future use)
 export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
     firebase.auth().onAuthStateChanged(function(user) {
         userRef.doc(user.uid).get()
@@ -331,7 +288,7 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
                     websiteUrl.value = trainerDoc.data().website;
                 }).catch(err => {
                     // If doc is undefined, user is not a trainer
-                    console.log("error: ", err);
+                    console.log("Error: ", err);
                 });
             }
         });
@@ -343,6 +300,7 @@ export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, 
     });
 }
 
+// Writes to trainerOnly collection, adds user uploaded certificate images.
 export function uploadCertImg(imgPath, selector) {
     firebase.auth().onAuthStateChanged(function(user) {
         // Reference to logged in user specific storage
@@ -365,7 +323,7 @@ export function uploadCertImg(imgPath, selector) {
     })
 }
 
-
+// Writes the parameters to the trainerOnly collection.
 export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) {
     firebase.auth().onAuthStateChanged(function(user) {
         trainerOnlyRef.doc(user.uid).update({
@@ -382,7 +340,7 @@ export function updateExpertise(certTitle, yearsExp, fitnessList, wellnessList) 
     });
 }
 
-// Parameters are references to a tag.
+// Reads from db and displays parameters.
 export function displayExpertise(yearsExp, fitnessInp, wellnessInp) {
     firebase.auth().onAuthStateChanged(function(user) {
         var fitnessSpcList = [];
@@ -419,7 +377,7 @@ export function displayExpertise(yearsExp, fitnessInp, wellnessInp) {
     });
 }
 
-// Parameters are references to a tag.
+// Updates trainerOnly collection fields with respective parameters.
 export function updatePlatformSpecifics(rate, depositMin, freeSession, preBookingMsg) {
     firebase.auth().onAuthStateChanged(function(user) {
         trainerOnlyRef.doc(user.uid).update({
@@ -434,7 +392,7 @@ export function updatePlatformSpecifics(rate, depositMin, freeSession, preBookin
     })
 }
 
-// Parameters are references to a tag.
+// Reads from db and displays parameters.
 export function displayPlatformSpecifics(rate, depositMin, freeSession, preBookingMsg) {
     firebase.auth().onAuthStateChanged(function(user) {
         trainerOnlyRef.doc(user.uid).get()
@@ -457,58 +415,34 @@ export function displayPlatformSpecifics(rate, depositMin, freeSession, preBooki
     })
 }
 
-  // hides sections of profile depending on if user or trainer
+  // Hides sections of profile depending on if user or trainer.
 export function hideUserSections(){
     let userSection = document.getElementsByClassName('hideUserSection');
-    console.log("hiding user sections");
+
     for (let i = 0; i< userSection.length; i++) {
         userSection[i].style.display = "none";
     }
 }
 
-// gets user post and posts to "Updates" section
-export function trainerProfilePosts() {
-    console.log("Profile Posts :)");
-    db.collection("trainer").doc("x4FAASQ2nGzvN4UL7rjB").get()         // pulls from "Chuck Norris" doc
-    .then(function(doc){
-            let postDate = doc.data().posts[0].date.toDate();
-            console.log(postDate);
-            let postMsg = doc.data().posts[0].message;
-            console.log(postMsg);
-            let postTitle= doc.data().posts[0].title;
-            console.log(postTitle);
-
-            document.getElementById('postDate').innerText = postDate;
-            document.getElementById('postMessage').innerText = postMsg;
-            document.getElementById('postTitle').innerText = postTitle;
+// Displays about me section for user.
+export function displayAboutMe(){
+    db.collection("user").get()
+    .then(function(c){
+        c.forEach(function(doc){
+            let cheatMeal = doc.data().about.favCheatMeal;              
+            let workout = doc.data().about.favWorkout;                  
+            let fitnessLevel = doc.data().about.fitnessLevel;                  
+            let fitnessGoal = doc.data().about.fitnessGoal;                  
+            let website = doc.data().about.website;                  
+    
+            document.getElementById('fav-cheatMeal-answer').innerText = cheatMeal;
+            document.getElementById('fav-workout-answer').innerText = workout;
+            document.getElementById('fav-fitnessGoals-answer').innerText = fitnessGoal;
+            document.getElementById('fav-website-answer').innerText = website;
+            document.getElementById('fav-fitnessLevel-answer').innerText = fitnessLevel;
         })
-    }
-
-    // about me section for user
-    export function displayAboutMe(){
-        console.log("About Me Section :)");
-        db.collection("user").get() // gets the entire collection??
-        .then(function(c){
-            c.forEach(function(doc){
-                let cheatMeal = doc.data().about.favCheatMeal;            
-                console.log(cheatMeal);   
-                let workout = doc.data().about.favWorkout;             
-                console.log(workout);      
-                let fitnessLevel = doc.data().about.fitnessLevel;             
-                console.log(fitnessLevel);      
-                let fitnessGoal = doc.data().about.fitnessGoal;             
-                console.log(fitnessGoal);      
-                let website = doc.data().about.website;             
-                console.log(website);      
-      
-                document.getElementById('fav-cheatMeal-answer').innerText = cheatMeal;
-                document.getElementById('fav-workout-answer').innerText = workout;
-                document.getElementById('fav-fitnessGoals-answer').innerText = fitnessGoal;
-                document.getElementById('fav-website-answer').innerText = website;
-                document.getElementById('fav-fitnessLevel-answer').innerText = fitnessLevel;
-            })
-        })
-    }
+    })
+}
 
 // Display the selected trainer's name and their initial booking message
 export function displayBookInfo(trainerID) {
