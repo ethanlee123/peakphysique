@@ -41,7 +41,6 @@ Content of the project folder:
 ├── sign-up-success.html
 ├── sign-up-trainer-expertise.html
 ├── sign-up-user-profile.html
-├── trainer-profile-self.html                   #deprecated, using user-profile.html
 ├── under-construction.html
 ├── user-profile.html
 └── README.md
