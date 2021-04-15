@@ -60,10 +60,12 @@ var schedule = {
         this._value.forEach(schedule => {
             const { data } = schedule;
             const scheduleCard = document.importNode(scheduleCardTemplate.content, true);
+            
+            const formattedDate = data.date.toDate().toLocaleDateString("en-US");
         
             insertText(scheduleCard, ".trainerFirstName", data[`${oppositeRole}FirstName`]);
             insertText(scheduleCard, ".trainerLastName", data[`${oppositeRole}LastName`]);
-            insertText(scheduleCard, "#appt-date", data.date);
+            insertText(scheduleCard, "#appt-date", formattedDate);
             insertText(scheduleCard, "#appt-time", data.time);
 
             const messageToRender = oppositeRole === "client" ? data.initialMsgFromClient : data.bookingMsg;

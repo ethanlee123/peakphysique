@@ -32,7 +32,7 @@ export function writeAppointmentSchedule(comments, dropdown, date, trainerID) {
             const lastName = doc.data().lastName;
             const profilePic = doc.data().profilePic;
             scheduleRef.add({
-                date: date.value, // from jquery date picker
+                date: new firebase.firestore.Timestamp.fromDate(date), // from jquery date picker
                 time: dropdown.options[dropdown.selectedIndex].text, // String morning, afternoon, or evening
                 completed: false, // boolean default false
                 clientProfilePic: profilePic,

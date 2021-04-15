@@ -119,7 +119,7 @@ const confirmBtn = document.getElementById("confirm-btn");
 confirmBtn.addEventListener("click", function (event) {
   confirmBtn.disabled = true;
   event.preventDefault();
-  writeAppointmentSchedule(comments, dropdown, date, trainerID);
+  writeAppointmentSchedule(comments, dropdown, new Date(date.value), trainerID);
 });
 
 const main = document.getElementById("main");
