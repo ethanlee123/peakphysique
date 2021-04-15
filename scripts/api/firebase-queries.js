@@ -269,7 +269,6 @@ export async function displayUserProfileImg(selector) {
     })
 }
 
-
 // Displays trainer profile information. (radiusTravel param for future use)
 export function displayProfileInfo(fullName, phoneNum, bio, workout, cheatMeal, randFact, websiteUrl, radiusTravel, radiusDisplay, userCity) {
     firebase.auth().onAuthStateChanged(function(user) {
@@ -424,20 +423,6 @@ export function hideUserSections(){
         userSection[i].style.display = "none";
     }
 }
-
-// Gets user post and posts to "Updates" section.
-export function trainerProfilePosts() {
-    db.collection("trainer").doc("x4FAASQ2nGzvN4UL7rjB").get()         // pulls from "Chuck Norris" doc
-    .then(function(doc){
-            let postDate = doc.data().posts[0].date.toDate();
-            let postMsg = doc.data().posts[0].message;
-            let postTitle= doc.data().posts[0].title;
-
-            document.getElementById('postDate').innerText = postDate;
-            document.getElementById('postMessage').innerText = postMsg;
-            document.getElementById('postTitle').innerText = postTitle;
-        })
-    }
 
 // Displays about me section for user.
 export function displayAboutMe(){
