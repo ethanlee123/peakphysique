@@ -140,12 +140,13 @@ getSchedule(getUserRole, schedule.tab === "upcoming" ? false : true);
 
 // sets appointment to completed in firestore if date is passed
 const completeAppt = () => {
-    var todayDate = new Date();
+    let yesterDate = new Date();
+    yesterDate.setDate( yesterDate.getDate() - 1);
 
     db.collection("schedule").get()
     .then(function(s) {
         s.forEach(schedule => {
-            if (schedule.data().date.toDate() < todayDate) {
+            if (schedule.data().date.toDate() < yesterDate) {
                 schedule.ref.update({completed: true})
             }
         })

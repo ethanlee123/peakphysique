@@ -1,4 +1,4 @@
-import { personalizedWelcome, updateUserRole, isFirstTime } from "/scripts/api/firebase-queries.js";
+import { personalizedWelcome, updateUserRole, isFirstTime, createUser } from "/scripts/api/firebase-queries.js";
 
 const nameId = document.querySelector("#name");
 const clientBtn = document.getElementById("client");
@@ -8,6 +8,7 @@ const loader = document.getElementById("loader");
 const question = document.getElementById("question");
 
 async function displayName() {
+    await createUser();
     personalizedWelcome(nameId);
 }
 displayName();
