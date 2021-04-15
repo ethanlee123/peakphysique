@@ -12,3 +12,9 @@ trainer-profile-self.html
 general-availability.html
 
 node_modules/
+.firebaserc
+firebase.json
+firestore.indexes.json
+firestore.rules
+storage.rules
+.firebase/hosting..cache

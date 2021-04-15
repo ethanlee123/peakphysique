@@ -111,7 +111,6 @@ It has the following subfolders and files:
     ├── util                                    # Utility-specific scripts
         /capitalizeWords.js
         /debounce.js
-        /generateTestData.js
         /generateUnavailableSlots.js
         /getGeoPointDistance.js
         /getTemplate.js
