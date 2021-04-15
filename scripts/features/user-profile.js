@@ -110,7 +110,6 @@ function displayProfileInfo(fullName, profileImg, location, availability, favWor
 
 // gets user post and posts to "Updates" section
 function trainerProfilePosts() {
-    console.log(trainerID);
 
     db.collection("trainerOnly").doc(trainerID).get()         // pulls from specific userID doc
     .then(function(doc){
@@ -166,5 +165,4 @@ initialRender();
 const bookAppt = document.querySelector(".book-button");
 bookAppt.addEventListener("click", (e) => {
     localStorage.setItem("trainerID", JSON.stringify(trainerToDisplay));
-    console.log(trainerToDisplay);
 });
