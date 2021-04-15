@@ -89,7 +89,6 @@ It has the following subfolders and files:
         /firebase_api_team37.js
         /firebase-queries.js        
         /here-api.js
-        /token.js
     ├── components                              # Component-specific scripts
         /date-picker.js
         /footer.js
