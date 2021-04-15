@@ -7,7 +7,6 @@ const uploadIcon = document.getElementById("upload");
 const years = document.getElementById("years");
 // Get NodeList of input tag under fitness specialization
 const fitnessInp = document.querySelectorAll(".fit-btn");
-const fitnessLabels = document.querySelectorAll(".fit-labels");
 // Get NodeList of input tag under wellness specialization
 const wellnessInp = document.querySelectorAll(".well-btn");
 // Get reference to a tag not button
