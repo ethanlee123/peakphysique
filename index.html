@@ -2,121 +2,119 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <title>Home - Peak Physique</title>
-  <meta name="comp1800 boilerplate code" content="my bcit project">
-  <meta name="author" content="Team 37">
+    <meta charset="utf-8">
+    <title>Home - Peak Physique</title>
+    <meta name="comp1800 boilerplate code" content="my bcit project">
+    <meta name="author" content="Team 37">
 
-  <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon/favicon-16x16.png">
-  <link rel="manifest" href="./images/favicon/site.webmanifest">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./images/favicon/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 
-  <!-- Bootstrap for Mobile-first, and JQuery -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!-- Bootstrap for Mobile-first, and JQuery -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="./styles/fontello.css">
-  <script src="https://kit.fontawesome.com/beb9e55d0a.js" crossorigin="anonymous"></script>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./styles/fontello.css">
+    <script src="https://kit.fontawesome.com/beb9e55d0a.js" crossorigin="anonymous"></script>
 
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="./styles/style.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./styles/style.css">
 </head>
 
 <body class="index-body logged-out">
 
-  <!-------------------------------------->
-  <!-- The following is HTML for layout -->
-  <!-------------------------------------->
-  <!-- Header Navigation Bar -->
+    <!-------------------------------------->
+    <!-- The following is HTML for layout -->
+    <!-------------------------------------->
+    <!-- Header Navigation Bar -->
 
-  <header-component></header-component>
+    <header-component></header-component>
 
-  <div id="landingCarousel" class="carousel slide container-fluid landing main-content" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#landingCarousel" data-bs-slide-to="0" class="active"
-        aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#landingCarousel" data-bs-slide-to="1"
-        aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#landingCarousel" data-bs-slide-to="2"
-        aria-label="Slide 3"></button>
-      <button type="button" data-bs-target="#landingCarousel" data-bs-slide-to="3"
-        aria-label="Slide 4"></button>
+    <div id="landingCarousel" class="carousel slide container-fluid landing main-content" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#landingCarousel" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#landingCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#landingCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#landingCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="./images/gym-banner.jfif" class="d-block w-100 carousel-images" alt="gym banner">
+                <div class="carousel-caption d-none d-md-block"></div>
+                <div class="caption">
+                    <h1 class="title-font">PEAK <span class="title-font-color">PHYSIQUE</span></h5>
+                        <p class="description-font">Discover and connect with personal trainers and fitness
+                            professionals today.</p>
+                        <a class="btn btn-primary" role="button" href="./login-sign-up.html">Sign up today</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="./images/home-workout.jfif" class="d-block w-100 carousel-images" alt="home workout">
+                <div class="carousel-caption d-none d-md-block"></div>
+                <div class="caption">
+                    <h1 class="title-font">Virtual <span class="title-font-color">Workouts</span></h1>
+                    <p class="description-font">Exercise from the comfort of your own home.</p>
+                    <a class="btn btn-light" role="button" href="./login-sign-up.html">LOGIN</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="./images/outdoor-training.jfif" class="d-block w-100 carousel-images" alt="outdoors training">
+                <div class="carousel-caption d-none d-md-block"></div>
+                <div class="caption">
+                    <h1 class="title-font">Outdoor <span class="title-font-color">Training</span></h1>
+                    <p class="description-font">Enjoy a workout in the great outdoors.</p>
+                    <a class="btn btn-primary" role="button" href="./find-a-trainer.html">Find a Trainer</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="./images/group-classes.jfif" class="d-block w-100 carousel-images" alt="group classes">
+                <div class="carousel-caption d-none d-md-block"></div>
+                <div class="caption">
+                    <h1 class="title-font">Group <span class="title-font-color">Classes</span></h1>
+                    <p class="description-font">Sign up for group classes near you.</p>
+                    <a class="btn btn-light" role="button" href="./under-construction.html">Join a Group Class</a>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#landingCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#landingCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="./images/gym-banner.jfif" class="d-block w-100 carousel-images" alt="gym banner">
-        <div class="carousel-caption d-none d-md-block"></div>
-        <div class="caption">
-          <h1 class="title-font">PEAK <span class="title-font-color">PHYSIQUE</span></h5>
-          <p class="description-font">Discover and connect with personal trainers and fitness professionals today.</p>
-          <a class="btn btn-primary" role="button" href="./login-sign-up.html">Sign up today</a>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="./images/home-workout.jfif" class="d-block w-100 carousel-images" alt="home workout">
-        <div class="carousel-caption d-none d-md-block"></div>
-        <div class="caption">
-          <h1 class="title-font">Virtual <span class="title-font-color">Workouts</span></h1>
-          <p class="description-font">Exercise from the comfort of your own home.</p>
-          <a class="btn btn-light" role="button" href="./login-sign-up.html">LOGIN</a>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="./images/outdoor-training.jfif" class="d-block w-100 carousel-images" alt="outdoors training">
-        <div class="carousel-caption d-none d-md-block"></div>
-        <div class="caption">
-          <h1 class="title-font">Outdoor <span class="title-font-color">Training</span></h1>
-          <p class="description-font">Enjoy a workout in the great outdoors.</p>
-          <a class="btn btn-primary" role="button" href="./find-a-trainer.html">Find a Trainer</a>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="./images/group-classes.jfif" class="d-block w-100 carousel-images" alt="group classes">
-        <div class="carousel-caption d-none d-md-block"></div>
-        <div class="caption">
-          <h1 class="title-font">Group <span class="title-font-color">Classes</span></h1>
-          <p class="description-font">Sign up for group classes near you.</p>
-          <a class="btn btn-light" role="button" href="./under-construction.html">Join a Group Class</a>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#landingCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#landingCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
 
-  <footer-component></footer-component>
+    <footer-component></footer-component>
 
-  <!----------------------------------------------->
-  <!-- JS: Boostrap, Firebase, API related    -->
-  <!----------------------------------------------->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-  </script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
+    <!----------------------------------------------->
+    <!-- JS: Boostrap, Firebase, API related    -->
+    <!----------------------------------------------->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
 
-  <!--------------------------------------------------------------------->
-  <!-- JS files: Your own JavaScript functions included here    -->
-  <!--------------------------------------------------------------------->
-  <script type="module" src="./scripts/components/header.js"></script>
-  <script type="module" src="./scripts/components/footer.js"></script>
-  <script type="module" src="./scripts/features/index.js"></script>
+    <!--------------------------------------------------------------------->
+    <!-- JS files: Your own JavaScript functions included here    -->
+    <!--------------------------------------------------------------------->
+    <script type="module" src="./scripts/components/header.js"></script>
+    <script type="module" src="./scripts/components/footer.js"></script>
+    <script type="module" src="./scripts/features/index.js"></script>
 </body>
 
 </html>
