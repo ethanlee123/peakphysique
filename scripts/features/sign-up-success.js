@@ -8,7 +8,7 @@ const loader = document.getElementById("loader");
 const question = document.getElementById("question");
 
 async function displayName() {
-    let response = await createUser();
+    await createUser();
     personalizedWelcome(nameId);
 }
 displayName();
