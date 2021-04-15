@@ -21,50 +21,6 @@ export function updateLocation(latitude, longitude, cityFromGeo) {
     });
 }
 
-export function displayTrainerInfo(){
-  console.log("hello from displayTrainerInfo! :)");
-  db.collection("trainer").get() 
-  .then(function(c){
-      c.forEach(function(doc){
-          let trainerFirstName = doc.data().name.first;             //gets the first name field
-          console.log(trainerFirstName);
-          let trainerLastName = doc.data().name.last;             //gets the last name field
-          console.log(trainerLastName);
-          let totalClients = doc.data().totalClients;        //gets the totalClients ID field
-          console.log(totalClients);
-          let totalSessions = doc.data().totalSessions;        //gets the totalSessions ID field
-          console.log(totalSessions);
-          let hourlyRate = doc.data().platformSpecific.hourlyRate;  // WILL CHANGE TO MATCH NESTED COLLECTIONS AS 
-          console.log(hourlyRate);                                  // DONE IN userProfile SCHEMA.JS
-          let services = doc.data().platformSpecific.services;      // change to wellness options?
-          console.log(services);
-          let expertise = doc.data().platformSpecific.expertise;    // change to fitness options?
-          console.log(expertise);
-          let certifications = doc.data().platformSpecific.certifications;
-          console.log(certifications);
-          let location = doc.data().location;
-          console.log(location);
-          let availability = doc.data().availability;
-          console.log(availability);
-          
-
-          document.getElementById('trainerFirstName').innerText = trainerFirstName;
-          document.getElementById('trainerLastName').innerText = trainerLastName;
-          document.getElementById('totalClients').innerText = totalClients;
-          document.getElementById('totalSessions').innerText = totalSessions;
-          document.getElementById('hourlyRate').innerText = hourlyRate;
-          document.getElementById('services').innerText = services;
-          document.getElementById('expertise').innerText = expertise;
-          document.getElementById('certifications').innerText = certifications;
-          document.getElementById('location').innerText = location;
-          document.getElementById('availability').innerText = availability;
-
-      })
-
-  })
-}
-
-
 // Creates a document in schedule collection for the booked appointment
 export function writeAppointmentSchedule(comments, dropdown, date, trainerID) {
     const scheduleRef = db.collection("schedule");
