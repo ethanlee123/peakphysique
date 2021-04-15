@@ -108,16 +108,18 @@ const getSchedule = (role, completed = false) => {
         .where(userFilter, "==", user.uid)
         .orderBy("date", "asc");
     
-    query.onSnapshot(res => {
-        let updatedSchedule = [];
-        res.forEach(doc => {
-            updatedSchedule.push({
-                id: doc.id,
-                data: doc.data()
+        query.onSnapshot(res => {
+            let updatedSchedule = [];
+            res && res.forEach(doc => {
+                updatedSchedule.push({
+                    id: doc.id,
+                    data: doc.data()
+                });
             });
+            schedule.value = updatedSchedule;
+        }, e => {
+            console.log(e);
         });
-        schedule.value = updatedSchedule;
-    });
 }
 
 const cancelAppointment = (id) => {
