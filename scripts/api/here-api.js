@@ -5,7 +5,7 @@ import { updateLocation } from "/scripts/api/firebase-queries.js"
 // communication error occurs):
 export function reverseGeo(latitude, longitude) {
     var platform = new H.service.Platform({
-        'apikey': 'apikey'
+        'apikey': 'g8D47PVidh-FkjRhJKk1i0EObhMgD9Wvnx1ensLVA7Y'
       });
     var service = platform.getGeocodingService();
     service.reverseGeocode({
